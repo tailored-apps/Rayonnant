@@ -1,0 +1,9 @@
+D:\BitBucket\Wise.Framework\Wise.Framework\Wise.Framework.Interfaces\obj\Debug\Wise.Framework.csprojResolveAssemblyReference.cache
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\Wise.Framework.dll
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\Wise.Framework.pdb
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\Iesi.Collections.dll
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\NHibernate.dll
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\Iesi.Collections.xml
+D:\BitBucket\Wise.Framework\Wise.Framework\bin\Debug\NHibernate.xml
+D:\BitBucket\Wise.Framework\Wise.Framework\obj\Debug\Wise.Framework.dll
+D:\BitBucket\Wise.Framework\Wise.Framework\obj\Debug\Wise.Framework.pdb
