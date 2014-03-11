@@ -14,6 +14,7 @@ namespace Wise.Framework.Presentation.ViewModel
         /// </summary>
         public void Dispose()
         {
+            
             this.OnDispose();
         }
 
