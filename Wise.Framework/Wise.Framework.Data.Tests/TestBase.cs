@@ -5,14 +5,14 @@ namespace Wise.Framework.Data.Tests
 {
     public class TestBase
     {
-        protected IUnityContainer container;
+    //    protected IUnityContainer container;
 
-        private static TestContext testContextInstance;
-        public TestContext TestContext
-        {
-            get { return testContextInstance; }
-            set { testContextInstance = value; }
-        }
+    //    private static TestContext testContextInstance;
+    //    public TestContext TestContext
+    //    {
+    //        get { return testContextInstance; }
+    //        set { testContextInstance = value; }
+    //    }
 
     }
 }
