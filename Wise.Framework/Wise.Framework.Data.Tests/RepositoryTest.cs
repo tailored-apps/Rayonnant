@@ -17,20 +17,20 @@ namespace Wise.Framework.Data.Tests
         //private readonly Mock<IDataProvider> repositroyMoq = new Mock<IDataProvider>();
 
 
-        [TestInitialize]
-        public void TestInitialize()
-        {
-            //TestContext.Properties["container"] = new UnityContainer();
-            //container = TestContext.Properties["container"] as IUnityContainer;
-            //container.RegisterType<IRepository, Repository>();
-            //container.RegisterInstance<IDataProvider>(repositroyMoq.Object);
-        }
+        //[TestInitialize]
+        //public void TestInitialize()
+        //{
+        //    //TestContext.Properties["container"] = new UnityContainer();
+        //    //container = TestContext.Properties["container"] as IUnityContainer;
+        //    //container.RegisterType<IRepository, Repository>();
+        //    //container.RegisterInstance<IDataProvider>(repositroyMoq.Object);
+        //}
 
-        [TestCleanup]
-        public void TestCleanup()
-        {
-            //repositroyMoq.ResetCalls();
-        }
+        //[TestCleanup]
+        //public void TestCleanup()
+        //{
+        //    //repositroyMoq.ResetCalls();
+        //}
         
         [TestMethod]
         public void GetTest()

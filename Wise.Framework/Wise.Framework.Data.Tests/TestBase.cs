@@ -5,6 +5,8 @@ namespace Wise.Framework.Data.Tests
 {
     public class TestBase
     {
+        public void ClassInit(TestContext context) { }
+
     //    protected IUnityContainer container;
 
     //    private static TestContext testContextInstance;
