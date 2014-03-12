@@ -31,7 +31,7 @@ namespace Wise.Framework.Data.Tests
         {
             repositroyMoq.ResetCalls();
         }
-
+        
         [TestMethod]
         public void GetTest()
         {
