@@ -16,15 +16,6 @@ namespace Wise.Framework.Data.Tests
     {
         private readonly Mock<IDataProvider> repositroyMoq = new Mock<IDataProvider>();
 
-        [ClassInitialize]
-        public static void ClassInit(TestContext testContext)
-        {
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-        }
 
         [TestInitialize]
         public void TestInitialize()

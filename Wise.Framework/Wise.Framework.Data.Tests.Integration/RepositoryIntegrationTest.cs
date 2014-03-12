@@ -15,15 +15,6 @@ namespace Wise.Framework.Data.Tests.Integration
     public class RepositoryIntegrationTest : TestBase
     {
 
-        [ClassInitialize]
-        public static void ClassInit(TestContext testContext)
-        {
-        }
-
-        [ClassCleanup]
-        public static void ClassCleanup()
-        {
-        }
 
         [TestInitialize]
         public void TestInitialize()
