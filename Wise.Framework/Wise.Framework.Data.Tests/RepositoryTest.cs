@@ -35,16 +35,16 @@ namespace Wise.Framework.Data.Tests
         [TestMethod]
         public void GetTest()
         {
-            var repo = container.Resolve<IRepository>();
-            repo.Get<object>(2);
+            //var repo = container.Resolve<IRepository>();
+            //repo.Get<object>(2);
             //repositroyMoq.Verify(x => x.Get<object>(1), Times.Never);
             //repositroyMoq.Verify(x => x.Get<object>(2), Times.Once);
         }
         [TestMethod]
         public void GetByIdTest()
         {
-            var repo = container.Resolve<IRepository>();
-            repo.GetById<long,object>(2);
+            //var repo = container.Resolve<IRepository>();
+            //repo.GetById<long,object>(2);
             //repositroyMoq.Verify(x => x.GetById<long, object>(1), Times.Never);
             //repositroyMoq.Verify(x => x.GetById<long, object>(2), Times.Once);
         }
