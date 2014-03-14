@@ -1,4 +1,4 @@
-﻿namespace Wise.Presentation.Framework.Interface.Modularity
+﻿namespace Wise.Framework.Interface.Modularity
 {
     /// <summary>
     /// The resource manager used to merging resources with application resources

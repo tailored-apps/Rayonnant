@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30110.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data", "Wise.Framework.Data\Wise.Framework.Data.csproj", "{F140AC0E-21DD-46F7-961F-8F336B9243E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.NHibernate", "Wise.Framework.Data.NHibernate\Wise.Framework.Data.NHibernate.csproj", "{44D4D3A9-BB9C-4622-8226-0EF31DFA3838}"
@@ -23,6 +25,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A1320B
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Security", "Wise.Framework.Security\Wise.Framework.Security.csproj", "{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.InternalMessagning", "Wise.Framework.InternalMessagning\Wise.Framework.InternalMessagning.csproj", "{4FF17129-D1B9-41F9-9ECD-E266469F2A4F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Logging", "Wise.Framework.Logging\Wise.Framework.Logging.csproj", "{E6E4BAF6-6FD0-4DAD-BF14-9B9644BEBBC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Environment", "Wise.Framework.Environment\Wise.Framework.Environment.csproj", "{1D454EA1-C61D-4BD0-9854-28BD643742E9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.HostShell", "Wise.Framework.HostShell\Wise.Framework.HostShell.csproj", "{8846F370-8168-4532-B1A4-3861B687BB99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Presentation.Resources", "Wise.Framework.Presentation.Resources\Wise.Framework.Presentation.Resources.csproj", "{B7465DD4-1399-4AEB-ACBE-ABB141F7981F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +76,30 @@ Global
 		{B5F13A7A-A18F-4E1A-9B74-26360EB0A90A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B5F13A7A-A18F-4E1A-9B74-26360EB0A90A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B5F13A7A-A18F-4E1A-9B74-26360EB0A90A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FF17129-D1B9-41F9-9ECD-E266469F2A4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FF17129-D1B9-41F9-9ECD-E266469F2A4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FF17129-D1B9-41F9-9ECD-E266469F2A4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FF17129-D1B9-41F9-9ECD-E266469F2A4F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6E4BAF6-6FD0-4DAD-BF14-9B9644BEBBC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6E4BAF6-6FD0-4DAD-BF14-9B9644BEBBC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6E4BAF6-6FD0-4DAD-BF14-9B9644BEBBC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6E4BAF6-6FD0-4DAD-BF14-9B9644BEBBC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D454EA1-C61D-4BD0-9854-28BD643742E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D454EA1-C61D-4BD0-9854-28BD643742E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D454EA1-C61D-4BD0-9854-28BD643742E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D454EA1-C61D-4BD0-9854-28BD643742E9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8846F370-8168-4532-B1A4-3861B687BB99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8846F370-8168-4532-B1A4-3861B687BB99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8846F370-8168-4532-B1A4-3861B687BB99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8846F370-8168-4532-B1A4-3861B687BB99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7465DD4-1399-4AEB-ACBE-ABB141F7981F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7465DD4-1399-4AEB-ACBE-ABB141F7981F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7465DD4-1399-4AEB-ACBE-ABB141F7981F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7465DD4-1399-4AEB-ACBE-ABB141F7981F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

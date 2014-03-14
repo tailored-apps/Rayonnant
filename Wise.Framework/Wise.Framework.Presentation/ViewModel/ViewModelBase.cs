@@ -1,20 +1,18 @@
-﻿using Microsoft.Practices.Prism;
+﻿using System;
 using Microsoft.Practices.Prism.ViewModel;
-using System;
 
 namespace Wise.Framework.Presentation.ViewModel
 {
     /// <summary>
-    /// Default ViewModelBase class  
+    /// Default ViewModelBase class 
     /// </summary>
-    public abstract class ViewModelBase : NotificationObject, IDisposable
+    public abstract class ViewModelBase : NotificationObject , IDisposable
     {
         /// <summary>
         /// <see cref="IDisposable.Dispose"/>
         /// </summary>
         public void Dispose()
         {
-            
             this.OnDispose();
         }
 
