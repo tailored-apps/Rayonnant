@@ -1,3 +1,6 @@
 Wise.Framework/build/
 obj/
 Wise.Framework/packages/
+*.user
+*.Cache
+*.suo
