@@ -17,13 +17,10 @@ using Wise.Framework.InternalMessagning;
 using Wise.Framework.Logging;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Modularity;
-using System;
 using System.Threading;
 using System.Windows;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.Regions;
 
 using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.Presentation.Interface.ViewModel;

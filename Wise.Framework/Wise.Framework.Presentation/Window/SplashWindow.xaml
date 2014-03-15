@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:window="clr-namespace:Wise.Framework.Presentation.Window"
-
+                ResizeMode="NoResize"
              mc:Ignorable="d" 
              Height="300" Width="450"
         WindowStartupLocation="CenterScreen" WindowStyle="None" ShowInTaskbar="False" >
