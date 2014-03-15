@@ -3,9 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:Wise.Framework.Presentation.Resources.Control"
     xmlns:window1="clr-namespace:Wise.Framework.Presentation.Window;assembly=Wise.Framework.Presentation">
-    <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary  Source="ColorDefinitions.xaml"/>
-    </ResourceDictionary.MergedDictionaries>
 
     <ControlTemplate x:Key="MainWindowControlTemplate" TargetType="{x:Type window1:ShellWindow}">
 
@@ -46,7 +43,7 @@
                         GlassFrameThickness="0,0,0,1"/>
             </Setter.Value>
         </Setter>
-        <Setter Property="Icon" Value="Wise.Framework.Presention.Resources;component/../../../Resources/1389141962_229117.ico"/>
+        <!-- FREZE <Setter Property="Icon" Value="Wise.Framework.Presentation.Resources;component/../../../Resources/1389141962_229117.ico"/>-->
         <Setter Property="Template" Value="{DynamicResource MainWindowControlTemplate}"/>
     </Style>
 

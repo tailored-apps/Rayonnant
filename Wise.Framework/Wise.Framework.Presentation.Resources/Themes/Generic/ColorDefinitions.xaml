@@ -6,4 +6,7 @@
     <!--FONT DEFINITONS -->
     <SolidColorBrush x:Key="FontActiveColorBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="FontInActiveColorBrush" Color="#AAAAAA" />
+    <SolidColorBrush x:Key="BorderColorBrush" Color="#AAAAAA" />
+    <SolidColorBrush x:Key="ControlBackgroundInActive" Color="#333337" />
+    <SolidColorBrush x:Key="ControlBackgroundActive" Color="#3F3F46" />
 </ResourceDictionary>
