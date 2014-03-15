@@ -4,3 +4,9 @@ Wise.Framework/packages/
 *.user
 *.Cache
 *.suo
+Wise.Framework/Wise.Framework.Environment/bin/
+Wise.Framework/Wise.Framework.HostShell/bin/
+Wise.Framework/Wise.Framework.InternalMessagning/bin/
+Wise.Framework/Wise.Framework.Logging/bin/
+Wise.Framework/Wise.Framework.Presentation.Resources/bin/
+Wise.Framework/Wise.Framework.Security/bin/
