@@ -5,25 +5,44 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Regions;
 using Wise.Framework.Interface.InternalApplicationMessagning;
+using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Modularity;
+using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.Presentation.Modularity
 {
     public class NavigationManager : INavigationManager
     {
-        private IMessanger Messanger;
+        private IDisposable subscription;
+        private IMessanger messanger;
         private IRegionManager regionManager;
-
-        public NavigationManager(IMessanger Messanger, IRegionManager regionManager)
+        public NavigationManager(IMessanger messanger, IRegionManager regionManager)
         {
-            // TODO: Complete member initialization
-            this.Messanger = Messanger;
+            this.messanger = messanger;
             this.regionManager = regionManager;
+            subscription = messanger.Subscribe<NavigationRequest>(OnMessageArrived);
         }
 
-        public void AddViewModel(ViewModel.ViewModelBase viewModel)
+        private void OnMessageArrived(NavigationRequest obj)
+        {
+
+            regionManager.RequestNavigate(ShellRegionNames.ContentRegion, obj.ViewModelType.FullName, NavigationCompleted);
+
+        }
+
+        private void NavigationCompleted(NavigationResult obj)
+        {
+            //throw new NotImplementedException();
+        }
+
+        public void AddViewModel(ViewModelBase viewModel)
         {
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            subscription.Dispose();
         }
     }
 }

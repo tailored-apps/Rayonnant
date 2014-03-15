@@ -9,12 +9,8 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <DockPanel LastChildFill="True">
-            <ContentControl DockPanel.Dock="Top" 
-                            cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.CommandRegion}"
-                            />
-            <ContentControl DockPanel.Dock="Bottom"
-                            cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.StatusRegion}"/>
-
+            <ContentControl DockPanel.Dock="Top" cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.CommandRegion}" />
+            <ContentControl DockPanel.Dock="Bottom" cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.StatusRegion}"/>
             <ContentControl cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.ContentRegion}"/>
         </DockPanel>
         <ContentControl cal:RegionManager.RegionName="{x:Static interface:ShellRegionNames.ProgressOverlayRegionRegion}"/>

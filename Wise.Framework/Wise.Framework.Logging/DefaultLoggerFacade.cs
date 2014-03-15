@@ -10,6 +10,7 @@ namespace Wise.Framework.Logging
     /// </summary>
     public class DefaultLoggerFacade : ILoggerFacade
     {
+
         /// <summary>
         /// default logger 
         /// </summary>

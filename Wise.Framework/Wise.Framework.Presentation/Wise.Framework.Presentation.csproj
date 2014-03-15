@@ -91,6 +91,7 @@
     <Compile Include="Interface\ViewModel\IStatusViewModel.cs" />
     <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Modularity\NavigationManager.cs" />
+    <Compile Include="Modularity\NavigationRequest.cs" />
     <Compile Include="Modularity\RegionConfigurator.cs" />
     <Compile Include="Modularity\ResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,6 +102,9 @@
     <Compile Include="ViewModel\SplashViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\CommandsView.xaml.cs">
+      <DependentUpon>CommandsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ShellView.xaml.cs">
       <DependentUpon>ShellView.xaml</DependentUpon>
     </Compile>
@@ -147,6 +151,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\SimpleLook.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CommandsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
