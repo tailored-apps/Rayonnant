@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Windows.Controls;
 using Common.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
@@ -188,6 +191,7 @@ namespace Wise.Framework.Bootstrapping
             {
                 log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion, Container.Resolve<ICommandsViewModel>);
+                
             }
 
             if (Container.IsTypeRegistered<IStatusViewModel>())

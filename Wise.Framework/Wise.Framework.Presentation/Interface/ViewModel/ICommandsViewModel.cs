@@ -1,4 +1,6 @@
 ﻿using System.Collections.ObjectModel;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Wise.Framework.Presentation.Interface.ViewModel
 {
@@ -10,11 +12,8 @@ namespace Wise.Framework.Presentation.Interface.ViewModel
         /// <summary>
         /// Commands
         /// </summary>
-        ObservableCollection<ICommandsViewModel> Commands { get; set; }
+        ObservableCollection<MenuItem> Commands { get; set; }
 
-        /// <summary>
-        /// Tels information about contained commands in application
-        /// </summary>
-        bool HasCommands { get; }
+        
     }
 }

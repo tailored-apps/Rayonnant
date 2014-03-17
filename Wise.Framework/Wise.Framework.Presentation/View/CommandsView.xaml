@@ -3,16 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:cal="clr-namespace:Microsoft.Practices.Prism.Regions;assembly=Microsoft.Practices.Prism"
-             xmlns:interface="clr-namespace:Wise.Framework.Presentation.Interface"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="900" MinHeight="30">
+             d:DesignHeight="30" d:DesignWidth="900" >
     <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic.xaml" />
     </UserControl.Resources>
-    <Menu>
-        <MenuItem>LADa</MenuItem>
-        <MenuItem>LADa</MenuItem>
-        <MenuItem>LADa</MenuItem>
-    </Menu>
+
+    <Menu IsMainMenu="True" ItemsSource="{Binding Commands}" Background="{StaticResource MainWindowBackground}" />
+
 </UserControl>
+ 

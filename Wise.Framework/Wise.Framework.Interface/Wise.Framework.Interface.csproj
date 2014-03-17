@@ -63,6 +63,7 @@
     <Compile Include="Bootstrapping\IBootstrapperRunner.cs" />
     <Compile Include="Bootstrapping\ISplashRunner.cs" />
     <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\ISearchCriteria.cs" />
     <Compile Include="DependencyInjection\Enum\LifetimeScope.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
     <Compile Include="DependencyInjection\IContainerRegistration.cs" />
