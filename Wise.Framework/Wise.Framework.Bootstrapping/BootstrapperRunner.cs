@@ -189,6 +189,15 @@ namespace Wise.Framework.Bootstrapping
             PublishSystemMessage("Going to setup regions on shell window");
             if (Container.IsTypeRegistered<ICommandsViewModel>())
             {
+                var command = Container.Resolve<ICommandsViewModel>();
+
+                command.Commands = new ObservableCollection<MenuItem>
+                {
+                    new MenuItem {Header = "_Adssa", ItemsSource = new ObservableCollection<MenuItem>(new List<MenuItem>(){new MenuItem(){Header = "asdasd"}})},
+                    new MenuItem {Header = "_Badssa 1"},
+                    new MenuItem {Header = "_Cadssa 2"}
+                };
+
                 log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion, Container.Resolve<ICommandsViewModel>);
                 

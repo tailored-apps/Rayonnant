@@ -19,10 +19,10 @@ namespace Wise.Framework.Data.NHibernate
         public void Initialize()
         {
             Configuration conf = BuildConfiguration();
-            conf.Configure();
+           
             BuildMappings(conf);
             PostProcessConfiguration(conf);
-
+ conf.Configure();
             container.RegisterInstance<nh.ISessionFactory>(conf.BuildSessionFactory());
         }
 

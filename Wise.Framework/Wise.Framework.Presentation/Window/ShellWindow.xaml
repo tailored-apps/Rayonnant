@@ -13,11 +13,15 @@
     <Window.Resources>
             <converters:UriToImageSourceConverter x:Key="UriToImageSourceConverter" />
     </Window.Resources>
+
+
+    <Window.InputBindings>
+        <KeyBinding  Key="LeftAlt"  Modifiers="Alt"   Command="{Binding ToogleVisibilityCommandRegionCommand}" />
+    </Window.InputBindings>
     
-    <!-- FREEZE
     <window:WindowBase.Icon >
         <Binding Converter="{StaticResource UriToImageSourceConverter}" Path="Icon"/>
-    </window:WindowBase.Icon>-->
+    </window:WindowBase.Icon>
 
 
     <Grid>

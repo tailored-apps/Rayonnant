@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Windows.Input;
+using Microsoft.Expression.Interactivity.Core;
 using Wise.Framework.Presentation.Interface.ViewModel;
 
 namespace Wise.Framework.Presentation.ViewModel
@@ -6,8 +8,15 @@ namespace Wise.Framework.Presentation.ViewModel
     /// <summary>
     /// <see cref="IShellViewModel"/>
     /// </summary>
-    public class ShellViewModel : ViewModelBase , IShellViewModel
+    public class ShellViewModel : ViewModelBase, IShellViewModel
     {
+
+        public ShellViewModel()
+        {
+            IsVisibleCommandRegion =true;
+                ToogleVisibilityCommandRegionCommand = new ActionCommand(toogleVisibilityOnCommandRegion);
+        }
+
         private Uri icon;
         private string title;
         /// <summary>
@@ -37,5 +46,33 @@ namespace Wise.Framework.Presentation.ViewModel
 
             }
         }
+
+        private bool isVisibleCommandRegion;
+        public bool IsVisibleCommandRegion
+        {
+            get { return isVisibleCommandRegion; }
+            set
+            {
+                isVisibleCommandRegion = value;
+                RaisePropertyChanged("IsVisibleCommandRegion");
+            }
+        }
+
+        private ICommand toogleVisibilityCommandRegionCommand;
+        public ICommand ToogleVisibilityCommandRegionCommand
+        {
+            get { return toogleVisibilityCommandRegionCommand; }
+            set
+            {
+                toogleVisibilityCommandRegionCommand = value;
+                RaisePropertyChanged("ToogleVisibilityCommandRegionCommand");
+            }
+        }
+
+
+        private void toogleVisibilityOnCommandRegion(object parameter)
+        {
+            IsVisibleCommandRegion = !IsVisibleCommandRegion;
+        } 
     }
 }
