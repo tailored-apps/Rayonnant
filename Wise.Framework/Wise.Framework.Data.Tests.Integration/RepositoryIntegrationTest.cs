@@ -39,11 +39,24 @@ namespace Wise.Framework.Data.Tests.Integration
         [TestMethod]
         public void TestMethod1()
         {
+            var entity = new MyEntityClass { DummYString = "Dummy Test" };
+            MyEntityClass readedEntitiy = null;
             using (var session = container.Resolve<SessionScope>())
             {
                 var repo = container.Resolve<IRepository>();
-                var entity = repo.GetById<int, MyEntityClass>(1);
-                    
+
+                repo.Save(entity);
+            }
+
+            using (var session = container.Resolve<SessionScope>())
+            {
+                
+                var repo = container.Resolve<IRepository>();
+                readedEntitiy = repo.GetById<int, MyEntityClass>(1);
+
+                Assert.IsNotNull(readedEntitiy);
+                Assert.AreEqual(readedEntitiy.Id, entity.Id);
+                Assert.AreEqual(readedEntitiy.DummYString, entity.DummYString);
             }
         }
 
@@ -61,11 +74,14 @@ namespace Wise.Framework.Data.Tests.Integration
             public MyEntityClassMapper()
             {
                 Table("MyEntity");
-                Id(x => x.Id);
+
+                Id(x => x.Id, mapper => mapper.Generator(Generators.Identity));
+
                 Property(p => p.DummYString, map =>
                 {
-                    map.Length(3);
+                    map.Length(255);
                     map.NotNullable(true);
+                    map.Lazy(true);
                 });
 
             }
@@ -80,7 +96,7 @@ namespace Wise.Framework.Data.Tests.Integration
 
             protected override void BuildMappings(Configuration conf)
             {
-                
+
                 var mapping = GetMappings();
                 conf.AddDeserializedMapping(mapping, "NHSchemaTest");
                 SchemaMetadataUpdater.QuoteTableAndColumns(conf);
@@ -100,8 +116,9 @@ namespace Wise.Framework.Data.Tests.Integration
 
             protected override void PostProcessConfiguration(Configuration cfg)
             {
+                new SchemaExport(cfg).Drop(false, true);
                 new SchemaExport(cfg).Create(false, true);
-             
+
             }
         }
     }

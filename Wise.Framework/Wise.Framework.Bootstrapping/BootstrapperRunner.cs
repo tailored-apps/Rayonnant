@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Windows.Controls;
 using Common.Logging;
 using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
@@ -19,6 +16,7 @@ using Wise.Framework.Interface.Window;
 using Wise.Framework.InternalMessagning;
 using Wise.Framework.Logging;
 using Wise.Framework.Presentation.Interface;
+using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using System.Threading;
 using System.Windows;
@@ -28,6 +26,7 @@ using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.Presentation.Interface.ViewModel;
 using Wise.Framework.Presentation.Modularity;
+using Wise.Framework.Presentation.Services;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 using Wise.Framework.Security.Authentication;
@@ -106,7 +105,7 @@ namespace Wise.Framework.Bootstrapping
 
         private void PublishSystemMessage(string messageToSend)
         {
-            Messanger.Publish<SystemNotyficationMessage>(new SystemNotyficationMessage()
+            Messanger.Publish(new SystemNotyficationMessage
             {
                 Message = messageToSend
             });
@@ -189,15 +188,6 @@ namespace Wise.Framework.Bootstrapping
             PublishSystemMessage("Going to setup regions on shell window");
             if (Container.IsTypeRegistered<ICommandsViewModel>())
             {
-                var command = Container.Resolve<ICommandsViewModel>();
-
-                command.Commands = new ObservableCollection<MenuItem>
-                {
-                    new MenuItem {Header = "_Adssa", ItemsSource = new ObservableCollection<MenuItem>(new List<MenuItem>(){new MenuItem(){Header = "asdasd"}})},
-                    new MenuItem {Header = "_Badssa 1"},
-                    new MenuItem {Header = "_Cadssa 2"}
-                };
-
                 log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion, Container.Resolve<ICommandsViewModel>);
                 
@@ -246,8 +236,7 @@ namespace Wise.Framework.Bootstrapping
             PublishSystemMessage("Going to show shell");
             Thread.Sleep(1000);
             shellWindow.Show();
-            shell.Activate();
-
+            if (shell != null) shell.Activate();
         }
 
         /// <summary>
@@ -291,6 +280,7 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ISecurityService, SecurityService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IEnvironmentService, EnvironmentService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ICommandsViewModel, CommandsViewModel>(LifetimeScope.Singleton);
+            Container.RegisterTypeIfMissing<IMenuService, MenuService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IStatusViewModel, StatusViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IProgressViewModel, ProgressViewModel>(LifetimeScope.Singleton);
 

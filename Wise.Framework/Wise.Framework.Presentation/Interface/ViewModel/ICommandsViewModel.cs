@@ -1,6 +1,5 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Controls;
-using System.Windows.Input;
 
 namespace Wise.Framework.Presentation.Interface.ViewModel
 {
