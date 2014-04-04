@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Practices.ServiceLocation;
 using NHibernate;
 using NHibernate.Context;
 using Wise.Framework.Interface.DependencyInjection;
@@ -16,18 +17,28 @@ namespace Wise.Framework.Data.NHibernate
         {
             this.sessionFactory = sessionFactory;
             if (!CurrentSessionContext.HasBind(sessionFactory))
-                CurrentSessionContext.Bind(sessionFactory.OpenSession());
+            {
+
+                var sess = sessionFactory.OpenSession();
+                CurrentSessionContext.Bind(sess);
+            }
+        }
+
+        public ISession Session
+        {
+            get { return sessionFactory.GetCurrentSession(); }
         }
 
         private void DisposeCurrentSession()
         {
             ISession currentSession = CurrentSessionContext.Unbind(sessionFactory);
-
+            currentSession.Flush();
             currentSession.Close();
             currentSession.Dispose();
         }
         public void Dispose()
         {
+
             DisposeCurrentSession();
         }
     }

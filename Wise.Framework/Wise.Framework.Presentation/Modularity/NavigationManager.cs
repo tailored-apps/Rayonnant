@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Prism.Modularity;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Modularity;
@@ -25,7 +22,6 @@ namespace Wise.Framework.Presentation.Modularity
 
         private void OnMessageArrived(NavigationRequest obj)
         {
-
             regionManager.RequestNavigate(ShellRegionNames.ContentRegion, obj.ViewModelType.FullName, NavigationCompleted);
 
         }
