@@ -8,7 +8,7 @@ namespace Wise.Framework.Data.Entity
 {
     public abstract class EntityBaseAbstract<TKey, TEntity>
     {
-        public TKey Id { get; protected set; }
+        public virtual TKey Id { get; protected set; }
 
 
         public override bool Equals(object obj)
