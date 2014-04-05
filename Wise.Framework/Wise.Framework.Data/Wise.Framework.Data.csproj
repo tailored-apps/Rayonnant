@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entity\EntityBaseAbstract.cs" />
     <Compile Include="Interface\IDataProvider.cs" />
     <Compile Include="Providers\AdoNetProvider.cs" />
     <Compile Include="Repository.cs" />

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Wise.Framework.Data.Entity;
 using Wise.Framework.Data.Interface;
 using Wise.Framework.Interface.Data;
 
