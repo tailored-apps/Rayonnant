@@ -10,6 +10,10 @@ namespace Wise.Framework.Presentation.ViewModel
     /// </summary>
     public class CommandsViewModel : ViewModelBase, ICommandsViewModel
     {
+        public CommandsViewModel()
+        {
+                Commands = new ObservableCollection<MenuItem>();
+        }
         private ObservableCollection<MenuItem> commands;
         /// <summary>
         /// Command list <see cref="ICommandsViewModel.Commands"/>
@@ -17,7 +21,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public ObservableCollection<MenuItem> Commands 
         { 
             get { return commands; } 
-            set { commands = value; RaisePropertyChanged("Commands"); RaisePropertyChanged("HasCommands"); } 
+            set { commands = value; RaisePropertyChanged("Commands"); } 
         }
 
        

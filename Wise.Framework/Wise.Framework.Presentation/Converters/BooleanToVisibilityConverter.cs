@@ -39,7 +39,7 @@ namespace Wise.Framework.Presentation.Converters
         private static readonly Dictionary<bool, Visibility> booleanToVisibilityDict = new Dictionary<bool, Visibility>()
         {
             {true, Visibility.Visible},
-            {false, Visibility.Hidden}
+            {false, Visibility.Collapsed}
         };
     }
 }

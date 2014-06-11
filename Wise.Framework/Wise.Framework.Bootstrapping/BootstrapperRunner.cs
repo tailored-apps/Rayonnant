@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows.Controls;
 using Common.Logging;
 using Microsoft.Practices.Prism.Modularity;
+using Microsoft.Practices.Prism.PubSubEvents;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Wise.Framework.DependencyInjection.Unity;
@@ -309,6 +311,9 @@ namespace Wise.Framework.Bootstrapping
             {
                 Messanger = Container.Resolve<IMessanger>();
             }
+
+            var menu = Container.Resolve<IMenuService>();
+            menu.AddMenuItem(new MenuItem() { Header = "Asd" }, MenuService.MENU_ITEMS_PREFIX);
         }
 
         /// <summary>

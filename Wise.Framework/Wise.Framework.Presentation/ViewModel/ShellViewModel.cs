@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Practices.Prism.Commands;
 using Wise.Framework.Presentation.Interface.ViewModel;
 
 namespace Wise.Framework.Presentation.ViewModel
@@ -14,7 +14,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public ShellViewModel()
         {
             IsVisibleCommandRegion =true;
-                ToogleVisibilityCommandRegionCommand = new ActionCommand(toogleVisibilityOnCommandRegion);
+            ToogleVisibilityCommandRegionCommand = new DelegateCommand(toogleVisibilityOnCommandRegion);
         }
 
         private Uri icon;
@@ -70,7 +70,7 @@ namespace Wise.Framework.Presentation.ViewModel
         }
 
 
-        private void toogleVisibilityOnCommandRegion(object parameter)
+        private void toogleVisibilityOnCommandRegion()
         {
             IsVisibleCommandRegion = !IsVisibleCommandRegion;
         } 

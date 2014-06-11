@@ -10,3 +10,5 @@ Wise.Framework/Wise.Framework.InternalMessagning/bin/
 Wise.Framework/Wise.Framework.Logging/bin/
 Wise.Framework/Wise.Framework.Presentation.Resources/bin/
 Wise.Framework/Wise.Framework.Security/bin/
+Wise.Framework/Testing/TestModules/Wise.DummyModule/bin/
+Wise.Framework/Testing/TestModules/Wise.DummyModuleTwo/bin/

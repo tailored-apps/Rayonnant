@@ -5,9 +5,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="30" d:DesignWidth="900" >
-    <UserControl.Resources>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic.xaml" />
-    </UserControl.Resources>
 
     <Menu IsMainMenu="True" ItemsSource="{Binding Commands}" Background="{StaticResource MainWindowBackground}" />
 

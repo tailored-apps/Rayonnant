@@ -49,25 +49,25 @@ namespace Wise.Framework.HostShell
         public override void ConfigureModuleCatalog(ModuleCatalog catalog)
         {
 
-            //string path = @"Wise.DummyModule.dll";
-            //Assembly assembly = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
-            //Type type = assembly.GetType("Wise.DummyModule.DummyModule");
-            //catalog.AddModule(new ModuleInfo
-            //{
-            //    ModuleName = type.Name,
-            //    ModuleType = type.AssemblyQualifiedName
+            string path = @"Wise.DummyModule.dll";
+            Assembly assembly = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
+            Type type = assembly.GetType("Wise.DummyModule.DummyModule");
+            catalog.AddModule(new ModuleInfo
+            {
+                ModuleName = type.Name,
+                ModuleType = type.AssemblyQualifiedName
 
-            //});
+            });
 
-            //string path2 = @"Wise.DummyModuleTwo.dll";
-            //Assembly assembly2 = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path2));
-            //Type type2 = assembly2.GetType("Wise.DummyModuleTwo.DummyModuleTwo");
-            //catalog.AddModule(new ModuleInfo
-            //{
-            //    ModuleName = type2.Name,
-            //    ModuleType = type2.AssemblyQualifiedName
+            string path2 = @"Wise.DummyModuleTwo.dll";
+            Assembly assembly2 = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path2));
+            Type type2 = assembly2.GetType("Wise.DummyModuleTwo.DummyModuleTwo");
+            catalog.AddModule(new ModuleInfo
+            {
+                ModuleName = type2.Name,
+                ModuleType = type2.AssemblyQualifiedName
 
-            //});
+            });
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)
