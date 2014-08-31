@@ -317,12 +317,6 @@ namespace Wise.Framework.Bootstrapping
                 Messanger = Container.Resolve<IMessanger>();
             }
 
-
-
-
-            var menu = Container.Resolve<IMenuService>();
-            menu.AddMenuItem(new MenuItem() { Header = "Menu Item One" }, MenuService.MENU_ITEMS_PREFIX);
-            menu.AddMenuItem(new MenuItem() { Header = "Menu Item Two" }, MenuService.MENU_ITEMS_PREFIX);
         }
 
         /// <summary>
