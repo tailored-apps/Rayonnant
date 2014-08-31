@@ -1,4 +1,6 @@
 ﻿using System;
+using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Wise.Framework.Presentation.ViewModel
@@ -6,8 +8,10 @@ namespace Wise.Framework.Presentation.ViewModel
     /// <summary>
     /// Default ViewModelBase class 
     /// </summary>
-    public abstract class ViewModelBase : NotificationObject , IDisposable
+    public abstract class ViewModelBase : BindableBase , IDisposable, INavigationAware
     {
+        public string ScreenId { get;  protected set; }
+
         /// <summary>
         /// <see cref="IDisposable.Dispose"/>
         /// </summary>
@@ -23,5 +27,24 @@ namespace Wise.Framework.Presentation.ViewModel
         {
 
         }
+
+        public virtual bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            var id = navigationContext.Parameters["ID"];
+            return string.Equals(ScreenId, id);
+        }
+
+
+        public virtual void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            
+        }
+
+
+        public virtual void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            
+        }
+
     }
 }

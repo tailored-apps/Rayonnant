@@ -21,7 +21,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public ObservableCollection<MenuItem> Commands 
         { 
             get { return commands; } 
-            set { commands = value; RaisePropertyChanged("Commands"); } 
+            set { commands = value; OnPropertyChanged("Commands"); } 
         }
 
        

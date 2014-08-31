@@ -46,7 +46,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 message = value;
-                RaisePropertyChanged("Message");
+                OnPropertyChanged("Message");
             }
         }
 
@@ -59,7 +59,7 @@ namespace Wise.Framework.Presentation.ViewModel
             protected set
             {
                 environment = value;
-                RaisePropertyChanged("Environment");
+                OnPropertyChanged("Environment");
             }
         }
 
@@ -76,7 +76,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 userName = value;
-                RaisePropertyChanged("UserName");
+                OnPropertyChanged("UserName");
             }
         }
 

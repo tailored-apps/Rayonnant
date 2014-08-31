@@ -9,6 +9,7 @@ namespace Wise.Framework.Interface.DependencyInjection
     /// </summary>
     public interface IContainer : IDisposable
     {
+        void RegisterTypeForNavigation<T>();
         void Teardown(object o);
         object Configure(Type configurationInterface);
         void RegisterTypeIfMissing<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1;

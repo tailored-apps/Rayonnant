@@ -74,10 +74,11 @@ namespace Wise.Framework.Presentation.Modularity
         /// <summary>
         /// <see cref="IRegionConfigurator.InitializeShell"/>
         /// </summary>
-        public void InitializeShell(DependencyObject shell)
+        public void InitializeShell(DependencyObject shell, IRegionManager rm)
         {
-            RegionManager.SetRegionManager(shell,ServiceLocator.Current.GetInstance<IRegionManager>());
-            RegionManager.UpdateRegions();
+            
+            //RegionManager.UpdateRegions();
+            RegionManager.SetRegionManager(shell,rm);
         }
 
         /// <summary>

@@ -15,9 +15,7 @@ namespace Wise.DummyModuleTwo.ViewModel
         {
 
             this.messanger = messanger;
-            messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.NewTask);
             messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher );
-            messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.MessagePublishingThread);
 
             Button = new DummyCommandTwo(this, messanger);
         }
@@ -32,7 +30,7 @@ namespace Wise.DummyModuleTwo.ViewModel
             protected set
             {
                 label = value;
-                RaisePropertyChanged("Label");
+                OnPropertyChanged("Label");
             }
         }
         private void OnMessageArrived(string o)

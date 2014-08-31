@@ -28,6 +28,7 @@ namespace Wise.Framework.Presentation.Modularity
             if (resourceDict != null)
             {
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+                
             }
         }
     }

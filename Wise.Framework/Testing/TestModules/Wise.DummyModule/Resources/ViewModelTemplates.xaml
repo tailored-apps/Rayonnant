@@ -2,8 +2,11 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:views="clr-namespace:Wise.DummyModule.View"
                     xmlns:viewModels="clr-namespace:Wise.DummyModule.ViewModel">
-   
+
     <DataTemplate DataType="{x:Type viewModels:ContentViewModel}">
         <views:ContentView />
+    </DataTemplate>
+    <DataTemplate DataType="{x:Type viewModels:OtherContentViewModel}">
+        <views:OtherContentView />
     </DataTemplate>
 </ResourceDictionary>

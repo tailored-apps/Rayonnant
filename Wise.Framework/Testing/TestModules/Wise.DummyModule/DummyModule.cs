@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Wise.DummyModule.ViewModel;
 using Wise.Framework.DependencyInjection;
+using Wise.Framework.Interface.DependencyInjection;
+using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Presentation.Interface;
@@ -19,26 +21,34 @@ namespace Wise.DummyModule
     {
         private readonly IRegionManager regionManager;
 
-        public DummyModule(IResourceManager resourceManager, IRegionManager regionManager, IMessanger messanger)
-            : base(resourceManager, messanger)
+        public DummyModule(IResourceManager resourceManager, IRegionManager regionManager, IMessanger messanger, IContainer container)
+            : base(resourceManager, messanger,container)
         {
             this.regionManager = regionManager;
 
             messanger.Publish("publish from module;");
         }
 
+        protected override void RegisterServices()
+        {
+            base.RegisterServices();
+            Container.RegisterTypeForNavigation<ContentViewModel>();
+            Container.RegisterTypeForNavigation<OtherContentViewModel>();
+        }
 
-        
 
         protected override void RegisterResources()
         {
             ResourceManager.MergeResource("Wise.DummyModule;component/Resources/ViewModelTemplates.xaml");
+            Container.RegisterTypeForNavigation<ContentViewModel>();
+            Container.RegisterTypeForNavigation<OtherContentViewModel>();
         }
 
         protected override void RegisterViewRegions()
         {
-            
-            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, Container.Current.Resolve<ContentViewModel>);
+
+            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof(ContentViewModel));
+            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof(OtherContentViewModel));
         }
     }
 }

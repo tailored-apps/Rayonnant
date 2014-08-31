@@ -1,4 +1,6 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿
+using Microsoft.Practices.Prism.Modularity;
+using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Modularity;
 
@@ -14,13 +16,19 @@ namespace Wise.Framework.Presentation.Modularity
         /// </summary>
         protected IResourceManager ResourceManager { get; private set; }
 
+        /// <summary>
+        /// The Container 
+        /// </summary>
+        protected IContainer Container  { get; private set; }
+
         private readonly IMessanger messanger;
         /// <summary>
         /// Ctor.
         /// </summary>
         /// <param name="resourceManager">the resource manager class used to merging resources.</param>
-        protected ModuleBase(IResourceManager resourceManager, IMessanger messanger)
+        protected ModuleBase(IResourceManager resourceManager, IMessanger messanger, IContainer container)
         {
+            this.Container = container;
             this.ResourceManager = resourceManager;
             this.messanger = messanger;
             PublishSystemMessage(string.Format("Module {0} has been created", typeof (T)));

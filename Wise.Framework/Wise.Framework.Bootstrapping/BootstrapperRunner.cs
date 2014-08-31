@@ -20,9 +20,7 @@ using Wise.Framework.Logging;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
-using System.Threading;
 using System.Windows;
-using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 
 using Microsoft.Practices.ServiceLocation;
@@ -87,7 +85,6 @@ namespace Wise.Framework.Bootstrapping
             ConfigureContainer();
             ConfigureApplicationInformation();
             ShowSplashScreen();
-            Thread.Sleep(5000);
             PublishSystemMessage("Splash screen opened");
             AuthenticateUser();
             InitialiseShell();
@@ -100,7 +97,7 @@ namespace Wise.Framework.Bootstrapping
             }
 
             log.Debug("going to close splash screen");
-
+            
             CloseSplashScreen();
             PublishSystemMessage("Application Started :-)");
         }
@@ -192,7 +189,7 @@ namespace Wise.Framework.Bootstrapping
             {
                 log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion, Container.Resolve<ICommandsViewModel>);
-                
+
             }
 
             if (Container.IsTypeRegistered<IStatusViewModel>())
@@ -200,6 +197,8 @@ namespace Wise.Framework.Bootstrapping
                 log.Info("registering StatusRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.StatusRegion, Container.Resolve<IStatusViewModel>);
             }
+
+
 
             PublishSystemMessage("regions has been registerd");
             Bootstrapper.RegisterShell(Container);
@@ -223,8 +222,14 @@ namespace Wise.Framework.Bootstrapping
                 var regionCfg = Container.Resolve<IRegionConfigurator>();
                 log.Info("going to configure and register regions");
                 regionCfg.ConfigureRegions();
-                regionCfg.InitializeShell(shell);
+                regionCfg.InitializeShell(shell, regionManager);
 
+                Container.RegisterTypeIfMissing<INavigationManager, NavigationManager>(LifetimeScope.Singleton);
+                if (Container.IsTypeRegistered<INavigationManager>())
+                {
+                    var navManager = Container.Resolve<INavigationManager>();
+
+                }
                 shell.Closing += (s, e) => { };
 
                 if (Application.Current != null)
@@ -236,7 +241,6 @@ namespace Wise.Framework.Bootstrapping
             }
 
             PublishSystemMessage("Going to show shell");
-            Thread.Sleep(1000);
             shellWindow.Show();
             if (shell != null) shell.Activate();
         }
@@ -307,13 +311,18 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ISplashRunner, SplashRunner>(LifetimeScope.Singleton);
 
 
+
             if (Container.IsTypeRegistered<IMessanger>())
             {
                 Messanger = Container.Resolve<IMessanger>();
             }
 
+
+
+
             var menu = Container.Resolve<IMenuService>();
-            menu.AddMenuItem(new MenuItem() { Header = "Asd" }, MenuService.MENU_ITEMS_PREFIX);
+            menu.AddMenuItem(new MenuItem() { Header = "Menu Item One" }, MenuService.MENU_ITEMS_PREFIX);
+            menu.AddMenuItem(new MenuItem() { Header = "Menu Item Two" }, MenuService.MENU_ITEMS_PREFIX);
         }
 
         /// <summary>

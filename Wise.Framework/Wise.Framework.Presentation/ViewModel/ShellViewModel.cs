@@ -28,7 +28,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 title = value;
-                RaisePropertyChanged("Title");
+                OnPropertyChanged("Title");
 
             }
         }
@@ -42,7 +42,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 icon = value;
-                RaisePropertyChanged("Icon");
+                OnPropertyChanged("Icon");
 
             }
         }
@@ -54,7 +54,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 isVisibleCommandRegion = value;
-                RaisePropertyChanged("IsVisibleCommandRegion");
+                OnPropertyChanged("IsVisibleCommandRegion");
             }
         }
 
@@ -65,7 +65,7 @@ namespace Wise.Framework.Presentation.ViewModel
             set
             {
                 toogleVisibilityCommandRegionCommand = value;
-                RaisePropertyChanged("ToogleVisibilityCommandRegionCommand");
+                OnPropertyChanged("ToogleVisibilityCommandRegionCommand");
             }
         }
 

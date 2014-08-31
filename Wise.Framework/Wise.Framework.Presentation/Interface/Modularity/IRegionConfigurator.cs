@@ -23,7 +23,7 @@ namespace Wise.Framework.Presentation.Interface.Modularity
         /// method initializes shell window
         /// </summary>
         /// <param name="shell">shell window</param>
-        void InitializeShell(DependencyObject shell);
+        void InitializeShell(DependencyObject shell, IRegionManager rm);
         /// <summary>
         /// method registers mapping between region adapter and given type.
         /// </summary>

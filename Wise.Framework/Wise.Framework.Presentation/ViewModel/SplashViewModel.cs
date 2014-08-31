@@ -20,11 +20,14 @@ namespace Wise.Framework.Presentation.ViewModel
 
         private void OnMessageArrive(SystemNotyficationMessage obj)
         {
-            SplashDispatcher.Invoke(new Action(() =>
+            if (SplashDispatcher != null && Messages != null)
             {
-                Messages.Insert(0, obj.Message);
-                CurrentMessage = obj.Message;
-            }));
+                SplashDispatcher.Invoke(new Action(() =>
+                {
+                    Messages.Insert(0, obj.Message);
+                    CurrentMessage = obj.Message;
+                }));
+            }
         }
 
         public ObservableCollection<string> Messages { get; set; }

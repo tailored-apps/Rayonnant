@@ -177,5 +177,11 @@ namespace Wise.Framework.DependencyInjection.Unity
             }
         }
 
+
+        public  void RegisterTypeForNavigation<T>()
+        {
+            unityContainer.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
+        }
+
     }
 }
