@@ -1,8 +1,9 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿
 using Wise.Framework.Interface.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.InternalApplicationMessagning;
+using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Window;
 
@@ -25,7 +26,7 @@ namespace Wise.Framework.Bootstrapping
         /// Abstract Method responsible for creating module catalog instance 
         /// </summary>
         /// <returns>ModuleCatalog which will be used per application instance</returns>
-        public abstract ModuleCatalog CreateModuleCatalog();
+        public abstract IModuleCatalog CreateModuleCatalog();
 
         /// <summary>
         /// Method responsible for configuring container.
@@ -74,7 +75,7 @@ namespace Wise.Framework.Bootstrapping
         /// Method responsible for configuring module catalog
         /// </summary>
         /// <param name="catalog">module catalog</param>
-        public virtual void ConfigureModuleCatalog(ModuleCatalog catalog)
+        public virtual void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
         }
 

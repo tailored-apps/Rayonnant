@@ -3,12 +3,13 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Common.Logging;
-using Microsoft.Practices.Prism.Modularity;
 using Wise.Framework.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
+using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface.ViewModel;
+using Wise.Framework.Presentation.Modularity;
 
 namespace Wise.Framework.HostShell
 {
@@ -36,7 +37,7 @@ namespace Wise.Framework.HostShell
         /// Creates Module Catalog per application 
         /// </summary>
         /// <returns>module catalog</returns>
-        public override ModuleCatalog CreateModuleCatalog()
+        public override IModuleCatalog CreateModuleCatalog()
         {
             logger.Info("Going to create Module Catalog");
             return new ModuleCatalog();
@@ -46,28 +47,18 @@ namespace Wise.Framework.HostShell
         /// Method responsible for configuration module catalog
         /// </summary>
         /// <param name="catalog">catalog which will be configured.</param>
-        public override void ConfigureModuleCatalog(ModuleCatalog catalog)
+        public override void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
 
             string path = @"Wise.DummyModule.dll";
             Assembly assembly = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
             Type type = assembly.GetType("Wise.DummyModule.DummyModule");
-            catalog.AddModule(new ModuleInfo
-            {
-                ModuleName = type.Name,
-                ModuleType = type.AssemblyQualifiedName
-
-            });
-
+            catalog.AddModule(type.Name,type.AssemblyQualifiedName);
+            
             string path2 = @"Wise.DummyModuleTwo.dll";
             Assembly assembly2 = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path2));
             Type type2 = assembly2.GetType("Wise.DummyModuleTwo.DummyModuleTwo");
-            catalog.AddModule(new ModuleInfo
-            {
-                ModuleName = type2.Name,
-                ModuleType = type2.AssemblyQualifiedName
-
-            });
+            catalog.AddModule(type2.Name,type2.AssemblyQualifiedName);
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)

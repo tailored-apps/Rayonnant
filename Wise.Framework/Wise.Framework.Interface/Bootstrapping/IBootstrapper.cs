@@ -1,8 +1,7 @@
 ﻿
-
-using Microsoft.Practices.Prism.Modularity;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
+using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Interface.Window;
 
 namespace Wise.Framework.Interface.Bootstrapping
@@ -16,7 +15,7 @@ namespace Wise.Framework.Interface.Bootstrapping
         /// used to configure module catalog for prism
         /// </summary>
         /// <param name="catalog">catalog used to config</param>
-        void ConfigureModuleCatalog(ModuleCatalog catalog);
+        void ConfigureModuleCatalog(IModuleCatalog catalog);
 
         /// <summary>
         /// method for registering container
@@ -28,7 +27,7 @@ namespace Wise.Framework.Interface.Bootstrapping
         /// method which allows to crate module catalog
         /// </summary>
         /// <returns><see cref="IModuleCatalog"/></returns>
-        ModuleCatalog CreateModuleCatalog();
+        IModuleCatalog CreateModuleCatalog();
         
         /// <summary>
         /// Method for container configuration

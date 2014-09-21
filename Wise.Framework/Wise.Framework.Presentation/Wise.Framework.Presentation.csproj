@@ -100,6 +100,7 @@
     <Compile Include="Interface\ViewModel\IShellViewModel.cs" />
     <Compile Include="Interface\ViewModel\IStatusViewModel.cs" />
     <Compile Include="Modularity\ModuleBase.cs" />
+    <Compile Include="Modularity\ModuleCatalog.cs" />
     <Compile Include="Modularity\NavigationManager.cs" />
     <Compile Include="Modularity\NavigationRequest.cs" />
     <Compile Include="Modularity\RegionConfigurator.cs" />

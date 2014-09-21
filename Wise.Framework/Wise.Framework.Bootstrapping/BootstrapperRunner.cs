@@ -30,6 +30,10 @@ using Wise.Framework.Presentation.Services;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 using Wise.Framework.Security.Authentication;
+using Wise.Framework.Interface.Modularity;
+using Wise.Framework.Presentation.Modularity;
+using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
+using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -63,7 +67,7 @@ namespace Wise.Framework.Bootstrapping
         /// <summary>
         ///     Gets or Sets ModuleCatalog.
         /// </summary>
-        private ModuleCatalog ModuleCatalog { get; set; }
+        private Wise.Framework.Interface.Modularity.IModuleCatalog ModuleCatalog { get; set; }
 
         /// <summary>
         ///     Gets or sets Container
@@ -155,7 +159,7 @@ namespace Wise.Framework.Bootstrapping
         ///     Method creates module catalog
         /// </summary>
         /// <returns></returns>
-        protected virtual ModuleCatalog CreateModuleCatalog()
+        protected virtual IModuleCatalog CreateModuleCatalog()
         {
             var moduleCatalog = Bootstrapper.CreateModuleCatalog();
 
@@ -330,7 +334,9 @@ namespace Wise.Framework.Bootstrapping
             log.Info("Module catalog created, Going to configure");
             Bootstrapper.ConfigureModuleCatalog(ModuleCatalog);
             log.Info("Module Catalog has been configured.");
-            Container.RegisterInstance<IModuleCatalog>(ModuleCatalog);
+            var moduleCatalog = ModuleCatalog as ModuleCatalog;
+            
+            Container.RegisterInstance<Microsoft.Practices.Prism.Modularity.IModuleCatalog>(moduleCatalog);
         }
 
     }
