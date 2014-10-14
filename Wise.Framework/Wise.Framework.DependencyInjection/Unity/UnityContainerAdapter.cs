@@ -183,5 +183,13 @@ namespace Wise.Framework.DependencyInjection.Unity
             unityContainer.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
         }
 
+        public IEnumerable<T> ResolveAll<T>()
+        {
+            return unityContainer.ResolveAll<T>();
+        }
+        public IEnumerable<object> ResolveAll(Type t)
+        {
+            return unityContainer.ResolveAll(t);
+        }
     }
 }

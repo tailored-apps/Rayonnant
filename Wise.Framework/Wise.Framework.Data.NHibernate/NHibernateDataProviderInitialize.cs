@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using NHibernate.Cfg;
 using Wise.Framework.Interface.DependencyInjection;
-using  nh=NHibernate;
+using nh = NHibernate;
 namespace Wise.Framework.Data.NHibernate
 {
-    public  class NHibernateDataProviderInitialize : IInitialize
+    public class NHibernateDataProviderInitialize : IInitialize
     {
         protected readonly IContainer container;
         public NHibernateDataProviderInitialize(IContainer container)
@@ -19,10 +19,10 @@ namespace Wise.Framework.Data.NHibernate
         public void Initialize()
         {
             Configuration conf = BuildConfiguration();
-           
+
             BuildMappings(conf);
             PostProcessConfiguration(conf);
- conf.Configure();
+            conf.Configure();
             container.RegisterInstance<nh.ISessionFactory>(conf.BuildSessionFactory());
         }
 
@@ -34,11 +34,11 @@ namespace Wise.Framework.Data.NHibernate
 
         protected virtual void BuildMappings(Configuration conf)
         {
-        
+
         }
         protected virtual void PostProcessConfiguration(Configuration cfg)
         {
-            
-        } 
+
+        }
     }
 }

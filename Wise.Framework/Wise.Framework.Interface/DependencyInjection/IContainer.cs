@@ -29,5 +29,9 @@ namespace Wise.Framework.Interface.DependencyInjection
         IContainer RegisterType(Type from, Type to, string name, object lifetimeManager, object[] injectionMembers);
         IContainer RegisterInstance(Type t, string name, object instance, object lifetime);
 
+
+        IEnumerable<T> ResolveAll<T>();
+        IEnumerable<object> ResolveAll(Type t);
+
     }
 }
