@@ -43,7 +43,7 @@ namespace Wise.Framework.DependencyInjection.Unity
         {
             if (!IsTypeRegistered<T1>())
             {
-                RegisterType<T1, T2>(lifetimeScope);
+                RegisterTypeWithoutCheck<T1, T2>(lifetimeScope);
             }
         }
 
@@ -53,15 +53,15 @@ namespace Wise.Framework.DependencyInjection.Unity
         /// <typeparam name="T1">in most cases interface</typeparam>
         /// <typeparam name="T2">in most cases class implementation for {T1}</typeparam>
         /// <param name="lifetimeScope">lifetime scope for type</param>
-        private void RegisterType<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1
+        private void RegisterTypeWithoutCheck<T1, T2>(LifetimeScope lifetimeScope, string name = null) where T2 : T1
         {
             if (lifetimeScope == LifetimeScope.Singleton)
             {
-                unityContainer.RegisterType<T1, T2>(new ContainerControlledLifetimeManager());
+                unityContainer.RegisterType<T1, T2>(name, new ContainerControlledLifetimeManager());
             }
             else
             {
-                unityContainer.RegisterType<T1, T2>();
+                unityContainer.RegisterType<T1, T2>(name);
             }
         }
 
@@ -178,7 +178,7 @@ namespace Wise.Framework.DependencyInjection.Unity
         }
 
 
-        public  void RegisterTypeForNavigation<T>()
+        public void RegisterTypeForNavigation<T>()
         {
             unityContainer.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
         }
@@ -190,6 +190,18 @@ namespace Wise.Framework.DependencyInjection.Unity
         public IEnumerable<object> ResolveAll(Type t)
         {
             return unityContainer.ResolveAll(t);
+        }
+
+
+        public void RegisterType<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1
+        {
+            RegisterTypeWithoutCheck<T1, T2>(lifetimeScope);
+        }
+
+
+        public void RegisterType<T1, T2>(LifetimeScope lifetimeScope, string name) where T2 : T1
+        {
+            RegisterTypeWithoutCheck<T1, T2>(lifetimeScope, name);
         }
     }
 }

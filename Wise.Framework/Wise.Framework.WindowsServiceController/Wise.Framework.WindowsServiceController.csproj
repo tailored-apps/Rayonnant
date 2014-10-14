@@ -40,6 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractServiceBase.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="IController.cs" />
     <Compile Include="WindowsServiceController.cs" />
     <Compile Include="WindowsServiceRunner.cs" />

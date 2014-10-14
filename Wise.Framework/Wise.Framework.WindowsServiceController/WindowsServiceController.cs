@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Wise.Framework.Interface.DependencyInjection;
+using Wise.Framework.Interface.DependencyInjection.Enum;
+using Wise.Framework.Interface.WindowsService;
 
 namespace Wise.Framework.WindowsServiceController
 {
@@ -23,7 +26,7 @@ namespace Wise.Framework.WindowsServiceController
             this.isInitialized = false;
         }
 
-        protected override bool IsWorking
+        protected bool IsWorking
         {
             get { return this.isWorking; }
         }
@@ -31,29 +34,28 @@ namespace Wise.Framework.WindowsServiceController
         {
             if (this.isInitialized)
                 return;
-            //Hashtable properties = new Hashtable();
-            //properties.Add("ModuleName", "#{moduleName}");
-            //base.Register<ServiceBase, DefaultService>("serviceImpl", properties);
+            container.RegisterType<asd, asd>(LifetimeScope.Singleton, "asd");
             this.isInitialized = true;
         }
         public void Dispose()
         {
 
         }
+
         private bool RunAsConsole(string[] args)
         {
             string[] console = new string[] { "c", "C", "console", "CONSOLE" };
             return args != null && args.Length > 0 && console.Contains(args[0]);
         }
 
-        private void Run(IEnumerable<ServiceBase> services)
+        private void Run(IEnumerable<AbstractServiceBase> services)
         {
             foreach (ServiceBase service in services)
-                if (service != null && service is IEdfStartable)
-                    ((IEdfStartable)service).Start();
+                if (service != null && service is IStartable)
+                    ((IStartable)service).Start();
             while (true)
             {
-                if (base.StopPending)
+                if (StopPending)
                     break;
 
                 Thread.Sleep(1000);
@@ -63,11 +65,9 @@ namespace Wise.Framework.WindowsServiceController
         public void RunModule(string[] args)
         {
             this.Initialize();
-            IEnumerable<ServiceBase> services = container.ResolveAll<ServiceBase>();
+            var services = container.ResolveAll<asd>();
             if (services != null)
             {
-
-
                 if (this.RunAsConsole(args))
                     this.Run(services);
                 else
@@ -76,5 +76,7 @@ namespace Wise.Framework.WindowsServiceController
             this.isWorking = false;
 
         }
+
+        public bool StopPending { get; set; }
     }
 }
