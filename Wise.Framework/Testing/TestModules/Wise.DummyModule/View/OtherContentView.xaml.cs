@@ -12,13 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wise.Framework.Presentation.View;
 
 namespace Wise.DummyModule.View
 {
     /// <summary>
     /// Interaction logic for ContentView.xaml
     /// </summary>
-    public partial class OtherContentView : UserControl
+    public partial class OtherContentView : PrismViewBase
     {
         public OtherContentView()
         {

@@ -7,7 +7,7 @@ namespace Wise.Framework.Presentation.View
     /// <summary>
     /// Interaction logic for ShellView.xaml
     /// </summary>
-    public partial class ShellView : UserControl
+    public partial class ShellView : PrismViewBase
     {
         /// <summary>
         /// Constructor, creates ShellView instance
@@ -15,8 +15,7 @@ namespace Wise.Framework.Presentation.View
         public ShellView()
         {
             InitializeComponent();
-            RegionManager.SetRegionManager(this, DependencyInjection.Container.Current.Resolve<IRegionManager>());
-            RegionManager.UpdateRegions();
+           
         }
     }
 }

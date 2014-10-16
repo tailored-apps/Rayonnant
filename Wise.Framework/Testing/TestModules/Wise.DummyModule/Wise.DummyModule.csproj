@@ -80,6 +80,7 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\DummyCommandTwo.cs" />
     <Compile Include="Commands\DummyCommand.cs" />
     <Compile Include="DummyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
