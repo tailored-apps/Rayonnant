@@ -1,5 +1,7 @@
-﻿using System.Windows.Controls;
-
+﻿using System.ComponentModel;
+using System.Windows.Controls;
+using Microsoft.Practices.Prism.Regions;
+using Wise.Framework.DependencyInjection;
 namespace Wise.Framework.Presentation.View
 {
     /// <summary>
@@ -13,6 +15,8 @@ namespace Wise.Framework.Presentation.View
         public ShellView()
         {
             InitializeComponent();
+            RegionManager.SetRegionManager(this, DependencyInjection.Container.Current.Resolve<IRegionManager>());
+            RegionManager.UpdateRegions();
         }
     }
 }

@@ -89,7 +89,6 @@
   <ItemGroup>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConverter.cs" />
-    <Compile Include="Interface\IWindow.cs" />
     <Compile Include="Interface\Menu\IMenuService.cs" />
     <Compile Include="Interface\Modularity\INavigationManager.cs" />
     <Compile Include="Interface\Modularity\IRegionConfigurator.cs" />

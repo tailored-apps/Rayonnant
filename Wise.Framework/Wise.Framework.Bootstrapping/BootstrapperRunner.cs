@@ -243,7 +243,6 @@ namespace Wise.Framework.Bootstrapping
                 }
 
             }
-
             PublishSystemMessage("Going to show shell");
             shellWindow.Show();
             if (shell != null) shell.Activate();

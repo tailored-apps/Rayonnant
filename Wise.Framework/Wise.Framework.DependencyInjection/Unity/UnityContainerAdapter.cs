@@ -31,9 +31,9 @@ namespace Wise.Framework.DependencyInjection.Unity
         public UnityContainerAdapter(IUnityContainer unityContainer)
         {
             this.unityContainer = unityContainer;
-            this.unityContainer.AddNewExtension<UnityRegistrationExtension>()
-                .RegisterInstance<IUnityContainer>(unityContainer)
-                .RegisterInstance<IContainer>(this);
+            this.unityContainer.RegisterInstance<IUnityContainer>(unityContainer, new ExternallyControlledLifetimeManager())
+                .AddNewExtension<UnityRegistrationExtension>()
+                .RegisterInstance<IContainer>(this, new ExternallyControlledLifetimeManager());
         }
 
         /// <summary>
@@ -146,6 +146,7 @@ namespace Wise.Framework.DependencyInjection.Unity
 
         public void Dispose()
         {
+            unityContainer.RemoveAllExtensions();
             unityContainer.Dispose();
         }
 

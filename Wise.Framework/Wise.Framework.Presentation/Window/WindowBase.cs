@@ -1,4 +1,5 @@
 ﻿
+using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface;
 
 namespace Wise.Framework.Presentation.Window

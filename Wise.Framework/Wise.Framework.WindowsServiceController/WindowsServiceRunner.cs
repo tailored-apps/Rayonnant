@@ -23,12 +23,6 @@ namespace Wise.Framework.WindowsServiceController
                 }
             }
 
-            //    ServiceBase[] ServicesToRun;
-            //    ServicesToRun = new ServiceBase[] 
-            //    { 
-
-            //    };
-            //    ServiceBase.Run(ServicesToRun);
         }
     }
 }

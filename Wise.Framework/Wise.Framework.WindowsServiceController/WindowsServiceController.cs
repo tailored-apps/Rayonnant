@@ -34,7 +34,7 @@ namespace Wise.Framework.WindowsServiceController
         {
             if (this.isInitialized)
                 return;
-            container.RegisterType<asd, asd>(LifetimeScope.Singleton, "asd");
+            container.RegisterType<AbstractServiceBase, asd>(LifetimeScope.Singleton, "asd");
             this.isInitialized = true;
         }
         public void Dispose()
@@ -44,37 +44,42 @@ namespace Wise.Framework.WindowsServiceController
 
         private bool RunAsConsole(string[] args)
         {
-            string[] console = new string[] { "c", "C", "console", "CONSOLE" };
-            return args != null && args.Length > 0 && console.Contains(args[0]);
+            string[] console = new string[] { "C", "CONSOLE" };
+            return args != null && args.Length > 0 && console.Contains(args[0].ToUpper());
         }
 
-        private void Run(IEnumerable<AbstractServiceBase> services)
+        private void Run(IEnumerable<AbstractServiceBase> services, TaskScheduler sched)
         {
+
             foreach (ServiceBase service in services)
                 if (service != null && service is IStartable)
-                    ((IStartable)service).Start();
-            while (true)
-            {
-                if (StopPending)
-                    break;
+                    ((IStartable)service).Start(sched);
 
-                Thread.Sleep(1000);
-            }
         }
 
         public void RunModule(string[] args)
         {
             this.Initialize();
-            var services = container.ResolveAll<asd>();
-            if (services != null)
-            {
-                if (this.RunAsConsole(args))
-                    this.Run(services);
-                else
-                    ServiceBase.Run(services.ToArray());
-            }
-            this.isWorking = false;
 
+            var runTask = Task.Factory.StartNew(() =>
+            {
+                var sched = TaskScheduler.Current;
+                Console.WriteLine("Outer task executing.");
+
+                var services = container.ResolveAll<AbstractServiceBase>();
+                if (services != null)
+                {
+                    if (this.RunAsConsole(args))
+                        this.Run(services, sched);
+                    else
+                        ServiceBase.Run(services.ToArray());
+                }
+
+                Console.WriteLine("Outer task end executing.");
+            });
+
+            runTask.Wait();
+            Console.WriteLine("after Waiting.");
         }
 
         public bool StopPending { get; set; }

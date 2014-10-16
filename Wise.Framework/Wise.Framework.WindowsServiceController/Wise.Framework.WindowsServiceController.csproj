@@ -57,6 +57,10 @@
       <Project>{5b4e5b58-5f87-4bc4-b9bb-c9ace5e64275}</Project>
       <Name>Wise.Framework.Interface</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Wise.Framework.Logging\Wise.Framework.Logging.csproj">
+      <Project>{e6e4baf6-6fd0-4dad-bf14-9b9644bebbc5}</Project>
+      <Name>Wise.Framework.Logging</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

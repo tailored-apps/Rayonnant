@@ -68,6 +68,9 @@
     <Compile Include="WindowsService\IStartable.cs" />
     <Compile Include="Window\IShellWindow.cs" />
     <Compile Include="Window\ISplashViewModel.cs" />
+    <Compile Include="Window\IWindow.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

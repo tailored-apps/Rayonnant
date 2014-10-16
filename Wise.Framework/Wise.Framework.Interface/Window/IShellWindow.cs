@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Wise.Framework.Interface.Window
 {
-    public interface IShellWindow
+    public interface IShellWindow : IWindow
     {
         /// <summary>
         /// Window Width
