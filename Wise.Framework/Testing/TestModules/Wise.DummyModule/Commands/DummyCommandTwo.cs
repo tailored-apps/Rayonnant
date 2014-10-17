@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -34,7 +35,7 @@ namespace Wise.DummyModule.Commands
         public void Execute(object parameter)
         {
             messanger.Publish("publish from buton on view model;");
-            messanger.Publish<NavigationRequest>(new NavigationRequest() { ViewModelType = typeof(ContentViewModel) });
+            messanger.Publish<NavigationRequest>(new NavigationRequest() { ViewModelFullName = "Wise.DummyModuleTwo.ViewModel.ContentTwoViewModel" });
 
             
         }

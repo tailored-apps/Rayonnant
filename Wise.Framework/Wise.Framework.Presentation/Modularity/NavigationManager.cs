@@ -28,7 +28,7 @@ namespace Wise.Framework.Presentation.Modularity
         {
             IRegionManager regManager = RegionManager.GetRegionManager(shell as DependencyObject);
             IRegion reg = regManager.Regions[ShellRegionNames.ContentRegion];
-            reg.RequestNavigate(obj.ViewModelType.FullName, NavigationCompleted);
+            reg.RequestNavigate(obj.ViewModelType !=null ? obj.ViewModelType.FullName : obj.ViewModelFullName, NavigationCompleted);
 
         }
 
