@@ -8,5 +8,6 @@ namespace Wise.Framework.Presentation.Modularity
         public string ViewModelFullName { get; set; }
         public Type ViewModelType { get; set; }
         public NavigationParameters UriQuery { get; set; }
+        public string RegionName { get; set; }
     }
 }

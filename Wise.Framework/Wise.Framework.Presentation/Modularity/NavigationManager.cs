@@ -46,15 +46,24 @@ namespace Wise.Framework.Presentation.Modularity
         private void OnMessageArrived(NavigationRequest obj)
         {
             var regManager = RegionManager.GetRegionManager(shell as DependencyObject);
-            var reg = regManager.Regions[ShellRegionNames.ContentRegion];
-            reg.RequestNavigate(obj.ViewModelType != null ? obj.ViewModelType.FullName : obj.ViewModelFullName, NavigationCompleted, obj.UriQuery);
+            var regionName = string.IsNullOrEmpty(obj.RegionName) ? ShellRegionNames.ContentRegion : obj.RegionName;
+            var navigateTo = obj.ViewModelType != null ? obj.ViewModelType.FullName : obj.ViewModelFullName;
+            regManager.Regions[regionName].RequestNavigate(navigateTo, NavigationCompleted, obj.UriQuery);
         }
 
         private void NavigationCompleted(NavigationResult obj)
         {
             var uri = obj.Context != null && obj.Context.Uri != null ? obj.Context.Uri.ToString() : string.Empty;
             var region = obj.Context != null && obj.Context.NavigationService != null && obj.Context.NavigationService.Region != null ? obj.Context.NavigationService.Region.Name : string.Empty;
-            loger.Info(string.Format("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}', logged error: '{3}'", uri, obj.Result, region, obj.Error));
+
+            if (obj.Error != null)
+            {
+                loger.Info(string.Format("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}', logged error: '{3}'", uri, obj.Result, region, obj.Error));
+            }
+            else
+            {
+                loger.Info(string.Format("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error", uri, obj.Result, region));
+            }
         }
 
         public void Dispose()
