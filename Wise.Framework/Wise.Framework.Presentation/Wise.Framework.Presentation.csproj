@@ -100,6 +100,7 @@
     <Compile Include="Interface\ViewModel\IProgressViewModel.cs" />
     <Compile Include="Interface\ViewModel\IShellViewModel.cs" />
     <Compile Include="Interface\ViewModel\IStatusViewModel.cs" />
+    <Compile Include="Logging\DefaultLoggerFacade.cs" />
     <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Modularity\ModuleCatalog.cs" />
     <Compile Include="Modularity\NavigationManager.cs" />
@@ -155,10 +156,6 @@
     <ProjectReference Include="..\Wise.Framework.InternalMessagning\Wise.Framework.InternalMessagning.csproj">
       <Project>{4ff17129-d1b9-41f9-9ecd-e266469f2a4f}</Project>
       <Name>Wise.Framework.InternalMessagning</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Wise.Framework.Logging\Wise.Framework.Logging.csproj">
-      <Project>{e6e4baf6-6fd0-4dad-bf14-9b9644bebbc5}</Project>
-      <Name>Wise.Framework.Logging</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

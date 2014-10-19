@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Wise.Framework.DependencyInjection.Unity.Extensions;
+using Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension;
+using Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 
@@ -33,6 +35,8 @@ namespace Wise.Framework.DependencyInjection.Unity
             this.unityContainer = unityContainer;
             this.unityContainer.RegisterInstance<IUnityContainer>(unityContainer, new ExternallyControlledLifetimeManager())
                 .AddNewExtension<UnityRegistrationExtension>()
+                .AddNewExtension<BuildTracking>()
+                .AddNewExtension<CommonLoggingLogCreationExtension>()
                 .RegisterInstance<IContainer>(this, new ExternallyControlledLifetimeManager());
         }
 

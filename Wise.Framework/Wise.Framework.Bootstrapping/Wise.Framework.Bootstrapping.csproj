@@ -106,10 +106,6 @@
       <Project>{4ff17129-d1b9-41f9-9ecd-e266469f2a4f}</Project>
       <Name>Wise.Framework.InternalMessagning</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wise.Framework.Logging\Wise.Framework.Logging.csproj">
-      <Project>{e6e4baf6-6fd0-4dad-bf14-9b9644bebbc5}</Project>
-      <Name>Wise.Framework.Logging</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Wise.Framework.Presentation\Wise.Framework.Presentation.csproj">
       <Project>{069e0f5d-0a61-4269-9276-b9b126abdabf}</Project>
       <Name>Wise.Framework.Presentation</Name>

@@ -19,7 +19,7 @@ namespace Wise.Framework.Presentation.Modularity
         private IRegionManager regionManager;
         private IContainer container;
         private ILog loger;
-        public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager, IShellWindow shell)
+        public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager, IShellWindow shell, ILog loger)
         {
             this.loger = loger;
             this.container = container;
@@ -52,7 +52,9 @@ namespace Wise.Framework.Presentation.Modularity
 
         private void NavigationCompleted(NavigationResult obj)
         {
-            //loger.Info(string.Format("{0}{1}{2}", obj.Context, obj.Error, obj.Result));
+            var uri = obj.Context != null && obj.Context.Uri != null ? obj.Context.Uri.ToString() : string.Empty;
+            var region = obj.Context != null && obj.Context.NavigationService != null && obj.Context.NavigationService.Region != null ? obj.Context.NavigationService.Region.Name : string.Empty;
+            loger.Info(string.Format("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}', logged error: '{3}'", uri, obj.Result, region, obj.Error));
         }
 
         public void Dispose()

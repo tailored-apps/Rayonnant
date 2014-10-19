@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\build\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -24,7 +24,7 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\build\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -56,10 +56,6 @@
     <ProjectReference Include="..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
       <Project>{5b4e5b58-5f87-4bc4-b9bb-c9ace5e64275}</Project>
       <Name>Wise.Framework.Interface</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Wise.Framework.Logging\Wise.Framework.Logging.csproj">
-      <Project>{e6e4baf6-6fd0-4dad-bf14-9b9644bebbc5}</Project>
-      <Name>Wise.Framework.Logging</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

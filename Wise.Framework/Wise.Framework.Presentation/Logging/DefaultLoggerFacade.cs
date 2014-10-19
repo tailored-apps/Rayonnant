@@ -2,7 +2,7 @@
 using Common.Logging;
 using Microsoft.Practices.Prism.Logging;
 
-namespace Wise.Framework.Logging
+namespace Wise.Framework.Presentation.Logging
 {
     /// <summary>
     ///     <see cref="ILoggerFacade" />
