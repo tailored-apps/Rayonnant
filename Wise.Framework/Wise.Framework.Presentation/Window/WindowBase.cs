@@ -1,10 +1,8 @@
-﻿
-using Wise.Framework.Interface.Window;
-using Wise.Framework.Presentation.Interface;
+﻿using Wise.Framework.Interface.Window;
 
 namespace Wise.Framework.Presentation.Window
 {
-    public abstract class WindowBase : System.Windows.Window , IWindow 
+    public abstract class WindowBase : System.Windows.Window, IWindow
     {
     }
 }

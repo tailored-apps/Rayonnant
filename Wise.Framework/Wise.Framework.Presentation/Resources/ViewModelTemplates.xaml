@@ -11,10 +11,10 @@
     <DataTemplate DataType="{x:Type viewModel:StatusViewModel}">
         <view:StatusView />
     </DataTemplate>
-    
+
     <DataTemplate DataType="{x:Type viewModel:CommandsViewModel}">
         <view:CommandsView />
     </DataTemplate>
 
 
-</ResourceDictionary>  
+</ResourceDictionary>

@@ -7,31 +7,37 @@ namespace Wise.Framework.Interface.Window
     public interface ISplashViewModel : IDisposable
     {
         /// <summary>
-        /// Messages
+        ///     Messages
         /// </summary>
         ObservableCollection<string> Messages { get; set; }
+
         /// <summary>
-        /// Last Message
+        ///     Last Message
         /// </summary>
         string CurrentMessage { set; get; }
+
         /// <summary>
-        /// Application name
+        ///     Application name
         /// </summary>
         string ApplicationName { get; set; }
+
         /// <summary>
-        /// Environment  name
+        ///     Environment  name
         /// </summary>
         string EnviormentName { get; set; }
+
         /// <summary>
-        /// Product name
+        ///     Product name
         /// </summary>
         string ProductName { get; set; }
+
         /// <summary>
-        /// Application version no
+        ///     Application version no
         /// </summary>
         string Version { get; set; }
+
         /// <summary>
-        /// Dispatcher for splash screen
+        ///     Dispatcher for splash screen
         /// </summary>
         Dispatcher SplashDispatcher { get; set; }
 

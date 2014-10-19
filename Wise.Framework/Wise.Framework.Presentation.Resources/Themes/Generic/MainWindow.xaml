@@ -7,27 +7,28 @@
     <ControlTemplate x:Key="MainWindowControlTemplate" TargetType="{x:Type window1:ShellWindow}">
 
         <Border Background="{DynamicResource MainWindowBackground}">
-            <Grid  Margin="3"  >
+            <Grid Margin="3">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="30" />
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0"  Margin="0,0,10,0" >
+                <Grid Grid.Row="0" Margin="0,0,10,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width ="25"/>
+                        <ColumnDefinition Width="25" />
                         <ColumnDefinition />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
 
-                    <Image Grid.Column="0"  Source="{Binding Icon}" HorizontalAlignment="Left" Margin="3"/>
-                    <Label Grid.Column ="1" Content="{Binding Title}" HorizontalAlignment="Left"/>
+                    <Image Grid.Column="0" Source="{Binding Icon}" HorizontalAlignment="Left" Margin="3" />
+                    <Label Grid.Column="1" Content="{Binding Title}" HorizontalAlignment="Left" />
                     <!-- Captions Buttons to control the window borderless-->
-                    <control:CaptionButtons Grid.Column="2" MarginButton="0,0,5,0" HorizontalAlignment="Right"  Type="Full"
-                                        Foreground="{DynamicResource CaptionButtonColor}" FontSize="14" 
-                                        VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True"/>
+                    <control:CaptionButtons Grid.Column="2" MarginButton="0,0,5,0" HorizontalAlignment="Right"
+                                            Type="Full"
+                                            Foreground="{DynamicResource CaptionButtonColor}" FontSize="14"
+                                            VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True" />
                 </Grid>
-                <ContentPresenter Margin="6" Grid.Row="1" Content="{TemplateBinding Content}"/>
+                <ContentPresenter Margin="6" Grid.Row="1" Content="{TemplateBinding Content}" />
             </Grid>
         </Border>
 
@@ -37,18 +38,20 @@
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome
-                        ResizeBorderThickness="6"
-                        CaptionHeight="30"
-                        CornerRadius="0"
-                        GlassFrameThickness="0,0,0,1"/>
+                    ResizeBorderThickness="6"
+                    CaptionHeight="30"
+                    CornerRadius="0"
+                    GlassFrameThickness="0,0,0,1" />
             </Setter.Value>
         </Setter>
-        <!-- FREZE <Setter Property="Icon" Value="Wise.Framework.Presentation.Resources;component/../../../Resources/1389141962_229117.ico"/>-->
-        <Setter Property="Template" Value="{DynamicResource MainWindowControlTemplate}"/>
+        <Setter Property="Template" Value="{DynamicResource MainWindowControlTemplate}" />
     </Style>
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
     </Style>
+
+
+
 
 </ResourceDictionary>

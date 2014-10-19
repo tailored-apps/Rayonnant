@@ -1,34 +1,34 @@
 ﻿<window:WindowBase x:Class="Wise.Framework.Presentation.Window.ShellWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:window="clr-namespace:Wise.Framework.Presentation.Window"
                    xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters"
                    Title="{Binding Title}"
-             mc:Ignorable="d" 
-             d:Height="300" d:Width="300"
-        WindowStartupLocation="CenterScreen" WindowStyle="None">
+                   mc:Ignorable="d"
+                   d:Height="300" d:Width="300"
+                   WindowStartupLocation="CenterScreen" WindowStyle="None">
 
     <Window.Resources>
-            <converters:UriToImageSourceConverter x:Key="UriToImageSourceConverter" />
+        <converters:UriToImageSourceConverter x:Key="UriToImageSourceConverter" />
     </Window.Resources>
 
 
     <Window.InputBindings>
-        <KeyBinding  Key="LeftAlt"  Modifiers="Alt"   Command="{Binding ToogleVisibilityCommandRegionCommand}" />
+        <KeyBinding Key="LeftAlt" Modifiers="Alt" Command="{Binding ToogleVisibilityCommandRegionCommand}" />
     </Window.InputBindings>
-    
-    <window:WindowBase.Icon >
-        <Binding Converter="{StaticResource UriToImageSourceConverter}" Path="Icon"/>
+
+    <window:WindowBase.Icon>
+        <Binding Converter="{StaticResource UriToImageSourceConverter}" Path="Icon" />
     </window:WindowBase.Icon>
 
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="271*"/>
-            <ColumnDefinition Width="109*"/>
+            <ColumnDefinition Width="271*" />
+            <ColumnDefinition Width="109*" />
         </Grid.ColumnDefinitions>
         <ContentControl Visibility="Visible" Content="{Binding}" Grid.ColumnSpan="2" />
     </Grid>
-    </window:WindowBase>
+</window:WindowBase>

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.ServiceProcess;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Wise.Framework.Interface.WindowsService;
@@ -28,18 +25,15 @@ namespace Wise.Framework.WindowsServiceController
 
     public class asd : AbstractServiceBase
     {
-
         public override void Start(TaskScheduler scheduler)
         {
             var child = new Task(() =>
             {
-
                 Console.WriteLine("Attached child starting.");
-                Thread.Sleep(1000 * 5);
+                Thread.Sleep(1000*5);
                 Console.WriteLine("Attached child completing.");
-
             },
-            TaskCreationOptions.AttachedToParent);
+                TaskCreationOptions.AttachedToParent);
 
             child.Start(scheduler);
         }

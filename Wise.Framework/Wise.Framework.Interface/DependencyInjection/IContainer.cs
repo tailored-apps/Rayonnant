@@ -5,11 +5,11 @@ using Wise.Framework.Interface.DependencyInjection.Enum;
 namespace Wise.Framework.Interface.DependencyInjection
 {
     /// <summary>
-    /// Interface used to describe Dependency injection container
+    ///     Interface used to describe Dependency injection container
     /// </summary>
     public interface IContainer : IDisposable
     {
-        void RegisterTypeForNavigation<T>();
+        IEnumerable<IContainerRegistration> Registrations { get; }
         void Teardown(object o);
         object Configure(Type configurationInterface);
         void RegisterTypeIfMissing<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1;
@@ -24,8 +24,7 @@ namespace Wise.Framework.Interface.DependencyInjection
         IContainer CreateChildContainer();
         IContainer RemoveAllExtensions();
         IContainer AddExtension(object extension);
-
-        IEnumerable<IContainerRegistration> Registrations { get; }
+        void RegisterType(Type from, Type to, string name);
         IContainer RegisterType(Type from, Type to, string name, object lifetimeManager, object[] injectionMembers);
         void RegisterType<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1;
         void RegisterType<T1, T2>(LifetimeScope lifetimeScope, string name) where T2 : T1;
@@ -34,6 +33,5 @@ namespace Wise.Framework.Interface.DependencyInjection
 
         IEnumerable<T> ResolveAll<T>();
         IEnumerable<object> ResolveAll(Type t);
-
     }
 }

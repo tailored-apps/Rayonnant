@@ -5,12 +5,12 @@ using Wise.Framework.Interface.Modularity;
 namespace Wise.Framework.Presentation.Modularity
 {
     /// <summary>
-    /// <see cref="IResourceManager"/>
+    ///     <see cref="IResourceManager" />
     /// </summary>
     public class ResourceManager : IResourceManager
     {
         /// <summary>
-        ///<see cref="IResourceManager.MergeViewModelTemplates"/>
+        ///     <see cref="IResourceManager.MergeViewModelTemplates" />
         /// </summary>
         public void MergeViewModelTemplates()
         {
@@ -18,8 +18,8 @@ namespace Wise.Framework.Presentation.Modularity
         }
 
         /// <summary>
-        /// Method for merging resource to current app resource dict.
-        /// <see cref="IResourceManager.MergeResource"/>
+        ///     Method for merging resource to current app resource dict.
+        ///     <see cref="IResourceManager.MergeResource" />
         /// </summary>
         /// <param name="relativeUri">uri to res.</param>
         public void MergeResource(string relativeUri)
@@ -28,7 +28,6 @@ namespace Wise.Framework.Presentation.Modularity
             if (resourceDict != null)
             {
                 Application.Current.Resources.MergedDictionaries.Add(resourceDict);
-                
             }
         }
     }

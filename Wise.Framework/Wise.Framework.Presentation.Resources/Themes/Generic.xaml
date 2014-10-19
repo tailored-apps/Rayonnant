@@ -3,9 +3,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/MainWindow.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashWindow.xaml"/>
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashViewModel.xaml"/>
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/MainWindow.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashWindow.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashViewModel.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ExceptionWindow.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

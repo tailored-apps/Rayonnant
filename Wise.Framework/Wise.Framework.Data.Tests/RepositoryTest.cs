@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Practices.Unity;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
-using Wise.Framework.Data.Interface;
-using Wise.Framework.Interface.Data;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Wise.Framework.Data.Tests
 {
@@ -31,7 +22,7 @@ namespace Wise.Framework.Data.Tests
         //{
         //    //repositroyMoq.ResetCalls();
         //}
-        
+
         [TestMethod]
         public void GetTest()
         {
@@ -40,6 +31,7 @@ namespace Wise.Framework.Data.Tests
             //repositroyMoq.Verify(x => x.Get<object>(1), Times.Never);
             //repositroyMoq.Verify(x => x.Get<object>(2), Times.Once);
         }
+
         [TestMethod]
         public void GetByIdTest()
         {

@@ -1,48 +1,47 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
->
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style TargetType="{x:Type TextBox}">
-        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-        <Setter Property="FontFamily" Value="Lao UI"></Setter>
-        <Setter Property="FontSize" Value="13"></Setter>
-        <Setter Property="FontWeight" Value="Light"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="FontFamily" Value="Lao UI" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontWeight" Value="Light" />
 
         <Style.Triggers>
             <Trigger Property="TextBox.IsMouseOver" Value="True">
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}"></Setter>
-                <Setter Property ="Background" Value ="{DynamicResource ControlBackgroundActive}"></Setter>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundActive}" />
             </Trigger>
 
-            <Trigger Property="TextBox.IsMouseOver"  Value="False">
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}"></Setter>
-                <Setter Property ="Background" Value ="{DynamicResource ControlBackgroundInActive}"></Setter>
+            <Trigger Property="TextBox.IsMouseOver" Value="False">
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundInActive}" />
             </Trigger>
 
             <Trigger Property="IsFocused" Value="True">
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}"></Setter>
-                <Setter Property ="Background" Value ="{DynamicResource ControlBackgroundActive}"></Setter>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundActive}" />
             </Trigger>
 
             <Trigger Property="IsFocused" Value="False">
-                <Setter Property="BorderThickness" Value="0"></Setter>
-                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}"></Setter>
-                <Setter Property ="Background" Value ="{DynamicResource ControlBackgroundInActive}"></Setter>
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource ControlBackgroundInActive}" />
             </Trigger>
 
-            <Trigger Property="IsReadOnly" Value="True" >
-                <Setter Property="BorderThickness" Value="0.5"></Setter>
-                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}"></Setter>
-                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}"></Setter>
-                <Setter Property="Background" Value ="{DynamicResource MainWindowBackground}"></Setter>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="BorderThickness" Value="0.5" />
+                <Setter Property="BorderBrush" Value="{DynamicResource BorderColorBrush}" />
+                <Setter Property="Foreground" Value="{DynamicResource FontInActiveColorBrush}" />
+                <Setter Property="Background" Value="{DynamicResource MainWindowBackground}" />
             </Trigger>
 
         </Style.Triggers>

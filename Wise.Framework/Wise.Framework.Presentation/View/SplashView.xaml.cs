@@ -3,7 +3,7 @@
 namespace Wise.Framework.Presentation.View
 {
     /// <summary>
-    /// Interaction logic for SplashView.xaml
+    ///     Interaction logic for SplashView.xaml
     /// </summary>
     public partial class SplashView : UserControl
     {

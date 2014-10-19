@@ -1,24 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Context;
-using Wise.Framework.Interface.DependencyInjection;
 
 namespace Wise.Framework.Data.NHibernate
 {
     public class SessionScope : IDisposable
     {
-        private ISessionFactory sessionFactory;
+        private readonly ISessionFactory sessionFactory;
+
         public SessionScope(ISessionFactory sessionFactory)
         {
             this.sessionFactory = sessionFactory;
             if (!CurrentSessionContext.HasBind(sessionFactory))
             {
-
-                var sess = sessionFactory.OpenSession();
+                ISession sess = sessionFactory.OpenSession();
                 CurrentSessionContext.Bind(sess);
             }
         }
@@ -28,17 +23,17 @@ namespace Wise.Framework.Data.NHibernate
             get { return sessionFactory.GetCurrentSession(); }
         }
 
+        public void Dispose()
+        {
+            DisposeCurrentSession();
+        }
+
         private void DisposeCurrentSession()
         {
             ISession currentSession = CurrentSessionContext.Unbind(sessionFactory);
             currentSession.Flush();
             currentSession.Close();
             currentSession.Dispose();
-        }
-        public void Dispose()
-        {
-
-            DisposeCurrentSession();
         }
     }
 }

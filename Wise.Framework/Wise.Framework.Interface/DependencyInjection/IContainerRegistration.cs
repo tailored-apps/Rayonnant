@@ -7,7 +7,7 @@ namespace Wise.Framework.Interface.DependencyInjection
         Type RegisteredType { get; }
         Type MappedToType { get; }
 
-        string Name {get; }
+        string Name { get; }
         Type LifetimeManagerType { get; }
     }
 }

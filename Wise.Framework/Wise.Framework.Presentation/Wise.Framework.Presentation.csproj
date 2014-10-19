@@ -128,6 +128,12 @@
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrismViewBase.cs" />
+    <Compile Include="Window\ExceptionWindow.xaml.cs">
+      <DependentUpon>ExceptionWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Window\ModalWindow.xaml.cs">
+      <DependentUpon>ModalWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window\ShellWindow.xaml.cs">
       <DependentUpon>ShellWindow.xaml</DependentUpon>
     </Compile>
@@ -156,6 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
@@ -181,6 +188,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\StatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window\ExceptionWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Window\ModalWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

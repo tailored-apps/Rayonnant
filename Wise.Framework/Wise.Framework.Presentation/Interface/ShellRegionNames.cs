@@ -1,34 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wise.Framework.Presentation.Interface
+﻿namespace Wise.Framework.Presentation.Interface
 {
     /// <summary>
-    /// Static class contains names of region names in shell window
+    ///     Static class contains names of region names in shell window
     /// </summary>
     public static class ShellRegionNames
     {
         /// <summary>
-        /// The Command Region 
+        ///     The Command Region
         /// </summary>
         public static string CommandRegion = @"ShellCommandRegion";
+
         /// <summary>
-        /// The Content Region
+        ///     The Content Region
         /// </summary>
         public static string ContentRegion = @"ShellContentRegion";
+
         /// <summary>
-        /// The status Region
+        ///     The status Region
         /// </summary>
         public static string StatusRegion = @"ShellStatusRegion";
+
         /// <summary>
-        /// The Progress Overlay
+        ///     The Progress Overlay
         /// </summary>
         public static string ProgressOverlayRegionRegion = @"ShellProgressOverlayRegionRegion";
+
         /// <summary>
-        /// The overlay region
+        ///     The overlay region
         /// </summary>
         public static string OverlayRegion = @"ShellOverlayRegion";
     }

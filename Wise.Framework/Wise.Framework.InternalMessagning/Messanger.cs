@@ -7,13 +7,13 @@ using Wise.Framework.Interface.InternalApplicationMessagning;
 
 namespace Wise.Framework.InternalMessagning
 {
-    public  class Messanger : IMessanger
+    public class Messanger : IMessanger
     {
-
-        private IDictionary<Type, ICollection<IMessangerSubscription>> subscriptionsDictionary = new ConcurrentDictionary<Type, ICollection<IMessangerSubscription>>();
-
-
         private readonly IMessangerExecutor executor;
+
+        private readonly IDictionary<Type, ICollection<IMessangerSubscription>> subscriptionsDictionary =
+            new ConcurrentDictionary<Type, ICollection<IMessangerSubscription>>();
+
         public Messanger(IMessangerExecutor executor)
         {
             this.executor = executor;
@@ -33,12 +33,13 @@ namespace Wise.Framework.InternalMessagning
         public void Publish<TMessage>(string key, TMessage obj)
         {
             ICollection<IMessangerSubscription> messangerSubscription;
-            if (subscriptionsDictionary.TryGetValue(typeof(TMessage), out messangerSubscription))
+            if (subscriptionsDictionary.TryGetValue(typeof (TMessage), out messangerSubscription))
             {
                 messangerSubscription = messangerSubscription.Where(x => x.HasAction).ToList();
-                subscriptionsDictionary[typeof(TMessage)] = messangerSubscription;
+                subscriptionsDictionary[typeof (TMessage)] = messangerSubscription;
 
-                var elements = messangerSubscription.Where(x => string.Equals(x.Key, key));
+                IEnumerable<IMessangerSubscription> elements =
+                    messangerSubscription.Where(x => string.Equals(x.Key, key));
                 executor.Execute<TMessage>(elements, obj);
             }
         }
@@ -78,7 +79,7 @@ namespace Wise.Framework.InternalMessagning
         private Action<object> ConvertToActionObject<TMessage>(Action<TMessage> myActionT)
         {
             if (myActionT == null) return null;
-            return o => myActionT((TMessage)o);
+            return o => myActionT((TMessage) o);
         }
     }
 }

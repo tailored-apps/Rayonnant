@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
+using Common.Logging;
+using Microsoft.Practices.Prism.Regions;
 using Wise.DummyModule.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
@@ -9,19 +11,20 @@ namespace Wise.DummyModule.ViewModel
 {
     public class ContentViewModel : ViewModelBase
     {
+        private string label;
+
         public ContentViewModel(IMessanger messanger)
         {
-            messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher );
+            //logger.Info("asd");
+            messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher);
 
             Button = new DummyCommand(this, messanger);
         }
 
         public ICommand Button { get; set; }
 
-        private string label;
         public string Label
         {
-
             get { return label; }
             protected set
             {
@@ -29,9 +32,25 @@ namespace Wise.DummyModule.ViewModel
                 OnPropertyChanged("Label");
             }
         }
+
         private void OnMessageArrived(string o)
         {
-            Label += DateTime.Now + " HELLO: "+o;
+            Label += DateTime.Now + " HELLO: " + o;
+        }
+
+        public override bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return false;
+        }
+
+        public override void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            base.OnNavigatedTo(navigationContext);
+        }
+
+        public override void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+            base.OnNavigatedFrom(navigationContext);
         }
     }
 }

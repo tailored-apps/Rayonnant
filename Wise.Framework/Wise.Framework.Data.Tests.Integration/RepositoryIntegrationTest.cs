@@ -17,8 +17,6 @@ namespace Wise.Framework.Data.Tests.Integration
     [TestClass]
     public class RepositoryIntegrationTest : TestBase
     {
-
-
         [TestInitialize]
         public void TestInitialize()
         {
@@ -30,16 +28,13 @@ namespace Wise.Framework.Data.Tests.Integration
             var elements = container.Resolve<CustomInintializer>();
 
 
-
-
-
             elements.Initialize();
-
         }
+
         [TestMethod]
         public void TestMethod1()
         {
-            var entity = new MyEntityClass { DummYString = "Dummy Test" };
+            var entity = new MyEntityClass {DummYString = "Dummy Test"};
             MyEntityClass readedEntitiy = null;
             using (var session = container.Resolve<SessionScope>())
             {
@@ -50,7 +45,6 @@ namespace Wise.Framework.Data.Tests.Integration
 
             using (var session = container.Resolve<SessionScope>())
             {
-                
                 var repo = container.Resolve<IRepository>();
                 readedEntitiy = repo.GetById<int, MyEntityClass>(1);
 
@@ -60,13 +54,43 @@ namespace Wise.Framework.Data.Tests.Integration
             }
         }
 
+        public class CustomInintializer : NHibernateDataProviderInitialize
+        {
+            public CustomInintializer(IContainer container)
+                : base(container)
+            {
+            }
+
+            protected override void BuildMappings(Configuration conf)
+            {
+                HbmMapping mapping = GetMappings();
+                conf.AddDeserializedMapping(mapping, "NHSchemaTest");
+                SchemaMetadataUpdater.QuoteTableAndColumns(conf);
+            }
+
+
+            private static HbmMapping GetMappings()
+            {
+                var mapper = new ModelMapper();
+
+                mapper.AddMappings(Assembly.GetAssembly(typeof (MyEntityClassMapper)).GetExportedTypes());
+                HbmMapping mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
+
+                return mapping;
+            }
+
+            protected override void PostProcessConfiguration(Configuration cfg)
+            {
+                new SchemaExport(cfg).Drop(false, true);
+                new SchemaExport(cfg).Create(false, true);
+            }
+        }
+
         public class MyEntityClass
         {
             public virtual int Id { get; set; }
             public virtual string DummYString { get; set; }
         }
-
-
 
 
         public class MyEntityClassMapper : ClassMapping<MyEntityClass>
@@ -83,42 +107,6 @@ namespace Wise.Framework.Data.Tests.Integration
                     map.NotNullable(true);
                     map.Lazy(true);
                 });
-
-            }
-        }
-
-        public class CustomInintializer : NHibernateDataProviderInitialize
-        {
-            public CustomInintializer(IContainer container)
-                : base(container)
-            {
-            }
-
-            protected override void BuildMappings(Configuration conf)
-            {
-
-                var mapping = GetMappings();
-                conf.AddDeserializedMapping(mapping, "NHSchemaTest");
-                SchemaMetadataUpdater.QuoteTableAndColumns(conf);
-
-            }
-
-
-            private static HbmMapping GetMappings()
-            {
-                var mapper = new ModelMapper();
-
-                mapper.AddMappings(Assembly.GetAssembly(typeof(MyEntityClassMapper)).GetExportedTypes());
-                var mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
-
-                return mapping;
-            }
-
-            protected override void PostProcessConfiguration(Configuration cfg)
-            {
-                new SchemaExport(cfg).Drop(false, true);
-                new SchemaExport(cfg).Create(false, true);
-
             }
         }
     }

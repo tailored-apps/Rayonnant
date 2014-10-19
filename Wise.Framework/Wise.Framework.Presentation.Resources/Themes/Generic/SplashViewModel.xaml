@@ -4,11 +4,10 @@
     xmlns:viewModel="clr-namespace:Wise.Framework.Presentation.ViewModel;assembly=Wise.Framework.Presentation"
     xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation">
 
-   
+
     <DataTemplate DataType="{x:Type viewModel:SplashViewModel}">
         <view:SplashView />
     </DataTemplate>
-    
 
 
 </ResourceDictionary>

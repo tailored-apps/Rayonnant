@@ -2,9 +2,8 @@
 
 namespace Wise.Framework.Presentation.ViewModel
 {
-
     /// <summary>
-    /// <see cref="IMenuViewModel"/>
+    ///     <see cref="IMenuViewModel" />
     /// </summary>
     public class MenuViewModel : IMenuViewModel
     {

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Wise.Framework.Data.Entity;
 using Wise.Framework.Data.Interface;
 using Wise.Framework.Interface.Data;
 
@@ -7,8 +6,8 @@ namespace Wise.Framework.Data
 {
     public class Repository : IRepository
     {
-
         private readonly IDataProvider dataProvider;
+
         public Repository(IDataProvider dataProvider)
         {
             this.dataProvider = dataProvider;
@@ -40,9 +39,10 @@ namespace Wise.Framework.Data
         }
 
 
-        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider :class 
+        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(
+            ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider : class
         {
-            return dataProvider.GetBySearchCriteria<TEntity, TProvider>(searchCriteria);
+            return dataProvider.GetBySearchCriteria(searchCriteria);
         }
     }
 }

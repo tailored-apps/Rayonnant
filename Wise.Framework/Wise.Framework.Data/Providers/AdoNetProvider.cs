@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Wise.Framework.Data.Interface;
 using Wise.Framework.Interface.Data;
 
@@ -36,7 +33,8 @@ namespace Wise.Framework.Data.Providers
         }
 
 
-        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider :class 
+        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(
+            ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider : class
         {
             throw new NotImplementedException();
         }

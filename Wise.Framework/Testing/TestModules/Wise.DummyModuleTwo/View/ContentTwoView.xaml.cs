@@ -3,7 +3,7 @@
 namespace Wise.DummyModuleTwo.View
 {
     /// <summary>
-    /// Interaction logic for ContentView.xaml
+    ///     Interaction logic for ContentView.xaml
     /// </summary>
     public partial class ContentTwoView : UserControl
     {

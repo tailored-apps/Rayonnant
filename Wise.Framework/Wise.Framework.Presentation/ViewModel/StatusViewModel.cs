@@ -9,18 +9,26 @@ using Wise.Framework.Presentation.Interface.ViewModel;
 namespace Wise.Framework.Presentation.ViewModel
 {
     /// <summary>
-    /// <see cref="IStatusViewModel"/>
+    ///     <see cref="IStatusViewModel" />
     /// </summary>
     public class StatusViewModel : ViewModelBase, IStatusViewModel
     {
-        private ISecurityService securityService;
+        private readonly IDisposable messageSubscription;
+        private string environment;
         private IEnvironmentService environmentService;
+
+        private string message;
         private IMessanger messanger;
-        private IDisposable messageSubscription;
-        public StatusViewModel(ISecurityService securityService, IEnvironmentService environmentService, IMessanger messanger)
+        private ISecurityService securityService;
+        private string userName;
+
+        public StatusViewModel(ISecurityService securityService, IEnvironmentService environmentService,
+            IMessanger messanger)
         {
             this.messanger = messanger;
-            messageSubscription = messanger.Subscribe<SystemNotyficationMessage>(OnMessageArrive).ExecuteOn(MessageProcessingThread.Dispatcher);
+            messageSubscription =
+                messanger.Subscribe<SystemNotyficationMessage>(OnMessageArrive)
+                    .ExecuteOn(MessageProcessingThread.Dispatcher);
 
             this.securityService = securityService;
             this.environmentService = environmentService;
@@ -28,17 +36,8 @@ namespace Wise.Framework.Presentation.ViewModel
             Environment = environmentService.GetEnvironmentInfo().Code;
         }
 
-        private void OnMessageArrive(SystemNotyficationMessage obj)
-        {
-            Message = obj.Message;
-        }
-
-        private string message;
-        private string userName;
-        private string environment;
-
         /// <summary>
-        /// Last status message 
+        ///     Last status message
         /// </summary>
         public string Message
         {
@@ -51,7 +50,7 @@ namespace Wise.Framework.Presentation.ViewModel
         }
 
         /// <summary>
-        /// Environment name, also might be a machine name
+        ///     Environment name, also might be a machine name
         /// </summary>
         public string Environment
         {
@@ -65,19 +64,21 @@ namespace Wise.Framework.Presentation.ViewModel
 
 
         /// <summary>
-        /// User Name id
+        ///     User Name id
         /// </summary>
         public string UserName
         {
-            get
-            {
-                return userName;
-            }
+            get { return userName; }
             set
             {
                 userName = value;
                 OnPropertyChanged("UserName");
             }
+        }
+
+        private void OnMessageArrive(SystemNotyficationMessage obj)
+        {
+            Message = obj.Message;
         }
 
         protected override void OnDispose()

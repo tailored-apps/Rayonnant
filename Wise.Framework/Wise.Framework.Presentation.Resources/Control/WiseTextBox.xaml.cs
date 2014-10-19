@@ -1,9 +1,9 @@
 ﻿namespace Wise.Framework.Presentation.Resources.Control
 {
     /// <summary>
-    /// Interaction logic for WiseTextBox.xaml
+    ///     Interaction logic for WiseTextBox.xaml
     /// </summary>
-    public partial class WiseTextBox 
+    public partial class WiseTextBox
     {
         public WiseTextBox()
         {

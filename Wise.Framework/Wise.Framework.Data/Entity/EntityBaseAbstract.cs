@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Wise.Framework.Data.Entity
+﻿namespace Wise.Framework.Data.Entity
 {
     public abstract class EntityBaseAbstract<TKey, TEntity>
     {
@@ -13,9 +7,9 @@ namespace Wise.Framework.Data.Entity
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof(TEntity))
+            if (obj.GetType() == typeof (TEntity))
             {
-                var oth = (EntityBaseAbstract<TKey, TEntity>)obj;
+                var oth = (EntityBaseAbstract<TKey, TEntity>) obj;
                 return Id.Equals(oth.Id);
             }
             return false;
@@ -32,7 +26,7 @@ namespace Wise.Framework.Data.Entity
 
         public override string ToString()
         {
-            return string.Format("#{0}#{1}", typeof(TEntity), Id);
+            return string.Format("#{0}#{1}", typeof (TEntity), Id);
         }
     }
 }

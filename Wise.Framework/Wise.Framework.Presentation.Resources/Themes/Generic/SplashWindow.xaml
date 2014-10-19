@@ -7,8 +7,8 @@
     <ControlTemplate x:Key="SplashWindowControlTemplate" TargetType="{x:Type window1:SplashWindow}">
 
         <Border Background="{DynamicResource MainWindowBackground}">
-            <StackPanel  Margin="3">
-                <ContentPresenter Margin="6" Content="{TemplateBinding Content}"/>
+            <StackPanel Margin="3">
+                <ContentPresenter Margin="6" Content="{TemplateBinding Content}" />
             </StackPanel>
         </Border>
 
@@ -18,17 +18,17 @@
         <Setter Property="WindowChrome.WindowChrome">
             <Setter.Value>
                 <WindowChrome
-                        ResizeBorderThickness="6"
-                        CaptionHeight="30"
-                        CornerRadius="0"
-                        GlassFrameThickness="0,0,0,1"/>
+                    ResizeBorderThickness="6"
+                    CaptionHeight="30"
+                    CornerRadius="0"
+                    GlassFrameThickness="0,0,0,1" />
             </Setter.Value>
         </Setter>
-        <Setter Property="Template" Value="{DynamicResource SplashWindowControlTemplate}"/>
+        <Setter Property="Template" Value="{DynamicResource SplashWindowControlTemplate}" />
     </Style>
 
     <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}"/>
+        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
     </Style>
 
 </ResourceDictionary>

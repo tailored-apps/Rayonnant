@@ -1,10 +1,9 @@
-﻿using System.Windows.Controls;
-using Wise.Framework.Presentation.View;
+﻿using Wise.Framework.Presentation.View;
 
 namespace Wise.DummyModule.View
 {
     /// <summary>
-    /// Interaction logic for ContentView.xaml
+    ///     Interaction logic for ContentView.xaml
     /// </summary>
     public partial class ContentView : PrismViewBase
     {

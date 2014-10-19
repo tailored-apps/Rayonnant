@@ -178,12 +178,6 @@ namespace Wise.Framework.DependencyInjection.Unity
             }
         }
 
-
-        public void RegisterTypeForNavigation<T>()
-        {
-            unityContainer.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
-        }
-
         public IEnumerable<T> ResolveAll<T>()
         {
             return unityContainer.ResolveAll<T>();
@@ -203,6 +197,12 @@ namespace Wise.Framework.DependencyInjection.Unity
         public void RegisterType<T1, T2>(LifetimeScope lifetimeScope, string name) where T2 : T1
         {
             RegisterTypeWithoutCheck<T1, T2>(lifetimeScope, name);
+        }
+
+
+        public void RegisterType(Type from, Type to, string name)
+        {
+            unityContainer.RegisterType(from, to, name);
         }
     }
 }

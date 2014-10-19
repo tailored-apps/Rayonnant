@@ -3,7 +3,7 @@
 namespace Wise.Framework.Presentation.ViewModel
 {
     /// <summary>
-    /// <see cref="IProgressViewModel"/>
+    ///     <see cref="IProgressViewModel" />
     /// </summary>
     public class ProgressViewModel : IProgressViewModel
     {

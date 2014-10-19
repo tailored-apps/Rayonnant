@@ -11,28 +11,25 @@ namespace Wise.Framework.Presentation.ViewModel
 {
     public class SplashViewModel : INotifyPropertyChanged, ISplashViewModel, IDisposable
     {
-        private IDisposable messangerSubscription;
+        private readonly IDisposable messangerSubscription;
+        private string applicationName;
+        private string currentMessage;
+        private string enviormentName;
+        private string productName;
+        private string version;
+
         public SplashViewModel(IMessanger messanger)
         {
             Messages = new ObservableCollection<string>();
-            messangerSubscription = messanger.Subscribe<SystemNotyficationMessage>(OnMessageArrive).ExecuteOn(MessageProcessingThread.Dispatcher);
+            messangerSubscription =
+                messanger.Subscribe<SystemNotyficationMessage>(OnMessageArrive)
+                    .ExecuteOn(MessageProcessingThread.Dispatcher);
         }
 
-        private void OnMessageArrive(SystemNotyficationMessage obj)
-        {
-            if (SplashDispatcher != null && Messages != null)
-            {
-                SplashDispatcher.Invoke(new Action(() =>
-                {
-                    Messages.Insert(0, obj.Message);
-                    CurrentMessage = obj.Message;
-                }));
-            }
-        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<string> Messages { get; set; }
 
-        private string currentMessage;
         public string CurrentMessage
         {
             get { return currentMessage; }
@@ -43,7 +40,6 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
-        private string applicationName;
         public string ApplicationName
         {
             get { return applicationName; }
@@ -54,7 +50,6 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
-        private string enviormentName;
         public string EnviormentName
         {
             get { return enviormentName; }
@@ -65,7 +60,6 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
-        private string productName;
         public string ProductName
         {
             get { return productName; }
@@ -76,7 +70,6 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
-        private string version;
         public string Version
         {
             get { return version; }
@@ -90,18 +83,28 @@ namespace Wise.Framework.Presentation.ViewModel
         public Uri Logo { get; set; }
         public Dispatcher SplashDispatcher { get; set; }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Dispose()
+        {
+            messangerSubscription.Dispose();
+        }
+
+        private void OnMessageArrive(SystemNotyficationMessage obj)
+        {
+            if (SplashDispatcher != null && Messages != null)
+            {
+                SplashDispatcher.Invoke(() =>
+                {
+                    Messages.Insert(0, obj.Message);
+                    CurrentMessage = obj.Message;
+                });
+            }
+        }
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-
-        public void Dispose()
-        {
-            messangerSubscription.Dispose();
         }
     }
 }

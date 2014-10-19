@@ -1,6 +1,6 @@
 ﻿namespace Wise.Framework.Interface.Environment
 {
-    public interface  IEnvironmentService
+    public interface IEnvironmentService
     {
         IEnvironmentInfo GetEnvironmentInfo();
     }
