@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Windows.Input;
-using Common.Logging;
 using Microsoft.Practices.Prism.Regions;
 using Wise.DummyModule.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
+using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
+    [MenuItem("","DummyModule ContentView")]
     public class ContentViewModel : ViewModelBase
     {
         private string label;

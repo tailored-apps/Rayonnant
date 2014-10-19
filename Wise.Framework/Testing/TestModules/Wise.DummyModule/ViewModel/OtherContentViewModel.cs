@@ -3,10 +3,12 @@ using System.Windows.Input;
 using Wise.DummyModule.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
+using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
+    [MenuItem("Modules|DummyModule Other", "DummyModule Other")]
     public class OtherContentViewModel : ViewModelBase
     {
         private string label;

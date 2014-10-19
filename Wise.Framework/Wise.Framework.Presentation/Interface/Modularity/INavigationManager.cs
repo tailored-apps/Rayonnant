@@ -3,7 +3,7 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.Presentation.Interface.Modularity
 {
-    public interface INavigationManager
+    public interface INavigationManager : IDisposable
     {
         void RegisterViewModelForNavigation(ViewModelBase viewModel);
         void RegisterTypeForNavigation<T>();

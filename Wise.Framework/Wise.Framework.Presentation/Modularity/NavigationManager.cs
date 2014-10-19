@@ -1,11 +1,17 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Windows;
+using System.Windows.Controls;
 using Common.Logging;
+using Microsoft.Expression.Interactivity.Core;
 using Microsoft.Practices.Prism.Regions;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface;
+using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
+using Wise.Framework.Presentation.Services;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Interface.DependencyInjection;
 
@@ -15,12 +21,14 @@ namespace Wise.Framework.Presentation.Modularity
     {
         private readonly IShellWindow shell;
         private readonly IDisposable subscription;
-        private IMessanger messanger;
-        private IRegionManager regionManager;
-        private IContainer container;
-        private ILog loger;
-        public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager, IShellWindow shell, ILog loger)
+        private readonly IMessanger messanger;
+        private readonly IRegionManager regionManager;
+        private readonly IContainer container;
+        private readonly ILog loger;
+        private readonly IMenuService menuService;
+        public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager, IShellWindow shell, ILog loger, IMenuService menuService)
         {
+            this.menuService = menuService;
             this.loger = loger;
             this.container = container;
             this.shell = shell;
@@ -32,15 +40,18 @@ namespace Wise.Framework.Presentation.Modularity
         public void RegisterTypeForNavigation(Type viewModelType)
         {
             container.RegisterType(typeof(Object), viewModelType, viewModelType.FullName);
+            AddMenuNavigation(viewModelType);
+
         }
         public void RegisterTypeForNavigation<T>()
         {
             container.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
+            AddMenuNavigation(typeof(T));
         }
 
         public void RegisterViewModelForNavigation(ViewModelBase viewModel)
         {
-            this.RegisterTypeForNavigation(viewModel.GetType());
+            RegisterTypeForNavigation(viewModel.GetType());
         }
 
         private void OnMessageArrived(NavigationRequest obj)
@@ -69,6 +80,22 @@ namespace Wise.Framework.Presentation.Modularity
         public void Dispose()
         {
             subscription.Dispose();
+        }
+
+        private void AddMenuNavigation(Type viewModel)
+        {
+            var attr = viewModel.GetCustomAttributes(typeof(Annotations.MenuItem));
+
+            if (attr != null && attr.Count() > 0)
+            {
+                foreach (var attribute in attr)
+                {
+                    var command = new ActionCommand(() => OnMessageArrived(new NavigationRequest() {ViewModelType = viewModel}));
+                    var menuItem = (Annotations.MenuItem)attribute;
+                    menuService.AddMenuItem(new MenuItem() { Header = menuItem.DisplayName, Command = command}, string.Concat(MenuService.MENU_ITEMS_PREFIX, menuItem.Path));
+                }
+            }
+
         }
     }
 }
