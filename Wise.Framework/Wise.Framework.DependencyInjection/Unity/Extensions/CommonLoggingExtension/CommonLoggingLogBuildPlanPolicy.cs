@@ -14,18 +14,18 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExten
 {
     public class CommonLoggingLogBuildPlanPolicy : IBuildPlanPolicy
     {
-        public Type LogType { get; private set; }
-
         public CommonLoggingLogBuildPlanPolicy(Type typeForLog)
         {
             LogType = typeForLog;
         }
 
+        public Type LogType { get; private set; }
+
         public void BuildUp(IBuilderContext context)
         {
             if (context.Existing == null)
-            {                
-                ILog log = LogManager.GetLogger(LogType);                
+            {
+                ILog log = LogManager.GetLogger(LogType);
                 context.Existing = log;
             }
         }

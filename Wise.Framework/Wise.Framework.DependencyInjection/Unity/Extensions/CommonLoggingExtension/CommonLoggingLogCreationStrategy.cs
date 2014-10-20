@@ -12,31 +12,31 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
-   public class CommonLoggingLogCreationStrategy: BuilderStrategy
-   {
-      public bool IsPolicySet { get; private set; }
+    public class CommonLoggingLogCreationStrategy : BuilderStrategy
+    {
+        public bool IsPolicySet { get; private set; }
 
-      public override void PreBuildUp(IBuilderContext context)
-      {         
-         if (typeof (ILog) == context.BuildKey.Type)
-         {
-            if (context.Policies.Get<IBuildPlanPolicy>(context.BuildKey) == null)
+        public override void PreBuildUp(IBuilderContext context)
+        {
+            if (typeof (ILog) == context.BuildKey.Type)
             {
-               Type typeForLog = LogType.Get(context);
-               IBuildPlanPolicy buildPlanPolicy = new CommonLoggingLogBuildPlanPolicy(typeForLog);
-               context.Policies.Set(buildPlanPolicy, context.BuildKey);
-               IsPolicySet = true;
+                if (context.Policies.Get<IBuildPlanPolicy>(context.BuildKey) == null)
+                {
+                    Type typeForLog = LogType.Get(context);
+                    IBuildPlanPolicy buildPlanPolicy = new CommonLoggingLogBuildPlanPolicy(typeForLog);
+                    context.Policies.Set(buildPlanPolicy, context.BuildKey);
+                    IsPolicySet = true;
+                }
             }
-         }
-      }
+        }
 
-      public override void PostBuildUp(IBuilderContext context)
-      {
-         if (IsPolicySet)
-         {
-            context.Policies.Clear<IBuildPlanPolicy>(context.BuildKey);
-            IsPolicySet = false;
-         }
-      }
-   }
+        public override void PostBuildUp(IBuilderContext context)
+        {
+            if (IsPolicySet)
+            {
+                context.Policies.Clear<IBuildPlanPolicy>(context.BuildKey);
+                IsPolicySet = false;
+            }
+        }
+    }
 }

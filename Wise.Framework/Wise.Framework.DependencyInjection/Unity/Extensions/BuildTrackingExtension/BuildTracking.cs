@@ -12,23 +12,23 @@ using Microsoft.Practices.Unity.ObjectBuilder;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {
-   public class BuildTracking: UnityContainerExtension
-   {
-      protected override void Initialize()
-      {
-         this.Context.Strategies.AddNew<BuildTrackingStrategy>(UnityBuildStage.TypeMapping);
-      }
+    public class BuildTracking : UnityContainerExtension
+    {
+        protected override void Initialize()
+        {
+            Context.Strategies.AddNew<BuildTrackingStrategy>(UnityBuildStage.TypeMapping);
+        }
 
-      public static IBuildTrackingPolicy GetPolicy(IBuilderContext context)
-      {
-         return context.Policies.Get<IBuildTrackingPolicy>(context.BuildKey);
-      }
+        public static IBuildTrackingPolicy GetPolicy(IBuilderContext context)
+        {
+            return context.Policies.Get<IBuildTrackingPolicy>(context.BuildKey);
+        }
 
-      public static IBuildTrackingPolicy SetPolicy(IBuilderContext context)
-      {
-         IBuildTrackingPolicy policy = new BuildTrackingPolicy();
-         context.Policies.SetDefault(policy);
-         return policy;
-      }
-   }
+        public static IBuildTrackingPolicy SetPolicy(IBuilderContext context)
+        {
+            IBuildTrackingPolicy policy = new BuildTrackingPolicy();
+            context.Policies.SetDefault(policy);
+            return policy;
+        }
+    }
 }

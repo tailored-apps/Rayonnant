@@ -5,12 +5,12 @@ using Microsoft.Practices.Unity;
 namespace Wise.Framework.DependencyInjection.Unity.Extensions
 {
     /// <summary>
-    /// Extension for checking registration of types in container
+    ///     Extension for checking registration of types in container
     /// </summary>
-    public class UnityRegistrationExtension :UnityContainerExtension
+    public class UnityRegistrationExtension : UnityContainerExtension
     {
         /// <summary>
-        /// check the status of registration type in container
+        ///     check the status of registration type in container
         /// </summary>
         /// <param name="container">container</param>
         /// <param name="type">type to check</param>
@@ -25,12 +25,12 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions
             var policy = extension.Context.Policies.Get<IBuildKeyMappingPolicy>(new NamedTypeBuildKey(type));
             return policy != null;
         }
+
         /// <summary>
-        /// Method used to initialization
+        ///     Method used to initialization
         /// </summary>
         protected override void Initialize()
         {
-            
         }
     }
 }

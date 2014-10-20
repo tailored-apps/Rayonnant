@@ -22,11 +22,11 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExten
             IBuildTrackingPolicy buildTrackingPolicy = BuildTracking.GetPolicy(context);
             if ((buildTrackingPolicy != null) && buildTrackingPolicy.BuildKeys.Count >= 2)
             {
-                logType = ((NamedTypeBuildKey)buildTrackingPolicy.BuildKeys.ElementAt(1)).Type;
+                logType = ((NamedTypeBuildKey) buildTrackingPolicy.BuildKeys.ElementAt(1)).Type;
             }
             else
             {
-                StackTrace stackTrace = new StackTrace();
+                var stackTrace = new StackTrace();
                 //First two stack frames are in the log creation strategy, skip it
                 for (int i = 2; i < stackTrace.FrameCount; i++)
                 {

@@ -11,11 +11,11 @@ using Microsoft.Practices.Unity.ObjectBuilder;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
-   public class CommonLoggingLogCreationExtension: UnityContainerExtension
-   {
-      protected override void Initialize()
-      {
-         Context.Strategies.AddNew<CommonLoggingLogCreationStrategy>(UnityBuildStage.PreCreation);
-      }
-   }
+    public class CommonLoggingLogCreationExtension : UnityContainerExtension
+    {
+        protected override void Initialize()
+        {
+            Context.Strategies.AddNew<CommonLoggingLogCreationStrategy>(UnityBuildStage.PreCreation);
+        }
+    }
 }

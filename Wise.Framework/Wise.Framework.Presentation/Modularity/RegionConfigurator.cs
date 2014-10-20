@@ -26,10 +26,12 @@ namespace Wise.Framework.Presentation.Modularity
             container.RegisterTypeIfMissing<IRegionManager, RegionManager>(LifetimeScope.Singleton);
             container.RegisterTypeIfMissing<IRegionViewRegistry, RegionViewRegistry>(LifetimeScope.Singleton);
             container.RegisterTypeIfMissing<IRegionBehaviorFactory, RegionBehaviorFactory>(LifetimeScope.Singleton);
-            container.RegisterTypeIfMissing<IRegionNavigationJournalEntry, RegionNavigationJournalEntry>(LifetimeScope.Singleton);
+            container.RegisterTypeIfMissing<IRegionNavigationJournalEntry, RegionNavigationJournalEntry>(
+                LifetimeScope.Singleton);
             container.RegisterTypeIfMissing<IRegionNavigationJournal, RegionNavigationJournal>(LifetimeScope.Singleton);
             container.RegisterTypeIfMissing<IRegionNavigationService, RegionNavigationService>(LifetimeScope.Singleton);
-            container.RegisterTypeIfMissing<IRegionNavigationContentLoader, RegionNavigationContentLoader>(LifetimeScope.Singleton);
+            container.RegisterTypeIfMissing<IRegionNavigationContentLoader, RegionNavigationContentLoader>(
+                LifetimeScope.Singleton);
         }
 
         /// <summary>

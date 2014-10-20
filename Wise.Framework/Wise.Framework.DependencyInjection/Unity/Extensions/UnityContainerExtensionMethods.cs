@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Wise.Framework.Interface.DependencyInjection;
@@ -13,7 +9,7 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions
     {
         public static IContainerRegistration ToContainerRegistration(this ContainerRegistration cr)
         {
-            return new UnityContainerRegistration()
+            return new UnityContainerRegistration
             {
                 LifetimeManagerType = cr.LifetimeManagerType,
                 MappedToType = cr.MappedToType,
@@ -21,11 +17,12 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions
                 RegisteredType = cr.RegisteredType
             };
         }
-        
-        public static IEnumerable<IContainerRegistration> ToContainerRegistration(this IEnumerable<ContainerRegistration> cr)
+
+        public static IEnumerable<IContainerRegistration> ToContainerRegistration(
+            this IEnumerable<ContainerRegistration> cr)
         {
             IList<IContainerRegistration> containerRegistrations = new List<IContainerRegistration>();
-            cr.ForEach(x=> containerRegistrations.Add(ToContainerRegistration(x)));
+            cr.ForEach(x => containerRegistrations.Add(ToContainerRegistration(x)));
             return containerRegistrations;
         }
     }

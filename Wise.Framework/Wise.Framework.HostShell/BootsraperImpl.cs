@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using Common.Logging;
 using Wise.Framework.Bootstrapping;
+using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.ExceptionHandling;
 using Wise.Framework.Interface.InternalApplicationMessagning;
@@ -13,7 +13,6 @@ using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface.ViewModel;
 using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
-using IContainer = Wise.Framework.Interface.DependencyInjection.IContainer;
 
 namespace Wise.Framework.HostShell
 {

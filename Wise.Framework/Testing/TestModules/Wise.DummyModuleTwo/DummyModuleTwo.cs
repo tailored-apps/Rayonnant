@@ -11,10 +11,11 @@ namespace Wise.DummyModuleTwo
 {
     public class DummyModuleTwo : ModuleBase<DummyModuleTwo>
     {
+        private readonly INavigationManager navigationManager;
         private readonly IRegionManager regionManager;
-        private INavigationManager navigationManager;
 
-        public DummyModuleTwo(IResourceManager resourceManager, IRegionManager regionManager, INavigationManager navigationManager, IMessanger messanger,
+        public DummyModuleTwo(IResourceManager resourceManager, IRegionManager regionManager,
+            INavigationManager navigationManager, IMessanger messanger,
             IContainer container)
             : base(resourceManager, messanger, container)
         {
@@ -23,7 +24,6 @@ namespace Wise.DummyModuleTwo
             messanger.Publish("publish from module two;");
         }
 
-        
 
         protected override void RegisterResources()
         {

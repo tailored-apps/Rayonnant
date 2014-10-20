@@ -72,7 +72,7 @@ namespace Wise.Framework.Presentation
                     if (Container.Current.IsTypeRegistered<IExceptionService>())
                     {
                         var exceptionService = Container.Current.Resolve<IExceptionService>();
-                        var result= exceptionService.ShowDialog(exception, ExceptionOptions.ExitOrContinue);
+                        bool? result = exceptionService.ShowDialog(exception, ExceptionOptions.ExitOrContinue);
                         if (result.HasValue && result.Value == false)
                         {
                             Environment.Exit(-1);

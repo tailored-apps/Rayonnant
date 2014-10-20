@@ -10,13 +10,13 @@ using System.Collections.Generic;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {
-   public class BuildTrackingPolicy : IBuildTrackingPolicy
-   {
-       public BuildTrackingPolicy()
-      {
-          BuildKeys = new Stack<object>();
-      }
+    public class BuildTrackingPolicy : IBuildTrackingPolicy
+    {
+        public BuildTrackingPolicy()
+        {
+            BuildKeys = new Stack<object>();
+        }
 
-       public Stack<object> BuildKeys { get; private set; }
-   }
+        public Stack<object> BuildKeys { get; private set; }
+    }
 }

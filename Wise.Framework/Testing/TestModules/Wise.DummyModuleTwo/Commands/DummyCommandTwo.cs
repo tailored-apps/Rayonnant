@@ -32,8 +32,11 @@ namespace Wise.DummyModuleTwo.Commands
         public void Execute(object parameter)
         {
             messanger.Publish("publish from buton on view model;");
-            messanger.Publish<NavigationRequest>(new NavigationRequest() { ViewModelFullName = "Wise.DummyModule.ViewModel.ContentViewModel",UriQuery = new NavigationParameters("?ASD=asd")});
-            
+            messanger.Publish(new NavigationRequest
+            {
+                ViewModelFullName = "Wise.DummyModule.ViewModel.ContentViewModel",
+                UriQuery = new NavigationParameters("?ASD=asd")
+            });
         }
     }
 }

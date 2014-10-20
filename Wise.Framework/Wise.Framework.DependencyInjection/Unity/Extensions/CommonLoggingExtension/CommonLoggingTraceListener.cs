@@ -6,38 +6,39 @@
 // Copyright © <github.com/trondr> 2013 
 // All rights reserved.
 
+using System.Diagnostics;
 using Common.Logging;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
-   public class CommonLoggingTraceListener : System.Diagnostics.TraceListener
-   {
-      private readonly ILog _log;
+    public class CommonLoggingTraceListener : TraceListener
+    {
+        private readonly ILog _log;
 
-      public CommonLoggingTraceListener()
-      {
-         _log = LogManager.GetLogger("System.Diagnostics.Redirection");
-      }
+        public CommonLoggingTraceListener()
+        {
+            _log = LogManager.GetLogger("System.Diagnostics.Redirection");
+        }
 
-      public CommonLoggingTraceListener(ILog log)
-      {
-         _log = log;
-      }
+        public CommonLoggingTraceListener(ILog log)
+        {
+            _log = log;
+        }
 
-      public override void Write(string message)
-      {
-         if (_log != null)
-         {
-            if(_log.IsDebugEnabled) _log.Debug(message);
-         }
-      }
+        public override void Write(string message)
+        {
+            if (_log != null)
+            {
+                if (_log.IsDebugEnabled) _log.Debug(message);
+            }
+        }
 
-      public override void WriteLine(string message)
-      {
-         if (_log != null)
-         {
-            if (_log.IsDebugEnabled) _log.Debug(message);
-         }
-      }
-   }
+        public override void WriteLine(string message)
+        {
+            if (_log != null)
+            {
+                if (_log.IsDebugEnabled) _log.Debug(message);
+            }
+        }
+    }
 }

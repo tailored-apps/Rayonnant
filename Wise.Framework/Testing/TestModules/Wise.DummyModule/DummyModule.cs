@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using System;
+using Microsoft.Practices.Prism.Regions;
 using Wise.DummyModule.ViewModel;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
@@ -14,7 +15,8 @@ namespace Wise.DummyModule
         private readonly INavigationManager navigationManager;
         private readonly IRegionManager regionManager;
 
-        public DummyModule(IResourceManager resourceManager, INavigationManager navigationManager, IRegionManager regionManager, IMessanger messanger, IContainer container)
+        public DummyModule(IResourceManager resourceManager, INavigationManager navigationManager,
+            IRegionManager regionManager, IMessanger messanger, IContainer container)
             : base(resourceManager, messanger, container)
         {
             this.navigationManager = navigationManager;
@@ -32,14 +34,14 @@ namespace Wise.DummyModule
 
         protected override void RegisterResources()
         {
+            throw new Exception();
             ResourceManager.MergeResource("Wise.DummyModule;component/Resources/ViewModelTemplates.xaml");
-
         }
 
         protected override void RegisterViewRegions()
         {
-            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof(ContentViewModel));
-            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof(OtherContentViewModel));
+            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof (ContentViewModel));
+            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof (OtherContentViewModel));
         }
     }
 }

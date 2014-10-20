@@ -11,8 +11,8 @@ using Microsoft.Practices.ObjectBuilder2;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {
-   public interface IBuildTrackingPolicy: IBuilderPolicy
-   {
-      Stack<object> BuildKeys { get; }
-   }
+    public interface IBuildTrackingPolicy : IBuilderPolicy
+    {
+        Stack<object> BuildKeys { get; }
+    }
 }

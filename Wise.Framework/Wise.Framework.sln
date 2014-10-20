@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data", "Wise
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.NHibernate", "Wise.Framework.Data.NHibernate\Wise.Framework.Data.NHibernate.csproj", "{44D4D3A9-BB9C-4622-8226-0EF31DFA3838}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests", "Wise.Framework.Data.Tests\Wise.Framework.Data.Tests.csproj", "{78D3D67B-3035-4227-B12A-3546F00838C4}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests.Integration", "Wise.Framework.Data.Tests.Integration\Wise.Framework.Data.Tests.Integration.csproj", "{2DEC93D2-089E-483B-BE11-91224FAF89EB}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.DependencyInjection", "Wise.Framework.DependencyInjection\Wise.Framework.DependencyInjection.csproj", "{A5ECA12C-2CAA-4960-914C-FAB0D0FCDE57}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Interface", "Wise.Framework.Interface\Wise.Framework.Interface.csproj", "{5B4E5B58-5F87-4BC4-B9BB-C9ACE5E64275}"
@@ -66,6 +62,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02CDCB19-1D71-45BA-B6E7-115FC70DD86D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests", "Testing\Wise.Framework.Data.Tests\Wise.Framework.Data.Tests.csproj", "{78D3D67B-3035-4227-B12A-3546F00838C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests.Integration", "Testing\Wise.Framework.Data.Tests.Integration\Wise.Framework.Data.Tests.Integration.csproj", "{2DEC93D2-089E-483B-BE11-91224FAF89EB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,14 +80,6 @@ Global
 		{44D4D3A9-BB9C-4622-8226-0EF31DFA3838}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44D4D3A9-BB9C-4622-8226-0EF31DFA3838}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44D4D3A9-BB9C-4622-8226-0EF31DFA3838}.Release|Any CPU.Build.0 = Release|Any CPU
-		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{78D3D67B-3035-4227-B12A-3546F00838C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{78D3D67B-3035-4227-B12A-3546F00838C4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A5ECA12C-2CAA-4960-914C-FAB0D0FCDE57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A5ECA12C-2CAA-4960-914C-FAB0D0FCDE57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5ECA12C-2CAA-4960-914C-FAB0D0FCDE57}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -145,13 +137,19 @@ Global
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{78D3D67B-3035-4227-B12A-3546F00838C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{78D3D67B-3035-4227-B12A-3546F00838C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DEC93D2-089E-483B-BE11-91224FAF89EB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{78D3D67B-3035-4227-B12A-3546F00838C4} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
-		{2DEC93D2-089E-483B-BE11-91224FAF89EB} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6} = {C6AE198D-EEBA-4321-80AF-1E0B439F2950}
 		{B9E4E74E-B2E7-4325-A01A-B0AC0776A489} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{6CB233AD-ED48-46EA-9325-E92A2A60CC9B} = {B9E4E74E-B2E7-4325-A01A-B0AC0776A489}
@@ -160,6 +158,8 @@ Global
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05} = {6D2C830C-24FA-4181-A9DF-C58AA622F4C9}
 		{C6AE198D-EEBA-4321-80AF-1E0B439F2950} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{02CDCB19-1D71-45BA-B6E7-115FC70DD86D} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
+		{78D3D67B-3035-4227-B12A-3546F00838C4} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
+		{2DEC93D2-089E-483B-BE11-91224FAF89EB} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

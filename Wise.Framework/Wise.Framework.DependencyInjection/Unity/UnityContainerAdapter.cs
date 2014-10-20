@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.ObjectBuilder2;
 using Microsoft.Practices.Unity;
 using Wise.Framework.DependencyInjection.Unity.Extensions;
 using Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension;
@@ -11,29 +10,28 @@ using Wise.Framework.Interface.DependencyInjection.Enum;
 namespace Wise.Framework.DependencyInjection.Unity
 {
     /// <summary>
-    /// Adapter class for unity DI framework. <see cref="IContainer"/>
+    ///     Adapter class for unity DI framework. <see cref="IContainer" />
     /// </summary>
     public class UnityContainerAdapter : IContainer
     {
         private IUnityContainer unityContainer;
 
         /// <summary>
-        /// default ctor
+        ///     default ctor
         /// </summary>
         public UnityContainerAdapter()
             : this(new UnityContainer())
         {
-
         }
 
         /// <summary>
-        /// ctor
+        ///     ctor
         /// </summary>
         /// <param name="unityContainer">unity container to adapt</param>
         public UnityContainerAdapter(IUnityContainer unityContainer)
         {
             this.unityContainer = unityContainer;
-            this.unityContainer.RegisterInstance<IUnityContainer>(unityContainer, new ExternallyControlledLifetimeManager())
+            this.unityContainer.RegisterInstance(unityContainer, new ExternallyControlledLifetimeManager())
                 .AddNewExtension<UnityRegistrationExtension>()
                 .AddNewExtension<BuildTracking>()
                 .AddNewExtension<CommonLoggingLogCreationExtension>()
@@ -41,7 +39,7 @@ namespace Wise.Framework.DependencyInjection.Unity
         }
 
         /// <summary>
-        /// <see cref="IContainer.RegisterTypeIfMissing{T1,T2}"/>
+        ///     <see cref="IContainer.RegisterTypeIfMissing{T1,T2}" />
         /// </summary>
         public void RegisterTypeIfMissing<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1
         {
@@ -52,40 +50,23 @@ namespace Wise.Framework.DependencyInjection.Unity
         }
 
         /// <summary>
-        /// method registers type in container
-        /// </summary>
-        /// <typeparam name="T1">in most cases interface</typeparam>
-        /// <typeparam name="T2">in most cases class implementation for {T1}</typeparam>
-        /// <param name="lifetimeScope">lifetime scope for type</param>
-        private void RegisterTypeWithoutCheck<T1, T2>(LifetimeScope lifetimeScope, string name = null) where T2 : T1
-        {
-            if (lifetimeScope == LifetimeScope.Singleton)
-            {
-                unityContainer.RegisterType<T1, T2>(name, new ContainerControlledLifetimeManager());
-            }
-            else
-            {
-                unityContainer.RegisterType<T1, T2>(name);
-            }
-        }
-
-        /// <summary>
-        /// <see cref="IContainer.IsTypeRegistered{T1}"/>
+        ///     <see cref="IContainer.IsTypeRegistered{T1}" />
         /// </summary>
         public bool IsTypeRegistered<T1>()
         {
-            return UnityRegistrationExtension.IsTypeRegistered(unityContainer, typeof(T1));
+            return UnityRegistrationExtension.IsTypeRegistered(unityContainer, typeof (T1));
         }
 
         /// <summary>
-        /// <see cref="IContainer.Resolve{T1}"/>
+        ///     <see cref="IContainer.Resolve{T1}" />
         /// </summary>
         public T1 Resolve<T1>()
         {
             return unityContainer.Resolve<T1>();
         }
+
         /// <summary>
-        /// <see cref="IContainer.Resolve{T1}"/>
+        ///     <see cref="IContainer.Resolve{T1}" />
         /// </summary>
         public T1 Resolve<T1>(string name)
         {
@@ -103,18 +84,19 @@ namespace Wise.Framework.DependencyInjection.Unity
         }
 
         /// <summary>
-        /// <see cref="IContainer.RegisterInstance{T1}"/>
+        ///     <see cref="IContainer.RegisterInstance{T1}" />
         /// </summary>
         public void RegisterInstance<T1>(T1 instance)
         {
             unityContainer.RegisterInstance(instance, new ContainerControlledLifetimeManager());
         }
+
         /// <summary>
-        /// <see cref="IContainer.RegisterInstance{T1}"/>
+        ///     <see cref="IContainer.RegisterInstance{T1}" />
         /// </summary>
         public void RegisterInstance<T1>(T1 instance, string name)
         {
-            unityContainer.RegisterInstance<T1>(name, instance);
+            unityContainer.RegisterInstance(name, instance);
         }
 
 
@@ -166,7 +148,8 @@ namespace Wise.Framework.DependencyInjection.Unity
             return this;
         }
 
-        public IContainer RegisterType(Type from, Type to, string name, object lifetimeManager, object[] injectionMembers)
+        public IContainer RegisterType(Type from, Type to, string name, object lifetimeManager,
+            object[] injectionMembers)
         {
             var members = injectionMembers as InjectionMember[];
             var manager = lifetimeManager as LifetimeManager;
@@ -176,16 +159,14 @@ namespace Wise.Framework.DependencyInjection.Unity
 
         public IEnumerable<IContainerRegistration> Registrations
         {
-            get
-            {
-                return unityContainer.Registrations.ToContainerRegistration();
-            }
+            get { return unityContainer.Registrations.ToContainerRegistration(); }
         }
 
         public IEnumerable<T> ResolveAll<T>()
         {
             return unityContainer.ResolveAll<T>();
         }
+
         public IEnumerable<object> ResolveAll(Type t)
         {
             return unityContainer.ResolveAll(t);
@@ -207,6 +188,24 @@ namespace Wise.Framework.DependencyInjection.Unity
         public void RegisterType(Type from, Type to, string name)
         {
             unityContainer.RegisterType(from, to, name);
+        }
+
+        /// <summary>
+        ///     method registers type in container
+        /// </summary>
+        /// <typeparam name="T1">in most cases interface</typeparam>
+        /// <typeparam name="T2">in most cases class implementation for {T1}</typeparam>
+        /// <param name="lifetimeScope">lifetime scope for type</param>
+        private void RegisterTypeWithoutCheck<T1, T2>(LifetimeScope lifetimeScope, string name = null) where T2 : T1
+        {
+            if (lifetimeScope == LifetimeScope.Singleton)
+            {
+                unityContainer.RegisterType<T1, T2>(name, new ContainerControlledLifetimeManager());
+            }
+            else
+            {
+                unityContainer.RegisterType<T1, T2>(name);
+            }
         }
     }
 }
