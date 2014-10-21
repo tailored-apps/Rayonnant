@@ -5,7 +5,7 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:window="clr-namespace:Wise.Framework.Presentation.Window"
                    mc:Ignorable="d"
-                   d:DesignHeight="300" d:DesignWidth="800"
-                   WindowStartupLocation="CenterScreen" WindowStyle="None">
+                   WindowStartupLocation="CenterScreen" WindowStyle="None" >
+
 
 </window:WindowBase>

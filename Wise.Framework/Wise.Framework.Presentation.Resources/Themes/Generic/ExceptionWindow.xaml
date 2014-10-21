@@ -17,8 +17,8 @@
 
     <ControlTemplate x:Key="ExceptionControlTemplate" TargetType="{x:Type window1:ExceptionWindow}">
 
-        <Border Background="{DynamicResource BorderColorBrush}" Padding="0.5">
-            <Grid Background="{DynamicResource MainWindowBackground}">
+        <Border Background="{DynamicResource BorderColorBrush}" Padding="0.5" >
+            <Grid Background="{DynamicResource MainWindowBackground}" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20" />
                     <RowDefinition Height="*" />
@@ -43,7 +43,7 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40" />
-                        <RowDefinition Height="*" />
+                        <RowDefinition Height="145" />
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
 
@@ -58,12 +58,11 @@
 
                     </ContentControl>
 
-                    <Label Content="Application encountered an issue" FontSize="20" Grid.Column="1" Grid.Row="0"
-                           HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Label Content="Application encountered an issue" FontSize="20" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
                     <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
 
-                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap">Application has encountered an error during some operation, Exception has been logged and you can decide to resume, but some parts may work incorrectly. You can send information to Your software vendor or service desk by sending technical details.</TextBlock>
+                        <TextBlock HorizontalAlignment="Stretch" TextWrapping="Wrap">Application has encountered an error during some operation, Exception has been logged and you can decide to resume, but some parts of your software may work incorrectly. You can send information to Your software vendor or service desk by sending technical details.</TextBlock>
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                             <Button Margin="5" Width="100" Height="35"
                                     Command="{Binding ResumeCommand, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
@@ -78,38 +77,32 @@
                             </Button>
                         </StackPanel>
                     </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5">
-                        <Border Background="{DynamicResource BorderColorBrush}" Padding="0.5">
-                            <Grid Background="{DynamicResource MainWindowBackground}">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="145" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="145" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="40" />
-                                    <RowDefinition Height="*" />
-                                </Grid.RowDefinitions>
+                    <StackPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" Margin="5" VerticalAlignment="Stretch">
+                        <Grid Background="{DynamicResource MainWindowBackground}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="145" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="145" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                                <Button Grid.Row="0" Grid.Column="0">View Technical Details</Button>
-                                <Button Grid.Row="0" Grid.Column="2">Copy To clipboard</Button>
+                            <Button Grid.Row="0" Grid.Column="0" Command="{Binding DetailsVisibilityToggleCommand, RelativeSource={RelativeSource TemplatedParent}}">View Technical Details</Button>
+                            <Button Grid.Row="0" Grid.Column="2" Command="{Binding CopyErrorCommand, RelativeSource={RelativeSource TemplatedParent}}">Copy To clipboard</Button>
 
-                                <ScrollViewer Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0"
-                                              HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-                                              VerticalScrollBarVisibility="Auto">
-                                    <TextBox HorizontalAlignment="Stretch" Background="Transparent" BorderThickness="0"
-                                             TextWrapping="Wrap"
-                                             Text="{Binding Exception.Message, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
-
-                                </ScrollViewer>
-                            </Grid>
-                        </Border>
+                            <ScrollViewer  Name="details"  Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="0" Visibility="{Binding DetailsVisibility, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+                                <Border Background="{DynamicResource BorderColorBrush}" Padding="0.5" >
+                                    <TextBox Name="TextBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap" Text="{Binding Exception.Message, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
+                                </Border>
+                            </ScrollViewer>
+                        </Grid>
                     </StackPanel>
                 </Grid>
 
             </Grid>
         </Border>
-
     </ControlTemplate>
 
     <Style TargetType="{x:Type window1:ExceptionWindow}">
@@ -123,7 +116,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="Width" Value="800" />
-        <Setter Property="Height" Value="300" />
+        <Setter Property="Height" Value="242" />
         <Setter Property="ResizeMode" Value="NoResize" />
         <Setter Property="Template" Value="{DynamicResource ExceptionControlTemplate}" />
     </Style>

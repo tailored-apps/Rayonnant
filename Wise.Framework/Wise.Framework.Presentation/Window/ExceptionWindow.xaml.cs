@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Expression.Interactivity.Core;
 using Wise.Framework.Interface.ExceptionHandling;
 
@@ -18,6 +20,8 @@ namespace Wise.Framework.Presentation.Window
             InitializeComponent();
             CloseWindowCommand = new ActionCommand(closeAction);
             ResumeCommand = new ActionCommand(resumeAction);
+            CopyErrorCommand = new ActionCommand(copyAction);
+            DetailsVisibilityToggleCommand = new ActionCommand(toggleVisibilityAction);
         }
 
         #region [IExceptionService]
@@ -71,6 +75,27 @@ namespace Wise.Framework.Presentation.Window
             Close();
         }
 
+
+        private void copyAction(object obj)
+        {
+            Clipboard.SetText(Exception.Message);
+        }
+
+        private void toggleVisibilityAction(object obj)
+        {
+            Height = DetailsVisibility == Visibility.Collapsed ? 400: 242 ;
+            var scroll = GetTemplateChild("details") as ScrollViewer;
+            if (scroll != null)
+            {
+                scroll.Height = DetailsVisibility == Visibility.Collapsed ? 150 : 0;
+            }
+            var row = GetTemplateChild("TextBox") as TextBox;
+            if (row != null)
+            {
+                row.Height = 150;
+            }
+            DetailsVisibility = DetailsVisibility == Visibility.Visible ? Visibility.Collapsed : Visibility.Visible;
+        }
         #endregion [Private Methods]
 
         #region [Properties]
@@ -89,9 +114,18 @@ namespace Wise.Framework.Presentation.Window
         public static readonly DependencyProperty MessageProperty = DependencyProperty.Register(
             "Message", typeof (string), typeof (ExceptionWindow), new PropertyMetadata(default(string)));
 
+        public static readonly DependencyProperty DetailsVisibilityProperty = DependencyProperty.Register(
+            "DetailsVisibility", typeof (Visibility), typeof (ExceptionWindow), new PropertyMetadata(Visibility.Collapsed));
+
+        public Visibility DetailsVisibility
+        {
+            get { return (Visibility) GetValue(DetailsVisibilityProperty); }
+            set { SetValue(DetailsVisibilityProperty, value); }
+        }
         public ICommand CloseWindowCommand { get; set; }
         public ICommand ResumeCommand { get; set; }
-
+        public ICommand DetailsVisibilityToggleCommand { get; set; }
+        public ICommand CopyErrorCommand { get; set; }
         public Exception Exception
         {
             get { return (Exception) GetValue(ExceptionProperty); }

@@ -34,7 +34,6 @@ namespace Wise.DummyModule
 
         protected override void RegisterResources()
         {
-            throw new Exception();
             ResourceManager.MergeResource("Wise.DummyModule;component/Resources/ViewModelTemplates.xaml");
         }
 

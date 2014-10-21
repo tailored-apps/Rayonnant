@@ -17,3 +17,7 @@ Wise.Framework/Testing/TestModules/Wise.DummyModuleTwo/bin/
 /Wise.Framework/Wise.Framework.WindowsServiceController/bin/Release
 /Wise.Framework/Wise.Framework.Presentation.Tests/bin/Debug
 /Wise.Framework/Wise.Framework.WindowsServiceController/bin/Debug
+/Wise.WPF/Wise.HostShell/bin
+/Wise.WPF/Wise.Module/bin/Debug
+/Wise.WPF/bin
+/Wise.Framework/Testing/build/bin
