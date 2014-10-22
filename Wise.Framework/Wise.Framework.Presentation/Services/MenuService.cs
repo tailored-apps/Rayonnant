@@ -62,6 +62,42 @@ namespace Wise.Framework.Presentation.Services
                 menuItem.Uid = ComposeUidForElement(menuItem.Header.ToString(), null);
                 commandsViewModel.Commands.Add(menuItem);
             }
+            else
+            {
+                var middleString = MENU_ITEMS_PREFIX;
+                var elements = path.Replace(MENU_ITEMS_PREFIX, string.Empty).Split('|');
+                MenuItem lastItem = null;
+
+                foreach (string element in elements)
+                {
+                    lastItem = Find(commandsViewModel.Commands, middleString);
+                    if (lastItem == null)
+                    {
+                        var isRequiredToAdd = ComposeUidForElement(element, null);
+                        if (Find(commandsViewModel.Commands, isRequiredToAdd) == null)
+                        {
+                            lastItem = new MenuItem();
+                            lastItem.Header = element;
+                            lastItem.Uid = ComposeUidForElement(lastItem.Header.ToString(), null);
+
+                            commandsViewModel.Commands.Add(lastItem);
+                        }
+                    }
+                    else
+                    {
+
+                        var i = new MenuItem();
+                        i.Header = element;
+                        i.Uid = ComposeUidForElement(i.Header.ToString(), lastItem);
+                        lastItem.Items.Add(i);
+                        lastItem = i;
+                    }
+
+
+                    middleString += middleString.Equals(MENU_ITEMS_PREFIX) ? element : "|" + element;
+                }
+                lastItem.Items.Add(menuItem);
+            }
         }
 
         /// <summary>

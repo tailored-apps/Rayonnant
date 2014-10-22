@@ -105,9 +105,7 @@ namespace Wise.Framework.Presentation.Modularity
                     var command =
                         new ActionCommand(() => OnMessageArrived(new NavigationRequest {ViewModelType = viewModel}));
                     var menuItem = (MenuItem) attribute;
-                    menuService.AddMenuItem(
-                        new System.Windows.Controls.MenuItem {Header = menuItem.DisplayName, Command = command},
-                        string.Concat(MenuService.MENU_ITEMS_PREFIX, menuItem.Path));
+                    menuService.AddMenuItem(new System.Windows.Controls.MenuItem {Header = menuItem.DisplayName, Command = command}, menuItem.Path);
                 }
             }
         }
