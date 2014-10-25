@@ -16,7 +16,7 @@ namespace Wise.Framework.Presentation.Services
         /// <summary>
         ///     Default Menu Prefix added to every item which will be added as root of path.
         /// </summary>
-        public static readonly string MENU_ITEMS_PREFIX = "#MenuItems:";
+        private static readonly string MENU_ITEMS_PREFIX = "#MenuItems:";
 
         private readonly ICommandsViewModel commandsViewModel;
 
@@ -46,12 +46,13 @@ namespace Wise.Framework.Presentation.Services
         /// </returns>
         public MenuItem GetMenuItem(string path)
         {
-            return Find(commandsViewModel.Commands, path);
+            return Find(commandsViewModel.Commands, String.Concat(MENU_ITEMS_PREFIX, path));
         }
 
         public void AddMenuItem(MenuItem menuItem, string path)
         {
-            MenuItem parent = Find(commandsViewModel.Commands, path);
+            path = String.Concat(MENU_ITEMS_PREFIX, path);
+            var parent = Find(commandsViewModel.Commands, path);
             if (parent != null)
             {
                 menuItem.Uid = ComposeUidForElement(menuItem.Header.ToString(), parent);
@@ -68,7 +69,7 @@ namespace Wise.Framework.Presentation.Services
                 var elements = path.Replace(MENU_ITEMS_PREFIX, string.Empty).Split('|');
                 MenuItem lastItem = null;
 
-                foreach (string element in elements)
+                foreach (var element in elements)
                 {
                     lastItem = Find(commandsViewModel.Commands, middleString);
                     if (lastItem == null)
@@ -96,7 +97,7 @@ namespace Wise.Framework.Presentation.Services
 
                     middleString += middleString.Equals(MENU_ITEMS_PREFIX) ? element : "|" + element;
                 }
-                lastItem.Items.Add(menuItem);
+                if (lastItem != null) lastItem.Items.Add(menuItem);
             }
         }
 
@@ -106,6 +107,7 @@ namespace Wise.Framework.Presentation.Services
         /// <param name="path">path for item</param>
         public void RemoveMenuItem(string path)
         {
+            path = String.Concat(MENU_ITEMS_PREFIX, path);
             MenuItem menuToRemove = Find(commandsViewModel.Commands, path);
 
             if (menuToRemove != null)

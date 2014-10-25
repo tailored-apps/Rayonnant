@@ -139,10 +139,6 @@
       <Project>{069e0f5d-0a61-4269-9276-b9b126abdabf}</Project>
       <Name>Wise.Framework.Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wise.DummyModuleTwo\Wise.DummyModuleTwo.csproj">
-      <Project>{e91c0f36-13db-4d7a-a90a-0c1b860cecd7}</Project>
-      <Name>Wise.DummyModuleTwo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Resources\ViewModelTemplates.xaml">
