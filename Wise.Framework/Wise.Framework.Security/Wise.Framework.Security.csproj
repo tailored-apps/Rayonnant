@@ -41,6 +41,9 @@
   <ItemGroup>
     <Compile Include="Authentication\SecurityService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\BaseSecurityProvider.cs" />
+    <Compile Include="Providers\WindowsSecurityProviders.cs" />
+    <Compile Include="Role.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">

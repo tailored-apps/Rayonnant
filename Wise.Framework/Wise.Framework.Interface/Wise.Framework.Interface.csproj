@@ -64,6 +64,7 @@
     <Compile Include="Modularity\IModuleCatalog.cs" />
     <Compile Include="Modularity\IResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\IRole.cs" />
     <Compile Include="Security\ISecurityService.cs" />
     <Compile Include="WindowsService\IStartable.cs" />
     <Compile Include="Window\IShellWindow.cs" />

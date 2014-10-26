@@ -10,6 +10,7 @@
         <ResourceDictionary Source="DataGridStyles.xaml" />
         <ResourceDictionary Source="ComboBoxStyles.xaml" />
         <ResourceDictionary Source="GroupBoxStyles.xaml" />
+        <ResourceDictionary Source="ToolTip.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="Button" BasedOn="{StaticResource StandardButton}" />
     <Style TargetType="TabControl" BasedOn="{StaticResource StandardTabControl}" />
@@ -20,4 +21,5 @@
     <Style TargetType="DataGrid" BasedOn="{StaticResource StandardDataGrid}" />
     <Style TargetType="ComboBox" BasedOn="{StaticResource StandardComboBox}" />
     <Style TargetType="GroupBox" BasedOn="{StaticResource StandardGroupBox}" />
+    <Style TargetType="ToolTip" BasedOn="{StaticResource StandardToolTip}" />
 </ResourceDictionary>

@@ -15,11 +15,33 @@
             <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
 
-        <Label ToolTip="System Message" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0"
-               Content="{Binding Message}" HorizontalContentAlignment="Center" />
-        <Label ToolTip="User Name" Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Content="{Binding UserName}"
-               FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" />
-        <Label ToolTip="Environment Name" Grid.Row="0" HorizontalAlignment="Right" Grid.Column="2"
-               Content="{Binding Environment}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" />
+        <Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0"
+			Content="{Binding Message}" HorizontalContentAlignment="Center" >
+
+            <Label.ToolTip>
+                <StackPanel>
+                    <Label Content="{Binding Message}"  ContentStringFormat="Last System Message: '{0}'"  />
+                </StackPanel>
+            </Label.ToolTip>
+        </Label>
+
+        <Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="1" Content="{Binding UserName}" 
+			FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
+            <Label.ToolTip>
+                <StackPanel>
+                    <Label Content="{Binding UserName}"  ContentStringFormat="User Name: '{0}'"  />
+                </StackPanel>
+            </Label.ToolTip>
+        </Label>
+
+        <Label  Grid.Row="0" HorizontalAlignment="Right" Grid.Column="2"
+			Content="{Binding Environment}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
+
+            <Label.ToolTip>
+                <StackPanel>
+                    <Label Content="{Binding Environment}"  ContentStringFormat="Environment Name: '{0}'"  />
+                </StackPanel>
+            </Label.ToolTip>
+        </Label>
     </Grid>
 </UserControl>
