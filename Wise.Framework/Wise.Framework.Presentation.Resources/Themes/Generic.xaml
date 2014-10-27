@@ -13,6 +13,8 @@
             Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashViewModel.xaml" />
         <ResourceDictionary
             Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ExceptionWindow.xaml" />
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/PrismViewBase.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

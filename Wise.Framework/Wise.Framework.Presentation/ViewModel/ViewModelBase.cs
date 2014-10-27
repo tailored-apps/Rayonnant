@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Windows.Input;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
+using Wise.Framework.Presentation.Commands;
 
 namespace Wise.Framework.Presentation.ViewModel
 {
@@ -10,6 +12,12 @@ namespace Wise.Framework.Presentation.ViewModel
     public abstract class ViewModelBase : BindableBase, IDisposable, INavigationAware
     {
         public string ScreenId { get; protected set; }
+        public bool IsTearOff { get; set; }
+
+        public ViewModelBase()
+        {
+            CloseItemCommand = new CloseItemCommand();
+        }
 
         /// <summary>
         ///     <see cref="IDisposable.Dispose" />
@@ -40,6 +48,16 @@ namespace Wise.Framework.Presentation.ViewModel
         /// </summary>
         protected virtual void OnDispose()
         {
+        }
+
+        private ICommand closeItemCommand;
+        public ICommand CloseItemCommand
+        {
+            get { return closeItemCommand; }
+            private set
+            {
+                SetProperty(ref closeItemCommand, value);
+            }
         }
     }
 }

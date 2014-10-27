@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -15,6 +16,7 @@ using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Services;
 using Wise.Framework.Presentation.ViewModel;
+using Wise.Framework.Presentation.Window;
 
 namespace Wise.Framework.Presentation.Modularity
 {
@@ -27,6 +29,8 @@ namespace Wise.Framework.Presentation.Modularity
         private readonly IRegionManager regionManager;
         private readonly IShellWindow shell;
         private readonly IDisposable subscription;
+
+        private readonly IDictionary<ViewModelBase, WindowBase> TearOffViewModels = new Dictionary<ViewModelBase, WindowBase>();
 
         public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager,
             IShellWindow shell, ILog loger, IMenuService menuService)
@@ -42,14 +46,30 @@ namespace Wise.Framework.Presentation.Modularity
 
         public void RegisterTypeForNavigation(Type viewModelType)
         {
-            container.RegisterType(typeof (Object), viewModelType, viewModelType.FullName);
+            container.RegisterType(typeof(Object), viewModelType, viewModelType.FullName);
             AddMenuNavigation(viewModelType);
+        }
+
+        public void CloseItem(ViewModelBase vm)
+        {
+            foreach (var region in regionManager.Regions)
+            {
+                if (region.ActiveViews.Contains(vm))
+                {
+                    region.Remove(vm);
+                }
+            }
+            if (TearOffViewModels.ContainsKey(vm))
+            {
+                TearOffViewModels[vm].Close();
+                TearOffViewModels.Remove(vm);
+            }
         }
 
         public void RegisterTypeForNavigation<T>()
         {
-            container.RegisterType(typeof (Object), typeof (T), typeof (T).FullName);
-            AddMenuNavigation(typeof (T));
+            container.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
+            AddMenuNavigation(typeof(T));
         }
 
         public void RegisterViewModelForNavigation(ViewModelBase viewModel)
@@ -96,16 +116,37 @@ namespace Wise.Framework.Presentation.Modularity
 
         private void AddMenuNavigation(Type viewModel)
         {
-            IEnumerable<Attribute> attr = viewModel.GetCustomAttributes(typeof (MenuItem));
+            IEnumerable<Attribute> attr = viewModel.GetCustomAttributes(typeof(MenuItem));
 
             if (attr != null && attr.Count() > 0)
             {
                 foreach (Attribute attribute in attr)
                 {
                     var command =
-                        new ActionCommand(() => OnMessageArrived(new NavigationRequest {ViewModelType = viewModel}));
-                    var menuItem = (MenuItem) attribute;
-                    menuService.AddMenuItem(new System.Windows.Controls.MenuItem {Header = menuItem.DisplayName, Command = command}, menuItem.Path);
+                        new ActionCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
+                    var menuItem = (MenuItem)attribute;
+                    menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);
+                }
+            }
+        }
+
+
+        public void TearOff(ViewModelBase vm)
+        {
+            if (!vm.IsTearOff)
+            {
+                var modalWindow = new ModalWindow();
+                modalWindow.DataContext = vm;
+                modalWindow.Show();
+                vm.IsTearOff = true;
+                TearOffViewModels.Add(vm, modalWindow);
+
+                foreach (var region in regionManager.Regions)
+                {
+                    if (region.ActiveViews.Contains(vm))
+                    {
+                        region.Remove(vm);
+                    }
                 }
             }
         }

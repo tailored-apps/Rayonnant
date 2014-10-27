@@ -6,6 +6,7 @@
                     xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
                     xmlns:regions="http://www.codeplex.com/CompositeWPF"
                     mc:Ignorable="d"
+                    Style="{StaticResource {x:Type view:PrismViewBase}}"
                     d:DesignHeight="300" d:DesignWidth="300">
 
     <Grid Margin="0,0,-270,0" RenderTransformOrigin="0.526,0.507">

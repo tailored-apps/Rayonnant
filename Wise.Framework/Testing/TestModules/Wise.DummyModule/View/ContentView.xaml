@@ -4,10 +4,11 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
+                    Style="{StaticResource {x:Type view:PrismViewBase}}"
                     mc:Ignorable="d"
-                    d:DesignHeight="300" d:DesignWidth="300">
+                    d:DesignHeight="300">
 
-    <Grid Margin="0,0,-270,0" RenderTransformOrigin="0.526,0.507">
+    <Grid >
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition />

@@ -39,19 +39,5 @@ namespace Wise.DummyModule.ViewModel
             Label += DateTime.Now + " HELLO: " + o;
         }
 
-        public override bool IsNavigationTarget(NavigationContext navigationContext)
-        {
-            return false;
-        }
-
-        public override void OnNavigatedTo(NavigationContext navigationContext)
-        {
-            base.OnNavigatedTo(navigationContext);
-        }
-
-        public override void OnNavigatedFrom(NavigationContext navigationContext)
-        {
-            base.OnNavigatedFrom(navigationContext);
-        }
     }
 }

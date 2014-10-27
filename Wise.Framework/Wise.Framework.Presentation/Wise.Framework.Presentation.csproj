@@ -91,6 +91,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\MenuItem.cs" />
+    <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\TearOffToggleCommand.cs" />
+    <Compile Include="Commands\CloseItemCommand.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConverter.cs" />
     <Compile Include="Interface\Menu\IMenuService.cs" />
