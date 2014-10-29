@@ -6,6 +6,7 @@
                     xmlns:interface="clr-namespace:Wise.Framework.Presentation.Interface"
                     xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters"
                     xmlns:regions="http://www.codeplex.com/CompositeWPF"
+                    xmlns:shell="clr-namespace:Wise.Framework.Presentation.Interface.Shell"
                     mc:Ignorable="d"
                     d:DesignHeight="300" d:DesignWidth="300">
 
@@ -15,13 +16,13 @@
 
     <Grid>
         <DockPanel LastChildFill="True">
-            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="{x:Static interface:ShellRegionNames.CommandRegion}"
+            <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.CommandRegion}"
                             Visibility="{Binding IsVisibleCommandRegion, Converter={StaticResource BooleanToVisibilityConverter}}" />
-            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="{x:Static interface:ShellRegionNames.StatusRegion}" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static interface:ShellRegionNames.ContentRegion}" />
+            <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.StatusRegion}" />
+            <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.ContentRegion}" />
         </DockPanel>
-        <ContentControl regions:RegionManager.RegionName="{x:Static interface:ShellRegionNames.ProgressOverlayRegionRegion}" />
-        <ContentControl regions:RegionManager.RegionName="{x:Static interface:ShellRegionNames.OverlayRegion}" />
+        <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.ProgressOverlayRegionRegion}" />
+        <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.OverlayRegion}" />
 
     </Grid>
 </UserControl>

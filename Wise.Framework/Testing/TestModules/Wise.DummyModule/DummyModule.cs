@@ -6,6 +6,7 @@ using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Modularity;
+using Wise.Framework.Presentation.Interface.Shell;
 using Wise.Framework.Presentation.Modularity;
 
 namespace Wise.DummyModule

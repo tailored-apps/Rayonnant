@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Regions;
 using Wise.DummyModule.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
@@ -20,6 +21,8 @@ namespace Wise.DummyModule.ViewModel
             messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher);
 
             Button = new DummyCommand(this, messanger);
+            base.Title = "asd";
+           // Icon = new BitmapImage(new Uri(@"/Wise.Framework.Presentation.Resources;component/Icons/appbar.adobe.audition.xaml"));
         }
 
         public ICommand Button { get; set; }

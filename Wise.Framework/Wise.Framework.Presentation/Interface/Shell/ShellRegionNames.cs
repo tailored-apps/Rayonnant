@@ -1,4 +1,4 @@
-﻿namespace Wise.Framework.Presentation.Interface
+﻿namespace Wise.Framework.Presentation.Interface.Shell
 {
     /// <summary>
     ///     Static class contains names of region names in shell window

@@ -1,5 +1,9 @@
-﻿using Wise.Framework.Interface.Window;
+﻿using System;
+using System.Linq;
+using Wise.Framework.Interface.Window;
+using Wise.Framework.Presentation.Interface.Shell;
 using Wise.Framework.Presentation.Interface.ViewModel;
+using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.Presentation.Window
 {
@@ -19,5 +23,6 @@ namespace Wise.Framework.Presentation.Window
 
             InitializeComponent();
         }
+
     }
 }

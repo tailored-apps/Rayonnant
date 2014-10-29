@@ -21,6 +21,7 @@ using Wise.Framework.InternalMessagning;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
+using Wise.Framework.Presentation.Interface.Shell;
 using Wise.Framework.Presentation.Interface.ViewModel;
 using Wise.Framework.Presentation.Logging;
 using Wise.Framework.Presentation.Modularity;

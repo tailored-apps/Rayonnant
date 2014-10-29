@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using Microsoft.Practices.Prism.Regions;
 using Wise.DummyModuleTwo.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
@@ -19,6 +20,7 @@ namespace Wise.DummyModuleTwo.ViewModel
             this.messanger = messanger;
             messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher);
 
+            base.Title = "asd";
             Button = new DummyCommandTwo(this, messanger);
         }
 
@@ -38,5 +40,6 @@ namespace Wise.DummyModuleTwo.ViewModel
         {
             Label += DateTime.Now + " HELLO: " + o;
         }
+
     }
 }

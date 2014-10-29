@@ -18,6 +18,7 @@ namespace Wise.DummyModule.ViewModel
             messanger.Subscribe<string>(OnMessageArrived).ExecuteOn(MessageProcessingThread.Dispatcher);
 
             Button = new DummyCommandTwo(this, messanger);
+            base.Title = "asd";
         }
 
         public ICommand Button { get; set; }

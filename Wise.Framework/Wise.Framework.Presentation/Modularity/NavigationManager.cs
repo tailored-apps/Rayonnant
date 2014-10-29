@@ -14,6 +14,7 @@ using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
+using Wise.Framework.Presentation.Interface.Shell;
 using Wise.Framework.Presentation.Services;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
@@ -116,14 +117,13 @@ namespace Wise.Framework.Presentation.Modularity
 
         private void AddMenuNavigation(Type viewModel)
         {
-            IEnumerable<Attribute> attr = viewModel.GetCustomAttributes(typeof(MenuItem));
+            var attr = viewModel.GetCustomAttributes(typeof(MenuItem));
 
-            if (attr != null && attr.Count() > 0)
+            if (attr != null && attr.Any())
             {
                 foreach (Attribute attribute in attr)
                 {
-                    var command =
-                        new ActionCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
+                    var command = new ActionCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
                     var menuItem = (MenuItem)attribute;
                     menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);
                 }
@@ -135,8 +135,8 @@ namespace Wise.Framework.Presentation.Modularity
         {
             if (!vm.IsTearOff)
             {
-                var modalWindow = new ModalWindow();
-                modalWindow.DataContext = vm;
+                var modalWindow = new ModalWindow {DataContext = vm,};
+                 
                 modalWindow.Show();
                 vm.IsTearOff = true;
                 TearOffViewModels.Add(vm, modalWindow);

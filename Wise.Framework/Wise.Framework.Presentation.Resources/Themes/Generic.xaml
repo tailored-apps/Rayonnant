@@ -16,5 +16,8 @@
         <ResourceDictionary
             Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/PrismViewBase.xaml" />
 
+        <ResourceDictionary
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ModalWindow.xaml" />
+
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

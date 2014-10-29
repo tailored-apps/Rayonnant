@@ -7,7 +7,7 @@
                    Title="{Binding Title}"
                    mc:Ignorable="d"
                    d:Height="300" d:Width="300"
-                   WindowStartupLocation="CenterScreen">
+                   WindowStartupLocation="CenterScreen" Padding="0" WindowStyle="None">
 
 
 

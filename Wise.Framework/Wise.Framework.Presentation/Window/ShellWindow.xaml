@@ -23,12 +23,5 @@
         <Binding Converter="{StaticResource UriToImageSourceConverter}" Path="Icon" />
     </window:WindowBase.Icon>
 
-
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="271*" />
-            <ColumnDefinition Width="109*" />
-        </Grid.ColumnDefinitions>
-        <ContentControl Visibility="Visible" Content="{Binding}" Grid.ColumnSpan="2" />
-    </Grid>
+    <ContentControl Visibility="Visible" Content="{Binding}"  />
 </window:WindowBase>

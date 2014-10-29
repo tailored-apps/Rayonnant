@@ -99,7 +99,8 @@
     <Compile Include="Interface\Menu\IMenuService.cs" />
     <Compile Include="Interface\Modularity\INavigationManager.cs" />
     <Compile Include="Interface\Modularity\IRegionConfigurator.cs" />
-    <Compile Include="Interface\ShellRegionNames.cs" />
+    <Compile Include="Interface\Shell\IShellWindowClosingAware.cs" />
+    <Compile Include="Interface\Shell\ShellRegionNames.cs" />
     <Compile Include="Interface\ViewModel\ICommandsViewModel.cs" />
     <Compile Include="Interface\ViewModel\IMenuViewModel.cs" />
     <Compile Include="Interface\ViewModel\IProgressViewModel.cs" />
