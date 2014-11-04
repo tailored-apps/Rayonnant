@@ -21,3 +21,5 @@ Wise.Framework/Testing/TestModules/Wise.DummyModuleTwo/bin/
 /Wise.WPF/Wise.Module/bin/Debug
 /Wise.WPF/bin
 /Wise.Framework/Testing/build/bin
+/Wise.Framework/Wise.Framework.Web/bin/Debug
+/Wise.Framework/Wise.MVC.TestApplication/bin
