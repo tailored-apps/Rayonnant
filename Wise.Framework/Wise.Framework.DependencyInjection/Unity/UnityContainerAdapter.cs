@@ -57,6 +57,11 @@ namespace Wise.Framework.DependencyInjection.Unity
             return UnityRegistrationExtension.IsTypeRegistered(unityContainer, typeof (T1));
         }
 
+        public bool IsTypeRegistered(Type type)
+        {
+            return UnityRegistrationExtension.IsTypeRegistered(unityContainer, type);
+        }
+
         /// <summary>
         ///     <see cref="IContainer.Resolve{T1}" />
         /// </summary>

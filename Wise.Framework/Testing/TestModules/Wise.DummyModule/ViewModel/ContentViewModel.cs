@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using Microsoft.Practices.Prism.Regions;
@@ -22,10 +23,13 @@ namespace Wise.DummyModule.ViewModel
 
             Button = new DummyCommand(this, messanger);
             base.Title = "asd";
-           // Icon = new BitmapImage(new Uri(@"/Wise.Framework.Presentation.Resources;component/Icons/appbar.adobe.audition.xaml"));
+            Items = new ObservableCollection<string>(new[] { "-- All --", "Anna", "annie", "cookie", "lolo test" });
+            Reset = new ResetKey();
         }
 
         public ICommand Button { get; set; }
+
+        public ICommand Reset { get; set; }
 
         public string Label
         {
@@ -42,5 +46,22 @@ namespace Wise.DummyModule.ViewModel
             Label += DateTime.Now + " HELLO: " + o;
         }
 
+
+        private string selectedItem;
+
+        public string SelectedItem
+        {
+            get { return selectedItem; }
+            set { SetProperty(ref selectedItem, value); }
+        }
+
+
+        private ObservableCollection<string> items;
+
+        public ObservableCollection<string> Items
+        {
+            get { return items; }
+            set { SetProperty(ref items, value); }
+        }
     }
 }

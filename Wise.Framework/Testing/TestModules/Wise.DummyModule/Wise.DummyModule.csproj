@@ -84,8 +84,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\ResetKey.cs" />
     <Compile Include="Commands\DummyCommandTwo.cs" />
     <Compile Include="Commands\DummyCommand.cs" />
+    <Compile Include="CustomDropDown.cs" />
     <Compile Include="DummyModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -4,9 +4,10 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
+                    xmlns:dummyModule="clr-namespace:Wise.DummyModule"
                     Style="{StaticResource {x:Type view:PrismViewBase}}"
                     mc:Ignorable="d"
-                    d:DesignHeight="300">
+                    d:DesignHeight="300" Name="root">
 
     <Grid >
         <Grid.RowDefinitions>
@@ -28,15 +29,10 @@
                  Grid.Column="1" Margin="86,36,84,36">
             asdasd
         </TextBox>
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Height="25" Grid.Row="2" Width="120" Margin="0,35">
-            <ComboBox.Items>
-                <ComboBoxItem IsSelected="True" Name="One">One</ComboBoxItem>
-                <ComboBoxItem Name="Two">Two</ComboBoxItem>
-                <ComboBoxItem Name="Five">Three</ComboBoxItem>
-                <ComboBoxItem Name="ASD">Four</ComboBoxItem>
-                <ComboBoxItem Name="aaa">Five</ComboBoxItem>
-                <ComboBoxItem Name="sadfsf">Six</ComboBoxItem>
-            </ComboBox.Items>
-        </ComboBox>
+        <dummyModule:CustomDropDown x:Name="CustomDropDown" Grid.Column="1" HorizontalAlignment="Left" Height="25" Grid.Row="2" Width="120" Margin="0,35" IsEditable="True" IsTextSearchEnabled="False"  ItemsSource="{Binding Items, Mode=TwoWay}" Text="{Binding SelectedItem, Mode=TwoWay}">
+            <dummyModule:CustomDropDown.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DataContext.Reset ,ElementName=root}" CommandParameter="{Binding ElementName=CustomDropDown}" />
+            </dummyModule:CustomDropDown.InputBindings>
+        </dummyModule:CustomDropDown>
     </Grid>
 </view:PrismViewBase>

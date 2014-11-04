@@ -33,5 +33,6 @@ namespace Wise.Framework.Interface.DependencyInjection
 
         IEnumerable<T> ResolveAll<T>();
         IEnumerable<object> ResolveAll(Type t);
+        bool IsTypeRegistered(Type typeToCheck);
     }
 }
