@@ -1,5 +1,6 @@
 ﻿using Wise.Framework.DependencyInjection.Unity;
 using Wise.Framework.Interface.DependencyInjection;
+using Wise.Framework.Interface.DependencyInjection.Enum;
 
 namespace Wise.Framework.WindowsServiceController
 {
@@ -9,9 +10,11 @@ namespace Wise.Framework.WindowsServiceController
         {
             using (IContainer container = new UnityContainerAdapter())
             {
-                using (IController controller = new WindowsServiceController(container))
+                container.RegisterType<IWindowsServiceController, WindowsServiceController>(LifetimeScope.Singleton);
+               
+                using (var windowsServiceController = container.Resolve<IWindowsServiceController>())
                 {
-                    controller.RunModule(args);
+                    windowsServiceController.RunModule(args);
                 }
             }
         }

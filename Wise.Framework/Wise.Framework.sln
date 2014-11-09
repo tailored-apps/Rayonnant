@@ -72,6 +72,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Web", "Wise.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.MVC.TestApplication", "Wise.MVC.TestApplication\Wise.MVC.TestApplication.csproj", "{4849ACB2-750F-4313-B342-C35CD9394044}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{72BED8E3-53D1-4A74-BFBA-D4580B0F0FA9}"
+	ProjectSection(SolutionItems) = preProject
+		Tools\Wise.IconsConverter.exe = Tools\Wise.IconsConverter.exe
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

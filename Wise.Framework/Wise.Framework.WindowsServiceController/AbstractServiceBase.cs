@@ -2,45 +2,42 @@
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
-using Wise.Framework.Interface.WindowsService;
+using Wise.Framework.Interface.MultiThreading;
+using Wise.Framework.Interface.WindowsServices;
 
 namespace Wise.Framework.WindowsServiceController
 {
-    public abstract class AbstractServiceBase : ServiceBase, IStartable
+    public abstract class AbstractServiceBase : ServiceBase, ITaskCreator, IWindowsService
     {
-        public abstract void Start();
-        public abstract void Start(TaskScheduler scheduler);
+        public abstract Task CreateTask();
 
         protected override void OnStart(string[] args)
         {
             base.OnStart(args);
-            Start(TaskScheduler.Current);
+            var task = CreateTask();
+            task.Start(TaskScheduler.Current);
         }
 
         protected override void OnStop()
         {
             base.OnStop();
+             
         }
     }
 
     public class asd : AbstractServiceBase
     {
-        public override void Start(TaskScheduler scheduler)
+        public override Task CreateTask()
         {
             var child = new Task(() =>
             {
                 Console.WriteLine("Attached child starting.");
-                Thread.Sleep(1000*5);
+                Thread.Sleep(1000 * 5);
                 Console.WriteLine("Attached child completing.");
             },
                 TaskCreationOptions.AttachedToParent);
-
-            child.Start(scheduler);
+            return child;
         }
 
-        public override void Start()
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -8,6 +8,13 @@
                     Style="{StaticResource {x:Type view:PrismViewBase}}"
                     mc:Ignorable="d"
                     d:DesignHeight="300" Name="root">
+    <view:PrismViewBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </view:PrismViewBase.Resources>
 
     <Grid >
         <Grid.RowDefinitions>
@@ -20,6 +27,10 @@
             <ColumnDefinition Width="9*" />
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Content="{Binding Label}" />
+        <Border Grid.Row="0" Grid.Column="1">
+            <Path  Style="{StaticResource AppbarSmileyHappyIconStyle}"  />
+
+        </Border>
         <Button Grid.Row="1" Command="{Binding Button}" />
         <TextBox Width="100" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"
                  Margin="100,36">

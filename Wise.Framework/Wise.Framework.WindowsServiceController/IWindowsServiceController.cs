@@ -2,7 +2,7 @@
 
 namespace Wise.Framework.WindowsServiceController
 {
-    public interface IController : IDisposable
+    public interface IWindowsServiceController : IDisposable
     {
         void RunModule(string[] args);
     }
