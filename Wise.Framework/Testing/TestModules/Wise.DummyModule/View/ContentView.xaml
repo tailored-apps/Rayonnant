@@ -28,7 +28,7 @@
         </Grid.ColumnDefinitions>
         <Label Grid.Row="0" Content="{Binding Label}" />
         <Border Grid.Row="0" Grid.Column="1">
-            <Path  Style="{StaticResource AppbarSmileyHappyIconStyle}"  />
+            <Path  Style="{StaticResource AsdStyle}" Margin="100,83.5,100,-54.5"  />
 
         </Border>
         <Button Grid.Row="1" Command="{Binding Button}" />

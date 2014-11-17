@@ -7,11 +7,31 @@
 		<Setter Property="Height" Value="70" />
 	</Style>
 
-	<!-- source file 'appbar.acorn.xaml' -->
+    <TransformGroup x:Key="MirrorTransformation">
+  <ScaleTransform ScaleY="-1" ScaleX="1"/>
+  <SkewTransform AngleY="0" AngleX="0"/>
+  <RotateTransform Angle="0"/>
+  <TranslateTransform/> 
+    </TransformGroup> 
+
+    <!-- source file 'appbar.acorn.xaml' -->
 	<Style TargetType="{x:Type Path}" BasedOn="{StaticResource BaseIconPathTemplate}" x:Key="AppbarAcornIconStyle">
 		<Setter Property="Data" Value="F1 M 16.6309,18.6563C 17.1309,8.15625 29.8809,14.1563 29.8809,14.1563C 30.8809,11.1563 34.1308,11.4063 34.1308,11.4063C 33.5,12 34.6309,13.1563 34.6309,13.1563C 32.1309,13.1562 31.1309,14.9062 31.1309,14.9062C 41.1309,23.9062 32.6309,27.9063 32.6309,27.9062C 24.6309,24.9063 21.1309,22.1562 16.6309,18.6563 Z M 16.6309,19.9063C 21.6309,24.1563 25.1309,26.1562 31.6309,28.6562C 31.6309,28.6562 26.3809,39.1562 18.3809,36.1563C 18.3809,36.1563 18,38 16.3809,36.9063C 15,36 16.3809,34.9063 16.3809,34.9063C 16.3809,34.9063 10.1309,30.9062 16.6309,19.9063 Z " />
 	</Style>
 
+
+
+    <!-- source file 'appbar.acorn.xaml' -->
+    <Style TargetType="{x:Type Path}" BasedOn="{StaticResource BaseIconPathTemplate}" x:Key="AsdStyle">
+        <Setter Property="Data" Value="M1536 1312v-1120q0 -50 -34 -89t-86 -60.5t-103.5 -32t-96.5 -10.5t-96.5 10.5t-103.5 32t-86 60.5t-34 89t34 89t86 60.5t103.5 32t96.5 10.5q105 0 192 -39v537l-768 -237v-709q0 -50 -34 -89t-86 -60.5t-103.5 -32t-96.5 -10.5t-96.5 10.5t-103.5 32t-86 60.5t-34 89 t34 89t86 60.5t103.5 32t96.5 10.5q105 0 192 -39v967q0 31 19 56.5t49 35.5l832 256q12 4 28 4q40 0 68 -28t28 -68z" />
+        <Setter Property="RenderTransform" Value="{StaticResource MirrorTransformation}"/>
+    
+    </Style>
+           
+           
+    
+    
+    
 	<!-- source file 'appbar.add.multiple.xaml' -->
 	<Style TargetType="{x:Type Path}" BasedOn="{StaticResource BaseIconPathTemplate}" x:Key="AppbarAddMultipleIconStyle">
 		<Setter Property="Data" Value="F1 M 39,46L 46,46L 46,39L 51,39L 51,46L 58,46L 58,51L 51,51L 51,58L 46,58L 46,51L 39,51L 39,46 Z M 31,25L 38,25L 38,18L 43,18L 43,25L 50,25L 50,30L 43,30L 43,37L 38,37L 38,30L 31,30L 31,25 Z M 18,39L 25,39L 25,32L 30,32L 30,39L 37,39L 37,44L 30,44L 30,51L 25,51L 25,44L 18,44L 18,39 Z " />

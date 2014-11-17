@@ -9,5 +9,6 @@ namespace Wise.Framework.Presentation.Modularity
         public Type ViewModelType { get; set; }
         public NavigationParameters UriQuery { get; set; }
         public string RegionName { get; set; }
+        public bool IsModal { get; set; }
     }
 }

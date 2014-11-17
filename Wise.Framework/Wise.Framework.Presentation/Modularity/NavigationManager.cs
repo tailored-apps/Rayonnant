@@ -16,6 +16,7 @@ using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Interface.Shell;
 using Wise.Framework.Presentation.Services;
+using Wise.Framework.Presentation.View;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 
@@ -53,10 +54,12 @@ namespace Wise.Framework.Presentation.Modularity
 
         public void CloseItem(ViewModelBase vm)
         {
+            IRegion containingRegion = null;
             foreach (var region in regionManager.Regions)
             {
                 if (region.ActiveViews.Contains(vm))
                 {
+                    containingRegion = region;
                     region.Remove(vm);
                 }
             }
@@ -64,6 +67,14 @@ namespace Wise.Framework.Presentation.Modularity
             {
                 TearOffViewModels[vm].Close();
                 TearOffViewModels.Remove(vm);
+            }
+            if (containingRegion != null)
+            {
+                var view = containingRegion.Views.LastOrDefault();
+                if (view != null)
+                {
+                    containingRegion.Activate(view);
+                }
             }
         }
 
@@ -89,6 +100,7 @@ namespace Wise.Framework.Presentation.Modularity
             string regionName = string.IsNullOrEmpty(obj.RegionName) ? ShellRegionNames.ContentRegion : obj.RegionName;
             string navigateTo = obj.ViewModelType != null ? obj.ViewModelType.FullName : obj.ViewModelFullName;
             regManager.Regions[regionName].RequestNavigate(navigateTo, NavigationCompleted, obj.UriQuery);
+
         }
 
         private void NavigationCompleted(NavigationResult obj)
@@ -131,12 +143,12 @@ namespace Wise.Framework.Presentation.Modularity
         }
 
 
-        public void TearOff(ViewModelBase vm)
+        public void TearOff(ViewModelBase vm, bool modal = false)
         {
             if (!vm.IsTearOff)
             {
-                var modalWindow = new ModalWindow {DataContext = vm,};
-                 
+                var modalWindow = new ModalWindow { DataContext = vm, };
+
                 modalWindow.Show();
                 vm.IsTearOff = true;
                 TearOffViewModels.Add(vm, modalWindow);

@@ -31,7 +31,7 @@ namespace Wise.DummyModule.Commands
         public void Execute(object parameter)
         {
             messanger.Publish("publish from buton on view model;");
-            messanger.Publish(new NavigationRequest {ViewModelType = typeof (OtherContentViewModel)});
+            messanger.Publish(new NavigationRequest {ViewModelType = typeof (OtherContentViewModel),IsModal = true});
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using Wise.Framework.Data.Interface;
 using Wise.Framework.Interface.Data;
 

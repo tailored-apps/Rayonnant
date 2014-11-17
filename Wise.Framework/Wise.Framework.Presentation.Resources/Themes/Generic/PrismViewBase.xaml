@@ -4,7 +4,12 @@
     xmlns:control="clr-namespace:Wise.Framework.Presentation.Resources.Control"
     xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
     xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters;assembly=Wise.Framework.Presentation">
-   
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
     <ControlTemplate x:Key="closeButtonControlTemplate" TargetType="{x:Type ButtonBase}">
 
         <ControlTemplate.Resources>
@@ -24,7 +29,7 @@
                 </DoubleAnimationUsingKeyFrames>
             </Storyboard>
         </ControlTemplate.Resources>
-        
+
         <Border x:Name="Chrome" BorderBrush="{TemplateBinding BorderBrush}"
                     Margin="{Binding MarginButton, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                     Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
@@ -43,7 +48,7 @@
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
-    
+
     <Style x:Key="CloseButtonStyle" TargetType="{x:Type Button}">
         <Style.Resources>
             <Storyboard x:Key="OnMouseDownStoryboard">
@@ -91,7 +96,7 @@
             </EventTrigger>
         </Style.Triggers>
     </Style>
-    
+
     <DataTemplate x:Key="close">
         <TextBlock TextWrapping="Wrap" Text="{TemplateBinding Content}" FontFamily="Webdings"
                        Foreground="{ DynamicResource FontActiveColorBrush}"
@@ -118,7 +123,9 @@
 
                         <Image Grid.Column="0" Source="{Binding Icon}" HorizontalAlignment="Left"  />
                         <Label Grid.Column="1" Content="{Binding Title}" HorizontalAlignment="Left" Padding="0" Margin="0" VerticalContentAlignment="Center" />
-                        <Button Grid.Column="2" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" ContentTemplate="{StaticResource close}" Content="2" HorizontalAlignment="Right" Command="{TemplateBinding TearOffCommand}" CommandParameter="{TemplateBinding DataContext}" />
+                        <Button Grid.Column="2" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding TearOffCommand}" CommandParameter="{TemplateBinding DataContext}" >
+                            <Path Style="{StaticResource AppbarArrowExpandIconStyle}" Width="15" Height="15"/>
+                        </Button>
 
                         <Button Grid.Column="3"  HorizontalContentAlignment="Right"  Style="{StaticResource CloseButtonStyle}" ContentTemplate="{StaticResource close}" Content="r" HorizontalAlignment="Right" Command="{TemplateBinding CloseItemCommand}" CommandParameter="{TemplateBinding DataContext}"/>
 
@@ -133,7 +140,7 @@
     <ControlTemplate x:Key="PrismViewBaseTemplateWithoutButtons" TargetType="{x:Type view:PrismViewBase}">
         <Border Background="{DynamicResource MainWindowBackground}">
             <DockPanel LastChildFill="True">
-               
+
                 <ContentPresenter  Content="{TemplateBinding Content}" />
             </DockPanel>
         </Border>

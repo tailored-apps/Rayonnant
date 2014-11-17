@@ -19,7 +19,7 @@ namespace Wise.Framework.Presentation.ViewModel
 
         public ShellViewModel()
         {
-            IsVisibleCommandRegion = true;
+            IsVisibleCommandRegion = false;
             ToogleVisibilityCommandRegionCommand = new DelegateCommand(toogleVisibilityOnCommandRegion);
         }
 
