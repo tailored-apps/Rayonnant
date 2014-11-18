@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -11,12 +10,9 @@ using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Annotations;
-using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Interface.Shell;
-using Wise.Framework.Presentation.Services;
-using Wise.Framework.Presentation.View;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 
@@ -48,6 +44,7 @@ namespace Wise.Framework.Presentation.Modularity
 
         public void RegisterTypeForNavigation(Type viewModelType)
         {
+            loger.InfoFormat("Registering ViewModel For navigation: {0}", viewModelType);
             container.RegisterType(typeof(Object), viewModelType, viewModelType.FullName);
             AddMenuNavigation(viewModelType);
         }
@@ -137,6 +134,7 @@ namespace Wise.Framework.Presentation.Modularity
                 {
                     var command = new ActionCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
                     var menuItem = (MenuItem)attribute;
+                    loger.InfoFormat("Adding ViewModel: '{0}' For navigation from menu: '{1}'", viewModel, menuItem.Path);
                     menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);
                 }
             }
@@ -155,11 +153,22 @@ namespace Wise.Framework.Presentation.Modularity
 
                 foreach (var region in regionManager.Regions)
                 {
+                    IRegion containingRegion = null;
                     if (region.ActiveViews.Contains(vm))
                     {
+                        containingRegion = region;
                         region.Remove(vm);
                     }
+                    if (containingRegion != null)
+                    {
+                        var view = containingRegion.Views.LastOrDefault();
+                        if (view != null)
+                        {
+                            containingRegion.Activate(view);
+                        }
+                    }
                 }
+
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Wise.Framework.Presentation.Interface.ViewModel;
 
@@ -10,17 +9,15 @@ namespace Wise.Framework.Presentation.ViewModel
     /// </summary>
     public class ShellViewModel : ViewModelBase, IShellViewModel
     {
-        private Uri icon;
 
         private bool isVisibleCommandRegion;
-        private string title;
 
         private ICommand toogleVisibilityCommandRegionCommand;
 
         public ShellViewModel()
         {
             IsVisibleCommandRegion = false;
-            ToogleVisibilityCommandRegionCommand = new DelegateCommand(toogleVisibilityOnCommandRegion);
+            ToogleVisibilityCommandRegionCommand = new DelegateCommand(ToogleVisibilityOnCommandRegion);
         }
 
         public bool IsVisibleCommandRegion
@@ -43,34 +40,10 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
-        /// <summary>
-        ///     <see cref="IShellViewModel.Title" />
-        /// </summary>
-        public string Title
-        {
-            get { return title; }
-            set
-            {
-                title = value;
-                OnPropertyChanged("Title");
-            }
-        }
-
-        /// <summary>
-        ///     <see cref="IShellViewModel.Icon" />
-        /// </summary>
-        public Uri Icon
-        {
-            get { return icon; }
-            set
-            {
-                icon = value;
-                OnPropertyChanged("Icon");
-            }
-        }
+     
 
 
-        private void toogleVisibilityOnCommandRegion()
+        private void ToogleVisibilityOnCommandRegion()
         {
             IsVisibleCommandRegion = !IsVisibleCommandRegion;
         }

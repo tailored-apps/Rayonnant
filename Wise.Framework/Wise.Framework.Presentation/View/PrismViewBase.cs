@@ -17,7 +17,7 @@ namespace Wise.Framework.Presentation.View
                 RegionManager.SetRegionManager(this, Container.Current.Resolve<IRegionManager>());
                 RegionManager.UpdateRegions();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

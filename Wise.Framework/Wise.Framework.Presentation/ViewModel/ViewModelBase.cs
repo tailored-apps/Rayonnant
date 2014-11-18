@@ -85,9 +85,9 @@ namespace Wise.Framework.Presentation.ViewModel
             set { SetProperty(ref title, value); }
         }
 
-        private ImageSource icon;
+        private Uri icon;
 
-        public ImageSource Icon
+        public Uri Icon
         {
             get { return icon; }
             set { SetProperty(ref icon, value); }
