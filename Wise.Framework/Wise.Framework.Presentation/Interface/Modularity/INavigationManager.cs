@@ -9,6 +9,7 @@ namespace Wise.Framework.Presentation.Interface.Modularity
         void RegisterTypeForNavigation<T>();
         void RegisterTypeForNavigation(Type viewModelType);
         void CloseItem(ViewModelBase vm);
-        void TearOff(ViewModelBase vm, bool modal = false);
+        void TearOff(ViewModelBase vm);
+        void Dock(ViewModelBase vm);
     }
 }

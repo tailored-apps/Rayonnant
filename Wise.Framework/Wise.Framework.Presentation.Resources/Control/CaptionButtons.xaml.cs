@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using Wise.Framework.Interface.Window;
+using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 
 namespace Wise.Framework.Presentation.Resources.Control
@@ -13,6 +15,10 @@ namespace Wise.Framework.Presentation.Resources.Control
         /// </summary>
         public enum CaptionType
         {
+            /// <summary>
+            /// All with dock button
+            /// </summary>
+            FullDock,
             /// <summary>
             ///     All the buttons
             /// </summary>
@@ -129,6 +135,18 @@ namespace Wise.Framework.Presentation.Resources.Control
         private void MinimizeButtonClick(object sender, RoutedEventArgs e)
         {
             _parent.WindowState = WindowState.Minimized;
+        }
+        /// <summary>
+        ///     Minimizes the Window.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
+        private void DockButtonClick(object sender, RoutedEventArgs e)
+        {
+            var prismViewModel = _parent as IModalWindow;
+           
+            if (prismViewModel != null)
+                prismViewModel.Dock();
         }
     }
 }

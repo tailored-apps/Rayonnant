@@ -121,13 +121,16 @@
                             <ColumnDefinition Width="20" />
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Column="0" Source="{Binding Icon}" HorizontalAlignment="Left"  />
+                        <Image Grid.Column="0"  Source="{Binding Icon}" HorizontalAlignment="Left"  />
                         <Label Grid.Column="1" Content="{Binding Title}" HorizontalAlignment="Left" Padding="0" Margin="0" VerticalContentAlignment="Center" />
-                        <Button Grid.Column="2" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding TearOffCommand}" CommandParameter="{TemplateBinding DataContext}" >
-                            <Path Style="{StaticResource AppbarArrowExpandIconStyle}" Width="15" Height="15"/>
+                        <Button Margin="2" Grid.Column="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding TearOffCommand}" CommandParameter="{TemplateBinding DataContext}" >
+                            <Path Style="{StaticResource AppbarFullscreenIconStyle}" Width="13" Height="13"/>
                         </Button>
 
-                        <Button Grid.Column="3"  HorizontalContentAlignment="Right"  Style="{StaticResource CloseButtonStyle}" ContentTemplate="{StaticResource close}" Content="r" HorizontalAlignment="Right" Command="{TemplateBinding CloseItemCommand}" CommandParameter="{TemplateBinding DataContext}"/>
+                        <Button Margin="2" Grid.Column="3"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding CloseItemCommand}"  CommandParameter="{TemplateBinding DataContext}" >
+                            <Path Style="{StaticResource AppbarCloseIconStyle}" Width="13" Height="13"/>
+                        </Button>
+              
 
                     </Grid>
                 </Grid>

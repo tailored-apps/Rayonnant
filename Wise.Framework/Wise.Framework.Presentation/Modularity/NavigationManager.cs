@@ -141,7 +141,7 @@ namespace Wise.Framework.Presentation.Modularity
         }
 
 
-        public void TearOff(ViewModelBase vm, bool modal = false)
+        public void TearOff(ViewModelBase vm)
         {
             if (!vm.IsTearOff)
             {
@@ -168,6 +168,25 @@ namespace Wise.Framework.Presentation.Modularity
                         }
                     }
                 }
+
+            }
+        }
+
+
+        public void Dock(ViewModelBase vm)
+        {
+            if (vm.IsTearOff)
+            {
+                var modalWindow = TearOffViewModels[vm];
+
+                modalWindow.Close();
+                vm.IsTearOff = false;
+                TearOffViewModels.Remove(vm);
+
+                var region = regionManager.Regions[ShellRegionNames.ContentRegion];
+
+                region.Add(vm);
+                region.Activate(vm);
 
             }
         }

@@ -25,7 +25,7 @@
                         <Label Grid.Column="1" Content="{Binding Title}" HorizontalAlignment="Left" />
                         <!-- Captions Buttons to control the window borderless-->
                         <control:CaptionButtons Grid.Column="2" MarginButton="0,0,5,0" HorizontalAlignment="Right"
-                                            Type="Full"
+                                            Type="FullDock"
                                             Foreground="{DynamicResource CaptionButtonColor}" FontSize="14"
                                             VerticalAlignment="Center" WindowChrome.IsHitTestVisibleInChrome="True" />
                     </Grid>
