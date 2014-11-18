@@ -36,7 +36,7 @@ namespace Wise.DummyModuleTwo
 
         protected override void RegisterViewRegions()
         {
-            regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof (ContentTwoViewModel));
+            //regionManager.RegisterViewWithRegion(ShellRegionNames.ContentRegion, typeof (ContentTwoViewModel));
         }
     }
 }

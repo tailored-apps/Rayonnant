@@ -13,7 +13,8 @@ using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface.ViewModel;
 using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
-
+using Wise.DummyModule;
+using Wise.DummyModuleTwo;
 namespace Wise.Framework.HostShell
 {
     /// <summary>
@@ -52,21 +53,10 @@ namespace Wise.Framework.HostShell
             container.RegisterType<IExceptionService, ExceptionWindow>(LifetimeScope.Factory);
         }
 
-        /// <summary>
-        ///     Method responsible for configuration module catalog
-        /// </summary>
-        /// <param name="catalog">catalog which will be configured.</param>
         public override void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
-            string path = @"Wise.DummyModule.dll";
-            Assembly assembly = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path));
-            Type type = assembly.GetType("Wise.DummyModule.DummyModule");
-            catalog.AddModule(type.Name, type.AssemblyQualifiedName);
-
-            string path2 = @"Wise.DummyModuleTwo.dll";
-            Assembly assembly2 = Assembly.LoadFrom(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path2));
-            Type type2 = assembly2.GetType("Wise.DummyModuleTwo.DummyModuleTwo");
-            catalog.AddModule(type2.Name, type2.AssemblyQualifiedName);
+            LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.dll"));
+            LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.dll"));
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)
@@ -75,10 +65,7 @@ namespace Wise.Framework.HostShell
             if (container.IsTypeRegistered<IShellViewModel>())
             {
                 var shellViewModel = container.Resolve<IShellViewModel>();
-                shellViewModel.Icon =
-                    new Uri(
-                        "pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/1389141962_229117.ico",
-                        UriKind.Absolute);
+                shellViewModel.Icon =new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/1389141962_229117.ico",UriKind.Absolute);
                 shellViewModel.Title = "Wise Test WPF Application";
             }
         }

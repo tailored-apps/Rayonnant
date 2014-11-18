@@ -1,10 +1,18 @@
-﻿using Wise.Framework.Interface.Bootstrapping;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using Common.Logging;
+using Microsoft.Practices.Prism.Modularity;
+using Wise.Framework.Interface.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.InternalApplicationMessagning;
-using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Interface.Window;
+using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
+using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -13,6 +21,7 @@ namespace Wise.Framework.Bootstrapping
     /// </summary>
     public abstract class AbstractBootstrapper : IBootstrapper
     {
+        private readonly ILog logger = LogManager.GetCurrentClassLogger();
         /// <summary>
         ///     Method responsible for registering logger inside application
         /// </summary>
@@ -76,6 +85,41 @@ namespace Wise.Framework.Bootstrapping
         /// <param name="catalog">module catalog</param>
         public virtual void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
+            var modulesPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Modules");
+
+            var modules = new DirectoryInfo(modulesPath).GetDirectories();
+            var dlls = new DirectoryInfo(modulesPath).GetFiles("*.dll").ToList();
+            foreach (var directoryInfo in modules)
+            {
+                var sub = directoryInfo.GetFiles("*.dll");
+                dlls.AddRange(sub);
+            }
+            LoadModule(catalog, dlls);
+
+        }
+
+        private void LoadModule(IModuleCatalog catalog, IEnumerable<FileInfo> dlls)
+        {
+            foreach (var fileInfo in dlls)
+            {
+                try
+                {
+                    var assembly2 = Assembly.LoadFrom(fileInfo.FullName);
+                    var types = assembly2.GetTypes();
+                    foreach (var type in types)
+                    {
+                        if (type.GetInterfaces().Contains(typeof(IModule)))
+                        {
+                            logger.InfoFormat("Going To load module {0}", fileInfo.FullName);
+                            LoadModule(catalog, type, fileInfo);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    logger.ErrorFormat("Could not load {0}", ex, fileInfo.FullName);
+                }
+            }
         }
 
         /// <summary>
@@ -84,6 +128,13 @@ namespace Wise.Framework.Bootstrapping
         /// <param name="splashViewModel">view model contains</param>
         public virtual void ConfigureAppliactionSplashInfo(ISplashViewModel splashViewModel)
         {
+        }
+
+
+
+        protected void LoadModule(IModuleCatalog catalog, Type type, FileInfo moduleFile)
+        {
+            catalog.AddModule(type.Name, type.AssemblyQualifiedName, new Uri(moduleFile.FullName, UriKind.RelativeOrAbsolute));
         }
     }
 }
