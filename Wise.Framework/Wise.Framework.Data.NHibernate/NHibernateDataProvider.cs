@@ -49,13 +49,14 @@ namespace Wise.Framework.Data.NHibernate
         }
 
 
-        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(
-            ISearchCriteria<TEntity, TProvider> searchCriteria)
+        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria)
             where TEntity : class
             where TProvider : class
         {
             if (searchCriteria == null)
                 throw new ArgumentNullException("searchCriteria");
+            if (typeof(TProvider) != typeof(DetachedCriteria))
+                throw new ArgumentTypeException("Type of searchCriteria is not matching", typeof(DetachedCriteria), typeof(TProvider));
 
             var crit = searchCriteria as ISearchCriteria<TEntity, DetachedCriteria>;
             if (crit != null)

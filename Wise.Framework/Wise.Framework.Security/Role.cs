@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wise.Framework.Interface.Security;
+﻿using Wise.Framework.Interface.Security;
 
 namespace Wise.Framework.Security
 {

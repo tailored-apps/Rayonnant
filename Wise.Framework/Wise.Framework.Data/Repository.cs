@@ -39,8 +39,9 @@ namespace Wise.Framework.Data
         }
 
 
-        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(
-            ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider : class
+        public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria) 
+            where TEntity : class 
+            where TProvider : class
         {
             return dataProvider.GetBySearchCriteria(searchCriteria);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Input;
 using System.Windows.Media;
 using Microsoft.Practices.Prism.Mvvm;
@@ -18,7 +19,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public string ScreenId
         {
             get { return screenId; }
-            set { SetProperty(ref screenId, value); }
+            private set { SetProperty(ref screenId, value); }
         }
 
         private bool isTearOff;
@@ -57,7 +58,7 @@ namespace Wise.Framework.Presentation.ViewModel
 
         public virtual void OnNavigatedTo(NavigationContext navigationContext)
         {
-
+            ScreenId = navigationContext.Parameters.Any(x => "ScreenId".Equals(x.Key)) ? navigationContext.Parameters["ScreenId"].ToString() : string.Empty;
         }
 
         /// <summary>

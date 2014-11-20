@@ -13,6 +13,7 @@ using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Interface.Shell;
+using Wise.Framework.Presentation.View;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 
@@ -27,11 +28,11 @@ namespace Wise.Framework.Presentation.Modularity
         private readonly IRegionManager regionManager;
         private readonly IShellWindow shell;
         private readonly IDisposable subscription;
-
+        private readonly IRegionNavigationJournal regionNavigationJournal;
         private readonly IDictionary<ViewModelBase, WindowBase> TearOffViewModels = new Dictionary<ViewModelBase, WindowBase>();
 
         public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager,
-            IShellWindow shell, ILog loger, IMenuService menuService)
+            IShellWindow shell, ILog loger, IMenuService menuService, IRegionNavigationJournal regionNavigationJournal)
         {
             this.menuService = menuService;
             this.loger = loger;
@@ -39,6 +40,7 @@ namespace Wise.Framework.Presentation.Modularity
             this.shell = shell;
             this.messanger = messanger;
             this.regionManager = regionManager;
+            this.regionNavigationJournal = regionNavigationJournal;
             subscription = messanger.Subscribe<NavigationRequest>(OnMessageArrived);
         }
 
@@ -96,12 +98,14 @@ namespace Wise.Framework.Presentation.Modularity
             IRegionManager regManager = RegionManager.GetRegionManager(shell as DependencyObject);
             string regionName = string.IsNullOrEmpty(obj.RegionName) ? ShellRegionNames.ContentRegion : obj.RegionName;
             string navigateTo = obj.ViewModelType != null ? obj.ViewModelType.FullName : obj.ViewModelFullName;
+
             regManager.Regions[regionName].RequestNavigate(navigateTo, NavigationCompleted, obj.UriQuery);
 
         }
 
         private void NavigationCompleted(NavigationResult obj)
         {
+
             string uri = obj.Context != null && obj.Context.Uri != null ? obj.Context.Uri.ToString() : string.Empty;
             string region = obj.Context != null && obj.Context.NavigationService != null &&
                             obj.Context.NavigationService.Region != null
@@ -122,6 +126,7 @@ namespace Wise.Framework.Presentation.Modularity
                         "Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error",
                         uri, obj.Result, region));
             }
+
         }
 
         private void AddMenuNavigation(Type viewModel)

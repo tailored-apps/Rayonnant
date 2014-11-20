@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 using Wise.Framework.Interface.Security;
 
@@ -14,14 +15,12 @@ namespace Wise.Framework.Security.Providers
 
         public override bool IsInRole(string roleName)
         {
-            return WindowsPrincipal.Current.IsInRole(roleName);
+            return ClaimsPrincipal.Current.IsInRole(roleName);
         }
 
         public override IEnumerable<IRole> GetRoles(IIdentity user)
         {
             return WindowsIdentity.GetCurrent().Groups.Select(x => Role.Create(x.Value));
-
         }
-
     }
 }

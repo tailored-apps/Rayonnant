@@ -7,7 +7,7 @@
 
         public override bool Equals(object obj)
         {
-            if (obj.GetType() == typeof (TEntity))
+            if (obj is TEntity)
             {
                 var oth = (EntityBaseAbstract<TKey, TEntity>) obj;
                 return Id.Equals(oth.Id);

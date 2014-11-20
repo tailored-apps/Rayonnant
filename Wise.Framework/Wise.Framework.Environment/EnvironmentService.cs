@@ -5,11 +5,20 @@ namespace Wise.Framework.Environment
 {
     public class EnvironmentService : IEnvironmentService
     {
-        private readonly EnvironmentSection config =
-            (EnvironmentSection) ConfigurationManager.GetSection("environmentSection/environment");
 
         public IEnvironmentInfo GetEnvironmentInfo()
         {
+            var config = (EnvironmentSection)ConfigurationManager.GetSection("environmentSection/environment");
+            if (config == null)
+            {
+                return new EnvironmentInfo
+                {
+                    SelfContained = true,
+                    Code = System.Environment.MachineName ,
+                    HostName = System.Environment.MachineName,
+                    Address = "127.0.0.1" ,
+                };
+            }
             return new EnvironmentInfo
             {
                 SelfContained = config.SelfContained,

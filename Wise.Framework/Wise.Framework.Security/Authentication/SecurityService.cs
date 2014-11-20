@@ -10,14 +10,13 @@ namespace Wise.Framework.Security.Authentication
 {
     public class SecurityService : ISecurityService
     {
-        private IEnvironmentService environmentService;
         private readonly BaseSecurityProvider securityProvider;
+
         public SecurityService(IEnvironmentService environmentService, IContainer container)
         {
-            this.environmentService = environmentService;
             if (container.IsTypeRegistered<BaseSecurityProvider>() && !environmentService.GetEnvironmentInfo().SelfContained)
             {
-                this.securityProvider = container.Resolve<BaseSecurityProvider>();
+                securityProvider = container.Resolve<BaseSecurityProvider>();
             }
             else
             {

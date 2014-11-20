@@ -8,7 +8,7 @@ namespace Wise.Framework.Security.Providers
     {
         public abstract IIdentity GetCurrentIddentity();
 
-        public abstract  bool IsInRole(string roleName);
+        public abstract bool IsInRole(string roleName);
 
         public abstract IEnumerable<IRole> GetRoles(IIdentity user);
     }
