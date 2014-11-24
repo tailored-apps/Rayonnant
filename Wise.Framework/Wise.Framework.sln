@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data", "Wise.Framework.Data\Wise.Framework.Data.csproj", "{F140AC0E-21DD-46F7-961F-8F336B9243E3}"
 EndProject
@@ -76,6 +76,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{72BED8E3
 	ProjectSection(SolutionItems) = preProject
 		Tools\Wise.IconsConverter.exe = Tools\Wise.IconsConverter.exe
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{AE4F96BD-1B65-4CD4-8B66-687ACAAD2B69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.SecurityModule", "Modules\Wise.Framework.SecurityModule\Wise.Framework.SecurityModule.csproj", "{7A43A224-0713-4920-9FDE-5337E1326D16}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -164,6 +168,10 @@ Global
 		{4849ACB2-750F-4313-B342-C35CD9394044}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4849ACB2-750F-4313-B342-C35CD9394044}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4849ACB2-750F-4313-B342-C35CD9394044}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A43A224-0713-4920-9FDE-5337E1326D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A43A224-0713-4920-9FDE-5337E1326D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A43A224-0713-4920-9FDE-5337E1326D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A43A224-0713-4920-9FDE-5337E1326D16}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -181,6 +189,7 @@ Global
 		{2DEC93D2-089E-483B-BE11-91224FAF89EB} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{32079C56-351E-47E9-987F-AC202840144B} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{4849ACB2-750F-4313-B342-C35CD9394044} = {32079C56-351E-47E9-987F-AC202840144B}
+		{7A43A224-0713-4920-9FDE-5337E1326D16} = {AE4F96BD-1B65-4CD4-8B66-687ACAAD2B69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

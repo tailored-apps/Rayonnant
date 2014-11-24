@@ -1,7 +1,9 @@
-﻿using System.Reflection;
+﻿using System.Linq;
+using System.Reflection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
+using NHibernate.Criterion;
 using NHibernate.Mapping.ByCode;
 using NHibernate.Mapping.ByCode.Conformist;
 using NHibernate.Tool.hbm2ddl;
@@ -34,7 +36,7 @@ namespace Wise.Framework.Data.Tests.Integration
         [TestMethod]
         public void TestMethod1()
         {
-            var entity = new MyEntityClass {DummYString = "Dummy Test"};
+            var entity = new MyEntityClass { DummYString = "asd" };
             MyEntityClass readedEntitiy = null;
             using (var session = container.Resolve<SessionScope>())
             {
@@ -51,6 +53,13 @@ namespace Wise.Framework.Data.Tests.Integration
                 Assert.IsNotNull(readedEntitiy);
                 Assert.AreEqual(readedEntitiy.Id, entity.Id);
                 Assert.AreEqual(readedEntitiy.DummYString, entity.DummYString);
+
+                var resultset = repo.GetBySearchCriteria(new MyEntityNhibernateSearchCriteria() {DummyString = "asd"});
+
+                Assert.IsNotNull(resultset);
+
+                Assert.IsTrue(resultset.Count()==1);
+            
             }
         }
 
@@ -73,7 +82,7 @@ namespace Wise.Framework.Data.Tests.Integration
             {
                 var mapper = new ModelMapper();
 
-                mapper.AddMappings(Assembly.GetAssembly(typeof (MyEntityClassMapper)).GetExportedTypes());
+                mapper.AddMappings(Assembly.GetAssembly(typeof(MyEntityClassMapper)).GetExportedTypes());
                 HbmMapping mapping = mapper.CompileMappingForAllExplicitlyAddedEntities();
 
                 return mapping;
@@ -92,6 +101,14 @@ namespace Wise.Framework.Data.Tests.Integration
             public virtual string DummYString { get; set; }
         }
 
+
+        public class MyEntityNhibernateSearchCriteria : BaseNhibernateSearchCriteria<MyEntityClass>
+        {
+            public string DummyString
+            {
+                set { base.Add(Restrictions.Eq("DummYString", value)); }
+            }
+        }
 
         public class MyEntityClassMapper : ClassMapping<MyEntityClass>
         {

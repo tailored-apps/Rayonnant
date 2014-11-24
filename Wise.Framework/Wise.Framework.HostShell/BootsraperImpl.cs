@@ -13,8 +13,6 @@ using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Interface.ViewModel;
 using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
-using Wise.DummyModule;
-using Wise.DummyModuleTwo;
 namespace Wise.Framework.HostShell
 {
     /// <summary>
@@ -55,8 +53,7 @@ namespace Wise.Framework.HostShell
 
         public override void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
-            LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.dll"));
-            LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.dll"));
+            LoadModule(catalog, typeof(SecurityModule.SecurityModule), new FileInfo(@".\Wise.Framework.SecurityModule.dll"));
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)

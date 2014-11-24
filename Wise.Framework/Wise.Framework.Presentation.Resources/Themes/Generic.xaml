@@ -18,6 +18,8 @@
 
         <ResourceDictionary
             Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ModalWindow.xaml" />
+        
+        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/UserControls/Generic.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

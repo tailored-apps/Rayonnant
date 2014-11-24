@@ -3,9 +3,9 @@ using Wise.Framework.Interface.Data;
 
 namespace Wise.Framework.Data.NHibernate
 {
-    public abstract class BaseSearchCriteria<TEntity> : DetachedCriteria, ISearchCriteria<TEntity, DetachedCriteria>
+    public abstract class BaseNhibernateSearchCriteria<TEntity> : DetachedCriteria, ISearchCriteria<TEntity, DetachedCriteria>
     {
-        public BaseSearchCriteria() : base(typeof (TEntity))
+        public BaseNhibernateSearchCriteria() : base(typeof (TEntity))
         {
             Criteria = this;
         }
