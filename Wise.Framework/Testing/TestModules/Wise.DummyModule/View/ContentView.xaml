@@ -1,0 +1,49 @@
+﻿<view:PrismViewBase x:Class="Wise.DummyModule.View.ContentView"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
+                    xmlns:dummyModule="clr-namespace:Wise.DummyModule"
+                    Style="{StaticResource {x:Type view:PrismViewBase}}"
+                    mc:Ignorable="d"
+                    d:DesignHeight="300" Name="root">
+    <view:PrismViewBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </view:PrismViewBase.Resources>
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10*" />
+            <ColumnDefinition Width="9*" />
+        </Grid.ColumnDefinitions>
+        <Label Grid.Row="0" Content="{Binding Label}" />
+        <Border Grid.Row="0" Grid.Column="1">
+            <Path  Style="{StaticResource AsdStyle}" Margin="100,83.5,100,-54.5"  />
+
+        </Border>
+        <Button Grid.Row="1" Command="{Binding Button}" />
+        <TextBox Width="100" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="2"
+                 Margin="100,36">
+            Quick Launch (Ctrl +Q)
+        </TextBox>
+        <TextBox Width="100" Height="28" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1"
+                 Grid.Column="1" Margin="86,36,84,36">
+            asdasd
+        </TextBox>
+        <dummyModule:CustomDropDown x:Name="CustomDropDown" Grid.Column="1" HorizontalAlignment="Left" Height="25" Grid.Row="2" Width="120" Margin="0,35" IsEditable="True" IsTextSearchEnabled="False"  ItemsSource="{Binding Items, Mode=TwoWay}" Text="{Binding SelectedItem, Mode=TwoWay}">
+            <dummyModule:CustomDropDown.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DataContext.Reset ,ElementName=root}" CommandParameter="{Binding ElementName=CustomDropDown}" />
+            </dummyModule:CustomDropDown.InputBindings>
+        </dummyModule:CustomDropDown>
+    </Grid>
+</view:PrismViewBase>

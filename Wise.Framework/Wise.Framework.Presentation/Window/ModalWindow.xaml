@@ -1,0 +1,15 @@
+﻿<window:WindowBase x:Class="Wise.Framework.Presentation.Window.ModalWindow"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                   xmlns:window="clr-namespace:Wise.Framework.Presentation.Window"
+                   Title="{Binding Title}"
+                   mc:Ignorable="d"
+                   d:Height="300" d:Width="300"
+                   WindowStartupLocation="CenterScreen" Padding="0" WindowStyle="None">
+
+
+
+    <ContentControl Visibility="Visible" Content="{Binding}"  />
+</window:WindowBase>
