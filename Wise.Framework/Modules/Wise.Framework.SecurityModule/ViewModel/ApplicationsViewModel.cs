@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Security.Principal;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
 using Wise.Framework.Presentation.Annotations;
@@ -29,6 +31,8 @@ namespace Wise.Framework.SecurityModule.ViewModel
                         ElementColorBrush = new SolidColorBrush(Colors.CornflowerBlue)
                     }
                 });
+
+          
         }
         private ObservableCollection<ApplicationViewModel> availableApplications;
 

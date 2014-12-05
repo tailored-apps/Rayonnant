@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}</ProjectGuid>
+    <ProjectGuid>{BBBEEA89-6FDC-4882-A0D4-3E583F35680C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Wise.Framework.Security</RootNamespace>
-    <AssemblyName>Wise.Framework.Security</AssemblyName>
+    <RootNamespace>Wise.Framework.Commons</RootNamespace>
+    <AssemblyName>Wise.Framework.Commons</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -16,15 +16,15 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\build\bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\build\bin\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -32,28 +32,22 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.DirectoryServices" />
-    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Authentication\SecurityService.cs" />
-    <Compile Include="Interface\IActiveDirectory.cs" />
+    <Compile Include="DateTime\DateTime.cs" />
+    <Compile Include="DateTime\IDateTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\ActiveDirectoryProvider.cs" />
-    <Compile Include="Providers\BaseSecurityProvider.cs" />
-    <Compile Include="Providers\WindowsSecurityProviders.cs" />
-    <Compile Include="Role.cs" />
+    <Compile Include="TxF\NativeKtmMethods.cs" />
+    <Compile Include="TxF\NativeMethods.cs" />
+    <Compile Include="TxF\TransactedDirectory.cs" />
+    <Compile Include="TxF\TransactedFile.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
-      <Project>{5b4e5b58-5f87-4bc4-b9bb-c9ace5e64275}</Project>
-      <Name>Wise.Framework.Interface</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
