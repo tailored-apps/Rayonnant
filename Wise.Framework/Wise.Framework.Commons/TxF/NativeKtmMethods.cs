@@ -49,7 +49,7 @@ namespace Wise.Framework.Commons.TxF
 
         private static void HandleError(int error)
         {
-            if (error != NativeMethods.ERROR_SUCCESS)
+            if (error != NativeMethods.ErrorSuccess)
             {
                 throw new System.ComponentModel.Win32Exception(error);
             }

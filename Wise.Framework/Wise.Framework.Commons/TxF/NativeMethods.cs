@@ -6,138 +6,138 @@ namespace Wise.Framework.Commons.TxF
 {
     public static class NativeMethods
     {
-        private const string KERNEL32 = "kernel32.dll";
+        private const string Kernel32 = "kernel32.dll";
 
         // Error codes
-        internal const int ERROR_SUCCESS = 0;
-        internal const int ERROR_FILE_NOT_FOUND = 2;
-        internal const int ERROR_NO_MORE_FILES = 18;
-        internal const int ERROR_RECOVERY_NOT_NEEDED = 6821;
+        internal const int ErrorSuccess = 0;
+        internal const int ErrorFileNotFound = 2;
+        internal const int ErrorNoMoreFiles = 18;
+        internal const int ErrorRecoveryNotNeeded = 6821;
 
         // Create file flags
-        internal const int FILE_FLAG_BACKUP_SEMANTICS = 0x02000000;
+        internal const int FileFlagBackupSemantics = 0x02000000;
 
         // Function control codes / masks
-        private const int METHOD_BUFFERED = 0x00000000;
-        private const int FILE_WRITE_DATA = 0x00000002;
-        private const int FILE_DEVICE_FILE_SYSTEM = 0x00000009;
+        private const int MethodBuffered = 0x00000000;
+        private const int FileWriteData = 0x00000002;
+        private const int FileDeviceFileSystem = 0x00000009;
 
-        private const int ROLLFORWARD_REDO_FUNCTION = 84;
-        private const int ROLLFORWARD_UNDO_FUNCTION = 85;
-        private const int START_RM_FUNCTION = 86;
-        private const int SHUTDOWN_RM_FUNCTION = 87;
-        private const int CREATE_SECONDARY_RM_FUNCTION = 90;
+        private const int RollforwardRedoFunction = 84;
+        private const int RollforwardUndoFunction = 85;
+        private const int StartRmFunction = 86;
+        private const int ShutdownRmFunction = 87;
+        private const int CreateSecondaryRmFunction = 90;
 
         // KTM IOCTLs
-        internal const int FSCTL_TXFS_ROLLFORWARD_REDO =
-            (FILE_DEVICE_FILE_SYSTEM << 16) | (FILE_WRITE_DATA << 14) | (ROLLFORWARD_REDO_FUNCTION << 2) | METHOD_BUFFERED;
+        internal const int FsctlTxfsRollforwardRedo =
+            (FileDeviceFileSystem << 16) | (FileWriteData << 14) | (RollforwardRedoFunction << 2) | MethodBuffered;
 
-        internal const int FSCTL_TXFS_ROLLFORWARD_UNDO =
-            (FILE_DEVICE_FILE_SYSTEM << 16) | (FILE_WRITE_DATA << 14) | (ROLLFORWARD_UNDO_FUNCTION << 2) | METHOD_BUFFERED;
+        internal const int FsctlTxfsRollforwardUndo =
+            (FileDeviceFileSystem << 16) | (FileWriteData << 14) | (RollforwardUndoFunction << 2) | MethodBuffered;
 
-        internal const int FSCTL_TXFS_START_RM =
-            (FILE_DEVICE_FILE_SYSTEM << 16) | (FILE_WRITE_DATA << 14) | (START_RM_FUNCTION << 2) | METHOD_BUFFERED;
+        internal const int FsctlTxfsStartRm =
+            (FileDeviceFileSystem << 16) | (FileWriteData << 14) | (StartRmFunction << 2) | MethodBuffered;
 
-        internal const int FSCTL_TXFS_SHUTDOWN_RM =
-            (FILE_DEVICE_FILE_SYSTEM << 16) | (FILE_WRITE_DATA << 14) | (SHUTDOWN_RM_FUNCTION << 2) | METHOD_BUFFERED;
+        internal const int FsctlTxfsShutdownRm =
+            (FileDeviceFileSystem << 16) | (FileWriteData << 14) | (ShutdownRmFunction << 2) | MethodBuffered;
 
-        internal const int FSCTL_TXFS_CREATE_SECONDARY_RM =
-            (FILE_DEVICE_FILE_SYSTEM << 16) | (FILE_WRITE_DATA << 14) | (CREATE_SECONDARY_RM_FUNCTION << 2) | METHOD_BUFFERED;
+        internal const int FsctlTxfsCreateSecondaryRm =
+            (FileDeviceFileSystem << 16) | (FileWriteData << 14) | (CreateSecondaryRmFunction << 2) | MethodBuffered;
 
         // KTM Start flags
-        internal const int TXFS_START_RM_FLAG_LOG_CONTAINER_COUNT_MAX = 0x00000001;
-        internal const int TXFS_START_RM_FLAG_LOG_CONTAINER_COUNT_MIN = 0x00000002;
-        internal const int TXFS_START_RM_FLAG_LOG_CONTAINER_SIZE = 0x00000004;
-        internal const int TXFS_START_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS = 0x00000008;
-        internal const int TXFS_START_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT = 0x00000010;
-        internal const int TXFS_START_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE = 0x00000020;
-        internal const int TXFS_START_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX = 0x00000040;
-        internal const int TXFS_START_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN = 0x00000080;
+        internal const int TxfsStartRmFlagLogContainerCountMax = 0x00000001;
+        internal const int TxfsStartRmFlagLogContainerCountMin = 0x00000002;
+        internal const int TxfsStartRmFlagLogContainerSize = 0x00000004;
+        internal const int TxfsStartRmFlagLogGrowthIncrementNumContainers = 0x00000008;
+        internal const int TxfsStartRmFlagLogGrowthIncrementPercent = 0x00000010;
+        internal const int TxfsStartRmFlagLogAutoShrinkPercentage = 0x00000020;
+        internal const int TxfsStartRmFlagLogNoContainerCountMax = 0x00000040;
+        internal const int TxfsStartRmFlagLogNoContainerCountMin = 0x00000080;
 
-        internal const int TXFS_START_RM_FLAG_RECOVER_BEST_EFFORT = 0x00000200;
-        internal const int TXFS_START_RM_FLAG_LOGGING_MODE = 0x00000400;
-        internal const int TXFS_START_RM_FLAG_PRESERVE_CHANGES = 0x00000800;
+        internal const int TxfsStartRmFlagRecoverBestEffort = 0x00000200;
+        internal const int TxfsStartRmFlagLoggingMode = 0x00000400;
+        internal const int TxfsStartRmFlagPreserveChanges = 0x00000800;
 
         // KTM Logging modes
-        internal const int TXFS_LOGGING_MODE_SIMPLE = 0x0001;
-        internal const int TXFS_LOGGING_MODE_FULL = 0x0002;
+        internal const int TxfsLoggingModeSimple = 0x0001;
+        internal const int TxfsLoggingModeFull = 0x0002;
 
         public enum FileAccess
         {
-            GENERIC_READ = unchecked((int)0x80000000),
-            GENERIC_WRITE = 0x40000000
+            GenericRead = unchecked((int)0x80000000),
+            GenericWrite = 0x40000000
         }
 
         [Flags]
         public enum FileShare
         {
-            FILE_SHARE_NONE = 0x00,
-            FILE_SHARE_READ = 0x01,
-            FILE_SHARE_WRITE = 0x02,
-            FILE_SHARE_DELETE = 0x04
+            None = 0x00,
+            Read = 0x01,
+            Write = 0x02,
+            Delete = 0x04
         }
 
         public enum FileMode
         {
-            CREATE_NEW = 1,
-            CREATE_ALWAYS = 2,
-            OPEN_EXISTING = 3,
-            OPEN_ALWAYS = 4,
-            TRUNCATE_EXISTING = 5
+            New = 1,
+            CreateAlways = 2,
+            OpenExisting = 3,
+            OpenAlways = 4,
+            TruncateExisting = 5
         }
 
         [Flags]
         internal enum CopyFileFlags : uint
         {
-            COPY_FILE_FAIL_IF_EXISTS = 0x00000001,
-            COPY_FILE_RESTARTABLE = 0x00000002,
-            COPY_FILE_OPEN_SOURCE_FOR_WRITE = 0x00000004,
-            COPY_FILE_ALLOW_DECRYPTED_DESTINATION = 0x00000008,
-            COPY_FILE_COPY_SYMLINK = 0x00000800
+            CopyFileFailIfExists = 0x00000001,
+            CopyFileRestartable = 0x00000002,
+            CopyFileOpenSourceForWrite = 0x00000004,
+            CopyFileAllowDecryptedDestination = 0x00000008,
+            CopyFileCopySymlink = 0x00000800
         }
 
         [Flags]
         internal enum MoveFileFlags : uint
         {
-            MOVEFILE_REPLACE_EXISTING = 0x00000001,
-            MOVEFILE_COPY_ALLOWED = 0x00000002,
-            MOVEFILE_DELAY_UNTIL_REBOOT = 0x00000004,
-            MOVEFILE_WRITE_THROUGH = 0x00000008,
-            MOVEFILE_CREATE_HARDLINK = 0x00000010,
-            MOVEFILE_FAIL_IF_NOT_TRACKABLE = 0x00000020
+            MovefileReplaceExisting = 0x00000001,
+            MovefileCopyAllowed = 0x00000002,
+            MovefileDelayUntilReboot = 0x00000004,
+            MovefileWriteThrough = 0x00000008,
+            MovefileCreateHardlink = 0x00000010,
+            MovefileFailIfNotTrackable = 0x00000020
         }
 
-        internal enum FINDEX_INFO_LEVELS
+        internal enum FindexInfoLevels
         {
             FindExInfoStandard,
             FindExInfoMaxInfoLevel
         }
-        internal enum FINDEX_SEARCH_OPS
+        internal enum FindexSearchOps
         {
-            FindExSearchNameMatch,
-            FindExSearchLimitToDirectories,
-            FindExSearchLimitToDevices,
-            FindExSearchMaxSearchOp
+            NameMatch,
+            LimitToDirectories,
+            LimitToDevices,
+            MaxSearchOp
         }
-        internal struct FILETIME
+        internal struct Filetime
         {
             public uint DateTimeLow;
             public uint DateTimeHigh;
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
-        internal struct WIN32_FIND_DATA
+        internal struct Win32FindData
         {
-            public int dwFileAttributes;
-            public NativeMethods.FILETIME ftCreationTime;
-            public NativeMethods.FILETIME ftLastAccessTime;
-            public NativeMethods.FILETIME ftLastWriteTime;
-            public uint nFileSizeHigh;
-            public uint nFileSizeLow;
-            public uint dwReserved0;
-            public uint dwReserved1;
+            public readonly int dwFileAttributes;
+            public Filetime ftCreationTime;
+            public Filetime ftLastAccessTime;
+            public Filetime ftLastWriteTime;
+            public readonly uint nFileSizeHigh;
+            public readonly uint nFileSizeLow;
+            public readonly uint dwReserved0;
+            public readonly uint dwReserved1;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string cFileName;
+            public readonly string cFileName;
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 14)]
             public string cAlternateFileName;
         }
@@ -168,40 +168,40 @@ namespace Wise.Framework.Commons.TxF
         // Standard file operations
         //
 
-        [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern SafeFileHandle CreateFile(
             [In] string lpFileName,
-            [In] NativeMethods.FileAccess dwDesiredAccess,
-            [In] NativeMethods.FileShare dwShareMode,
+            [In] FileAccess dwDesiredAccess,
+            [In] FileShare dwShareMode,
             [In] IntPtr lpSecurityAttributes,
-            [In] NativeMethods.FileMode dwCreationDisposition,
+            [In] FileMode dwCreationDisposition,
             [In] int dwFlagsAndAttributes,
             [In] IntPtr hTemplateFile);
 
-        [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool FindNextFile(
             [In] SafeFileHandle hFindFile,
-            [Out] out WIN32_FIND_DATA lpFindFileData);
+            [Out] out Win32FindData lpFindFileData);
 
         //
         // Transacted file operations
         //
 
-        [DllImport(KERNEL32, EntryPoint = "CreateFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "CreateFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern SafeFileHandle CreateFileTransacted(
             [In] string lpFileName,
-            [In] NativeMethods.FileAccess dwDesiredAccess,
-            [In] NativeMethods.FileShare dwShareMode,
+            [In] FileAccess dwDesiredAccess,
+            [In] FileShare dwShareMode,
             [In] IntPtr lpSecurityAttributes,
-            [In] NativeMethods.FileMode dwCreationDisposition,
+            [In] FileMode dwCreationDisposition,
             [In] int dwFlagsAndAttributes,
             [In] IntPtr hTemplateFile,
             [In] KtmTransactionHandle hTransaction,
             [In] IntPtr pusMiniVersion,
             [In] IntPtr pExtendedParameter);
 
-        [DllImport(KERNEL32, EntryPoint = "CopyFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "CopyFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CopyFileTransacted(
             [In] string lpExistingFileName,
@@ -212,23 +212,23 @@ namespace Wise.Framework.Commons.TxF
             [In] CopyFileFlags dwCopyFlags,
             [In] KtmTransactionHandle hTransaction);
 
-        [DllImport(KERNEL32, EntryPoint = "DeleteFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "DeleteFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool DeleteFileTransacted(
             [In] string lpFileName,
             [In] KtmTransactionHandle hTransaction);
 
-        [DllImport(KERNEL32, EntryPoint = "FindFirstFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "FindFirstFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
         internal static extern SafeFileHandle FindFirstFileTransacted(
             [In] string lpDirSpec,
-            [In] FINDEX_INFO_LEVELS fInfoLevelId,
-            [Out] out WIN32_FIND_DATA lpFindFileData,
-            [In] FINDEX_SEARCH_OPS fSearchOp,
+            [In] FindexInfoLevels fInfoLevelId,
+            [Out] out Win32FindData lpFindFileData,
+            [In] FindexSearchOps fSearchOp,
             [In] IntPtr lpSearchFilter,
             [In] int dwAdditionalFlags,
             [In] KtmTransactionHandle hTransaction);
 
-        [DllImport(KERNEL32, EntryPoint = "MoveFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "MoveFileTransacted", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool MoveFileTransacted(
             [In] string lpExistingFileName,
@@ -238,7 +238,7 @@ namespace Wise.Framework.Commons.TxF
             [In] MoveFileFlags dwFlags,
             [In] KtmTransactionHandle hTransaction);
 
-        [DllImport(KERNEL32, EntryPoint = "DeviceIoControl", CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, EntryPoint = "DeviceIoControl", CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool DeviceIoControl(
             [In] SafeFileHandle hDevice,
@@ -254,11 +254,11 @@ namespace Wise.Framework.Commons.TxF
         // Close handles
         //
 
-        [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool CloseHandle(
             [In] IntPtr handle);
-        [DllImport(KERNEL32, CharSet = CharSet.Unicode, SetLastError = true)]
+        [DllImport(Kernel32, CharSet = CharSet.Unicode, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static extern bool FindClose(
             [In] SafeFileHandle handle);

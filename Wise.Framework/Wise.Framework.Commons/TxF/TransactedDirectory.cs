@@ -19,7 +19,7 @@ namespace Wise.Framework.Commons.TxF
             {
                 string dirSpec = System.IO.Path.Combine(path, searchPattern);
 
-                NativeMethods.WIN32_FIND_DATA findFileData;
+                NativeMethods.Win32FindData findFileData;
                 SafeFileHandle hFind = FindFirstFileTransacted(dirSpec, ktmTx, out findFileData);
                 try
                 {
@@ -33,7 +33,7 @@ namespace Wise.Framework.Commons.TxF
                     while (NativeMethods.FindNextFile(hFind, out findFileData));
                     int error = Marshal.GetLastWin32Error();
 
-                    if (error != NativeMethods.ERROR_NO_MORE_FILES)
+                    if (error != NativeMethods.ErrorNoMoreFiles)
                     {
                         NativeMethods.HandleCOMError(error);
                     }
@@ -64,7 +64,7 @@ namespace Wise.Framework.Commons.TxF
                 // Issue the IO ctrl asking to create a secondary RM...
                 bool result = NativeMethods.DeviceIoControl(
                     handle,
-                    NativeMethods.FSCTL_TXFS_CREATE_SECONDARY_RM,
+                    NativeMethods.FsctlTxfsCreateSecondaryRm,
                     IntPtr.Zero,
                     0,
                     IntPtr.Zero,
@@ -140,7 +140,7 @@ namespace Wise.Framework.Commons.TxF
             int bytesReturned = 0;
             bool result = NativeMethods.DeviceIoControl(
                 handle,
-                NativeMethods.FSCTL_TXFS_START_RM,
+                NativeMethods.FsctlTxfsStartRm,
                 win32Buffer,
                 fullBuffer.Length,
                 IntPtr.Zero,
@@ -167,7 +167,7 @@ namespace Wise.Framework.Commons.TxF
             bool needRecovery = true;
             result = NativeMethods.DeviceIoControl(
                 handle,
-                NativeMethods.FSCTL_TXFS_ROLLFORWARD_REDO,
+                NativeMethods.FsctlTxfsRollforwardRedo,
                 inBytes,
                 inBytesLength,
                 inBytes,
@@ -177,7 +177,7 @@ namespace Wise.Framework.Commons.TxF
             if (!result)
             {
                 int status = Marshal.GetLastWin32Error();
-                if (status == NativeMethods.ERROR_RECOVERY_NOT_NEEDED)
+                if (status == NativeMethods.ErrorRecoveryNotNeeded)
                 {
                     needRecovery = false;
                 }
@@ -192,7 +192,7 @@ namespace Wise.Framework.Commons.TxF
             {
                 result = NativeMethods.DeviceIoControl(
                     handle,
-                    NativeMethods.FSCTL_TXFS_ROLLFORWARD_UNDO,
+                    NativeMethods.FsctlTxfsRollforwardUndo,
                     IntPtr.Zero,
                     0,
                     IntPtr.Zero,
@@ -220,7 +220,7 @@ namespace Wise.Framework.Commons.TxF
                 // Issue the IO ctrl asking to stop a secondary RM...
                 bool result = NativeMethods.DeviceIoControl(
                     handle,
-                    NativeMethods.FSCTL_TXFS_SHUTDOWN_RM,
+                    NativeMethods.FsctlTxfsShutdownRm,
                     IntPtr.Zero,
                     0,
                     IntPtr.Zero,
@@ -243,11 +243,11 @@ namespace Wise.Framework.Commons.TxF
             // Get a native handle to the directory
             SafeFileHandle handle = NativeMethods.CreateFile(
                 path,
-                NativeMethods.FileAccess.GENERIC_WRITE,
-                NativeMethods.FileShare.FILE_SHARE_NONE,
+                NativeMethods.FileAccess.GenericWrite,
+                NativeMethods.FileShare.None,
                 IntPtr.Zero,
-                NativeMethods.FileMode.OPEN_EXISTING,
-                NativeMethods.FILE_FLAG_BACKUP_SEMANTICS, // Returns the directory handle
+                NativeMethods.FileMode.OpenExisting,
+                NativeMethods.FileFlagBackupSemantics, // Returns the directory handle
                 IntPtr.Zero);
             if (handle.IsInvalid)
             {
@@ -257,13 +257,13 @@ namespace Wise.Framework.Commons.TxF
             return handle;
         }
 
-        private static SafeFileHandle FindFirstFileTransacted(string dirSpec, KtmTransactionHandle ktmTx, out NativeMethods.WIN32_FIND_DATA findFileData)
+        private static SafeFileHandle FindFirstFileTransacted(string dirSpec, KtmTransactionHandle ktmTx, out NativeMethods.Win32FindData findFileData)
         {
             SafeFileHandle hFile = NativeMethods.FindFirstFileTransacted(
                 dirSpec,
-                NativeMethods.FINDEX_INFO_LEVELS.FindExInfoStandard,
+                NativeMethods.FindexInfoLevels.FindExInfoStandard,
                 out findFileData,
-                NativeMethods.FINDEX_SEARCH_OPS.FindExSearchNameMatch,
+                NativeMethods.FindexSearchOps.NameMatch,
                 IntPtr.Zero,
                 0,
                 ktmTx);

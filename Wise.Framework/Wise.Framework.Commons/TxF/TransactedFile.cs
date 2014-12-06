@@ -54,7 +54,7 @@ namespace Wise.Framework.Commons.TxF
             using (TransactionScope scope = new TransactionScope())
             using (KtmTransactionHandle ktmTx = KtmTransactionHandle.CreateKtmTransactionHandle())
             {
-                NativeMethods.CopyFileFlags copyFlags = NativeMethods.CopyFileFlags.COPY_FILE_FAIL_IF_EXISTS;
+                NativeMethods.CopyFileFlags copyFlags = NativeMethods.CopyFileFlags.CopyFileFailIfExists;
                 if (overwrite)
                 {
                     copyFlags = 0; // TODO - Correctness - Which flag value is this really supposed to be? Works though...
@@ -87,8 +87,8 @@ namespace Wise.Framework.Commons.TxF
             {
                 // Allow copying to different volumes and to replace existing files
                 NativeMethods.MoveFileFlags moveFlags =
-                    NativeMethods.MoveFileFlags.MOVEFILE_COPY_ALLOWED |
-                    NativeMethods.MoveFileFlags.MOVEFILE_REPLACE_EXISTING;
+                    NativeMethods.MoveFileFlags.MovefileCopyAllowed |
+                    NativeMethods.MoveFileFlags.MovefileReplaceExisting;
 
                 bool status = NativeMethods.MoveFileTransacted(
                     sourceFileName,
@@ -121,7 +121,7 @@ namespace Wise.Framework.Commons.TxF
                 {
                     // Match the BCL behavior and disregard non-existant files...
                     int error = Marshal.GetLastWin32Error();
-                    if (error != NativeMethods.ERROR_FILE_NOT_FOUND)
+                    if (error != NativeMethods.ErrorFileNotFound)
                     {
                         NativeMethods.HandleCOMError(error);
                     }
@@ -147,7 +147,7 @@ namespace Wise.Framework.Commons.TxF
 
         private static NativeMethods.FileAccess TranslateFileAccess(FileAccess access)
         {
-            return access == FileAccess.Read ? NativeMethods.FileAccess.GENERIC_READ : NativeMethods.FileAccess.GENERIC_WRITE;
+            return access == FileAccess.Read ? NativeMethods.FileAccess.GenericRead : NativeMethods.FileAccess.GenericWrite;
         }
 
         private static NativeMethods.FileShare TranslateFileShare(FileShare share)
