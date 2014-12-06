@@ -50,15 +50,15 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Wise.Framework.Data.NHibernate\Wise.Framework.Data.NHibernate.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Data.NHibernate\Wise.Framework.Data.NHibernate.csproj">
       <Project>{44d4d3a9-bb9c-4622-8226-0ef31dfa3838}</Project>
       <Name>Wise.Framework.Data.NHibernate</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Wise.Framework.Data\Wise.Framework.Data.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Data\Wise.Framework.Data.csproj">
       <Project>{f140ac0e-21dd-46f7-961f-8f336b9243e3}</Project>
       <Name>Wise.Framework.Data</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
       <Project>{5b4e5b58-5f87-4bc4-b9bb-c9ace5e64275}</Project>
       <Name>Wise.Framework.Interface</Name>
     </ProjectReference>

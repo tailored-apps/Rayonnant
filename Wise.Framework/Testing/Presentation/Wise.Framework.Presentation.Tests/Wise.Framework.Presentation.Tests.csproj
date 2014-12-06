@@ -67,7 +67,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wise.Framework.Presentation\Wise.Framework.Presentation.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Presentation\Wise.Framework.Presentation.csproj">
       <Project>{069e0f5d-0a61-4269-9276-b9b126abdabf}</Project>
       <Name>Wise.Framework.Presentation</Name>
     </ProjectReference>

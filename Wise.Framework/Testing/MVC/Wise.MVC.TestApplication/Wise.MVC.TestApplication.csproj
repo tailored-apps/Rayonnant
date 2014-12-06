@@ -180,11 +180,11 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
       <Project>{5B4E5B58-5F87-4BC4-B9BB-C9ACE5E64275}</Project>
       <Name>Wise.Framework.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Wise.Framework.Web\Wise.Framework.Web.csproj">
+    <ProjectReference Include="..\..\..\Wise.Framework.Web\Wise.Framework.Web.csproj">
       <Project>{616c35f7-9d88-48a6-af2c-47250c41cc1f}</Project>
       <Name>Wise.Framework.Web</Name>
     </ProjectReference>
