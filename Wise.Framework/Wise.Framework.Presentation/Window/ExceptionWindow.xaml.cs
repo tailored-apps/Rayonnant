@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Practices.Prism.Commands;
 using Wise.Framework.Interface.ExceptionHandling;
 
 namespace Wise.Framework.Presentation.Window
@@ -18,10 +18,10 @@ namespace Wise.Framework.Presentation.Window
         public ExceptionWindow()
         {
             InitializeComponent();
-            CloseWindowCommand = new ActionCommand(closeAction);
-            ResumeCommand = new ActionCommand(resumeAction);
-            CopyErrorCommand = new ActionCommand(copyAction);
-            DetailsVisibilityToggleCommand = new ActionCommand(toggleVisibilityAction);
+            CloseWindowCommand = new DelegateCommand(closeAction);
+            ResumeCommand = new DelegateCommand(resumeAction);
+            CopyErrorCommand = new DelegateCommand(copyAction);
+            DetailsVisibilityToggleCommand = new DelegateCommand(toggleVisibilityAction);
         }
 
         #region [IExceptionService]
@@ -63,25 +63,25 @@ namespace Wise.Framework.Presentation.Window
             }
         }
 
-        private void closeAction(object obj)
+        private void closeAction()
         {
             status = false;
             Close();
         }
 
-        private void resumeAction(object obj)
+        private void resumeAction()
         {
             status = true;
             Close();
         }
 
 
-        private void copyAction(object obj)
+        private void copyAction()
         {
             Clipboard.SetText(Exception.Message);
         }
 
-        private void toggleVisibilityAction(object obj)
+        private void toggleVisibilityAction()
         {
             Height = DetailsVisibility == Visibility.Collapsed ? 400: 242 ;
             var scroll = GetTemplateChild("details") as ScrollViewer;

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows;
 using Common.Logging;
-using Microsoft.Expression.Interactivity.Core;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
@@ -137,7 +137,7 @@ namespace Wise.Framework.Presentation.Modularity
             {
                 foreach (Attribute attribute in attr)
                 {
-                    var command = new ActionCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
+                    var command = new DelegateCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
                     var menuItem = (MenuItem)attribute;
                     loger.InfoFormat("Adding ViewModel: '{0}' For navigation from menu: '{1}'", viewModel, menuItem.Path);
                     menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);

@@ -40,10 +40,6 @@
     </StartupObject>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Common.Logging, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Wise.Framework\build\bin\Release\Common.Logging.dll</HintPath>
-    </Reference>
     <Reference Include="Common.Logging.Core, Version=2.2.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Wise.Framework\build\bin\Release\Common.Logging.Core.dll</HintPath>
@@ -176,12 +172,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Wise.Module\Wise.Module.csproj">
-      <Project>{4d2cd168-9aaa-486f-a289-09160bd89053}</Project>
-      <Name>Wise.Module</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
