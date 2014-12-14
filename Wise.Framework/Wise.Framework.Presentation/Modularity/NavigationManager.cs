@@ -137,8 +137,8 @@ namespace Wise.Framework.Presentation.Modularity
             {
                 foreach (Attribute attribute in attr)
                 {
-                    var command = new DelegateCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel }));
                     var menuItem = (MenuItem)attribute;
+                    var command = new DelegateCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel, UriQuery = new NavigationParameters(menuItem.NavigationParameters) }));
                     loger.InfoFormat("Adding ViewModel: '{0}' For navigation from menu: '{1}'", viewModel, menuItem.Path);
                     menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);
                 }
