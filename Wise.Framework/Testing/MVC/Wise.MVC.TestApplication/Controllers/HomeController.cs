@@ -8,14 +8,8 @@ namespace Wise.MVC.TestApplication.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IDupa dupa;
-        public HomeController(IDupa dupa)
-        {
-            this.dupa = dupa;
-        }
         public ActionResult Index()
         {
-            dupa.Sraj();
             return View();
         }
 

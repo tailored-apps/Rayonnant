@@ -75,13 +75,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.SecurityModu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Commons", "Wise.Framework.Commons\Wise.Framework.Commons.csproj", "{BBBEEA89-6FDC-4882-A0D4-3E583F35680C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.MVC.TestApplication", "Testing\MVC\Wise.MVC.TestApplication\Wise.MVC.TestApplication.csproj", "{4849ACB2-750F-4313-B342-C35CD9394044}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests", "Testing\Data\Wise.Framework.Data.Tests\Wise.Framework.Data.Tests.csproj", "{78D3D67B-3035-4227-B12A-3546F00838C4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests.Integration", "Testing\Data\Wise.Framework.Data.Tests.Integration\Wise.Framework.Data.Tests.Integration.csproj", "{2DEC93D2-089E-483B-BE11-91224FAF89EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Presentation.Tests", "Testing\Presentation\Wise.Framework.Presentation.Tests\Wise.Framework.Presentation.Tests.csproj", "{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.MVC.TestApplication", "Testing\MVC\Wise.MVC.TestApplication\Wise.MVC.TestApplication.csproj", "{412A2031-A9E3-4C28-9958-27BDEC97E048}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -162,10 +162,6 @@ Global
 		{BBBEEA89-6FDC-4882-A0D4-3E583F35680C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBBEEA89-6FDC-4882-A0D4-3E583F35680C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBBEEA89-6FDC-4882-A0D4-3E583F35680C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4849ACB2-750F-4313-B342-C35CD9394044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4849ACB2-750F-4313-B342-C35CD9394044}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4849ACB2-750F-4313-B342-C35CD9394044}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4849ACB2-750F-4313-B342-C35CD9394044}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78D3D67B-3035-4227-B12A-3546F00838C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78D3D67B-3035-4227-B12A-3546F00838C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -178,6 +174,10 @@ Global
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -192,10 +192,10 @@ Global
 		{02CDCB19-1D71-45BA-B6E7-115FC70DD86D} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{32079C56-351E-47E9-987F-AC202840144B} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{7A43A224-0713-4920-9FDE-5337E1326D16} = {AE4F96BD-1B65-4CD4-8B66-687ACAAD2B69}
-		{4849ACB2-750F-4313-B342-C35CD9394044} = {32079C56-351E-47E9-987F-AC202840144B}
 		{78D3D67B-3035-4227-B12A-3546F00838C4} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{2DEC93D2-089E-483B-BE11-91224FAF89EB} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6} = {C6AE198D-EEBA-4321-80AF-1E0B439F2950}
+		{412A2031-A9E3-4C28-9958-27BDEC97E048} = {32079C56-351E-47E9-987F-AC202840144B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
