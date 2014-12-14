@@ -104,9 +104,12 @@ namespace Wise.Framework.Data.Tests.Integration
 
         public class MyEntityNhibernateSearchCriteria : BaseNhibernateSearchCriteria<MyEntityClass>
         {
-            public string DummyString
+            public string DummyString { get; set; }
+
+            protected override DetachedCriteria GetCriteria(DetachedCriteria detachedCriteria)
             {
-                set { base.Add(Restrictions.Eq("DummYString", value)); }
+                detachedCriteria.Add(Restrictions.Eq("DummYString", DummyString));
+                return detachedCriteria;
             }
         }
 

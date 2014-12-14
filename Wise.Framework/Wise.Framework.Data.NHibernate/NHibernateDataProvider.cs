@@ -27,6 +27,11 @@ namespace Wise.Framework.Data.NHibernate
             return Session.Get<TEntity>(id);
         }
 
+        public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class
+        {
+            return Session.CreateCriteria<TEntity>().List<TEntity>();
+        }
+
         public TEntity GetById<TKey, TEntity>(TKey id) where TEntity : class
         {
             return Session.Get<TEntity>(id);

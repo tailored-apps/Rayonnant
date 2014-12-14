@@ -28,6 +28,11 @@ namespace Wise.Framework.Data
             return dataProvider.Get<TEntity>(id);
         }
 
+        public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class
+        {
+           return dataProvider.GetAll<TEntity>();
+        }
+
         public void DeleteById<TKey, TEntity>(TKey id) where TEntity : class
         {
             dataProvider.DeleteById<TKey, TEntity>(id);

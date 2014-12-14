@@ -13,6 +13,11 @@ namespace Wise.Framework.Data.Providers
             throw new NotImplementedException();
         }
 
+        public IEnumerable<TEntity> GetAll<TEntity>() where TEntity : class
+        {
+            throw new NotImplementedException();
+        }
+
         public TEntity GetById<TKey, TEntity>(TKey id) where TEntity : class
         {
             throw new NotImplementedException();

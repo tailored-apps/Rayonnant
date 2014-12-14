@@ -77,7 +77,7 @@ namespace Wise.Framework.HostShell
             splashViewModel.Logo =
                 new Uri(@"pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/logo.png",
                     UriKind.Absolute);
-            
+          
         }
     }
 }
