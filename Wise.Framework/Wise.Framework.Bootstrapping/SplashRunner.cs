@@ -41,9 +41,6 @@ namespace Wise.Framework.Bootstrapping
         public void CloseSplash()
         {
             Dispatcher.FromThread(splashThread).Invoke(splash.Close);
-
-            splashThread.Abort();
-            splashThread.Interrupt();
             viewModel.Dispose();
         }
     }
