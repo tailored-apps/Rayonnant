@@ -79,6 +79,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -89,7 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Annotations\MenuItem.cs" />
+    <Compile Include="Behaviors\FocusBehavior.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
+    <Compile Include="Commands\ConfirmPopupCommand.cs" />
     <Compile Include="Commands\DockCommand.cs" />
     <Compile Include="Commands\TearOffToggleCommand.cs" />
     <Compile Include="Commands\CloseItemCommand.cs" />
@@ -114,6 +117,8 @@
     <Compile Include="Modularity\ResourceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="UserInteraction\GenericPopup\GenericPopupViewModel.cs" />
+    <Compile Include="UserInteraction\GenericPopup\IGenericPopup.cs" />
     <Compile Include="ViewModel\CommandsViewModel.cs" />
     <Compile Include="ViewModel\MenuViewModel.cs" />
     <Compile Include="ViewModel\ProgressViewModel.cs" />

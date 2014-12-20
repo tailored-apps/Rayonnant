@@ -119,6 +119,8 @@ namespace Wise.Framework.Commons.TxF
             LimitToDevices,
             MaxSearchOp
         }
+
+        [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto)]
         internal struct Filetime
         {
             public uint DateTimeLow;

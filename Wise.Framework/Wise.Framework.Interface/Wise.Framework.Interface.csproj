@@ -67,6 +67,7 @@
     <Compile Include="Security\IRole.cs" />
     <Compile Include="Security\ISecurityService.cs" />
     <Compile Include="MultiThreading\ITaskCreator.cs" />
+    <Compile Include="ViewModel\IValidableViewModel.cs" />
     <Compile Include="WindowsServices\IWindowsService.cs" />
     <Compile Include="Window\IModalWindow.cs" />
     <Compile Include="Window\IShellWindow.cs" />
