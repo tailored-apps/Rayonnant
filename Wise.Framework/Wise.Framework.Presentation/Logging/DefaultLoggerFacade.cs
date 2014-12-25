@@ -14,12 +14,13 @@ namespace Wise.Framework.Presentation.Logging
         /// <summary>
         ///     default logger
         /// </summary>
-
+        private readonly ILog log;
         /// <summary>
         ///     ctor.
         /// </summary>
-        public DefaultLoggerFacade()
+        public DefaultLoggerFacade(ILog log)
         {
+            this.log = log;
         }
 
         /// <summary>
@@ -28,7 +29,6 @@ namespace Wise.Framework.Presentation.Logging
         /// </summary>
         public void Log(string message, Category category, Priority priority)
         {
-            var               log = LogManager.GetCurrentClassLogger();
             switch (category)
             {
                 case Category.Debug:
