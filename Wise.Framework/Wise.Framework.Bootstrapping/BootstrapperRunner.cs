@@ -268,7 +268,7 @@ namespace Wise.Framework.Bootstrapping
             log.Debug("about configuring container");
 
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
-
+            System.Diagnostics.Debugger.Launch();
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IServiceLocator, UnityServiceLocatorAdapter>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
