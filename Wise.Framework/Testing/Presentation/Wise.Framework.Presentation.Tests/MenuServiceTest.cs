@@ -26,37 +26,14 @@ namespace Wise.Framework.Presentation.Tests
         {
             var collection = new ObservableCollection<MenuItem>();
 
-            collection.Add(new MenuItem {Header = "asd1", Uid = "1asd"});
-            collection.Add(new MenuItem {Header = "asd2", Uid = "2asd"});
-            collection.Add(new MenuItem {Header = "asd3", Uid = "3asd"});
-            collection.Add(new MenuItem
-            {
-                Header = "asd4",
-                Uid = "4asd",
-                ItemsSource = new ObservableCollection<MenuItem>(new List<MenuItem>
-                {
-                    new MenuItem {Header = "qwas1", Uid = "1qwas"},
-                    new MenuItem {Header = "qwas2", Uid = "2qwas"},
-                    new MenuItem
-                    {
-                        Header = "qwas3",
-                        Uid = "3qwas",
-                        ItemsSource = new ObservableCollection<MenuItem>(new List<MenuItem>
-                        {
-                            new MenuItem {Header = "asdads"},
-                            new MenuItem {Header = "asdads1asdads1asdads1asdads1", Uid = "asdads1"},
-                        })
-                    },
-                    new MenuItem {Header = "qwas4", Uid = "4qwas"}
-                })
-            });
-            collection.Add(new MenuItem {Header = "asd5", Uid = "5asd"});
+           
             commandsViewModel.SetupProperty(x => x.Commands).SetupGet(x => x.Commands).Returns(collection);
 
             IMenuService service = new MenuService(commandsViewModel.Object);
-            MenuItem element = service.GetMenuItem("asdads1");
+             service.AddMenuItem(new MenuItem(){Header = "asd1"}, "1asd");
+            MenuItem element = service.GetMenuItem("1asd");
             Assert.IsNotNull(element);
-            Assert.AreEqual("asdads1asdads1asdads1asdads1", element.Header);
+            Assert.AreEqual("asd1", element.Header);
         }
 
 
@@ -70,7 +47,7 @@ namespace Wise.Framework.Presentation.Tests
 
             var newItem = new MenuItem {Header = "Asd"};
 
-            service.AddMenuItem(newItem, "#MenuItems:");
+            service.AddMenuItem(newItem, "");
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
             Assert.AreEqual(commandsViewModel.Object.Commands.First().Header, "Asd");

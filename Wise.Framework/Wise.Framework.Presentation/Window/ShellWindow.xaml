@@ -5,6 +5,8 @@
                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:window="clr-namespace:Wise.Framework.Presentation.Window"
                    xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters"
+                   xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                   xmlns:behaviors="clr-namespace:Wise.Framework.Presentation.Behaviors"
                    Title="{Binding Title}"
                    mc:Ignorable="d"
                    d:Height="300" d:Width="300"
@@ -14,10 +16,10 @@
         <converters:UriToImageSourceConverter x:Key="UriToImageSourceConverter" />
     </Window.Resources>
 
-
-    <Window.InputBindings>
-        <KeyBinding Key="LeftAlt" Modifiers="Alt" Command="{Binding ToogleVisibilityCommandRegionCommand}" />
-    </Window.InputBindings>
+    <i:Interaction.Behaviors>
+        <behaviors:KeyUpBehavior Key="LeftAlt" KeyDownCommand="{Binding ToogleVisibilityCommandRegionCommand}" />
+    </i:Interaction.Behaviors>
+    
 
     <window:WindowBase.Icon>
         <Binding Converter="{StaticResource UriToImageSourceConverter}" Path="Icon" />

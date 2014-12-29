@@ -196,6 +196,11 @@ namespace Wise.Framework.Bootstrapping
                 log.Info("registering StatusRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.StatusRegion, Container.Resolve<IStatusViewModel>);
             }
+            if (Container.IsTypeRegistered<IMenuViewModel>())
+            {
+                log.Info("registering left Menu region in shell");
+                regionManager.RegisterViewWithRegion(ShellRegionNames.LeftSideNavigationRegion, Container.Resolve<IMenuViewModel>);
+            }
 
 
             PublishSystemMessage("regions has been registerd");
@@ -282,6 +287,7 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ICommandsViewModel, CommandsViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IMenuService, MenuService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IStatusViewModel, StatusViewModel>(LifetimeScope.Singleton);
+            Container.RegisterTypeIfMissing<IMenuViewModel, MenuViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IProgressViewModel, ProgressViewModel>(LifetimeScope.Singleton);
 
             Container.RegisterTypeIfMissing<IEventAggregator, EventAggregator>(LifetimeScope.Singleton);
