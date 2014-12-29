@@ -4,59 +4,26 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              mc:Ignorable="d"
-             d:DesignHeight="60" d:DesignWidth="900">
+             d:DesignHeight="30" d:DesignWidth="600">
 
 
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml"/>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic/Styles.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-
-
-            <Style x:Key="ZoomingStyle" TargetType="Button" BasedOn="{StaticResource StandardButton}" >
-
-                <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Style.Triggers>
-                    <Trigger  Property="IsMouseOver" Value="True">
-                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-                                </TransformGroup>
-                            </Setter.Value>
-                        </Setter>
-
-                        <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                    </Trigger>
-                </Style.Triggers>
-
-            </Style>
-        </ResourceDictionary>
-    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="2*" />
-            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="100" />
         </Grid.ColumnDefinitions>
 
-
-
-
-        <Label Grid.Row="0" HorizontalAlignment="Left" Grid.Column="0"
-			Content="{Binding Message}" HorizontalContentAlignment="Center" VerticalAlignment="Bottom">
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+        </StackPanel>
+        
+        <Label Grid.Row="1" HorizontalAlignment="Left" Grid.Column="0"
+			Content="{Binding Message}" HorizontalContentAlignment="Center" >
 
             <Label.ToolTip>
                 <StackPanel>
@@ -65,68 +32,23 @@
             </Label.ToolTip>
         </Label>
 
+        <Label Grid.Row="1" HorizontalAlignment="Left" Grid.Column="1" Content="{Binding UserName}" 
+			FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
+            <Label.ToolTip>
+                <StackPanel>
+                    <Label Content="{Binding UserName}"  ContentStringFormat="User Name: '{0}'"  />
+                </StackPanel>
+            </Label.ToolTip>
+        </Label>
 
-        <StackPanel Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel >
-                    <Path Style="{StaticResource AppbarHomeIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Home</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarAppIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
-                    <Label>Open Items</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarListIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
-                    <Label>Actions</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarMoneyIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Financials</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarToolsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Tools</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarSettingsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Settings</Label>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+        <Label  Grid.Row="1" HorizontalAlignment="Right" Grid.Column="2"
+			Content="{Binding Environment}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
 
-        <StackPanel Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
-            <Label  HorizontalAlignment="Left"  Content="{Binding UserName}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
-                <Label.ToolTip>
-                    <StackPanel>
-                        <Label Content="{Binding UserName}"  ContentStringFormat="User Name: '{0}'"  />
-                    </StackPanel>
-                </Label.ToolTip>
-            </Label>
-
-            <Label   HorizontalAlignment="Right" Content="{Binding Environment}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
-
-                <Label.ToolTip>
-                    <StackPanel>
-                        <Label Content="{Binding Environment}"  ContentStringFormat="Environment Name: '{0}'"  />
-                    </StackPanel>
-                </Label.ToolTip>
-            </Label>
-        </StackPanel>
+            <Label.ToolTip>
+                <StackPanel>
+                    <Label Content="{Binding Environment}"  ContentStringFormat="Environment Name: '{0}'"  />
+                </StackPanel>
+            </Label.ToolTip>
+        </Label>
     </Grid>
 </UserControl>
