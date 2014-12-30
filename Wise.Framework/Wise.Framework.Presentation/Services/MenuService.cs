@@ -78,7 +78,7 @@ namespace Wise.Framework.Presentation.Services
                         if (Find(commandsViewModel.Commands, isRequiredToAdd) == null)
                         {
                             lastItem = new MenuItem();
-                            lastItem.Header = menuItem.Header;
+                            lastItem.Header = element;
                             lastItem.Uid = ComposeUidForElement(lastItem.Header.ToString(), null);
 
                             commandsViewModel.Commands.Add(lastItem);
@@ -97,7 +97,11 @@ namespace Wise.Framework.Presentation.Services
 
                     middleString += middleString.Equals(MENU_ITEMS_PREFIX) ? element : "|" + element;
                 }
-                if (lastItem != null) lastItem.Items.Add(menuItem);
+                if (lastItem != null)
+                {
+                    menuItem.Uid = ComposeUidForElement(menuItem.Header.ToString(), lastItem);
+                    lastItem.Items.Add(menuItem);
+                }
             }
         }
 

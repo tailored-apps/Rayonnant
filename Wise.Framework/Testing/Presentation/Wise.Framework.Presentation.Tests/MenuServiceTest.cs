@@ -30,8 +30,8 @@ namespace Wise.Framework.Presentation.Tests
             commandsViewModel.SetupProperty(x => x.Commands).SetupGet(x => x.Commands).Returns(collection);
 
             IMenuService service = new MenuService(commandsViewModel.Object);
-            service.AddMenuItem(new MenuItem() { Header = "asd1" }, "1asd");
-            MenuItem element = service.GetMenuItem("asd1");
+            service.AddMenuItem(new MenuItem() { Header = "asd1" }, "one|two");
+            MenuItem element = service.GetMenuItem("one|two|asd1");
             Assert.IsNotNull(element);
             Assert.AreEqual("asd1", element.Header);
         }
