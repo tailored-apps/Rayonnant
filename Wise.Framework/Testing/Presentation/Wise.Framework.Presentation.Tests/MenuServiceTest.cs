@@ -26,12 +26,12 @@ namespace Wise.Framework.Presentation.Tests
         {
             var collection = new ObservableCollection<MenuItem>();
 
-           
+
             commandsViewModel.SetupProperty(x => x.Commands).SetupGet(x => x.Commands).Returns(collection);
 
             IMenuService service = new MenuService(commandsViewModel.Object);
-             service.AddMenuItem(new MenuItem(){Header = "asd1"}, "1asd");
-            MenuItem element = service.GetMenuItem("1asd");
+            service.AddMenuItem(new MenuItem() { Header = "asd1" }, "1asd");
+            MenuItem element = service.GetMenuItem("asd1");
             Assert.IsNotNull(element);
             Assert.AreEqual("asd1", element.Header);
         }
@@ -40,12 +40,13 @@ namespace Wise.Framework.Presentation.Tests
         [TestMethod]
         public void CanAddOnSpecyficPathNewMenuItem()
         {
+            var menuItems = new ObservableCollection<MenuItem>();
             IMenuService service = new MenuService(commandsViewModel.Object);
             commandsViewModel.SetupProperty(x => x.Commands)
                 .SetupGet(x => x.Commands)
-                .Returns(new ObservableCollection<MenuItem>());
+                .Returns(menuItems);
 
-            var newItem = new MenuItem {Header = "Asd"};
+            var newItem = new MenuItem { Header = "Asd" };
 
             service.AddMenuItem(newItem, "");
             Assert.IsNotNull(commandsViewModel.Object.Commands);
@@ -53,8 +54,8 @@ namespace Wise.Framework.Presentation.Tests
             Assert.AreEqual(commandsViewModel.Object.Commands.First().Header, "Asd");
 
 
-            var otherSubItem = new MenuItem {Header = "SubItem"};
-            service.AddMenuItem(otherSubItem, "#MenuItems:Asd");
+            var otherSubItem = new MenuItem { Header = "SubItem" };
+            service.AddMenuItem(otherSubItem, "Asd");
 
 
             Assert.IsNotNull(commandsViewModel.Object.Commands);
@@ -63,14 +64,11 @@ namespace Wise.Framework.Presentation.Tests
 
 
             Assert.IsNotNull(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")));
-            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count,
-                1);
-            Assert.AreEqual(
-                ((MenuItem) (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0]))
-                    .Header, "SubItem");
+            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count, 1);
+            Assert.AreEqual("SubItem", ((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Header);
 
-            var otherSubSubItem = new MenuItem {Header = "SubSubItem"};
-            service.AddMenuItem(otherSubSubItem, "#MenuItems:Asd|SubItem");
+            var otherSubSubItem = new MenuItem { Header = "SubSubItem" };
+            service.AddMenuItem(otherSubSubItem, "Asd|SubItem");
 
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
@@ -78,58 +76,33 @@ namespace Wise.Framework.Presentation.Tests
 
 
             Assert.IsNotNull(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")));
-            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count,
-                1);
-            Assert.AreEqual(
-                ((MenuItem) (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0]))
-                    .Header, "SubItem");
+            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count, 1);
+            Assert.AreEqual("SubItem", ((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Header);
 
-            Assert.AreEqual(
-                ((MenuItem)
-                    ((MenuItem)
-                        (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items
-                        [0]).Header, "SubSubItem");
-            Assert.AreEqual(
-                ((MenuItem)
-                    ((MenuItem)
-                        (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items
-                        [0]).Uid, "#MenuItems:Asd|SubItem|SubSubItem");
+            Assert.AreEqual("SubSubItem", ((MenuItem)((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items[0]).Header);
+            Assert.AreEqual("#MenuItems:Asd|SubItem|SubSubItem", ((MenuItem)((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items[0]).Uid);
         }
 
         [TestMethod]
         public void CanRemoveOnSpecyficPathMenuItem()
         {
+            var items = new ObservableCollection<MenuItem>();
             IMenuService service = new MenuService(commandsViewModel.Object);
             commandsViewModel.SetupProperty(x => x.Commands)
                 .SetupGet(x => x.Commands)
-                .Returns(new ObservableCollection<MenuItem>());
+                .Returns(items);
 
-            var newItem = new MenuItem {Header = "Asd"};
+            var newItem = new MenuItem { Header = "Asd" };
 
-            service.AddMenuItem(newItem, "#MenuItems:");
+            service.AddMenuItem(newItem, "");
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
             Assert.AreEqual(commandsViewModel.Object.Commands.First().Header, "Asd");
 
 
-            var otherSubItem = new MenuItem {Header = "SubItem"};
-            service.AddMenuItem(otherSubItem, "#MenuItems:Asd");
+            var otherSubItem = new MenuItem { Header = "SubItem" };
+            service.AddMenuItem(otherSubItem, "Asd");
 
-
-            Assert.IsNotNull(commandsViewModel.Object.Commands);
-            Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
-            Assert.AreEqual(commandsViewModel.Object.Commands.First().Header, "Asd");
-
-
-            Assert.IsNotNull(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")));
-            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count,
-                1);
-            Assert.AreEqual(
-                ((MenuItem) (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0]))
-                    .Header, "SubItem");
-
-            var otherSubSubItem = new MenuItem {Header = "SubSubItem"};
-            service.AddMenuItem(otherSubSubItem, "#MenuItems:Asd|SubItem");
 
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
@@ -137,25 +110,26 @@ namespace Wise.Framework.Presentation.Tests
 
 
             Assert.IsNotNull(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")));
-            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count,
-                1);
-            Assert.AreEqual(
-                ((MenuItem) (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0]))
-                    .Header, "SubItem");
+            Assert.AreEqual(1,commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count);
+            Assert.AreEqual("SubItem",((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Header);
 
-            Assert.AreEqual(
-                ((MenuItem)
-                    ((MenuItem)
-                        (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items
-                        [0]).Header, "SubSubItem");
-            Assert.AreEqual(
-                ((MenuItem)
-                    ((MenuItem)
-                        (commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items
-                        [0]).Uid, "#MenuItems:Asd|SubItem|SubSubItem");
+            var otherSubSubItem = new MenuItem { Header = "SubSubItem" };
+            service.AddMenuItem(otherSubSubItem, "Asd|SubItem");
+
+            Assert.IsNotNull(commandsViewModel.Object.Commands);
+            Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
+            Assert.AreEqual(commandsViewModel.Object.Commands.First().Header, "Asd");
 
 
-            service.RemoveMenuItem("#MenuItems:Asd|SubItem");
+            Assert.IsNotNull(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")));
+            Assert.AreEqual(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items.Count,1);
+            Assert.AreEqual("SubItem",((MenuItem)(commandsViewModel.Object.Commands.FirstOrDefault(x => x.Header.Equals("Asd")).Items[0])).Header);
+
+            Assert.AreEqual("SubSubItem",((MenuItem)((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items[0]).Header );
+            Assert.AreEqual("#MenuItems:Asd|SubItem|SubSubItem",((MenuItem)((MenuItem)(commandsViewModel.Object.Commands.SingleOrDefault(x => x.Header.Equals("Asd")).Items[0])).Items[0]).Uid);
+
+
+            service.RemoveMenuItem("Asd|SubItem");
 
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 1);
@@ -166,7 +140,7 @@ namespace Wise.Framework.Presentation.Tests
                 0);
 
 
-            service.RemoveMenuItem("#MenuItems:Asd");
+            service.RemoveMenuItem("Asd");
 
             Assert.IsNotNull(commandsViewModel.Object.Commands);
             Assert.AreEqual(commandsViewModel.Object.Commands.Count, 0);

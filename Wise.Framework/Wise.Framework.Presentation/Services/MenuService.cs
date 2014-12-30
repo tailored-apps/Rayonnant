@@ -78,7 +78,7 @@ namespace Wise.Framework.Presentation.Services
                         if (Find(commandsViewModel.Commands, isRequiredToAdd) == null)
                         {
                             lastItem = new MenuItem();
-                            lastItem.Header = element;
+                            lastItem.Header = menuItem.Header;
                             lastItem.Uid = ComposeUidForElement(lastItem.Header.ToString(), null);
 
                             commandsViewModel.Commands.Add(lastItem);
