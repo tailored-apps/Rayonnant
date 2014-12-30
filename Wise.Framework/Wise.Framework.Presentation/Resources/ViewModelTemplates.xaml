@@ -18,7 +18,6 @@
 
     <DataTemplate DataType="{x:Type viewModel:MenuViewModel}">
         <view:MenuView />
-        
     </DataTemplate>
 
 
