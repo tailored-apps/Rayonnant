@@ -69,12 +69,15 @@
     <Compile Include="MultiThreading\ITaskCreator.cs" />
     <Compile Include="ViewModel\IValidableViewModel.cs" />
     <Compile Include="WindowsServices\IWindowsService.cs" />
+    <Compile Include="Window\OpenItemsMenuGroup.cs" />
     <Compile Include="Window\IModalWindow.cs" />
     <Compile Include="Window\IShellWindow.cs" />
     <Compile Include="Window\ISplashViewModel.cs" />
     <Compile Include="Window\IWindow.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Window\HomeMenuGroup.cs" />
+    <Compile Include="Window\MenuGroup.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

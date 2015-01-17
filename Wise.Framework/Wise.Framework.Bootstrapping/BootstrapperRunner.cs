@@ -208,6 +208,9 @@ namespace Wise.Framework.Bootstrapping
 
             PublishSystemMessage("Going to register shell window");
             Container.RegisterTypeIfMissing<IShellWindow, ShellWindow>(LifetimeScope.Singleton);
+          
+
+            
 
             shellWindow = Container.Resolve<IShellWindow>();
 
@@ -231,6 +234,7 @@ namespace Wise.Framework.Bootstrapping
                 if (Container.IsTypeRegistered<INavigationManager>())
                 {
                     var navManager = Container.Resolve<INavigationManager>();
+                    navManager.RegisterTypeForNavigation<OpenItemsViewModel>();
                 }
                 shell.Closing += (s, e) => { };
 

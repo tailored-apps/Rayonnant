@@ -89,12 +89,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Annotations\ViewModelInfo.cs" />
     <Compile Include="Annotations\MenuItem.cs" />
     <Compile Include="Behaviors\KeyUpBehavior.cs" />
     <Compile Include="Behaviors\FocusBehavior.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\ConfirmPopupCommand.cs" />
     <Compile Include="Commands\DockCommand.cs" />
+    <Compile Include="Commands\NavigateToViewModelCommand.cs" />
+    <Compile Include="Commands\NavigateToOpenItemsCommand.cs" />
+    <Compile Include="Commands\NavigateToHomeCommand.cs" />
     <Compile Include="Commands\TearOffToggleCommand.cs" />
     <Compile Include="Commands\CloseItemCommand.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
@@ -110,14 +114,19 @@
     <Compile Include="Interface\ViewModel\IShellViewModel.cs" />
     <Compile Include="Interface\ViewModel\IStatusViewModel.cs" />
     <Compile Include="Logging\DefaultLoggerFacade.cs" />
+    <Compile Include="Interface\IPreferenceManager.cs" />
     <Compile Include="Modularity\ModuleBase.cs" />
     <Compile Include="Modularity\ModuleCatalog.cs" />
     <Compile Include="Modularity\NavigationManager.cs" />
     <Compile Include="Modularity\NavigationRequest.cs" />
     <Compile Include="Modularity\RegionConfigurator.cs" />
     <Compile Include="Modularity\ResourceManager.cs" />
+    <Compile Include="Preferences\IPreferenceProvider.cs" />
+    <Compile Include="Preferences\PreferenceManager.cs" />
+    <Compile Include="Preferences\RegistryPreferenceProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MenuService.cs" />
+    <Compile Include="TemplateSelectors\StatusMenuGroupTemplateSelector.cs" />
     <Compile Include="UserInteraction\GenericPopup\GenericPopupViewModel.cs" />
     <Compile Include="UserInteraction\GenericPopup\IGenericPopup.cs" />
     <Compile Include="ViewModel\CommandsViewModel.cs" />
@@ -125,8 +134,12 @@
     <Compile Include="ViewModel\ProgressViewModel.cs" />
     <Compile Include="ViewModel\ShellViewModel.cs" />
     <Compile Include="ViewModel\SplashViewModel.cs" />
+    <Compile Include="ViewModel\OpenItemsViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="View\OpenItemsView.xaml.cs">
+      <DependentUpon>OpenItemsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\MenuView.xaml.cs">
       <DependentUpon>MenuView.xaml</DependentUpon>
     </Compile>
@@ -183,6 +196,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\SimpleLook.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OpenItemsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

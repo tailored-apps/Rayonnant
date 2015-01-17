@@ -13,7 +13,6 @@ using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Interface.Shell;
-using Wise.Framework.Presentation.View;
 using Wise.Framework.Presentation.ViewModel;
 using Wise.Framework.Presentation.Window;
 
@@ -44,6 +43,11 @@ namespace Wise.Framework.Presentation.Modularity
             subscription = messanger.Subscribe<NavigationRequest>(OnMessageArrived);
         }
 
+        public void RegisterTypeForNavigation<T>()
+        {
+            RegisterTypeForNavigation(typeof(T));
+        }
+
         public void RegisterTypeForNavigation(Type viewModelType)
         {
             loger.InfoFormat("Registering ViewModel For navigation: {0}", viewModelType);
@@ -51,12 +55,42 @@ namespace Wise.Framework.Presentation.Modularity
             AddMenuNavigation(viewModelType);
         }
 
+
+
+        public IEnumerable<ViewModelInfo> OpenedViewModelInfos
+        {
+            get
+            {
+                foreach (var view in regionManager.Regions[ShellRegionNames.ContentRegion].Views)
+                {
+                    var type = view.GetType();
+                    if (type != typeof(OpenItemsViewModel))
+                    {
+                        var attr = type.GetCustomAttributes(typeof(ViewModelInfo));
+
+                        if (attr != null && attr.Any())
+                        {
+                            foreach (var attribute in attr)
+                            {
+                                var modelInfo = (ViewModelInfo)attribute;
+                                modelInfo.ViewModelType = type;
+                                modelInfo.ViewModel = view as ViewModelBase;
+                                yield return modelInfo;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+
         public void CloseItem(ViewModelBase vm)
         {
             IRegion containingRegion = null;
             foreach (var region in regionManager.Regions)
             {
-                if (region.ActiveViews.Contains(vm))
+                if (region.Views.Contains(vm))
                 {
                     containingRegion = region;
                     region.Remove(vm);
@@ -77,16 +111,7 @@ namespace Wise.Framework.Presentation.Modularity
             }
         }
 
-        public void RegisterTypeForNavigation<T>()
-        {
-            container.RegisterType(typeof(Object), typeof(T), typeof(T).FullName);
-            AddMenuNavigation(typeof(T));
-        }
 
-        public void RegisterViewModelForNavigation(ViewModelBase viewModel)
-        {
-            RegisterTypeForNavigation(viewModel.GetType());
-        }
 
         public void Dispose()
         {

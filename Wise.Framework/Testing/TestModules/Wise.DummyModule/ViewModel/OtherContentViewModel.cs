@@ -8,6 +8,7 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
+    [ViewModelInfo("Dummy Module One Other Content View Model", "Tools", 0)]
     [MenuItem("Modules|Dummy Module One", "Other Content View Model")]
     public class OtherContentViewModel : ViewModelBase
     {

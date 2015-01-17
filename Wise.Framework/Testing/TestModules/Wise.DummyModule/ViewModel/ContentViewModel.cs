@@ -11,6 +11,7 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
+    [ViewModelInfo("Dummy Module One Content View", "Tools", 0)]
     [MenuItem("Modules|Dummy Module One", "Content View")]
     public class ContentViewModel : ViewModelBase
     {

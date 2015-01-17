@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Windows;
 using System.Windows.Threading;
 using Common.Logging;
@@ -15,6 +16,14 @@ namespace Wise.Framework.Presentation
     {
         private readonly ILog log = LogManager.GetCurrentClassLogger();
 
+        static WiseApplication()
+        {
+
+            var applicationAssembly = System.Reflection.Assembly.GetEntryAssembly();
+            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(applicationAssembly.Location);
+            version = fvi.FileVersion;
+             name = fvi.ProductName;
+        }
 
         /// <summary>
         ///     Creates new instance of WiseApplication
@@ -54,7 +63,7 @@ namespace Wise.Framework.Presentation
 
             if (!Current.Dispatcher.CheckAccess())
             {
-                Current.Dispatcher.BeginInvoke((Action<Exception>) HandleException, exception);
+                Current.Dispatcher.BeginInvoke((Action<Exception>)HandleException, exception);
             }
             else
             {
@@ -111,6 +120,25 @@ namespace Wise.Framework.Presentation
                 Environment.NewLine, exception);
 
             MessageBox.Show(message);
+        }
+
+
+        private static string name;
+        public static string Name
+        {
+            get
+            {
+                return name;
+            }
+        }
+
+        private static string version;
+        public static string Version
+        {
+            get
+            {
+                return version;
+            }
         }
     }
 }

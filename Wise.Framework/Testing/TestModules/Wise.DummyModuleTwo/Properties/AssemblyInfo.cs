@@ -9,9 +9,9 @@ using System.Windows;
 [assembly: AssemblyTitle("Wise.DummyModule")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Hewlett-Packard Company")]
+[assembly: AssemblyCompany("Wise Solutions")]
 [assembly: AssemblyProduct("Wise.DummyModule")]
-[assembly: AssemblyCopyright("Copyright © Hewlett-Packard Company 2013")]
+[assembly: AssemblyCopyright("Copyright © Wise Solutions 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

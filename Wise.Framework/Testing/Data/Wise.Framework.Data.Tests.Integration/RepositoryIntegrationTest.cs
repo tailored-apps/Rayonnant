@@ -33,7 +33,7 @@ namespace Wise.Framework.Data.Tests.Integration
             elements.Initialize();
         }
 
-        
+        [Ignore]
         [TestMethod]
         public void TestMethod1()
         {

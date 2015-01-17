@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:templateSelectors="clr-namespace:Wise.Framework.Presentation.TemplateSelectors"
              mc:Ignorable="d"
              d:DesignHeight="60" d:DesignWidth="900">
 
@@ -14,31 +15,8 @@
                 <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml"/>
                 <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
+            <templateSelectors:StatusMenuGroupTemplateSelector x:Key="GroupTemplateSelector"/>
 
-
-            <Style x:Key="ZoomingStyle" TargetType="Button" BasedOn="{StaticResource StandardButton}" >
-
-                <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
-                <Setter Property="BorderThickness" Value="0"/>
-                <Setter Property="BorderBrush" Value="{x:Null}" />
-                <Style.Triggers>
-                    <Trigger  Property="IsMouseOver" Value="True">
-                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                        <Setter Property="RenderTransform">
-                            <Setter.Value>
-                                <TransformGroup>
-                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
-                                </TransformGroup>
-                            </Setter.Value>
-                        </Setter>
-
-                        <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
-                        <Setter Property="BorderThickness" Value="0"/>
-                        <Setter Property="BorderBrush" Value="{x:Null}" />
-                    </Trigger>
-                </Style.Triggers>
-
-            </Style>
         </ResourceDictionary>
     </UserControl.Resources>
     <Grid>
@@ -66,49 +44,14 @@
         </Label>
 
 
-        <StackPanel Grid.Row="0" Grid.Column="1"  HorizontalAlignment="Center" Orientation="Horizontal">
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel >
-                    <Path Style="{StaticResource AppbarHomeIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Home</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarAppIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
-                    <Label>Open Items</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarListIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
-                    <Label>Actions</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarMoneyIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Financials</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarToolsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Tools</Label>
-                </StackPanel>
-            </Button>
-            
-            <Button Style="{StaticResource ZoomingStyle}">
-                <StackPanel>
-                    <Path Style="{StaticResource AppbarSettingsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
-                    <Label>Settings</Label>
-                </StackPanel>
-            </Button>
-        </StackPanel>
+        <ListView  Grid.Row="0" Grid.Column="1" Background="{x:Null}"  ItemTemplateSelector="{StaticResource GroupTemplateSelector}" ItemsSource="{Binding MenuGroups}" BorderBrush="{x:Null}" BorderThickness="0"   Width="auto" HorizontalAlignment="Center" HorizontalContentAlignment="Center">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <!-- Here is the panel that will contain the items -->
+                    <StackPanel Orientation="Horizontal" IsItemsHost="True" HorizontalAlignment="Center" Background="{x:Null}"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
 
         <StackPanel Grid.Column="2"  HorizontalAlignment="Right" VerticalAlignment="Bottom" >
             <Label  HorizontalAlignment="Left"  Content="{Binding UserName}" FontSize="10" Foreground="{DynamicResource FontInActiveColorBrush}" >
