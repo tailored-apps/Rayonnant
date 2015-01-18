@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
-using System.Windows.Media;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using Wise.Framework.Presentation.Commands;
@@ -33,6 +32,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public ViewModelBase()
         {
             CloseItemCommand = new CloseItemCommand();
+            ScreenId = Guid.NewGuid().ToString();
         }
 
 
@@ -46,7 +46,7 @@ namespace Wise.Framework.Presentation.ViewModel
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            object id = navigationContext.Parameters["ID"];
+            object id = navigationContext.Parameters["ScreenId"];
             return Equals(ScreenId, id);
         }
 

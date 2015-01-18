@@ -81,7 +81,6 @@ namespace Wise.Framework.Presentation.Modularity
                     }
                 }
             }
-
         }
 
 
@@ -96,11 +95,13 @@ namespace Wise.Framework.Presentation.Modularity
                     region.Remove(vm);
                 }
             }
+
             if (TearOffViewModels.ContainsKey(vm))
             {
                 TearOffViewModels[vm].Close();
                 TearOffViewModels.Remove(vm);
             }
+
             if (containingRegion != null)
             {
                 var view = containingRegion.Views.LastOrDefault();
@@ -139,17 +140,11 @@ namespace Wise.Framework.Presentation.Modularity
 
             if (obj.Error != null)
             {
-                loger.Info(
-                    string.Format(
-                        "Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}', logged error: '{3}'",
-                        uri, obj.Result, region, obj.Error));
+                loger.InfoFormat("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}', logged error: '{3}'", uri, obj.Result, region, obj.Error);
             }
             else
             {
-                loger.Info(
-                    string.Format(
-                        "Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error",
-                        uri, obj.Result, region));
+                loger.InfoFormat("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error",uri, obj.Result, region);
             }
 
         }

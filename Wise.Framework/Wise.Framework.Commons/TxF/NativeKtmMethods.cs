@@ -27,24 +27,29 @@ namespace Wise.Framework.Commons.TxF
                 throw new InvalidOperationException("Cannot create a KTM handle without Transaction.Current");
             }
 
-            return KtmTransactionHandle.CreateKtmTransactionHandle(Transaction.Current);
+            return CreateKtmTransactionHandle(Transaction.Current);
         }
 
         public static KtmTransactionHandle CreateKtmTransactionHandle(Transaction managedTransaction)
         {
-            IDtcTransaction dtcTransaction = TransactionInterop.GetDtcTransaction(managedTransaction);
-            IKernelTransaction ktmInterface = (IKernelTransaction)dtcTransaction;
+            var dtcTransaction = TransactionInterop.GetDtcTransaction(managedTransaction);
+            var ktmInterface = dtcTransaction as IKernelTransaction;
 
-            IntPtr ktmTxHandle;
-            int hr = ktmInterface.GetHandle(out ktmTxHandle);
-            HandleError(hr);
+            if (ktmInterface != null)
+            {
 
-            return new KtmTransactionHandle(ktmTxHandle);
+                IntPtr ktmTxHandle;
+                int hr = ktmInterface.GetHandle(out ktmTxHandle);
+                HandleError(hr);
+                return new KtmTransactionHandle(ktmTxHandle);
+
+            }
+            return null;
         }
 
         protected override bool ReleaseHandle()
         {
-            return NativeMethods.CloseHandle(this.handle);
+            return NativeMethods.CloseHandle(handle);
         }
 
         private static void HandleError(int error)

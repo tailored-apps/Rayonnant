@@ -1,6 +1,6 @@
-﻿using Wise.Framework.Interface.InternalApplicationMessagning;
+﻿using Microsoft.Practices.Prism.Regions;
+using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Presentation.Annotations;
-using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.ViewModel;
@@ -23,7 +23,7 @@ namespace Wise.Framework.Presentation.Commands
         {
             var vm = parameter as ViewModelInfo;
             var messanger = DependencyInjection.Container.Current.Resolve<IMessanger>();
-            messanger.Publish(new NavigationRequest() { ViewModelType = vm.ViewModelType});
+            messanger.Publish(new NavigationRequest() { ViewModelType = vm.ViewModelType, UriQuery = new NavigationParameters(string.Format("ScreenId={0}", vm.ViewModel.ScreenId)) });
 
             var manager = DependencyInjection.Container.Current.Resolve<INavigationManager>();
             manager.CloseItem(openItemsViewModel);

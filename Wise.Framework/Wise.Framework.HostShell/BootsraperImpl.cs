@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
 using System.IO;
-using System.Reflection;
 using Common.Logging;
 using Wise.Framework.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
@@ -87,7 +85,7 @@ namespace Wise.Framework.HostShell
                     new MenuGroup {ElementName="_Actions",DataTemplateKey = "ActionsMenuGroupDataTemplate"},
                     new MenuGroup {ElementName="_Financials",DataTemplateKey = "FinancialsMenuGroupDataTemplate"},
                     new MenuGroup {ElementName="_Tools",DataTemplateKey = "ToolsMenuGroupDataTemplate"},
-                    new MenuGroup {ElementName="_Settings",DataTemplateKey = "SettingsMenuGroupDataTemplate"},
+                    new MenuGroup {ElementName="_Settings",DataTemplateKey = "SettingsMenuGroupDataTemplate"}
                 });
             }
         }

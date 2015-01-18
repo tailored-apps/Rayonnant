@@ -10,7 +10,6 @@ using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Window;
-using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
 using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 
