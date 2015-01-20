@@ -27,13 +27,13 @@ namespace Wise.Framework.Presentation.ViewModel
         }
 
 
-        private ObservableCollection<ViewModelInfo> _viewModels;
-        public ObservableCollection<ViewModelInfo> ViewModels
+        private ObservableCollection<ViewModelInfoAttribute> viewModels;
+        public ObservableCollection<ViewModelInfoAttribute> ViewModels
         {
-            get { return _viewModels; }
+            get { return viewModels; }
             set
             {
-                _viewModels = value;
+                viewModels = value;
                 OnPropertyChanged("ViewModels");
             }
             
@@ -42,7 +42,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
             base.OnNavigatedTo(navigationContext);
-            ViewModels = new ObservableCollection<ViewModelInfo>(navigationManager.OpenedViewModelInfos);
+            ViewModels = new ObservableCollection<ViewModelInfoAttribute>(navigationManager.OpenedViewModelInfos);
         }
 
         public override bool IsNavigationTarget(NavigationContext navigationContext)

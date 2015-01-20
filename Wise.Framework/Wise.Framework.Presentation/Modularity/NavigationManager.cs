@@ -29,6 +29,7 @@ namespace Wise.Framework.Presentation.Modularity
         private readonly IDisposable subscription;
         private readonly IRegionNavigationJournal regionNavigationJournal;
         private readonly IDictionary<ViewModelBase, WindowBase> TearOffViewModels = new Dictionary<ViewModelBase, WindowBase>();
+        private readonly List<Type> registeredViewModels;
 
         public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager,
             IShellWindow shell, ILog loger, IMenuService menuService, IRegionNavigationJournal regionNavigationJournal)
@@ -41,6 +42,7 @@ namespace Wise.Framework.Presentation.Modularity
             this.regionManager = regionManager;
             this.regionNavigationJournal = regionNavigationJournal;
             subscription = messanger.Subscribe<NavigationRequest>(OnMessageArrived);
+            registeredViewModels = new List<Type>();
         }
 
         public void RegisterTypeForNavigation<T>()
@@ -53,36 +55,62 @@ namespace Wise.Framework.Presentation.Modularity
             loger.InfoFormat("Registering ViewModel For navigation: {0}", viewModelType);
             container.RegisterType(typeof(Object), viewModelType, viewModelType.FullName);
             AddMenuNavigation(viewModelType);
+            registeredViewModels.Add(viewModelType);
         }
 
 
 
-        public IEnumerable<ViewModelInfo> OpenedViewModelInfos
+        public IEnumerable<ViewModelInfoAttribute> OpenedViewModelInfos
         {
             get
             {
                 foreach (var view in regionManager.Regions[ShellRegionNames.ContentRegion].Views)
                 {
-                    var type = view.GetType();
-                    if (type != typeof(OpenItemsViewModel))
-                    {
-                        var attr = type.GetCustomAttributes(typeof(ViewModelInfo));
-
-                        if (attr != null && attr.Any())
-                        {
-                            foreach (var attribute in attr)
-                            {
-                                var modelInfo = (ViewModelInfo)attribute;
-                                modelInfo.ViewModelType = type;
-                                modelInfo.ViewModel = view as ViewModelBase;
-                                yield return modelInfo;
-                            }
-                        }
-                    }
+                    if (view.GetType() != typeof(OpenItemsViewModel))
+                        yield return GetViewModelInfoAttribute(view as ViewModelBase);
                 }
             }
         }
 
+
+        private ViewModelInfoAttribute GetViewModelInfoAttribute(ViewModelBase view)
+        {
+            var type = view.GetType();
+            if (type != typeof(OpenItemsViewModel))
+            {
+                var attr = type.GetCustomAttributes(typeof(ViewModelInfoAttribute));
+
+                if (attr != null && attr.Any())
+                {
+                    foreach (var attribute in attr)
+                    {
+                        var modelInfo = (ViewModelInfoAttribute)attribute;
+                        modelInfo.ViewModelType = type;
+                        modelInfo.ViewModel = view as ViewModelBase;
+                        return modelInfo;
+                    }
+                }
+            }
+            return null;
+        }
+        private ViewModelInfoAttribute GetViewModelInfoAttribute(Type type)
+        {
+            if (type != typeof(OpenItemsViewModel))
+            {
+                var attr = type.GetCustomAttributes(typeof(ViewModelInfoAttribute));
+
+                if (attr != null && attr.Any())
+                {
+                    foreach (var attribute in attr)
+                    {
+                        var modelInfo = (ViewModelInfoAttribute)attribute;
+                        modelInfo.ViewModelType = type;
+                        return modelInfo;
+                    }
+                }
+            }
+            return null;
+        }
 
         public void CloseItem(ViewModelBase vm)
         {
@@ -144,20 +172,20 @@ namespace Wise.Framework.Presentation.Modularity
             }
             else
             {
-                loger.InfoFormat("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error",uri, obj.Result, region);
+                loger.InfoFormat("Navigation To: '{0}', has completed operation: '{1}', and is placed in region: '{2}' without error", uri, obj.Result, region);
             }
 
         }
 
         private void AddMenuNavigation(Type viewModel)
         {
-            var attr = viewModel.GetCustomAttributes(typeof(MenuItem));
+            var attr = viewModel.GetCustomAttributes(typeof(MenuItemAttribute));
 
             if (attr != null && attr.Any())
             {
                 foreach (Attribute attribute in attr)
                 {
-                    var menuItem = (MenuItem)attribute;
+                    var menuItem = (MenuItemAttribute)attribute;
                     var command = new DelegateCommand(() => OnMessageArrived(new NavigationRequest { ViewModelType = viewModel, UriQuery = new NavigationParameters(menuItem.NavigationParameters) }));
                     loger.InfoFormat("Adding ViewModel: '{0}' For navigation from menu: '{1}'", viewModel, menuItem.Path);
                     menuService.AddMenuItem(new System.Windows.Controls.MenuItem { Header = menuItem.DisplayName, Command = command }, menuItem.Path);
@@ -213,6 +241,15 @@ namespace Wise.Framework.Presentation.Modularity
                 region.Add(vm);
                 region.Activate(vm);
 
+            }
+        }
+
+
+        public IEnumerable<ViewModelInfoAttribute> RegisteredViewModels
+        {
+            get
+            {
+                return registeredViewModels.Where(x => x != typeof(OpenItemsViewModel)).Select(x => GetViewModelInfoAttribute(x));
             }
         }
     }

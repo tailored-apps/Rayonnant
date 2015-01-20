@@ -4,15 +4,15 @@ using Microsoft.Practices.Prism.Regions;
 namespace Wise.Framework.Presentation.Annotations
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class MenuItem : Attribute
+    public class MenuItemAttribute : Attribute
     {
-        public MenuItem(string path, string displayName, string navigationParameters)
+        public MenuItemAttribute(string path, string displayName, string navigationParameters)
         {
             DisplayName = displayName;
             Path = path;
             NavigationParameters = navigationParameters;
         }
-        public MenuItem(string path, string displayName)
+        public MenuItemAttribute(string path, string displayName)
             : this(path, displayName, null)
         {
         }

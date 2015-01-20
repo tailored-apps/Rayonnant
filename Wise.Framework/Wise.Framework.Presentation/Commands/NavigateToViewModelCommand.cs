@@ -21,7 +21,7 @@ namespace Wise.Framework.Presentation.Commands
 
         public override void Execute(object parameter)
         {
-            var vm = parameter as ViewModelInfo;
+            var vm = parameter as ViewModelInfoAttribute;
             var messanger = DependencyInjection.Container.Current.Resolve<IMessanger>();
             messanger.Publish(new NavigationRequest() { ViewModelType = vm.ViewModelType, UriQuery = new NavigationParameters(string.Format("ScreenId={0}", vm.ViewModel.ScreenId)) });
 

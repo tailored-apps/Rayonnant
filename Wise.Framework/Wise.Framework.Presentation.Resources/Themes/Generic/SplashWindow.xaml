@@ -27,8 +27,5 @@
         <Setter Property="Template" Value="{DynamicResource SplashWindowControlTemplate}" />
     </Style>
 
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
-    </Style>
 
 </ResourceDictionary>

@@ -29,9 +29,9 @@
                                 <Grid x:Name="Grid">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto"
-                                                          SharedSizeGroup="MenuItemIconColumnGroup" />
+                                                          SharedSizeGroup="MenuItemAttributeIconColumnGroup" />
                                         <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup" />
-                                        <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+                                        <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemAttributeIGTColumnGroup" />
                                         <ColumnDefinition x:Name="Col3" Width="14" />
                                     </Grid.ColumnDefinitions>
                                     <ContentPresenter Grid.Column="0" x:Name="Icon" VerticalAlignment="Center"

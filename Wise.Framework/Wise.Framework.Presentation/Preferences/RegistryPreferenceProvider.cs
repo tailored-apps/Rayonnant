@@ -39,7 +39,7 @@ namespace Wise.Framework.Presentation.Preferences
         }
         private void SaveValue(string key, string value)
         {
-            Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey()).SetValue(key, value);
+            Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey(),true).SetValue(key, value);
         }
 
         private string GetStoreKey()

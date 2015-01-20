@@ -13,6 +13,8 @@ namespace Wise.Framework.Presentation.Interface.Modularity
         void TearOff(ViewModelBase vm);
         void Dock(ViewModelBase vm);
 
-        IEnumerable<ViewModelInfo> OpenedViewModelInfos { get; } 
+        IEnumerable<ViewModelInfoAttribute> OpenedViewModelInfos { get; }
+        IEnumerable<ViewModelInfoAttribute> RegisteredViewModels { get; } 
+
     }
 }

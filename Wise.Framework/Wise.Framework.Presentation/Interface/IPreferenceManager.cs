@@ -4,5 +4,7 @@
     {
         string GetUserHomeView();
 
+
+        void SavePreference(string preferenceKey, object value);
     }
 }

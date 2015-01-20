@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Logging;
 
@@ -19,6 +20,16 @@ namespace Wise.Framework.Presentation.Preferences
         public string GetUserHomeView()
         {
             return preferenceProvider.HomeView;
+            
+        }
+
+        public void SavePreference(string preferenceKey, object value)
+        {
+            if (string.Equals(preferenceKey, "HomeView"))
+            {
+                preferenceProvider.HomeView = value.ToString();
+            }
+            preferenceProvider.Save();
         }
     }
 

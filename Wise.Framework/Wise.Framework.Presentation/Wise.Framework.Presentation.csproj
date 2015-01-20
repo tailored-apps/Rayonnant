@@ -97,8 +97,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Annotations\ViewModelInfo.cs" />
-    <Compile Include="Annotations\MenuItem.cs" />
+    <Compile Include="Annotations\ViewModelInfoAttribute.cs" />
+    <Compile Include="Annotations\MenuItemAttribute.cs" />
     <Compile Include="Behaviors\KeyUpBehavior.cs" />
     <Compile Include="Behaviors\FocusBehavior.cs" />
     <Compile Include="Commands\BaseCommand.cs" />
@@ -109,6 +109,7 @@
     <Compile Include="Commands\NavigateToHomeCommand.cs" />
     <Compile Include="Commands\TearOffToggleCommand.cs" />
     <Compile Include="Commands\CloseItemCommand.cs" />
+    <Compile Include="Converters\NotNullToVisibilityConverter.cs" />
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Converters\UriToImageSourceConverter.cs" />
     <Compile Include="Interface\Menu\IMenuService.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="ViewModel\SplashViewModel.cs" />
     <Compile Include="ViewModel\OpenItemsViewModel.cs" />
     <Compile Include="ViewModel\StatusViewModel.cs" />
+    <Compile Include="ViewModel\UserPreferencesSettingsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="View\OpenItemsView.xaml.cs">
       <DependentUpon>OpenItemsView.xaml</DependentUpon>
@@ -164,6 +166,9 @@
       <DependentUpon>StatusView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PrismViewBase.cs" />
+    <Compile Include="View\UserPreferencesSettingsView.xaml.cs">
+      <DependentUpon>UserPreferencesSettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window\ExceptionWindow.xaml.cs">
       <DependentUpon>ExceptionWindow.xaml</DependentUpon>
     </Compile>
@@ -230,6 +235,10 @@
     <Page Include="View\StatusView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserPreferencesSettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Window\ExceptionWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

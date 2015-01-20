@@ -15,7 +15,14 @@ namespace Wise.Framework.Presentation.Commands
         {
             var messanger = DependencyInjection.Container.Current.Resolve<IMessanger>();
             var preferenceManager = DependencyInjection.Container.Current.Resolve<IPreferenceManager>();
-            messanger.Publish(new NavigationRequest() { ViewModelFullName = preferenceManager.GetUserHomeView()});
+            
+            var home =preferenceManager.GetUserHomeView();
+            if (string.IsNullOrEmpty(home))
+            {
+                home = "Wise.Framework.Presentation.ViewModel.UserPreferencesSettingsViewModel";
+            }
+
+            messanger.Publish(new NavigationRequest() { ViewModelFullName = home});
         }
 
     }

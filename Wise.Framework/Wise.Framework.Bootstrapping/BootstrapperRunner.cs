@@ -234,6 +234,7 @@ namespace Wise.Framework.Bootstrapping
                 {
                     var navManager = Container.Resolve<INavigationManager>();
                     navManager.RegisterTypeForNavigation<OpenItemsViewModel>();
+                    navManager.RegisterTypeForNavigation<UserPreferencesSettingsViewModel>();
                 }
                 shell.Closing += (s, e) => { };
 
