@@ -18,7 +18,7 @@ namespace Wise.Framework.Presentation.ViewModel
         public string ScreenId
         {
             get { return screenId; }
-            private set { SetProperty(ref screenId, value); }
+            protected set { SetProperty(ref screenId, value); }
         }
 
         private bool isTearOff;
@@ -46,7 +46,7 @@ namespace Wise.Framework.Presentation.ViewModel
 
         public virtual bool IsNavigationTarget(NavigationContext navigationContext)
         {
-            object id = navigationContext.Parameters["ScreenId"];
+            string id = navigationContext.Parameters.Any(x => "ScreenId".Equals(x.Key)) ? navigationContext.Parameters["ScreenId"].ToString() : string.Empty;
             return Equals(ScreenId, id);
         }
 

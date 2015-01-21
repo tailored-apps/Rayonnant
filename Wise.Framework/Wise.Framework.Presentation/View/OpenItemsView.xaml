@@ -10,7 +10,7 @@
     <ItemsControl ItemsSource="{Binding ViewModels}">
         <ItemsControl.ItemsPanel>
             <ItemsPanelTemplate>
-                <StackPanel IsItemsHost="True" Orientation="Horizontal" VerticalAlignment="Top"></StackPanel>
+                <WrapPanel IsItemsHost="True" Orientation="Horizontal" VerticalAlignment="Top"></WrapPanel>
             </ItemsPanelTemplate>
         </ItemsControl.ItemsPanel>
         <ItemsControl.ItemTemplate>

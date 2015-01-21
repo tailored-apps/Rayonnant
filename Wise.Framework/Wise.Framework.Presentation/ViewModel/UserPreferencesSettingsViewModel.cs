@@ -26,6 +26,7 @@ namespace Wise.Framework.Presentation.ViewModel
             Title = "User Preferences";
             Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/service-128.ico", UriKind.Absolute);
             SaveCommand = new DelegateCommand(SaveData);
+            base.ScreenId = string.Empty;
 
         }
 
@@ -57,6 +58,8 @@ namespace Wise.Framework.Presentation.ViewModel
         {
             if (SelectedHomeView != null)
                 preferenceManager.SavePreference("HomeView", SelectedHomeView.ViewModelType);
+
+            navigationManager.CloseItem(this);
         }
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
@@ -66,6 +69,7 @@ namespace Wise.Framework.Presentation.ViewModel
             ViewModels = new ObservableCollection<ViewModelInfoAttribute>(navigationManager.RegisteredViewModels);
             var home = preferenceManager.GetUserHomeView();
             SelectedHomeView = navigationManager.RegisteredViewModels.SingleOrDefault(x => string.Equals(x.ViewModelType.ToString(), home));
+
         }
     }
 }

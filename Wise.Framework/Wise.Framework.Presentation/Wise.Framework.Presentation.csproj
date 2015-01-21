@@ -104,6 +104,7 @@
     <Compile Include="Commands\BaseCommand.cs" />
     <Compile Include="Commands\ConfirmPopupCommand.cs" />
     <Compile Include="Commands\DockCommand.cs" />
+    <Compile Include="Commands\NavigateToUserPreferencesCommand.cs" />
     <Compile Include="Commands\NavigateToViewModelCommand.cs" />
     <Compile Include="Commands\NavigateToOpenItemsCommand.cs" />
     <Compile Include="Commands\NavigateToHomeCommand.cs" />

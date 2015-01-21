@@ -20,9 +20,7 @@
             </ResourceDictionary.MergedDictionaries>
 
             <converters:NotNullToVisibilityConverter x:Key="NotNullToVisibilityConverter"/>
-            <Style TargetType="{x:Type Label}" x:Key="WarningStyle" BasedOn="{StaticResource StandardLabel}">
-                <Setter Property="Foreground" Value="Red"/>
-            </Style>
+           
             
         </ResourceDictionary>
 
@@ -36,7 +34,7 @@
         </StackPanel>
 
         <StackPanel HorizontalAlignment="Left">
-            <Label HorizontalAlignment="Left" Visibility="{Binding SelectedHomeView, Converter={StaticResource NotNullToVisibilityConverter}}" Style="{StaticResource WarningStyle}" >It looks like You didn't choose a default application view, this view will be navigated after Home Button Click</Label>
+            <Label HorizontalAlignment="Left" Visibility="{Binding SelectedHomeView, Converter={StaticResource NotNullToVisibilityConverter}}" >It looks like You didn't choose a default application view, this view will be navigated after Home Button Click</Label>
             <Label HorizontalAlignment="Left">Default View</Label>
             <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding ViewModels}" SelectedItem="{Binding SelectedHomeView,Mode=TwoWay}" Height="25" Width="380"  DisplayMemberPath="DisplayName"/>
         </StackPanel>

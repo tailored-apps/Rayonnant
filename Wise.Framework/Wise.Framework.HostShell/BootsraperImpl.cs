@@ -85,7 +85,7 @@ namespace Wise.Framework.HostShell
                     new MenuGroup {ElementName="_Actions",DataTemplateKey = "ActionsMenuGroupDataTemplate"},
                     new MenuGroup {ElementName="_Financials",DataTemplateKey = "FinancialsMenuGroupDataTemplate"},
                     new MenuGroup {ElementName="_Tools",DataTemplateKey = "ToolsMenuGroupDataTemplate"},
-                    new MenuGroup {ElementName="_Settings",DataTemplateKey = "SettingsMenuGroupDataTemplate"}
+                    new MenuGroup {ElementName="_Settings",DataTemplateKey = "SettingsMenuGroupDataTemplate",Command = new NavigateToUserPreferencesCommand()}
                 });
             }
         }
