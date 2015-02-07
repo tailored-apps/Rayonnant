@@ -57,7 +57,7 @@ namespace Wise.Framework.Presentation.ViewModel
         private void SaveData()
         {
             if (SelectedHomeView != null)
-                preferenceManager.SavePreference("HomeView", SelectedHomeView.ViewModelType);
+                preferenceManager.SavePreference("HomeView", SelectedHomeView.ViewModelType.ToString());
 
             navigationManager.CloseItem(this);
         }

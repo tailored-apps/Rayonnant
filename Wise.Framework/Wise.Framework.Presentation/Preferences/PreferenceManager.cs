@@ -23,14 +23,34 @@ namespace Wise.Framework.Presentation.Preferences
             
         }
 
-        public void SavePreference(string preferenceKey, object value)
+        public void SavePreference(string preferenceKey, string value)
         {
             if (string.Equals(preferenceKey, "HomeView"))
             {
                 preferenceProvider.HomeView = value.ToString();
             }
+            else
+            {
+                if (!preferenceProvider.Preferences.ContainsKey(preferenceKey))
+                {
+                    preferenceProvider.Preferences.Add(preferenceKey, value);
+                }
+                else
+                {
+                    preferenceProvider.Preferences[preferenceKey] = value;
+                }
+
+            }
             preferenceProvider.Save();
         }
+
+        public string GetPreference(string preferenceKey)
+        {
+            return preferenceProvider.GetPreferenceByKey(preferenceKey);
+        }
+
+
+        
     }
 
     

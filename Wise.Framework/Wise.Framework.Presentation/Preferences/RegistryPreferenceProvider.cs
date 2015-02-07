@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Wise.Framework.Presentation.Preferences
 {
@@ -18,6 +13,19 @@ namespace Wise.Framework.Presentation.Preferences
                 Microsoft.Win32.Registry.CurrentUser.CreateSubKey(GetStoreKey());
             }
             HomeView = ReadValue(HOME_VIEW_KEY);
+            Preferences = ReadPreferences();
+        }
+
+        private Dictionary<string, string> ReadPreferences()
+        {
+            var dict = new Dictionary<string, string>();
+            var valueNames = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey()).GetValueNames();
+            foreach (var valueName in valueNames)
+            {
+                if (!string.Equals(valueName, HOME_VIEW_KEY))
+                    dict.Add(valueName, Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey()).GetValue(valueName).ToString());
+            }
+            return dict;
         }
 
         private string homeView;
@@ -27,9 +35,22 @@ namespace Wise.Framework.Presentation.Preferences
             set { homeView = value; }
         }
 
+        public Dictionary<string, string> Preferences { get; set; }
+
         public void Save()
         {
             SaveValue(HOME_VIEW_KEY, HomeView);
+
+            foreach (var preference in Preferences)
+            {
+                SaveValue(preference.Key, preference.Value);
+            }
+        }
+
+
+        public string GetPreferenceByKey(string preferenceKey)
+        {
+            return ReadValue(preferenceKey);
         }
 
         private string ReadValue(string key)
@@ -37,9 +58,15 @@ namespace Wise.Framework.Presentation.Preferences
             var registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey()).GetValue(key);
             return registryKey != null ? registryKey.ToString() : null;
         }
+
         private void SaveValue(string key, string value)
         {
-            Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey(),true).SetValue(key, value);
+            var regkey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(GetStoreKey(), true);
+            if (value != null)
+            {
+                regkey.SetValue(key, value ?? string.Empty);
+
+            }
         }
 
         private string GetStoreKey()

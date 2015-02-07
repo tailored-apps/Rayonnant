@@ -35,7 +35,7 @@
 
         <StackPanel HorizontalAlignment="Left">
             <Label HorizontalAlignment="Left" Visibility="{Binding SelectedHomeView, Converter={StaticResource NotNullToVisibilityConverter}}" >It looks like You didn't choose a default application view, this view will be navigated after Home Button Click</Label>
-            <Label HorizontalAlignment="Left">Default View</Label>
+            <Label HorizontalAlignment="Left">Default Home View</Label>
             <ComboBox HorizontalAlignment="Left" ItemsSource="{Binding ViewModels}" SelectedItem="{Binding SelectedHomeView,Mode=TwoWay}" Height="25" Width="380"  DisplayMemberPath="DisplayName"/>
         </StackPanel>
     </DockPanel>
