@@ -18,6 +18,7 @@ using Wise.Framework.Interface.Modularity;
 using Wise.Framework.Interface.Security;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.InternalMessagning;
+using Wise.Framework.Presentation.Interface;
 using Wise.Framework.Presentation.Interface.Menu;
 using Wise.Framework.Presentation.Interface.Modularity;
 using Wise.Framework.Presentation.Interface.Shell;
@@ -207,9 +208,9 @@ namespace Wise.Framework.Bootstrapping
 
             PublishSystemMessage("Going to register shell window");
             Container.RegisterTypeIfMissing<IShellWindow, ShellWindow>(LifetimeScope.Singleton);
-          
 
-            
+
+
 
             shellWindow = Container.Resolve<IShellWindow>();
 
@@ -246,7 +247,10 @@ namespace Wise.Framework.Bootstrapping
             }
             PublishSystemMessage("Going to show shell");
             shellWindow.Show();
-            if (shell != null) shell.Activate();
+            if (shell != null)
+            {
+                shell.Activate();
+            }
         }
 
         /// <summary>

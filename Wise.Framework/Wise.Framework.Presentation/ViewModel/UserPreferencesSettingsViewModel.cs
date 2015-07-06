@@ -56,9 +56,15 @@ namespace Wise.Framework.Presentation.ViewModel
 
         private void SaveData()
         {
-            if (SelectedHomeView != null)
+            if (SelectedHomeView != null && !string.IsNullOrEmpty(SelectedHomeView.DisplayName))
+            {
                 preferenceManager.SavePreference("HomeView", SelectedHomeView.ViewModelType.ToString());
 
+            }
+            else
+            {
+                preferenceManager.SavePreference("HomeView", string.Empty);
+            }
             navigationManager.CloseItem(this);
         }
 
@@ -67,6 +73,9 @@ namespace Wise.Framework.Presentation.ViewModel
             base.OnNavigatedTo(navigationContext);
 
             ViewModels = new ObservableCollection<ViewModelInfoAttribute>(navigationManager.RegisteredViewModels);
+            var vmia = new ViewModelInfoAttribute(string.Empty);
+            vmia.ViewModelType = typeof(string);
+            ViewModels.Insert(0,vmia);
             var home = preferenceManager.GetUserHomeView();
             SelectedHomeView = navigationManager.RegisteredViewModels.SingleOrDefault(x => string.Equals(x.ViewModelType.ToString(), home));
 
