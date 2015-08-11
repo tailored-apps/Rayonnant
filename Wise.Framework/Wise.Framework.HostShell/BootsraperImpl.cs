@@ -15,7 +15,9 @@ using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
 namespace Wise.Framework.HostShell
 {
+
     /// <summary>
+    /// extra line
     ///     Default Implementation for Bootstrapping class which is responsible for running application and adding new
     ///     modules and starting them in proper way.
     /// </summary>
