@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
+using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Wise.Framework.Interface.DependencyInjection;
@@ -42,13 +44,16 @@ namespace Wise.Framework.WindowsServiceController
             var runTask = Task.Factory.StartNew(() =>
             {
                 var sched = TaskScheduler.Current;
+                var CancelationTokenSourece = new CancellationTokenSource();
+
+                container.RegisterInstance(CancelationTokenSourece);
                 logger.InfoFormat("Task Sheduler Created: '{0}', maximum concurency level is : '{1}'", sched.Id, sched.MaximumConcurrencyLevel);
 
                 var services = container.ResolveAll<AbstractServiceBase>();
                 if (services != null)
                 {
                     if (RunAsConsole(args))
-                        Run(services, sched);
+                        Run(services, sched,CancelationTokenSourece);
                     else
                         ServiceBase.Run(services.ToArray());
 
@@ -71,7 +76,6 @@ namespace Wise.Framework.WindowsServiceController
             logger.InfoFormat("Windows service is going to initialize");
             if (isInitialized)
                 return;
-            container.RegisterType<AbstractServiceBase, asd>(LifetimeScope.Singleton, "asd");
             isInitialized = true;
             logger.InfoFormat("Windows service is initialized");
         }
@@ -82,11 +86,11 @@ namespace Wise.Framework.WindowsServiceController
             return args != null && args.Length > 0 && console.Contains(args[0].ToUpper());
         }
 
-        private void Run(IEnumerable<AbstractServiceBase> services, TaskScheduler sched)
+        private void Run(IEnumerable<AbstractServiceBase> services, TaskScheduler sched,CancellationTokenSource cts)
         {
             foreach (var task in services.OfType<ITaskCreator>())
             {
-                task.CreateTask().Start(sched);
+                task.CreateTask(cts).Start(sched);
             }
         }
     }

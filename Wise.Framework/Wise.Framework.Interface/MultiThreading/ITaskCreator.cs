@@ -1,9 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace Wise.Framework.Interface.MultiThreading
 {
     public interface ITaskCreator
     {
-        Task CreateTask();
+        Task CreateTask(CancellationTokenSource cancelationToken);
     }
 }

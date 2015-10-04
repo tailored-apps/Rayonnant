@@ -9,35 +9,27 @@ namespace Wise.Framework.WindowsServiceController
 {
     public abstract class AbstractServiceBase : ServiceBase, ITaskCreator, IWindowsService
     {
-        public abstract Task CreateTask();
+        private readonly CancellationTokenSource cancellationTokenSource;
+        public AbstractServiceBase(CancellationTokenSource cancellationTokenSource)
+        {
+            this.cancellationTokenSource = cancellationTokenSource;
+        }
+
+        public abstract Task CreateTask(CancellationTokenSource cancelationToken);
 
         protected override void OnStart(string[] args)
         {
             base.OnStart(args);
-            var task = CreateTask();
+            var task = CreateTask(cancellationTokenSource);
             task.Start(TaskScheduler.Current);
         }
 
         protected override void OnStop()
         {
+            cancellationTokenSource.Cancel();
             base.OnStop();
-             
+
         }
     }
 
-    public class asd : AbstractServiceBase
-    {
-        public override Task CreateTask()
-        {
-            var child = new Task(() =>
-            {
-                Console.WriteLine("Attached child starting.");
-                Thread.Sleep(1000 * 5);
-                Console.WriteLine("Attached child completing.");
-            },
-                TaskCreationOptions.AttachedToParent);
-            return child;
-        }
-
-    }
 }
