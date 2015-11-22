@@ -164,11 +164,11 @@
       <Name>Wise.Framework.SecurityModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Testing\TestModules\Wise.DummyModuleTwo\Wise.DummyModuleTwo.csproj">
-      <Project>{E91C0F36-13DB-4D7A-A90A-0C1B860CECD7}</Project>
+      <Project>{e91c0f36-13db-4d7a-a90a-0c1b860cecd7}</Project>
       <Name>Wise.DummyModuleTwo</Name>
     </ProjectReference>
     <ProjectReference Include="..\Testing\TestModules\Wise.DummyModule\Wise.DummyModule.csproj">
-      <Project>{6CB233AD-ED48-46EA-9325-E92A2A60CC9B}</Project>
+      <Project>{6cb233ad-ed48-46ea-9325-e92a2a60cc9b}</Project>
       <Name>Wise.DummyModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Wise.Framework.Bootstrapping\Wise.Framework.Bootstrapping.csproj">
