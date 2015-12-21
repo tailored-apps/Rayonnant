@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Prism.Modularity;
+﻿using Prism.Modularity;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Modularity;

@@ -1,6 +1,6 @@
 ﻿using System;
 using Common.Logging;
-using Microsoft.Practices.Prism.Logging;
+using Prism.Logging;
 
 namespace Wise.Framework.Presentation.Logging
 {

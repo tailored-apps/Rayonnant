@@ -1,5 +1,5 @@
 ﻿using System.Windows.Input;
-using Microsoft.Practices.Prism.Commands;
+using Prism.Commands;
 using Wise.Framework.Presentation.Interface.ViewModel;
 
 namespace Wise.Framework.Presentation.ViewModel

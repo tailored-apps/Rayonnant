@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 
 namespace Wise.Framework.Presentation.Modularity
 {

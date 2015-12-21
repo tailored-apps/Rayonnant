@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using Prism.Regions;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface.Modularity;

@@ -62,9 +62,22 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Common.Logging.Core.3.0.0\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.1.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.1.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.1.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -120,14 +133,6 @@
     <ProjectReference Include="..\Modules\Wise.Framework.SecurityModule\Wise.Framework.SecurityModule.csproj">
       <Project>{7a43a224-0713-4920-9fde-5337e1326d16}</Project>
       <Name>Wise.Framework.SecurityModule</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Testing\TestModules\Wise.DummyModuleTwo\Wise.DummyModuleTwo.csproj">
-      <Project>{e91c0f36-13db-4d7a-a90a-0c1b860cecd7}</Project>
-      <Name>Wise.DummyModuleTwo</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Testing\TestModules\Wise.DummyModule\Wise.DummyModule.csproj">
-      <Project>{6cb233ad-ed48-46ea-9325-e92a2a60cc9b}</Project>
-      <Name>Wise.DummyModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Wise.Framework.Bootstrapping\Wise.Framework.Bootstrapping.csproj">
       <Project>{b5f13a7a-a18f-4e1a-9b74-26360eb0a90a}</Project>

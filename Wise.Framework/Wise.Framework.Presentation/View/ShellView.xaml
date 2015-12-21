@@ -5,7 +5,7 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interface="clr-namespace:Wise.Framework.Presentation.Interface"
                     xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters"
-                    xmlns:regions="http://www.codeplex.com/CompositeWPF"
+                    xmlns:regions="http://www.codeplex.com/prism"
                     xmlns:shell="clr-namespace:Wise.Framework.Presentation.Interface.Shell"
                     mc:Ignorable="d"
                     d:DesignHeight="600" d:DesignWidth="900">

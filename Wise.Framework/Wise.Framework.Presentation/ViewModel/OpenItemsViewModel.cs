@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Commands;
 using Wise.Framework.Presentation.Interface.Modularity;

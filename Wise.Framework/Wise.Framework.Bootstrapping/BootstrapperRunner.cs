@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Windows;
 using Common.Logging;
-using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.UnityExtensions;
+using Prism.Logging;
+using Prism.Modularity;
+using Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.DependencyInjection.Unity;
 using Wise.Framework.Environment;
@@ -31,6 +29,8 @@ using Wise.Framework.Presentation.Window;
 using Wise.Framework.Security.Authentication;
 using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
+using Prism.Events;
+using Wise.Framework.DependencyInjection;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -282,7 +282,9 @@ namespace Wise.Framework.Bootstrapping
 
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
-            Container.RegisterTypeIfMissing<IServiceLocator, UnityServiceLocatorAdapter>(LifetimeScope.Singleton);
+            
+
+            Container.RegisterTypeIfMissing<IServiceLocator, UnityContainerServiceLocator>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
             DependencyInjection.Container.Current = Container;
 
@@ -338,7 +340,7 @@ namespace Wise.Framework.Bootstrapping
             Log.Info("Module Catalog has been configured.");
             var moduleCatalog = ModuleCatalog as ModuleCatalog;
 
-            Container.RegisterInstance<Microsoft.Practices.Prism.Modularity.IModuleCatalog>(moduleCatalog);
+            Container.RegisterInstance<Prism.Modularity.IModuleCatalog>(moduleCatalog);
         }
     }
 }

@@ -58,8 +58,8 @@ namespace Wise.Framework.HostShell
 
         public override void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
-            LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.dll"));
-            LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.dll"));
+            //LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.dll"));
+            //LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.dll"));
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using Microsoft.Practices.Prism.Regions;
 using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.Presentation.Annotations

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 using Wise.Framework.Interface.DependencyInjection;
 
 namespace Wise.Framework.Presentation.Interface.Modularity

@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Practices.Prism.Regions;
 
 namespace Wise.Framework.Presentation.Annotations
 {

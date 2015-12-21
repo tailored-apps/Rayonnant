@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Media;
-using Microsoft.Practices.Prism.Mvvm;
-using Microsoft.Practices.Prism.ViewModel;
+using Prism.Mvvm;
+using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.SecurityModule.ViewModel
 {
-    public class ApplicationViewModel : BindableBase
+    public class ApplicationViewModel : ViewModelBase
     {
         private String name;
         private Brush elementColorBrush;
