@@ -13,8 +13,8 @@ using Wise.Framework.Presentation.Interface.Modularity;
 
 namespace Wise.Framework.Presentation.ViewModel
 {
-    [ViewModelInfo("User Preferences", "Settings", 0)]
-    [MenuItem("Settings", "User Preferences")]
+    [ViewModelInfo(DisplayName = "User Preferences", MenuGroup = "Settings", SecurityLevel = 0)]
+    [MenuItem(Path ="Settings", DisplayName = "User Preferences")]
     public class UserPreferencesSettingsViewModel : ViewModelBase
     {
         private readonly IPreferenceManager preferenceManager;
@@ -73,9 +73,9 @@ namespace Wise.Framework.Presentation.ViewModel
             base.OnNavigatedTo(navigationContext);
 
             ViewModels = new ObservableCollection<ViewModelInfoAttribute>(navigationManager.RegisteredViewModels);
-            var vmia = new ViewModelInfoAttribute(string.Empty);
+            var vmia = new ViewModelInfoAttribute();
             vmia.ViewModelType = typeof(string);
-            ViewModels.Insert(0,vmia);
+            ViewModels.Insert(0, vmia);
             var home = preferenceManager.GetUserHomeView();
             SelectedHomeView = navigationManager.RegisteredViewModels.SingleOrDefault(x => string.Equals(x.ViewModelType.ToString(), home));
 

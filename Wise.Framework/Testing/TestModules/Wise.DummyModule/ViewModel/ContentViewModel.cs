@@ -11,8 +11,8 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
-    [ViewModelInfo("Dummy Module One Content View", "Tools", 0)]
-    [MenuItem("Modules|Dummy Module One", "Content View")]
+    [ViewModelInfo(DisplayName ="Dummy Module One Content View", MenuGroup ="Tools", SecurityLevel =0)]
+    [MenuItem(Path ="Modules|Dummy Module One", DisplayName ="Content View")]
     public class ContentViewModel : ViewModelBase
     {
         private string label;

@@ -20,7 +20,7 @@ namespace Wise.Framework.Bootstrapping
     /// </summary>
     public abstract class AbstractBootstrapper : IBootstrapper
     {
-        private readonly ILog logger = LogManager.GetCurrentClassLogger();
+        private readonly ILog logger = LogManager.GetLogger<AbstractBootstrapper>();
         /// <summary>
         ///     Method responsible for registering logger inside application
         /// </summary>

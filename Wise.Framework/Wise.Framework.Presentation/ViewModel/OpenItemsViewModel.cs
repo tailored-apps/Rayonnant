@@ -14,11 +14,9 @@ namespace Wise.Framework.Presentation.ViewModel
     /// </summary>
     public class OpenItemsViewModel : ViewModelBase
     {
-        private readonly IDisposable messageSubscription;
-        private string environment;
         
         private INavigationManager navigationManager;
-        private string userName;
+     
 
         public OpenItemsViewModel(INavigationManager navigationManager)
         {

@@ -36,7 +36,7 @@ namespace Wise.Framework.Bootstrapping
 {
     public class BootstrapperRunner : IBootstrapperRunner
     {
-        private static readonly ILog Log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger< BootstrapperRunner>();
 
         /// <summary>
         ///     the shell window

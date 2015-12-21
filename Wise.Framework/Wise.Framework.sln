@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data", "Wise.Framework.Data\Wise.Framework.Data.csproj", "{F140AC0E-21DD-46F7-961F-8F336B9243E3}"
 EndProject
@@ -82,11 +82,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Presentation.Tests", "Testing\Presentation\Wise.Framework.Presentation.Tests\Wise.Framework.Presentation.Tests.csproj", "{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.MVC.TestApplication", "Testing\MVC\Wise.MVC.TestApplication\Wise.MVC.TestApplication.csproj", "{412A2031-A9E3-4C28-9958-27BDEC97E048}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{16CA2DF9-6BB7-4207-812A-FE1D24BD9871}"
-	ProjectSection(SolutionItems) = preProject
-		UnitTest.testsettings = UnitTest.testsettings
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

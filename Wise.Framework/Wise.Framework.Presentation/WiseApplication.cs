@@ -14,7 +14,7 @@ namespace Wise.Framework.Presentation
     /// </summary>
     public class WiseApplication : Application
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog log = LogManager.GetLogger<WiseApplication>();
 
         static WiseApplication()
         {
@@ -22,7 +22,7 @@ namespace Wise.Framework.Presentation
             var applicationAssembly = System.Reflection.Assembly.GetEntryAssembly();
             FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(applicationAssembly.Location);
             version = fvi.FileVersion;
-             name = fvi.ProductName;
+            name = fvi.ProductName;
         }
 
         /// <summary>
