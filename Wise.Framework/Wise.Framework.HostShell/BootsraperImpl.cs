@@ -82,9 +82,6 @@ namespace Wise.Framework.HostShell
                 {
                     new HomeMenuGroup {ElementName="_Home",DataTemplateKey = "HomeMenuGroupDataTemplate" ,Command = new NavigateToHomeCommand()},
                     new OpenItemsMenuGroup {ElementName="_Open Items",DataTemplateKey = "OpenItesmMenuGroupDataTemplate",Command = new NavigateToOpenItemsCommand()},
-                    new MenuGroup {ElementName="_Actions",DataTemplateKey = "ActionsMenuGroupDataTemplate"},
-                    new MenuGroup {ElementName="_Financials",DataTemplateKey = "FinancialsMenuGroupDataTemplate"},
-                    new MenuGroup {ElementName="_Tools",DataTemplateKey = "ToolsMenuGroupDataTemplate"},
                     new MenuGroup {ElementName="_Settings",DataTemplateKey = "SettingsMenuGroupDataTemplate",Command = new NavigateToUserPreferencesCommand()}
                 });
             }

@@ -87,7 +87,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Rest", "..\.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REST", "REST", "{B286AF43-25FC-4712-A0DA-EF913285A6B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Rest.Testing.Model", "..\..\..\Workspace\SOFT\Wise.Framework\Wise.Framework\Testing\REST\Wise.Framework.Rest.Testing.Model\Wise.Framework.Rest.Testing.Model.csproj", "{91F8B242-E8DB-4281-8221-ED297D4941CB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Rest.Testing.Model", "Testing\REST\Wise.Framework.Rest.Testing.Model\Wise.Framework.Rest.Testing.Model.csproj", "{91F8B242-E8DB-4281-8221-ED297D4941CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
