@@ -8,6 +8,7 @@ using Prism.Commands;
 using Prism.Regions;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
+using Wise.Framework.Interface.Security;
 using Wise.Framework.Interface.Window;
 using Wise.Framework.Presentation.Annotations;
 using Wise.Framework.Presentation.Interface.Menu;
@@ -30,10 +31,11 @@ namespace Wise.Framework.Presentation.Modularity
         private readonly IRegionNavigationJournal regionNavigationJournal;
         private readonly IDictionary<ViewModelBase, WindowBase> TearOffViewModels = new Dictionary<ViewModelBase, WindowBase>();
         private readonly List<Type> registeredViewModels;
-
+        private readonly ISecurityService securityService;
         public NavigationManager(IContainer container, IMessanger messanger, IRegionManager regionManager,
-            IShellWindow shell, ILog loger, IMenuService menuService, IRegionNavigationJournal regionNavigationJournal)
+            IShellWindow shell, ILog loger, IMenuService menuService, IRegionNavigationJournal regionNavigationJournal, ISecurityService securityService)
         {
+            this.securityService = securityService;
             this.menuService = menuService;
             this.loger = loger;
             this.container = container;
@@ -153,7 +155,52 @@ namespace Wise.Framework.Presentation.Modularity
             string regionName = string.IsNullOrEmpty(obj.RegionName) ? ShellRegionNames.ContentRegion : obj.RegionName;
             string navigateTo = obj.ViewModelType != null ? obj.ViewModelType.FullName : obj.ViewModelFullName;
 
-            regManager.Regions[regionName].RequestNavigate(navigateTo, NavigationCompleted, obj.UriQuery);
+            var security = false;
+            try
+            {
+                var vmAttribute = obj.ViewModelType.GetCustomAttribute<ViewModelInfoAttribute>();
+                if (vmAttribute != null)
+                {
+                    if (!string.IsNullOrEmpty(vmAttribute.AllowedRoles))
+                    {
+                        var listOfRoles = vmAttribute.AllowedRoles.Split(new[] { ';', ':', '/', ',' });
+                        if (listOfRoles.Any())
+                        {
+                            if (listOfRoles.Contains("*"))
+                            {
+                                security = true;
+                            }
+                            else
+                            {
+                                if (listOfRoles.Any(role => securityService.IsInRole(role)))
+                                {
+                                    security = true;
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        security = true;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                security = true;
+                loger.Error(ex);
+
+            }
+            if (security)
+            {
+                regManager.Regions[regionName].RequestNavigate(navigateTo, NavigationCompleted, obj.UriQuery);
+            }
+            else
+            {
+                MessageBox.Show("Wypad nie ma roli");
+            }
+
 
         }
 

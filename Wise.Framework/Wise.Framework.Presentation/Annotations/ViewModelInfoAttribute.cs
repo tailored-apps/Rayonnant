@@ -7,6 +7,7 @@ namespace Wise.Framework.Presentation.Annotations
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class ViewModelInfoAttribute : Attribute
     {
+        private string roles ;
      
 
         public ViewModelBase ViewModel { get; set; }
@@ -15,6 +16,12 @@ namespace Wise.Framework.Presentation.Annotations
         public int SecurityLevel { get;  set; }
         public string MenuGroup { get;  set; }
         public string NavigationParameters { get;  set; }
+
+        public string AllowedRoles
+        {
+            get { return roles; }
+            set { roles = value; }
+        }
 
         public override bool Equals(object obj)
         {
