@@ -1,19 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.ServiceProcess;
 using System.Threading;
 using System.Threading.Tasks;
 using Common.Logging;
 using Wise.Framework.Interface.DependencyInjection;
-using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.MultiThreading;
 
 namespace Wise.Framework.WindowsServiceController
 {
     public class WindowsServiceController : IWindowsServiceController
     {
+        private IList<Task> tasks;
         private readonly IContainer container;
         private readonly bool isWorking;
         private bool isInitialized;
@@ -25,6 +24,7 @@ namespace Wise.Framework.WindowsServiceController
             this.logger = logger;
             isWorking = true;
             isInitialized = false;
+            tasks=new List<Task>();
         }
 
         protected bool IsWorking
@@ -35,6 +35,7 @@ namespace Wise.Framework.WindowsServiceController
 
         public void Dispose()
         {
+            
         }
 
         public void RunModule(string[] args)
@@ -44,16 +45,16 @@ namespace Wise.Framework.WindowsServiceController
             var runTask = Task.Factory.StartNew(() =>
             {
                 var sched = TaskScheduler.Current;
-                var CancelationTokenSourece = new CancellationTokenSource();
+                var cancelationTokenSourece = new CancellationTokenSource();
 
-                container.RegisterInstance(CancelationTokenSourece);
+                container.RegisterInstance(cancelationTokenSourece);
                 logger.InfoFormat("Task Sheduler Created: '{0}', maximum concurency level is : '{1}'", sched.Id, sched.MaximumConcurrencyLevel);
 
                 var services = container.ResolveAll<AbstractServiceBase>();
                 if (services != null)
                 {
                     if (RunAsConsole(args))
-                        Run(services, sched,CancelationTokenSourece);
+                        Run(services, sched, cancelationTokenSourece);
                     else
                         ServiceBase.Run(services.ToArray());
 
@@ -86,11 +87,14 @@ namespace Wise.Framework.WindowsServiceController
             return args != null && args.Length > 0 && console.Contains(args[0].ToUpper());
         }
 
-        private void Run(IEnumerable<AbstractServiceBase> services, TaskScheduler sched,CancellationTokenSource cts)
+        private void Run(IEnumerable<AbstractServiceBase> services, TaskScheduler sched, CancellationTokenSource cts)
         {
-            foreach (var task in services.OfType<ITaskCreator>())
+            foreach (var taskCreator in services.OfType<ITaskCreator>())
             {
-                task.CreateTask(cts).Start(sched);
+                var task = taskCreator.CreateTask(cts);
+                tasks.Add(task);
+                task.Start(sched);
+                Task.WaitAll(tasks.ToArray());
             }
         }
     }

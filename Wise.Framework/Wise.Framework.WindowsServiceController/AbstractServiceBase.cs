@@ -17,13 +17,15 @@ namespace Wise.Framework.WindowsServiceController
 
         public abstract Task CreateTask(CancellationTokenSource cancelationToken);
 
+
         protected override void OnStart(string[] args)
         {
             base.OnStart(args);
             var task = CreateTask(cancellationTokenSource);
             task.Start(TaskScheduler.Current);
+            Task = task;
         }
-
+        public Task Task { get; private set; }
         protected override void OnStop()
         {
             cancellationTokenSource.Cancel();

@@ -89,6 +89,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Rest.Testing
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Rest", "Wise.Framework.Rest\Wise.Framework.Rest.csproj", "{A2BB6CF5-D306-4756-AE01-34A30F41C466}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Security", "Security", "{547AB183-88F4-4C15-AE6B-93C3CCEAC0E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Security.Tests", "Wise.Framework.Security.Tests\Wise.Framework.Security.Tests.csproj", "{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -192,6 +196,10 @@ Global
 		{A2BB6CF5-D306-4756-AE01-34A30F41C466}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A2BB6CF5-D306-4756-AE01-34A30F41C466}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A2BB6CF5-D306-4756-AE01-34A30F41C466}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -212,6 +220,8 @@ Global
 		{412A2031-A9E3-4C28-9958-27BDEC97E048} = {32079C56-351E-47E9-987F-AC202840144B}
 		{B286AF43-25FC-4712-A0DA-EF913285A6B3} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{91F8B242-E8DB-4281-8221-ED297D4941CB} = {B286AF43-25FC-4712-A0DA-EF913285A6B3}
+		{547AB183-88F4-4C15-AE6B-93C3CCEAC0E5} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
+		{DB7F4AD1-12FE-4094-AF33-CCF2B95A7FC1} = {547AB183-88F4-4C15-AE6B-93C3CCEAC0E5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
