@@ -37,3 +37,5 @@ Wise.Framework/Testing/TestModules/Wise.DummyModuleTwo/bin/
 /Wise.Framework/Modules/Wise.Framework.SecurityModule/bin
 /Wise.Framework/.vs/config
 /Wise.Framework/Testing/REST/Wise.Framework.Rest.Testing.Model/bin/Debug
+/Wise.Framework/Wise.Framework.Rest/bin/Debug
+/Wise.Framework/Wise.Framework.Security.Tests/bin/Debug
