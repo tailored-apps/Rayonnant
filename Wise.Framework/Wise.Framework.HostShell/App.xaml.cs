@@ -11,7 +11,7 @@ namespace Wise.Framework.HostShell
     /// </summary>
     public partial class App : WiseApplication
     {
-        private readonly ILog log = LogManager.GetCurrentClassLogger();
+        private readonly ILog log = LogManager.GetLogger< App>();
 
         protected override void OnStartup(StartupEventArgs e)
         {

@@ -43,6 +43,8 @@
     <Compile Include="DateTime\DateTime.cs" />
     <Compile Include="DateTime\IDateTime.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registry\RegistryManager.cs" />
+    <Compile Include="Registry\IRegistryManager.cs" />
     <Compile Include="TxF\NativeKtmMethods.cs" />
     <Compile Include="TxF\NativeMethods.cs" />
     <Compile Include="TxF\TransactedDirectory.cs" />

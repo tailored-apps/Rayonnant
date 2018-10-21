@@ -4,7 +4,7 @@ using nh = NHibernate;
 
 namespace Wise.Framework.Data.NHibernate
 {
-    public class NHibernateDataProviderInitialize : IInitialize
+    public abstract class NHibernateDataProviderInitialize : IInitialize
     {
         protected readonly IContainer container;
 
@@ -29,9 +29,7 @@ namespace Wise.Framework.Data.NHibernate
             return new Configuration();
         }
 
-        protected virtual void BuildMappings(Configuration conf)
-        {
-        }
+        protected abstract void BuildMappings(Configuration conf);
 
         protected virtual void PostProcessConfiguration(Configuration cfg)
         {

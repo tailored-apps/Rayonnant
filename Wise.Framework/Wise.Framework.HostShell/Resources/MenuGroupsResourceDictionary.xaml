@@ -1,0 +1,86 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:window="clr-namespace:Wise.Framework.Interface.Window;assembly=Wise.Framework.Interface">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary>
+            <Style x:Key="ZoomingStyle" TargetType="Button" BasedOn="{StaticResource StandardButton}" >
+
+                <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
+                <Setter Property="BorderThickness" Value="0"/>
+                <Setter Property="BorderBrush" Value="{x:Null}" />
+                <Style.Triggers>
+                    <Trigger  Property="IsMouseOver" Value="True">
+                        <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1.1" ScaleY="1.1"/>
+                                </TransformGroup>
+                            </Setter.Value>
+                        </Setter>
+
+                        <Setter Property="Background" Value="{StaticResource MainWindowBackground}" />
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="BorderBrush" Value="{x:Null}" />
+                    </Trigger>
+                </Style.Triggers>
+
+            </Style>
+
+            <DataTemplate DataType="window:HomeMenuGroup" x:Key="HomeMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel >
+                        <Path Style="{StaticResource AppbarHomeIconStyle}" Stretch="Fill" Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate DataType="window:OpenItemsMenuGroup" x:Key="OpenItesmMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel>
+                        <Path Style="{StaticResource AppbarAppIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate DataType="window:MenuGroup" x:Key="ActionsMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel>
+                        <Path Style="{StaticResource AppbarListIconStyle}" Stretch="Fill"  Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate DataType="window:MenuGroup" x:Key="FinancialsMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel>
+                        <Path Style="{StaticResource AppbarMoneyIconStyle}" Stretch="Fill" Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate DataType="window:MenuGroup" x:Key="ToolsMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel>
+                        <Path Style="{StaticResource AppbarToolsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+
+            <DataTemplate DataType="window:MenuGroup" x:Key="SettingsMenuGroupDataTemplate">
+                <Button Style="{StaticResource ZoomingStyle}" Command="{Binding Command}">
+                    <StackPanel>
+                        <Path Style="{StaticResource AppbarSettingsIconStyle}" Stretch="Fill" Height="30" Width="30"/>
+                        <Label Content="{Binding ElementName}" />
+                    </StackPanel>
+                </Button>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

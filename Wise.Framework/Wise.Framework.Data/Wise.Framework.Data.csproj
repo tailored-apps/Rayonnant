@@ -40,7 +40,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entity\EntityBaseAbstract.cs" />
+    <Compile Include="Enum\AdoNetExecutionType.cs" />
+    <Compile Include="Enum\AdoNetCommandType.cs" />
+    <Compile Include="Enum\AdoNetProviderOperations.cs" />
+    <Compile Include="Interface\ICompositeKey.cs" />
     <Compile Include="Interface\IDataProvider.cs" />
+    <Compile Include="Providers\AdoNetEntitySettings.cs" />
+    <Compile Include="Providers\AdoNetDbPersister.cs" />
+    <Compile Include="Providers\AdoNetProviderInitialize.cs" />
     <Compile Include="Providers\AdoNetProvider.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

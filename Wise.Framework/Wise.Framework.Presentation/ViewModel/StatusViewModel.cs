@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Wise.Framework.Interface.Environment;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
 using Wise.Framework.Interface.Security;
+using Wise.Framework.Interface.Window;
 using Wise.Framework.InternalMessagning;
 using Wise.Framework.Presentation.Interface.ViewModel;
 
@@ -62,6 +65,7 @@ namespace Wise.Framework.Presentation.ViewModel
             }
         }
 
+         
 
         /// <summary>
         ///     User Name id
@@ -74,6 +78,18 @@ namespace Wise.Framework.Presentation.ViewModel
                 userName = value;
                 OnPropertyChanged("UserName");
             }
+        }
+
+        private ObservableCollection<MenuGroup> menuGroups;
+        public ObservableCollection<MenuGroup> MenuGroups
+        {
+            get { return menuGroups; }
+            set
+            {
+                menuGroups = value;
+                OnPropertyChanged("ViewModels");
+            }
+            
         }
 
         private void OnMessageArrive(SystemNotyficationMessage obj)

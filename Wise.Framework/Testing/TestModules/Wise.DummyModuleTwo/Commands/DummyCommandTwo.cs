@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 using Wise.DummyModuleTwo.ViewModel;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Presentation.Modularity;

@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Microsoft.Practices.Prism.Modularity;
+using Prism.Modularity;
 using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 
 namespace Wise.Framework.Presentation.Modularity
 {
-    public class ModuleCatalog : Microsoft.Practices.Prism.Modularity.ModuleCatalog, IModuleCatalog
+    public class ModuleCatalog : Prism.Modularity.ModuleCatalog, IModuleCatalog
     {
         public IModuleCatalog AddModule(string moduleName, string moduleType,Uri moduleUri, params string[] dependsOn)
         {

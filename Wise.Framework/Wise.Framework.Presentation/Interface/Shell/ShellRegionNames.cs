@@ -21,9 +21,9 @@
         public static string StatusRegion = @"ShellStatusRegion";
 
         /// <summary>
-        ///     The Progress Overlay
+        ///     The Left Side Navigation Region
         /// </summary>
-        public static string ProgressOverlayRegionRegion = @"ShellProgressOverlayRegionRegion";
+        public static string LeftSideNavigationRegion = @"ShellLeftSideNavigationRegion";
 
         /// <summary>
         ///     The overlay region

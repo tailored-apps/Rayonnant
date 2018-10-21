@@ -6,8 +6,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Generic.xaml" />
-                <ResourceDictionary
-                    Source="/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic.xaml" />
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic.xaml" />
+                <ResourceDictionary Source="/Wise.Framework.HostShell;component/Resources/MenuGroupsResourceDictionary.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </wpf:WiseApplication.Resources>

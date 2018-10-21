@@ -46,6 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="asd.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -56,6 +59,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Wise.Framework.Interface\Wise.Framework.Interface.csproj">
+      <Project>{5b4e5b58-5f87-4bc4-b9bb-c9ace5e64275}</Project>
+      <Name>Wise.Framework.Interface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\Wise.Framework.WindowsServiceController\Wise.Framework.WindowsServiceController.csproj">
       <Project>{0f741b28-0c1b-4e53-8d78-848138096765}</Project>
       <Name>Wise.Framework.WindowsServiceController</Name>

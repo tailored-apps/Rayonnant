@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Windows;
 using Common.Logging;
-using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.Modularity;
-using Microsoft.Practices.Prism.PubSubEvents;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.UnityExtensions;
+using Prism.Logging;
+using Prism.Modularity;
+using Prism.Regions;
 using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.DependencyInjection.Unity;
 using Wise.Framework.Environment;
@@ -31,12 +29,14 @@ using Wise.Framework.Presentation.Window;
 using Wise.Framework.Security.Authentication;
 using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
+using Prism.Events;
+using Wise.Framework.DependencyInjection;
 
 namespace Wise.Framework.Bootstrapping
 {
     public class BootstrapperRunner : IBootstrapperRunner
     {
-        private static readonly ILog log = LogManager.GetCurrentClassLogger();
+        private static readonly ILog Log = LogManager.GetLogger< BootstrapperRunner>();
 
         /// <summary>
         ///     the shell window
@@ -78,7 +78,7 @@ namespace Wise.Framework.Bootstrapping
         /// <param name="bootstrapper">bootstrapping class object</param>
         public void Run(IBootstrapper bootstrapper)
         {
-            log.Debug("going to run bootstrapping class");
+            Log.Debug("going to run bootstrapping class");
             Bootstrapper = bootstrapper;
 
             ConfigureModuleCatalog();
@@ -92,12 +92,12 @@ namespace Wise.Framework.Bootstrapping
 
             if (Container.IsTypeRegistered<IModuleManager>())
             {
-                log.Debug("module manager is registered going to initialize modules");
+                Log.Debug("module manager is registered going to initialize modules");
                 InitializeModules();
                 Bootstrapper.PostModuleInitialization(Container);
             }
 
-            log.Debug("going to close splash screen");
+            Log.Debug("going to close splash screen");
 
             CloseSplashScreen();
             PublishSystemMessage("Application Started :-)");
@@ -134,20 +134,20 @@ namespace Wise.Framework.Bootstrapping
         /// </summary>
         protected virtual void InitializeModules()
         {
-            log.Debug("about registering module manager");
+            Log.Debug("about registering module manager");
             IModuleManager moduleManager;
             try
             {
                 moduleManager = Container.Resolve<IModuleManager>();
-                log.Info("module manager resolved");
+                Log.Info("module manager resolved");
             }
             catch (Exception ex)
             {
-                log.Warn("module manager has been not resolved.");
-                log.Error(ex.Message, ex);
+                Log.Warn("module manager has been not resolved.");
+                Log.Error(ex.Message, ex);
                 throw;
             }
-            log.Debug("going to run module manager.");
+            Log.Debug("going to run module manager.");
             moduleManager.Run();
         }
 
@@ -162,11 +162,11 @@ namespace Wise.Framework.Bootstrapping
 
             if (moduleCatalog != null)
             {
-                log.Info("using registered module catalog from Bootstrapping class.");
+                Log.Info("using registered module catalog from Bootstrapping class.");
             }
             else
             {
-                log.Info("Creating default module catalog");
+                Log.Info("Creating default module catalog");
             }
 
             return moduleCatalog ?? new ModuleCatalog();
@@ -178,7 +178,7 @@ namespace Wise.Framework.Bootstrapping
         protected virtual void InitialiseShell()
         {
             PublishSystemMessage("Going to init shell window");
-            log.Debug("about initializing shell");
+            Log.Debug("about initializing shell");
 
             PublishSystemMessage("post initialization has been completed");
             var regionManager = Container.Resolve<IRegionManager>();
@@ -186,15 +186,20 @@ namespace Wise.Framework.Bootstrapping
             PublishSystemMessage("Going to setup regions on shell window");
             if (Container.IsTypeRegistered<ICommandsViewModel>())
             {
-                log.Info("registering CommandRegion in shell");
+                Log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion,
                     Container.Resolve<ICommandsViewModel>);
             }
 
             if (Container.IsTypeRegistered<IStatusViewModel>())
             {
-                log.Info("registering StatusRegion in shell");
+                Log.Info("registering StatusRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.StatusRegion, Container.Resolve<IStatusViewModel>);
+            }
+            if (Container.IsTypeRegistered<IMenuViewModel>())
+            {
+                Log.Info("registering left Menu region in shell");
+                regionManager.RegisterViewWithRegion(ShellRegionNames.LeftSideNavigationRegion, Container.Resolve<IMenuViewModel>);
             }
 
 
@@ -203,6 +208,9 @@ namespace Wise.Framework.Bootstrapping
 
             PublishSystemMessage("Going to register shell window");
             Container.RegisterTypeIfMissing<IShellWindow, ShellWindow>(LifetimeScope.Singleton);
+
+
+
 
             shellWindow = Container.Resolve<IShellWindow>();
 
@@ -215,10 +223,10 @@ namespace Wise.Framework.Bootstrapping
             var shell = shellWindow as Window;
             if (shell != null)
             {
-                log.Info("going to register shell view to shell window");
+                Log.Info("going to register shell view to shell window");
                 shell.DataContext = Container.Resolve<IShellViewModel>();
                 var regionCfg = Container.Resolve<IRegionConfigurator>();
-                log.Info("going to configure and register regions");
+                Log.Info("going to configure and register regions");
                 regionCfg.ConfigureRegions();
                 regionCfg.InitializeShell(shell, regionManager);
 
@@ -226,6 +234,8 @@ namespace Wise.Framework.Bootstrapping
                 if (Container.IsTypeRegistered<INavigationManager>())
                 {
                     var navManager = Container.Resolve<INavigationManager>();
+                    navManager.RegisterTypeForNavigation<OpenItemsViewModel>();
+                    navManager.RegisterTypeForNavigation<UserPreferencesSettingsViewModel>();
                 }
                 shell.Closing += (s, e) => { };
 
@@ -237,7 +247,10 @@ namespace Wise.Framework.Bootstrapping
             }
             PublishSystemMessage("Going to show shell");
             shellWindow.Show();
-            if (shell != null) shell.Activate();
+            if (shell != null)
+            {
+                shell.Activate();
+            }
         }
 
         /// <summary>
@@ -254,7 +267,7 @@ namespace Wise.Framework.Bootstrapping
         /// </summary>
         protected virtual void ShowSplashScreen()
         {
-            log.Debug("about showing splash screen");
+            Log.Debug("about showing splash screen");
             if (!Container.IsTypeRegistered<ISplashViewModel>())
                 return;
             Container.Resolve<ISplashRunner>().ShowSplash();
@@ -265,11 +278,13 @@ namespace Wise.Framework.Bootstrapping
         /// </summary>
         protected virtual void ConfigureContainer()
         {
-            log.Debug("about configuring container");
+            Log.Debug("about configuring container");
 
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
-            Container.RegisterTypeIfMissing<IServiceLocator, UnityServiceLocatorAdapter>(LifetimeScope.Singleton);
+            
+
+            Container.RegisterTypeIfMissing<IServiceLocator, UnityContainerServiceLocator>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
             DependencyInjection.Container.Current = Container;
 
@@ -282,6 +297,7 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ICommandsViewModel, CommandsViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IMenuService, MenuService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IStatusViewModel, StatusViewModel>(LifetimeScope.Singleton);
+            Container.RegisterTypeIfMissing<IMenuViewModel, MenuViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IProgressViewModel, ProgressViewModel>(LifetimeScope.Singleton);
 
             Container.RegisterTypeIfMissing<IEventAggregator, EventAggregator>(LifetimeScope.Singleton);
@@ -316,15 +332,15 @@ namespace Wise.Framework.Bootstrapping
         /// </summary>
         protected virtual void ConfigureModuleCatalog()
         {
-            log.Debug("about configuring module catalog");
+            Log.Debug("about configuring module catalog");
             ModuleCatalog = CreateModuleCatalog();
 
-            log.Info("Module catalog created, Going to configure");
+            Log.Info("Module catalog created, Going to configure");
             Bootstrapper.ConfigureModuleCatalog(ModuleCatalog);
-            log.Info("Module Catalog has been configured.");
+            Log.Info("Module Catalog has been configured.");
             var moduleCatalog = ModuleCatalog as ModuleCatalog;
 
-            Container.RegisterInstance<Microsoft.Practices.Prism.Modularity.IModuleCatalog>(moduleCatalog);
+            Container.RegisterInstance<Prism.Modularity.IModuleCatalog>(moduleCatalog);
         }
     }
 }

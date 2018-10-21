@@ -4,15 +4,14 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Common.Logging;
-using Microsoft.Practices.Prism.Modularity;
 using Wise.Framework.Interface.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Window;
-using Wise.Framework.Presentation.Modularity;
 using Wise.Framework.Presentation.Window;
 using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
+using Prism.Modularity;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -21,7 +20,7 @@ namespace Wise.Framework.Bootstrapping
     /// </summary>
     public abstract class AbstractBootstrapper : IBootstrapper
     {
-        private readonly ILog logger = LogManager.GetCurrentClassLogger();
+        private readonly ILog logger = LogManager.GetLogger<AbstractBootstrapper>();
         /// <summary>
         ///     Method responsible for registering logger inside application
         /// </summary>

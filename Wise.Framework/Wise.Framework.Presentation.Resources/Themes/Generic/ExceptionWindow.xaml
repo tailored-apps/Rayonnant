@@ -5,9 +5,6 @@
     xmlns:window1="clr-namespace:Wise.Framework.Presentation.Window;assembly=Wise.Framework.Presentation">
 
 
-    <Style TargetType="{x:Type Label}">
-        <Setter Property="Foreground" Value="{DynamicResource FontActiveColorBrush}" />
-    </Style>
 
 
     <Style TargetType="{x:Type TextBlock}">

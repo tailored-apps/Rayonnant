@@ -9,7 +9,7 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.Framework.SecurityModule.ViewModel
 {
-    [MenuItem("Options|Security", "Applications")]
+    [MenuItem(Path ="Options|Security", DisplayName ="Applications")]
     public class ApplicationsViewModel : ViewModelBase
     {
 

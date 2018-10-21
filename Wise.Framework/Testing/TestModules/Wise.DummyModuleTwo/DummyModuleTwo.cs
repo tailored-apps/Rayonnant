@@ -1,4 +1,4 @@
-﻿using Microsoft.Practices.Prism.Regions;
+﻿using Prism.Regions;
 using Wise.DummyModuleTwo.ViewModel;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;

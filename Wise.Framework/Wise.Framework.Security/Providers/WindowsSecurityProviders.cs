@@ -10,17 +10,17 @@ namespace Wise.Framework.Security.Providers
     {
         public override IIdentity GetCurrentIddentity()
         {
-            return WindowsIdentity.GetCurrent();
+            return WindowsPrincipal.Current.Identity;
         }
 
         public override bool IsInRole(string roleName)
         {
-            return ClaimsPrincipal.Current.IsInRole(roleName);
+            return WindowsIdentity.GetCurrent().Groups.Translate(typeof(NTAccount)).Select(x => Role.Create(x.Value)).Any(x=>x.Name==roleName);
         }
 
         public override IEnumerable<IRole> GetRoles(IIdentity user)
         {
-            return WindowsIdentity.GetCurrent().Groups.Select(x => Role.Create(x.Value));
+            return WindowsIdentity.GetCurrent().Groups.Translate(typeof(NTAccount)).Select(x=>Role.Create(x.Value));
         }
     }
 }

@@ -5,10 +5,10 @@
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:interface="clr-namespace:Wise.Framework.Presentation.Interface"
                     xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters"
-                    xmlns:regions="http://www.codeplex.com/CompositeWPF"
+                    xmlns:regions="http://www.codeplex.com/prism"
                     xmlns:shell="clr-namespace:Wise.Framework.Presentation.Interface.Shell"
                     mc:Ignorable="d"
-                    d:DesignHeight="300" d:DesignWidth="300">
+                    d:DesignHeight="600" d:DesignWidth="900">
 
     <UserControl.Resources>
         <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
@@ -19,9 +19,22 @@
             <ContentControl DockPanel.Dock="Top" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.CommandRegion}"
                             Visibility="{Binding IsVisibleCommandRegion, Converter={StaticResource BooleanToVisibilityConverter}}" />
             <ContentControl DockPanel.Dock="Bottom" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.StatusRegion}" />
-            <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.ContentRegion}" />
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ContentControl Grid.Column="0" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.LeftSideNavigationRegion}"  />
+                <GridSplitter Grid.Row="0" Grid.Column="1" Margin="2,0,2,0"
+                  Width="3" Background="{x:Null}" VerticalAlignment="Stretch" HorizontalAlignment="Center" />
+                <ContentControl  Grid.Column="2" regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.ContentRegion}" />
+            </Grid>
         </DockPanel>
-        <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.ProgressOverlayRegionRegion}" />
         <ContentControl regions:RegionManager.RegionName="{x:Static shell:ShellRegionNames.OverlayRegion}" />
 
     </Grid>

@@ -2,7 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 using Wise.DummyModule.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
@@ -11,7 +11,8 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModule.ViewModel
 {
-    [MenuItem("Modules|Dummy Module One", "Content View")]
+    [ViewModelInfo(DisplayName ="Dummy Module One Content View", MenuGroup ="Tools", SecurityLevel =0)]
+    [MenuItem(Path ="Modules|Dummy Module One", DisplayName ="Content View")]
     public class ContentViewModel : ViewModelBase
     {
         private string label;

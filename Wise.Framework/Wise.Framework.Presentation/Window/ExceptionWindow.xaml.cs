@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using Microsoft.Practices.Prism.Commands;
+using Prism.Commands;
 using Wise.Framework.Interface.ExceptionHandling;
 
 namespace Wise.Framework.Presentation.Window

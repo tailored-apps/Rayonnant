@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
-using Microsoft.Practices.Prism.Regions;
+using Prism.Regions;
 using Wise.DummyModuleTwo.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;
@@ -9,7 +9,8 @@ using Wise.Framework.Presentation.ViewModel;
 
 namespace Wise.DummyModuleTwo.ViewModel
 {
-    [MenuItem("Modules|Dummy Module Two", "Content Two View")]
+    [ViewModelInfo(DisplayName ="Dummy Module Two Content Two View", MenuGroup ="Tools", SecurityLevel = 50)]
+    [MenuItem(Path ="Modules|Dummy Module Two", DisplayName ="Content Two View")]
     public class ContentTwoViewModel : ViewModelBase
     {
         private string label;

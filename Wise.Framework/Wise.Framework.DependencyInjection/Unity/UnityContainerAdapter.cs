@@ -6,6 +6,7 @@ using Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 using Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
+using Microsoft.Practices.ServiceLocation;
 
 namespace Wise.Framework.DependencyInjection.Unity
 {
@@ -212,5 +213,6 @@ namespace Wise.Framework.DependencyInjection.Unity
                 unityContainer.RegisterType<T1, T2>(name);
             }
         }
+
     }
 }

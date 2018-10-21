@@ -9,7 +9,7 @@ namespace Wise.Framework.Presentation.Services
 {
     /// <summary>
     ///     Default implementation of <see cref="IMenuService" />
-    ///     Class is responsible for adding removing and getting MenuItem object stored in header Commands view model.
+    ///     Class is responsible for adding removing and getting MenuItemAttribute object stored in header Commands view model.
     /// </summary>
     public class MenuService : IMenuService
     {
@@ -97,7 +97,11 @@ namespace Wise.Framework.Presentation.Services
 
                     middleString += middleString.Equals(MENU_ITEMS_PREFIX) ? element : "|" + element;
                 }
-                if (lastItem != null) lastItem.Items.Add(menuItem);
+                if (lastItem != null)
+                {
+                    menuItem.Uid = ComposeUidForElement(menuItem.Header.ToString(), lastItem);
+                    lastItem.Items.Add(menuItem);
+                }
             }
         }
 
@@ -161,7 +165,7 @@ namespace Wise.Framework.Presentation.Services
         /// </summary>
         /// <param name="items">colection item supposed to be searched</param>
         /// <param name="uid">element uid</param>
-        /// <returns>first MenuItem in whole collection with specyfic uid</returns>
+        /// <returns>first MenuItemAttribute in whole collection with specyfic uid</returns>
         private MenuItem Find(IEnumerable<MenuItem> items, string uid)
         {
             MenuItem menuItem = null;

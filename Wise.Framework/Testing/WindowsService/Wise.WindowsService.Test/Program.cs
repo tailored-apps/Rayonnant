@@ -9,7 +9,13 @@ namespace Wise.WindowsService.Test
         /// </summary>
         private static void Main(params string[] args)
         {
-            WindowsServiceRunner.Run(args);
+            using (var wsc = new WindowsServiceRunner())
+            {
+
+                wsc.RegisterService<asd>();
+                
+                wsc.RunRegisteredServices(args);
+            };
         }
     }
 }

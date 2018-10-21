@@ -8,6 +8,7 @@ namespace Wise.MVC.TestApplication
     {
         public void Configuration(IAppBuilder app)
         {
+            
             ConfigureAuth(app);
         }
     }

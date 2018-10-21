@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.Regions.Behaviors;
+using Prism.Regions;
+using Prism.Regions.Behaviors;
 using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
