@@ -7,14 +7,14 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
 
-            <SolidColorBrush Color="Red"  x:Key="PopupBackgroundBrush" />
-            <SolidColorBrush Color="Red"  x:Key="PopupHeaderBackgroundBrush" />
-            <SolidColorBrush Color="Red"  x:Key="DarkBackgroundForeground" />
+            <SolidColorBrush Color="Black"  x:Key="PopupBackgroundBrush" />
+            <SolidColorBrush Color="Black"  x:Key="PopupHeaderBackgroundBrush" />
+            <SolidColorBrush Color="Black"  x:Key="DarkBackgroundForeground" />
             <sys:Double  x:Key="LegendCloseButtonWidth" >20</sys:Double>
             <conv:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         </ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
-    
+
     <Style x:Key="GenericPopup" TargetType="{x:Type ContentControl}">
         <Setter Property="Template">
             <Setter.Value>
