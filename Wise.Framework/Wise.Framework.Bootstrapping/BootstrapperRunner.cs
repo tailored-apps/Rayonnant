@@ -4,7 +4,6 @@ using Common.Logging;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.DependencyInjection.Unity;
 using Wise.Framework.Environment;
 using Wise.Framework.Interface.Bootstrapping;
@@ -31,6 +30,7 @@ using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
 using Prism.Events;
 using Wise.Framework.DependencyInjection;
+using CommonServiceLocator;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -321,10 +321,10 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ISplashRunner, SplashRunner>(LifetimeScope.Singleton);
 
 
-            if (Container.IsTypeRegistered<IMessanger>())
-            {
+            //if (Container.IsTypeRegistered<IMessanger>())
+            //{
                 Messanger = Container.Resolve<IMessanger>();
-            }
+            //}
         }
 
         /// <summary>

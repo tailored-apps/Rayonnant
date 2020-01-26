@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.Practices.Unity;
 using Wise.Framework.DependencyInjection.Unity.Extensions;
 using Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension;
 using Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
-using Microsoft.Practices.ServiceLocation;
+using Unity;
+using Unity.Extension;
+using Unity.Lifetime;
+using Unity.Injection;
 
 namespace Wise.Framework.DependencyInjection.Unity
 {
@@ -124,21 +126,11 @@ namespace Wise.Framework.DependencyInjection.Unity
         }
 
 
-        public IContainer RemoveAllExtensions()
-        {
-            unityContainer.RemoveAllExtensions();
-            return this;
-        }
 
 
-        public void Teardown(object o)
-        {
-            unityContainer.Teardown(o);
-        }
 
         public void Dispose()
         {
-            unityContainer.RemoveAllExtensions();
             unityContainer.Dispose();
         }
 
@@ -149,7 +141,7 @@ namespace Wise.Framework.DependencyInjection.Unity
 
         public IContainer RegisterInstance(Type t, string name, object instance, object lifetime)
         {
-            var manager = lifetime as LifetimeManager;
+            var manager = lifetime as IInstanceLifetimeManager;
             unityContainer.RegisterInstance(t, name, instance, manager);
             return this;
         }
@@ -158,12 +150,12 @@ namespace Wise.Framework.DependencyInjection.Unity
             object[] injectionMembers)
         {
             var members = injectionMembers as InjectionMember[];
-            var manager = lifetimeManager as LifetimeManager;
+            var manager = lifetimeManager as ITypeLifetimeManager;
             unityContainer.RegisterType(from, to, name, manager, members);
             return this;
         }
 
-        public IEnumerable<IContainerRegistration> Registrations
+        public IEnumerable<Wise.Framework.Interface.DependencyInjection.IContainerRegistration> Registrations
         {
             get { return unityContainer.Registrations.ToContainerRegistration(); }
         }

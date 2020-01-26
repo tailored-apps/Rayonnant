@@ -1,4 +1,5 @@
-﻿using Prism.Modularity;
+﻿using Prism.Ioc;
+using Prism.Modularity;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.Modularity;
@@ -89,6 +90,14 @@ namespace Wise.Framework.Presentation.Modularity
         ///     If you have to register resource do it in this method.
         /// </summary>
         protected virtual void RegisterResources()
+        {
+        }
+
+        public virtual void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+        }
+
+        public virtual void OnInitialized(IContainerProvider containerProvider)
         {
         }
     }

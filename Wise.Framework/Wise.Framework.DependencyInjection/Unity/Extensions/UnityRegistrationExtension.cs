@@ -1,12 +1,15 @@
 ﻿using System;
-using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Unity;
+using Microsoft.Practices.ObjectBuilder;
+using Unity;
+using Unity.Builder;
+using Unity.Extension;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions
 {
     /// <summary>
     ///     Extension for checking registration of types in container
     /// </summary>
+    /// todo
     public class UnityRegistrationExtension : UnityContainerExtension
     {
         /// <summary>
@@ -22,8 +25,9 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions
             {
                 return false;
             }
-            var policy = extension.Context.Policies.Get<IBuildKeyMappingPolicy>(new NamedTypeBuildKey(type));
-            return policy != null;
+            //  var policy = extension.Context.Policies.Get<IBuildKeyMappingPolicy>(new NamedTypeBuildKey(type));
+            //return policy != null;
+            return false;
         }
 
         /// <summary>

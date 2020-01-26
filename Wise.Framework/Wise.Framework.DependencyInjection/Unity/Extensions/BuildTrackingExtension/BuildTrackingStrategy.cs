@@ -6,25 +6,30 @@
 // Copyright © <github.com/trondr> 2013 
 // All rights reserved.
 
-using Microsoft.Practices.ObjectBuilder2;
+using System;
+using Common.Logging;
+using Unity.Builder;
+using Unity.Strategies;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {
+    //todo
     public class BuildTrackingStrategy : BuilderStrategy
     {
-        public override void PreBuildUp(IBuilderContext context)
+        public override void PreBuildUp(ref BuilderContext context)
         {
-            IBuildTrackingPolicy policy = BuildTracking.GetPolicy(context) ?? BuildTracking.SetPolicy(context);
-            policy.BuildKeys.Push(context.BuildKey);
+            
+            //IBuildTrackingPolicy policy = BuildTracking.GetPolicy(context) ?? BuildTracking.SetPolicy(context);
+            //policy.BuildKeys.Push(context.BuildKey);
         }
 
-        public override void PostBuildUp(IBuilderContext context)
+        public override void PostBuildUp(ref BuilderContext context)
         {
-            IBuildTrackingPolicy policy = BuildTracking.GetPolicy(context);
-            if ((policy != null) && (policy.BuildKeys.Count > 0))
-            {
-                policy.BuildKeys.Pop();
-            }
+            //IBuildTrackingPolicy policy = BuildTracking.GetPolicy(context);
+            //if ((policy != null) && (policy.BuildKeys.Count > 0))
+            //{
+            //    policy.BuildKeys.Pop();
+            //}
         }
     }
 }

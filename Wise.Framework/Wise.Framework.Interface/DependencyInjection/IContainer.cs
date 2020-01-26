@@ -9,8 +9,7 @@ namespace Wise.Framework.Interface.DependencyInjection
     /// </summary>
     public interface IContainer : IDisposable
     {
-        IEnumerable<IContainerRegistration> Registrations { get; }
-        void Teardown(object o);
+        IEnumerable<Wise.Framework.Interface.DependencyInjection.IContainerRegistration> Registrations { get; }
         object Configure(Type configurationInterface);
         void RegisterTypeIfMissing<T1, T2>(LifetimeScope lifetimeScope) where T2 : T1;
         bool IsTypeRegistered<T1>();
@@ -22,7 +21,6 @@ namespace Wise.Framework.Interface.DependencyInjection
         void RegisterInstance<T1>(T1 instance, string name);
 
         IContainer CreateChildContainer();
-        IContainer RemoveAllExtensions();
         IContainer AddExtension(object extension);
         void RegisterType(Type from, Type to, string name);
         IContainer RegisterType(Type from, Type to, string name, object lifetimeManager, object[] injectionMembers);
