@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Microsoft.Practices.ObjectBuilder;
 using Unity;
 using Unity.Builder;
@@ -25,9 +26,7 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions
             {
                 return false;
             }
-            //  var policy = extension.Context.Policies.Get<IBuildKeyMappingPolicy>(new NamedTypeBuildKey(type));
-            //return policy != null;
-            return false;
+            return extension.Context.Container.Registrations.Any(x=>x.RegisteredType ==  type);
         }
 
         /// <summary>

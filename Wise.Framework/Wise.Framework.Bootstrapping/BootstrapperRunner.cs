@@ -31,6 +31,8 @@ using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
 using Prism.Events;
 using Wise.Framework.DependencyInjection;
 using CommonServiceLocator;
+using Prism.Ioc;
+using Unity.Extension;
 
 namespace Wise.Framework.Bootstrapping
 {
@@ -279,7 +281,8 @@ namespace Wise.Framework.Bootstrapping
         protected virtual void ConfigureContainer()
         {
             Log.Debug("about configuring container");
-
+            //todo
+            Container.RegisterTypeIfMissing<ILog, Common.Logging.Simple.NoOpLogger>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
             
@@ -291,6 +294,7 @@ namespace Wise.Framework.Bootstrapping
             Bootstrapper.ConfigureContainer(Container);
             Container.RegisterInstance(ModuleCatalog);
 
+            Container.RegisterTypeIfMissing<IContainerExtension, Prism.Unity.Ioc.UnityContainerExtension>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IShellViewModel, ShellViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISecurityService, SecurityService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IEnvironmentService, EnvironmentService>(LifetimeScope.Singleton);
