@@ -6,5 +6,6 @@ namespace Wise.Framework.Interface.Modularity
     {
         IModuleCatalog AddModule(string moduleName, string moduleType, Uri moduleUri, params string[] dependsOn);
         IModuleCatalog AddModule(Type moduleType, params string[] dependsOn);
+        void Initialize();
     }
 }

@@ -33,12 +33,13 @@ using Wise.Framework.DependencyInjection;
 using CommonServiceLocator;
 using Prism.Ioc;
 using Unity.Extension;
+using System.Linq;
 
 namespace Wise.Framework.Bootstrapping
 {
     public class BootstrapperRunner : IBootstrapperRunner
     {
-        private static readonly ILog Log = LogManager.GetLogger< BootstrapperRunner>();
+        private static readonly ILog Log = LogManager.GetLogger<BootstrapperRunner>();
 
         /// <summary>
         ///     the shell window
@@ -140,8 +141,15 @@ namespace Wise.Framework.Bootstrapping
             IModuleManager moduleManager;
             try
             {
-                moduleManager = Container.Resolve<IModuleManager>();
+                moduleManager = Container.Resolve<IModuleManager>() as ModuleManager;
+                moduleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
                 Log.Info("module manager resolved");
+
+                var moduleCatalog = ModuleCatalog as ModuleCatalog;
+                foreach (var module in moduleCatalog.Modules.Select(x => x.ModuleName))
+                {
+                    moduleManager.LoadModule(module);
+                }
             }
             catch (Exception ex)
             {
@@ -151,6 +159,12 @@ namespace Wise.Framework.Bootstrapping
             }
             Log.Debug("going to run module manager.");
             moduleManager.Run();
+        }
+
+        private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
+        {
+            System.Console.WriteLine(e.ModuleInfo.State);
+            
         }
 
 
@@ -285,7 +299,7 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ILog, Common.Logging.Simple.NoOpLogger>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
-            
+
 
             Container.RegisterTypeIfMissing<IServiceLocator, UnityContainerServiceLocator>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
@@ -325,10 +339,10 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<ISplashRunner, SplashRunner>(LifetimeScope.Singleton);
 
 
-            //if (Container.IsTypeRegistered<IMessanger>())
-            //{
+            if (Container.IsTypeRegistered<IMessanger>())
+            {
                 Messanger = Container.Resolve<IMessanger>();
-            //}
+            }
         }
 
         /// <summary>
@@ -343,7 +357,6 @@ namespace Wise.Framework.Bootstrapping
             Bootstrapper.ConfigureModuleCatalog(ModuleCatalog);
             Log.Info("Module Catalog has been configured.");
             var moduleCatalog = ModuleCatalog as ModuleCatalog;
-
             Container.RegisterInstance<Prism.Modularity.IModuleCatalog>(moduleCatalog);
         }
     }

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using Common.Logging;
+using Wise.DummyModule.ViewModel;
 using Wise.Framework.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
@@ -70,6 +71,7 @@ namespace Wise.Framework.HostShell
                 var shellViewModel = container.Resolve<IShellViewModel>();
                 shellViewModel.Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/1389141962_229117.ico", UriKind.Absolute);
                 shellViewModel.Title = "Wise Test WPF Application";
+                messanger.Publish(new NavigationRequest { ViewModelType = typeof(OtherContentViewModel), IsModal = true });
             }
 
 

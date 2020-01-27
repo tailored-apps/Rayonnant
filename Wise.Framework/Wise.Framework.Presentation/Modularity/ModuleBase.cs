@@ -99,6 +99,7 @@ namespace Wise.Framework.Presentation.Modularity
 
         public virtual void OnInitialized(IContainerProvider containerProvider)
         {
+            Initialize();
         }
     }
 }
