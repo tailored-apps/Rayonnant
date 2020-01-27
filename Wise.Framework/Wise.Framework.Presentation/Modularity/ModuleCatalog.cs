@@ -24,7 +24,8 @@ namespace Wise.Framework.Presentation.Modularity
 
         public new IModuleCatalog AddModule(Type moduleType, params string[] dependsOn)
         {
-            base.AddModule(moduleType, dependsOn);
+            var module = new ModuleInfo { ModuleType = moduleType.FullName, DependsOn = new Collection<string>(dependsOn) };
+            base.AddModule(module);
             return this;
         }
     }

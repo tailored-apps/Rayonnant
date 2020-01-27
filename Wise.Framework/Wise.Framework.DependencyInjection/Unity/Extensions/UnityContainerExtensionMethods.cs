@@ -1,28 +1,26 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.ObjectBuilder2;
-using Microsoft.Practices.Unity;
-using Wise.Framework.Interface.DependencyInjection;
-
+using Microsoft.Practices.ObjectBuilder;
+using Unity;
+using Unity.Registration;
 namespace Wise.Framework.DependencyInjection.Unity.Extensions
 {
     public static class UnityContainerExtensionMethods
     {
-        public static IContainerRegistration ToContainerRegistration(this ContainerRegistration cr)
+        public static Wise.Framework.Interface.DependencyInjection.IContainerRegistration ToContainerRegistration(this IContainerRegistration cr)
         {
             return new UnityContainerRegistration
             {
-                LifetimeManagerType = cr.LifetimeManagerType,
-                MappedToType = cr.MappedToType,
-                Name = cr.Name,
-                RegisteredType = cr.RegisteredType
             };
         }
 
-        public static IEnumerable<IContainerRegistration> ToContainerRegistration(
-            this IEnumerable<ContainerRegistration> cr)
+        public static IEnumerable<Wise.Framework.Interface.DependencyInjection.IContainerRegistration> ToContainerRegistration(
+            this IEnumerable<IContainerRegistration> cr)
         {
-            IList<IContainerRegistration> containerRegistrations = new List<IContainerRegistration>();
-            cr.ForEach(x => containerRegistrations.Add(ToContainerRegistration(x)));
+            IList<Wise.Framework.Interface.DependencyInjection.IContainerRegistration> containerRegistrations = new List<Wise.Framework.Interface.DependencyInjection.IContainerRegistration>();
+            foreach (var registration  in cr)
+            {
+                containerRegistrations.Add(ToContainerRegistration(registration));
+            }
             return containerRegistrations;
         }
     }

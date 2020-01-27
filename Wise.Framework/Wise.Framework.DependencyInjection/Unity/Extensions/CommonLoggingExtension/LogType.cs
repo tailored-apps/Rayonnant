@@ -9,7 +9,8 @@
 using System;
 using System.Diagnostics;
 using System.Linq;
-using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.ObjectBuilder;
+using Unity.Builder;
 using Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension

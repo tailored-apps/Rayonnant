@@ -8,11 +8,14 @@
 
 using System;
 using Common.Logging;
-using Microsoft.Practices.ObjectBuilder2;
+using Unity.Builder;
+using Unity.Policy;
+using Unity.Resolution;
+using Unity.Strategies;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
-    public class CommonLoggingLogBuildPlanPolicy : IBuildPlanPolicy
+    public class CommonLoggingLogBuildPlanPolicy : IResolveDelegateFactory
     {
         public CommonLoggingLogBuildPlanPolicy(Type typeForLog)
         {
@@ -21,13 +24,18 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExten
 
         public Type LogType { get; private set; }
 
-        public void BuildUp(IBuilderContext context)
+        public void BuildUp(ref BuilderContext context)
         {
             if (context.Existing == null)
             {
                 ILog log = LogManager.GetLogger(LogType);
                 context.Existing = log;
             }
+        }
+
+        public ResolveDelegate<BuilderContext> GetResolver(ref BuilderContext context)
+        {
+            throw new NotImplementedException();
         }
     }
 }

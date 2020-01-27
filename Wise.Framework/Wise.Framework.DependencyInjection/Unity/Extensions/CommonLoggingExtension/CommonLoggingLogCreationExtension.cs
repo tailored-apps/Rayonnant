@@ -6,8 +6,10 @@
 // Copyright © <github.com/trondr> 2013 
 // All rights reserved.
 
-using Microsoft.Practices.Unity;
-using Microsoft.Practices.Unity.ObjectBuilder;
+using Unity;
+using Unity.Extension;
+using Microsoft.Practices.ObjectBuilder;
+using Unity.Builder;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
@@ -15,7 +17,7 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExten
     {
         protected override void Initialize()
         {
-            Context.Strategies.AddNew<CommonLoggingLogCreationStrategy>(UnityBuildStage.PreCreation);
+            Context.Strategies.Add(new CommonLoggingLogCreationStrategy(),UnityBuildStage.PreCreation);
         }
     }
 }

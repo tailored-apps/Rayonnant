@@ -7,7 +7,7 @@
 // All rights reserved.
 
 using System.Collections.Generic;
-using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.ObjectBuilder;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {

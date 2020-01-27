@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data", "Wise.Framework.Data\Wise.Framework.Data.csproj", "{F140AC0E-21DD-46F7-961F-8F336B9243E3}"
 EndProject
@@ -14,13 +14,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Presentation", "Wise.Framework.Presentation\Wise.Framework.Presentation.csproj", "{069E0F5D-0A61-4269-9276-B9B126ABDABF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Bootstrapping", "Wise.Framework.Bootstrapping\Wise.Framework.Bootstrapping.csproj", "{B5F13A7A-A18F-4E1A-9B74-26360EB0A90A}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A1320B3B-1C38-418B-A5AF-FE5B96369859}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Security", "Wise.Framework.Security\Wise.Framework.Security.csproj", "{8DEC92F9-DDD7-4639-AA26-EABEF9F7BEC4}"
 EndProject
@@ -60,10 +53,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{02CDCB19-1D71-45BA-B6E7-115FC70DD86D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MVC", "MVC", "{32079C56-351E-47E9-987F-AC202840144B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Web", "Wise.Framework.Web\Wise.Framework.Web.csproj", "{616C35F7-9D88-48A6-AF2C-47250C41CC1F}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{72BED8E3-53D1-4A74-BFBA-D4580B0F0FA9}"
 	ProjectSection(SolutionItems) = preProject
 		Tools\Wise.IconsConverter.exe = Tools\Wise.IconsConverter.exe
@@ -80,8 +69,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Data.Tests.Integration", "Testing\Data\Wise.Framework.Data.Tests.Integration\Wise.Framework.Data.Tests.Integration.csproj", "{2DEC93D2-089E-483B-BE11-91224FAF89EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.Framework.Presentation.Tests", "Testing\Presentation\Wise.Framework.Presentation.Tests\Wise.Framework.Presentation.Tests.csproj", "{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wise.MVC.TestApplication", "Testing\MVC\Wise.MVC.TestApplication\Wise.MVC.TestApplication.csproj", "{412A2031-A9E3-4C28-9958-27BDEC97E048}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "REST", "REST", "{B286AF43-25FC-4712-A0DA-EF913285A6B3}"
 EndProject
@@ -160,10 +147,6 @@ Global
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05}.Release|Any CPU.Build.0 = Release|Any CPU
-		{616C35F7-9D88-48A6-AF2C-47250C41CC1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{616C35F7-9D88-48A6-AF2C-47250C41CC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{616C35F7-9D88-48A6-AF2C-47250C41CC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{616C35F7-9D88-48A6-AF2C-47250C41CC1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7A43A224-0713-4920-9FDE-5337E1326D16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7A43A224-0713-4920-9FDE-5337E1326D16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A43A224-0713-4920-9FDE-5337E1326D16}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -184,10 +167,6 @@ Global
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{412A2031-A9E3-4C28-9958-27BDEC97E048}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91F8B242-E8DB-4281-8221-ED297D4941CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91F8B242-E8DB-4281-8221-ED297D4941CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91F8B242-E8DB-4281-8221-ED297D4941CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -212,12 +191,10 @@ Global
 		{DD5B882C-EB90-4154-A8DB-A8987426FA05} = {6D2C830C-24FA-4181-A9DF-C58AA622F4C9}
 		{C6AE198D-EEBA-4321-80AF-1E0B439F2950} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{02CDCB19-1D71-45BA-B6E7-115FC70DD86D} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
-		{32079C56-351E-47E9-987F-AC202840144B} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{7A43A224-0713-4920-9FDE-5337E1326D16} = {AE4F96BD-1B65-4CD4-8B66-687ACAAD2B69}
 		{78D3D67B-3035-4227-B12A-3546F00838C4} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{2DEC93D2-089E-483B-BE11-91224FAF89EB} = {02CDCB19-1D71-45BA-B6E7-115FC70DD86D}
 		{5F1A167F-37E6-46DB-AF3E-D9A70D212FB6} = {C6AE198D-EEBA-4321-80AF-1E0B439F2950}
-		{412A2031-A9E3-4C28-9958-27BDEC97E048} = {32079C56-351E-47E9-987F-AC202840144B}
 		{B286AF43-25FC-4712-A0DA-EF913285A6B3} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
 		{91F8B242-E8DB-4281-8221-ED297D4941CB} = {B286AF43-25FC-4712-A0DA-EF913285A6B3}
 		{547AB183-88F4-4C15-AE6B-93C3CCEAC0E5} = {A2A61B33-94FB-4575-96FC-EEB0CC2C2B48}
@@ -225,5 +202,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {53411246-890D-40CE-AC28-DCB078CC0E81}
 	EndGlobalSection
 EndGlobal

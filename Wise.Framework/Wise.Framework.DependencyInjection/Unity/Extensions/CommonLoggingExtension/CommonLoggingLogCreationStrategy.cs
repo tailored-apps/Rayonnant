@@ -8,35 +8,37 @@
 
 using System;
 using Common.Logging;
-using Microsoft.Practices.ObjectBuilder2;
+using Unity.Builder;
+using Unity.Strategies;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension
 {
+    //todo
     public class CommonLoggingLogCreationStrategy : BuilderStrategy
     {
         public bool IsPolicySet { get; private set; }
 
-        public override void PreBuildUp(IBuilderContext context)
+        public override void PreBuildUp(ref BuilderContext context)
         {
-            if (typeof (ILog) == context.BuildKey.Type)
-            {
-                if (context.Policies.Get<IBuildPlanPolicy>(context.BuildKey) == null)
-                {
-                    Type typeForLog = LogType.Get(context);
-                    IBuildPlanPolicy buildPlanPolicy = new CommonLoggingLogBuildPlanPolicy(typeForLog);
-                    context.Policies.Set(buildPlanPolicy, context.BuildKey);
-                    IsPolicySet = true;
-                }
-            }
+            //if (typeof(ILog) == context.BuildKey.Type)
+            //{
+            //    if (context.Policies.Get<IBuildPlanPolicy>(context.BuildKey) == null)
+            //    {
+            //        Type typeForLog = LogType.Get(context);
+            //        IBuildPlanPolicy buildPlanPolicy = new CommonLoggingLogBuildPlanPolicy(typeForLog);
+            //        context.Policies.Set(buildPlanPolicy, context.BuildKey);
+            //        IsPolicySet = true;
+            //    }
+            //}
         }
 
-        public override void PostBuildUp(IBuilderContext context)
+        public override void PostBuildUp(ref BuilderContext context)
         {
-            if (IsPolicySet)
-            {
-                context.Policies.Clear<IBuildPlanPolicy>(context.BuildKey);
-                IsPolicySet = false;
-            }
+        //    if (IsPolicySet)
+        //    {
+        //        context.Policies.Clear<IBuildPlanPolicy>(context.BuildKey);
+        //        IsPolicySet = false;
+        //    }
         }
     }
 }
