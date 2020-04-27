@@ -185,6 +185,10 @@ namespace Wise.Framework.Presentation.Modularity
                         security = true;
                     }
                 }
+                else
+                {
+                    security = true;
+                }
             }
             catch (Exception ex)
             {
@@ -198,7 +202,7 @@ namespace Wise.Framework.Presentation.Modularity
             }
             else
             {
-                MessageBox.Show("Wypad nie ma roli");
+                MessageBox.Show("Brak uprawnień");
             }
 
 
