@@ -14,7 +14,7 @@ namespace Wise.Framework.Presentation.Modularity
         /// </summary>
         public void MergeViewModelTemplates()
         {
-            MergeResource("Wise.Framework.Presentation;component/Resources/ViewModelTemplates.xaml");
+            MergeResource("Wise.Framework.Presentation.Core;component/Resources/ViewModelTemplates.xaml");
         }
 
         /// <summary>

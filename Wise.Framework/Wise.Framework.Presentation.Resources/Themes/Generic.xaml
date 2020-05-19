@@ -4,25 +4,25 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/ColorDefinitions.xaml" />
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/MainWindow.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/MainWindow.xaml" />
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashWindow.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/SplashWindow.xaml" />
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SplashViewModel.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/SplashViewModel.xaml" />
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ExceptionWindow.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/ExceptionWindow.xaml" />
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/PrismViewBase.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/PrismViewBase.xaml" />
 
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/ModalWindow.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/ModalWindow.xaml" />
 
 
 
-        
-        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/UserControls/Generic.xaml" />
+
+        <ResourceDictionary Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/UserControls/Generic.xaml" />
 
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

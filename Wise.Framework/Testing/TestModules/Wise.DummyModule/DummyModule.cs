@@ -35,7 +35,7 @@ namespace Wise.DummyModule
 
         protected override void RegisterResources()
         {
-            ResourceManager.MergeResource("Wise.DummyModule;component/Resources/ViewModelTemplates.xaml");
+            ResourceManager.MergeResource("Wise.DummyModule.Core;component/Resources/ViewModelTemplates.xaml");
         }
 
         protected override void RegisterViewRegions()

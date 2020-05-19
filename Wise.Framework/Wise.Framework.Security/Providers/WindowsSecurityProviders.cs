@@ -10,7 +10,7 @@ namespace Wise.Framework.Security.Providers
     {
         public override IIdentity GetCurrentIddentity()
         {
-            return WindowsPrincipal.Current.Identity;
+            return WindowsIdentity.GetCurrent();
         }
 
         public override bool IsInRole(string roleName)

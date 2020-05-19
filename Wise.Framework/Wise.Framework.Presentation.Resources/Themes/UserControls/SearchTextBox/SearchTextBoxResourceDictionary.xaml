@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:userControl="clr-namespace:Wise.Framework.Presentation.Resources.UserControls">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"></ResourceDictionary>
-        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Generic/SizeDefinition.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"></ResourceDictionary>
+        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/SizeDefinition.xaml"></ResourceDictionary>
     </ResourceDictionary.MergedDictionaries>
     <Style TargetType="{x:Type userControl:SearchTextBox}">
         <Setter Property="Height" Value="26"/>
