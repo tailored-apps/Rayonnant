@@ -20,9 +20,7 @@
     <PackageReference Include="CommonServiceLocator">
       <Version>2.0.5</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Practices.ObjectBuilder.dll">
-      <Version>3.1.0</Version>
-    </PackageReference>
+    <PackageReference Include="microsoft.Practices.ObjectBuilder.dll" Version="3.1.0" />
     <PackageReference Include="Unity">
       <Version>5.11.3</Version>
     </PackageReference>

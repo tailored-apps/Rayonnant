@@ -6,7 +6,7 @@
 // Copyright © <github.com/trondr> 2013 
 // All rights reserved.
 
-using Microsoft.Practices.ObjectBuilder2;
+using Microsoft.Practices.ObjectBuilder;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExten
             IBuildTrackingPolicy buildTrackingPolicy = BuildTracking.GetPolicy(context);
             if ((buildTrackingPolicy != null) && buildTrackingPolicy.BuildKeys.Count >= 2)
             {
-                logType = ((Microsoft.Practices.ObjectBuilder2.NamedTypeBuildKey) buildTrackingPolicy.BuildKeys.ElementAt(1)).Type;
+                logType = (buildTrackingPolicy.BuildKeys.ElementAt(1)).GetType();
             }
             else
             {
