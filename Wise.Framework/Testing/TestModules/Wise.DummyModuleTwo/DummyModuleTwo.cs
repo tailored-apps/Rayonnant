@@ -1,4 +1,4 @@
-﻿using Prism.Regions;
+﻿
 using Wise.DummyModuleTwo.ViewModel;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.InternalApplicationMessagning;
@@ -13,14 +13,12 @@ namespace Wise.DummyModuleTwo
     public class DummyModuleTwo : ModuleBase<DummyModuleTwo>
     {
         private readonly INavigationManager navigationManager;
-        private readonly IRegionManager regionManager;
 
-        public DummyModuleTwo(IResourceManager resourceManager, IRegionManager regionManager,
+        public DummyModuleTwo(IResourceManager resourceManager, 
             INavigationManager navigationManager, IMessanger messanger,
             IContainer container)
             : base(resourceManager, messanger, container)
         {
-            this.regionManager = regionManager;
             this.navigationManager = navigationManager;
             messanger.Publish("publish from module two;");
         }
@@ -28,7 +26,7 @@ namespace Wise.DummyModuleTwo
 
         protected override void RegisterResources()
         {
-            ResourceManager.MergeResource("Wise.DummyModuleTwo;component/Resources/ViewTwoModelTemplates.xaml");
+            ResourceManager.MergeResource("Wise.DummyModuleTwo.Core;component/Resources/ViewTwoModelTemplates.xaml");
 
             navigationManager.RegisterTypeForNavigation<ContentTwoViewModel>();
         }

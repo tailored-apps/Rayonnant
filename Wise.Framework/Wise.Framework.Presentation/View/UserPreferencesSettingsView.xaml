@@ -14,7 +14,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
 
-                <ResourceDictionary  Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic/LabelStyle.xaml" />
+                <ResourceDictionary  Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Controls/Generic/LabelStyle.xaml" />
 
 
             </ResourceDictionary.MergedDictionaries>

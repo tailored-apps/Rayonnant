@@ -7,7 +7,8 @@ namespace Wise.Framework.Environment
     {
 
         public IEnvironmentInfo GetEnvironmentInfo()
-        {
+        {//TODO FIX THAT CODE
+            return new EnvironmentInfo();
             var config = (EnvironmentSection)ConfigurationManager.GetSection("environmentSection/environment");
             var localhost = "127.0.0.1";
             if (config == null)

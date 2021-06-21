@@ -3,7 +3,7 @@
                     xmlns:viewModel="clr-namespace:Wise.Framework.SecurityModule.ViewModel"
                     xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters;assembly=Wise.Framework.Presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"/>
         
     </ResourceDictionary.MergedDictionaries>
 

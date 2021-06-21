@@ -8,7 +8,6 @@
 
 using Unity;
 using Unity.Extension;
-using Microsoft.Practices.ObjectBuilder;
 using Unity.Builder;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.CommonLoggingExtension

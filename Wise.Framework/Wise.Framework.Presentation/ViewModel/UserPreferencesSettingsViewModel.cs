@@ -24,7 +24,7 @@ namespace Wise.Framework.Presentation.ViewModel
             this.preferenceManager = preferenceManager;
             this.navigationManager = navigationManager;
             Title = "User Preferences";
-            Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/service-128.ico", UriKind.Absolute);
+            Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Resources/service-128.ico", UriKind.Absolute);
             SaveCommand = new DelegateCommand(SaveData);
             base.ScreenId = string.Empty;
 

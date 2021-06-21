@@ -11,9 +11,9 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Generic/ColorDefinitions.xaml"/>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic/Styles.xaml"/>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/ColorDefinitions.xaml"/>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Themes/Controls/Generic/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <templateSelectors:StatusMenuGroupTemplateSelector x:Key="GroupTemplateSelector"/>
 
