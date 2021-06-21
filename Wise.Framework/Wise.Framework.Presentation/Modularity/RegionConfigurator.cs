@@ -2,9 +2,9 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using CommonServiceLocator;
 using Prism.Regions;
 using Prism.Regions.Behaviors;
-using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
 using Wise.Framework.Presentation.Interface.Modularity;

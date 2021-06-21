@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using Common.Logging;
+using Wise.DummyModule.ViewModel;
 using Wise.Framework.Bootstrapping;
 using Wise.Framework.Interface.DependencyInjection;
 using Wise.Framework.Interface.DependencyInjection.Enum;
@@ -58,8 +59,8 @@ namespace Wise.Framework.HostShell
 
         public override void ConfigureModuleCatalog(IModuleCatalog catalog)
         {
-            LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.dll"));
-            LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.dll"));
+            LoadModule(catalog, typeof(DummyModule.DummyModule), new FileInfo(@".\Wise.DummyModule.Core.dll"));
+            LoadModule(catalog, typeof(DummyModuleTwo.DummyModuleTwo), new FileInfo(@".\Wise.DummyModuleTwo.Core.dll"));
         }
 
         public override void PostConfiguration(IContainer container, IMessanger messanger)
@@ -68,8 +69,9 @@ namespace Wise.Framework.HostShell
             if (container.IsTypeRegistered<IShellViewModel>())
             {
                 var shellViewModel = container.Resolve<IShellViewModel>();
-                shellViewModel.Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/1389141962_229117.ico", UriKind.Absolute);
+                shellViewModel.Icon = new Uri("pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Resources/1389141962_229117.ico", UriKind.Absolute);
                 shellViewModel.Title = "Wise Test WPF Application";
+                messanger.Publish(new NavigationRequest { ViewModelType = typeof(OtherContentViewModel), IsModal = true });
             }
 
 
@@ -90,9 +92,9 @@ namespace Wise.Framework.HostShell
         public override void ConfigureAppliactionSplashInfo(ISplashViewModel splashViewModel)
         {
             splashViewModel.ProductName = WiseApplication.Name;
-            splashViewModel.EnviormentName = Environment.MachineName;
+            splashViewModel.EnviormentName = System.Environment.MachineName;
             splashViewModel.Version = WiseApplication.Version;
-            splashViewModel.Logo = new Uri(@"pack://application:,,,/Wise.Framework.Presentation.Resources;component/Resources/logo.png", UriKind.Absolute);
+            splashViewModel.Logo = new Uri(@"pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Resources/logo.png", UriKind.Absolute);
 
         }
     }

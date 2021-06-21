@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
-            Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Controls/Generic/Resources.xaml" />
+            Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Controls/Generic/Resources.xaml" />
     </ResourceDictionary.MergedDictionaries>
     <ControlTemplate x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
         <Grid>

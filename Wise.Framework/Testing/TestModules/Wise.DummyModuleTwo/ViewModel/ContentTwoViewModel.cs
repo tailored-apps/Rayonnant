@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Input;
-using Prism.Regions;
 using Wise.DummyModuleTwo.Commands;
 using Wise.Framework.Interface.InternalApplicationMessagning;
 using Wise.Framework.Interface.InternalApplicationMessagning.Enum;

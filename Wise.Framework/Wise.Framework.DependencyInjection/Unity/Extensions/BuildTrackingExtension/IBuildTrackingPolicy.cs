@@ -6,8 +6,8 @@
 // Copyright © <github.com/trondr> 2013 
 // All rights reserved.
 
+using Microsoft.Practices.ObjectBuilder;
 using System.Collections.Generic;
-using Microsoft.Practices.ObjectBuilder2;
 
 namespace Wise.Framework.DependencyInjection.Unity.Extensions.BuildTrackingExtension
 {

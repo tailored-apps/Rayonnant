@@ -4,7 +4,6 @@ using Common.Logging;
 using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
-using Microsoft.Practices.ServiceLocation;
 using Wise.Framework.DependencyInjection.Unity;
 using Wise.Framework.Environment;
 using Wise.Framework.Interface.Bootstrapping;
@@ -31,12 +30,16 @@ using IModuleCatalog = Wise.Framework.Interface.Modularity.IModuleCatalog;
 using ModuleCatalog = Wise.Framework.Presentation.Modularity.ModuleCatalog;
 using Prism.Events;
 using Wise.Framework.DependencyInjection;
+using CommonServiceLocator;
+using Prism.Ioc;
+using Unity.Extension;
+using System.Linq;
 
 namespace Wise.Framework.Bootstrapping
 {
     public class BootstrapperRunner : IBootstrapperRunner
     {
-        private static readonly ILog Log = LogManager.GetLogger< BootstrapperRunner>();
+        private static readonly ILog Log = LogManager.GetLogger<BootstrapperRunner>();
 
         /// <summary>
         ///     the shell window
@@ -138,8 +141,15 @@ namespace Wise.Framework.Bootstrapping
             IModuleManager moduleManager;
             try
             {
-                moduleManager = Container.Resolve<IModuleManager>();
+                moduleManager = Container.Resolve<IModuleManager>() as ModuleManager;
+                moduleManager.LoadModuleCompleted += ModuleManager_LoadModuleCompleted;
                 Log.Info("module manager resolved");
+
+                var moduleCatalog = ModuleCatalog as ModuleCatalog;
+                foreach (var module in moduleCatalog.Modules.Select(x => x.ModuleName))
+                {
+                    moduleManager.LoadModule(module);
+                }
             }
             catch (Exception ex)
             {
@@ -149,6 +159,12 @@ namespace Wise.Framework.Bootstrapping
             }
             Log.Debug("going to run module manager.");
             moduleManager.Run();
+        }
+
+        private void ModuleManager_LoadModuleCompleted(object sender, LoadModuleCompletedEventArgs e)
+        {
+            System.Console.WriteLine(e.ModuleInfo.State);
+            
         }
 
 
@@ -279,10 +295,11 @@ namespace Wise.Framework.Bootstrapping
         protected virtual void ConfigureContainer()
         {
             Log.Debug("about configuring container");
-
+            //todo
+            Container.RegisterTypeIfMissing<ILog, Common.Logging.Simple.NoOpLogger>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
-            
+
 
             Container.RegisterTypeIfMissing<IServiceLocator, UnityContainerServiceLocator>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
@@ -291,6 +308,7 @@ namespace Wise.Framework.Bootstrapping
             Bootstrapper.ConfigureContainer(Container);
             Container.RegisterInstance(ModuleCatalog);
 
+            Container.RegisterTypeIfMissing<IContainerExtension, Prism.Unity.Ioc.UnityContainerExtension>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IShellViewModel, ShellViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISecurityService, SecurityService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IEnvironmentService, EnvironmentService>(LifetimeScope.Singleton);
@@ -339,7 +357,6 @@ namespace Wise.Framework.Bootstrapping
             Bootstrapper.ConfigureModuleCatalog(ModuleCatalog);
             Log.Info("Module Catalog has been configured.");
             var moduleCatalog = ModuleCatalog as ModuleCatalog;
-
             Container.RegisterInstance<Prism.Modularity.IModuleCatalog>(moduleCatalog);
         }
     }

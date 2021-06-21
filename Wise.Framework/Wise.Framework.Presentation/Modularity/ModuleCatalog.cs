@@ -15,16 +15,23 @@ namespace Wise.Framework.Presentation.Modularity
                 ModuleName = moduleName,
                 ModuleType = moduleType,
                 DependsOn = new Collection<string>(dependsOn),
-                Ref = moduleUri.AbsoluteUri
+                Ref = moduleUri.AbsoluteUri,
+InitializationMode= InitializationMode.OnDemand,
+State = ModuleState.NotStarted
             };
             
             base.AddModule(moduleInfo);
+            
             return this;
         }
 
         public new IModuleCatalog AddModule(Type moduleType, params string[] dependsOn)
         {
-            base.AddModule(moduleType, dependsOn);
+            var module = new ModuleInfo { ModuleType = moduleType.FullName, DependsOn = new Collection<string>(dependsOn),
+                InitializationMode = InitializationMode.OnDemand,
+                State= ModuleState.NotStarted
+            };
+            base.AddModule(module);
             return this;
         }
     }

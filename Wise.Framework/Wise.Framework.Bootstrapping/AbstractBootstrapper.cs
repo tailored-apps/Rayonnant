@@ -111,6 +111,7 @@ namespace Wise.Framework.Bootstrapping
                         {
                             logger.InfoFormat("Going To load module {0}", fileInfo.FullName);
                             LoadModule(catalog, type, fileInfo);
+                            
                         }
                     }
                 }

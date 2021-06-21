@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using Wise.Framework.Data.Enum;
 using Wise.Framework.Data.Interface;
 using Wise.Framework.Interface.Data;
@@ -13,7 +14,7 @@ namespace Wise.Framework.Data.Providers
 
         public abstract class Transformer<TEntity>
         {
-            public abstract TEntity Transform(System.Data.SqlClient.SqlDataReader reader);
+            public abstract TEntity Transform(SqlDataReader reader);
         }
 
         public void SetOperation<TEntity>(AdoNetProviderOperations operation, string command, AdoNetCommandType commandType,AdoNetExecutionType execution, Transformer<TEntity> transformer)

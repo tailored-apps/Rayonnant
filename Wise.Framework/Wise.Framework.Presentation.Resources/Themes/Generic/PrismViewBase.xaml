@@ -2,11 +2,11 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:control="clr-namespace:Wise.Framework.Presentation.Resources.Control"
-    xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
-    xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters;assembly=Wise.Framework.Presentation">
+    xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation.Core"
+    xmlns:converters="clr-namespace:Wise.Framework.Presentation.Converters;assembly=Wise.Framework.Presentation.Core">
 
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+        <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
 

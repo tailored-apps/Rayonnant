@@ -1,0 +1,33 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Common.Logging.Core">
+      <Version>3.4.1</Version>
+    </PackageReference>
+    <PackageReference Include="CommonServiceLocator">
+      <Version>2.0.5</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Core">
+      <Version>7.2.0.1422</Version>
+    </PackageReference>
+    <PackageReference Include="Prism.Wpf">
+      <Version>7.2.0.1422</Version>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Wise.Framework.DependencyInjection\Wise.Framework.DependencyInjection.Core.csproj" />
+    <ProjectReference Include="..\..\Wise.Framework.Interface\Wise.Framework.Interface.Core.csproj" />
+    <ProjectReference Include="..\..\Wise.Framework.Presentation.Resources\Wise.Framework.Presentation.Resources.Core.csproj" />
+    <ProjectReference Include="..\..\Wise.Framework.Presentation\Wise.Framework.Presentation.Core.csproj" />
+  </ItemGroup>
+
+</Project>

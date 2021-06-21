@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:window1="clr-namespace:Wise.Framework.Presentation.Window;assembly=Wise.Framework.Presentation">
+    xmlns:window1="clr-namespace:Wise.Framework.Presentation.Window;assembly=Wise.Framework.Presentation.Core">
 
 
     <ControlTemplate x:Key="SplashWindowControlTemplate" TargetType="{x:Type window1:SplashWindow}">

@@ -8,7 +8,7 @@
     <UserControl.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -305,7 +305,7 @@
 
     <StackPanel Orientation="Horizontal" Style="{StaticResource CaptionButtonStyle}">
         <StackPanel.Resources>
-            <ResourceDictionary Source="/Wise.Framework.Presentation.Resources;component/Styles/IconsSetResourceDictionary.xaml"/>
+            <ResourceDictionary Source="/Wise.Framework.Presentation.Resources.Core;component/Styles/IconsSetResourceDictionary.xaml"/>
         </StackPanel.Resources>
         <Button Style="{StaticResource DockChromeButtonStyle}" Click="DockButtonClick"
                 ContentTemplate="{DynamicResource DockButtonControlTemplate}" >

@@ -3,15 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation"
-             xmlns:userControl="clr-namespace:Wise.Framework.Presentation.Resources.UserControls;assembly=Wise.Framework.Presentation.Resources"
+             xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation.Core"
+             xmlns:userControl="clr-namespace:Wise.Framework.Presentation.Resources.UserControls;assembly=Wise.Framework.Presentation.Resources.Core"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1600"
                     Style="{StaticResource {x:Type view:PrismViewBase}}">
     <view:PrismViewBase.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary  Source="pack://application:,,,/Wise.Framework.Presentation.Resources;component/Themes/Generic/SizeDefinition.xaml"/>
+                <ResourceDictionary  Source="pack://application:,,,/Wise.Framework.Presentation.Resources.Core;component/Themes/Generic/SizeDefinition.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             
             <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">

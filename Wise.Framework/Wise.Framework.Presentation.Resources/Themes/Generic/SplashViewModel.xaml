@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModel="clr-namespace:Wise.Framework.Presentation.ViewModel;assembly=Wise.Framework.Presentation"
-    xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation">
+    xmlns:viewModel="clr-namespace:Wise.Framework.Presentation.ViewModel;assembly=Wise.Framework.Presentation.Core"
+    xmlns:view="clr-namespace:Wise.Framework.Presentation.View;assembly=Wise.Framework.Presentation.Core">
 
 
     <DataTemplate DataType="{x:Type viewModel:SplashViewModel}">
