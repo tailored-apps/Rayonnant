@@ -1,0 +1,43 @@
+// Powered by Infostretch 
+
+timestamps {
+
+node () {
+    cleanWs()
+	stage ('feature branch checkout') {
+ 	  checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption',
+                    disableSubmodules: false,
+                    parentCredentials: true,
+                    recursiveSubmodules: true,
+                    reference: '',
+                    trackingSubmodules: false], 
+ 	       []
+        ]
+        ], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://bitbucket.tailoredapps.pl/scm/wise/wise.framework.git']]]) 
+	}
+	
+	stage ('Build'){
+	    dir("Wise.Framework"){
+	    
+	        bat "dotnet restore"
+	        bat "dotnet msbuild -target:Publish /p:Version=2.0.1.${BUILD_NUMBER}"
+	    }
+    }
+    stage('archive artifacts'){
+          withCredentials([string(credentialsId: '${nuget}', variable: 'credentials')]) {
+        	    bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Presentation\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Data\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Bootstrapping\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Commons\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Data.NHibernate\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.DependencyInjection\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Environment\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Interface\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.InternalMessagning\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Presentation.Resources\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Security\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+                bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Interface\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
+            }
+        }
+    }
+}
