@@ -4,7 +4,7 @@ timestamps {
 
 node () {
     cleanWs()
-	stage ('feature branch checkout') {
+	stage ('master branch checkout') {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [
                 [$class: 'SubmoduleOption',
                     disableSubmodules: false,
