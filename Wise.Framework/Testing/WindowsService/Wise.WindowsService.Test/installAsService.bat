@@ -1,1 +1,0 @@
-sc create Wise.TestService binpath= %CD%"\Wise.WindowsService.Test.exe" displayname= "Wise.TestService"
