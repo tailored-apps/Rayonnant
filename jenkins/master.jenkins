@@ -40,10 +40,10 @@ node () {
                 bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Interface\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
             }
         }
-    }
+    
     notifyBitbucket(buildStatus: 'SUCCESSFUL') 
     } 
     catch(err) {
         notifyBitbucket(buildStatus: 'FAILED') 
     }
-}
+}}
