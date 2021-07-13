@@ -4,6 +4,8 @@ timestamps {
 
 node () {
     cleanWs()
+    notifyBitbucket(buildStatus: 'INPROGRESS')
+    try {
 	stage ('feature branch checkout') {
  	  checkout([$class: 'GitSCM', branches: [[name: '*/feature/*']], doGenerateSubmoduleConfigurations: false, extensions: [[$class: 'SubmoduleOption',
                     disableSubmodules: false,
@@ -31,5 +33,10 @@ node () {
 	    }
     }
    
+    }
+    notifyBitbucket(buildStatus: 'SUCCESSFUL') 
+    } 
+    catch(err) {
+        notifyBitbucket(buildStatus: 'FAILED') 
     }
 }
