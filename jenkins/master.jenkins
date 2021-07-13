@@ -4,6 +4,8 @@ timestamps {
 
 node () {
     cleanWs()
+    notifyBitbucket(buildStatus: 'INPROGRESS')
+    try {
 	stage ('master branch checkout') {
     checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [
                 [$class: 'SubmoduleOption',
@@ -38,5 +40,10 @@ node () {
                 bat """dotnet nuget push "Wise.Framework\\Wise.Framework.Interface\\bin\\Debug\\*.nupkg" -k ${credentials} -s https://nexus.tailoredapps.pl/repository/hosted/ """
             }
         }
+    }
+    notifyBitbucket(buildStatus: 'SUCCESSFUL') 
+    } 
+    catch(err) {
+        notifyBitbucket(buildStatus: 'FAILED') 
     }
 }
