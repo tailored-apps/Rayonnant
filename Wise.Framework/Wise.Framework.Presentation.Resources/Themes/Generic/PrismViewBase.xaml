@@ -127,7 +127,7 @@
                             <Path Style="{StaticResource AppbarFullscreenIconStyle}" Width="13" Height="13"/>
                         </Button>
 
-                        <Button Margin="2" Grid.Column="3"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding CloseItemCommand}"  CommandParameter="{TemplateBinding DataContext}" >
+                        <Button Name="closeCurrentControl" Margin="2" Grid.Column="3"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Style="{StaticResource CloseButtonStyle}" HorizontalAlignment="Right" Command="{TemplateBinding CloseItemCommand}"  CommandParameter="{TemplateBinding DataContext}" >
                             <Path Style="{StaticResource AppbarCloseIconStyle}" Width="13" Height="13"/>
                         </Button>
               
