@@ -29,7 +29,7 @@ node () {
 	    dir("TailoredApps.Rayonnant"){
 	    
 	        bat "dotnet restore"
-	        bat "dotnet msbuild -target:Publish /p:Version=2.0.0.${BUILD_NUMBER}-DEVELOP"
+	        bat "dotnet msbuild -target:Publish /p:Version=1.0.0.${BUILD_NUMBER}-DEVELOP"
 	    }
     }
     stage('archive artifacts'){

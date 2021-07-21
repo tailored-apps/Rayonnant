@@ -29,7 +29,7 @@ node () {
 	    dir("TailoredApps.Rayonnant"){
 	    
 	        bat "dotnet restore"
-	        bat "dotnet msbuild -target:Publish /p:Version=2.0.1.${BUILD_NUMBER}"
+	        bat "dotnet msbuild -target:Publish /p:Version=1.0.1.${BUILD_NUMBER}"
 	    }
     }
    
