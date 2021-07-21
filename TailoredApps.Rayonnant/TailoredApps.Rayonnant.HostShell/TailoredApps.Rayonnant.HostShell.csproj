@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <TargetFramework>net5.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Testing\TestModules\TailoredApps.Rayonnant.DummyModuleTwo\TailoredApps.Rayonnant.DummyModuleTwo.csproj" />
+    <ProjectReference Include="..\Testing\TestModules\TailoredApps.Rayonnant.DummyModule\TailoredApps.Rayonnant.DummyModule.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Bootstrapping\TailoredApps.Rayonnant.Bootstrapping.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Environment\TailoredApps.Rayonnant.Environment.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Interface\TailoredApps.Rayonnant.Interface.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Presentation.Resources\TailoredApps.Rayonnant.Presentation.Resources.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Presentation\TailoredApps.Rayonnant.Presentation.csproj" />
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Security\TailoredApps.Rayonnant.Security.csproj" />
+  </ItemGroup>
+
+</Project>
