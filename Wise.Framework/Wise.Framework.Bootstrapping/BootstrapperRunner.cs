@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using Common.Logging;
-using Prism.Logging;
 using Prism.Modularity;
 using Prism.Regions;
 using Wise.Framework.DependencyInjection.Unity;
@@ -73,7 +72,6 @@ namespace Wise.Framework.Bootstrapping
         ///     Gets or sets Container
         /// </summary>
         private IContainer Container { get; set; }
-
 
         /// <summary>
         ///     Method responsible for running.
@@ -167,7 +165,6 @@ namespace Wise.Framework.Bootstrapping
             
         }
 
-
         /// <summary>
         ///     Method creates module catalog
         /// </summary>
@@ -202,6 +199,7 @@ namespace Wise.Framework.Bootstrapping
             PublishSystemMessage("Going to setup regions on shell window");
             if (Container.IsTypeRegistered<ICommandsViewModel>())
             {
+                var dupa = Container.Resolve<ICommandsViewModel>();
                 Log.Info("registering CommandRegion in shell");
                 regionManager.RegisterViewWithRegion(ShellRegionNames.CommandRegion,
                     Container.Resolve<ICommandsViewModel>);
@@ -218,15 +216,11 @@ namespace Wise.Framework.Bootstrapping
                 regionManager.RegisterViewWithRegion(ShellRegionNames.LeftSideNavigationRegion, Container.Resolve<IMenuViewModel>);
             }
 
-
             PublishSystemMessage("regions has been registerd");
             Bootstrapper.RegisterShell(Container);
 
             PublishSystemMessage("Going to register shell window");
             Container.RegisterTypeIfMissing<IShellWindow, ShellWindow>(LifetimeScope.Singleton);
-
-
-
 
             shellWindow = Container.Resolve<IShellWindow>();
 
@@ -298,8 +292,7 @@ namespace Wise.Framework.Bootstrapping
             //todo
             Container.RegisterTypeIfMissing<ILog, Common.Logging.Simple.NoOpLogger>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISplashViewModel, SplashViewModel>(LifetimeScope.Singleton);
-            Container.RegisterTypeIfMissing<ILoggerFacade, DefaultLoggerFacade>(LifetimeScope.Singleton);
-
+            Container.RegisterTypeIfMissing<Microsoft.Extensions.Logging.ILogger, DefaultLoggerFacade>(LifetimeScope.Singleton);
 
             Container.RegisterTypeIfMissing<IServiceLocator, UnityContainerServiceLocator>(LifetimeScope.Singleton);
             ServiceLocator.SetLocatorProvider(() => Container.Resolve<IServiceLocator>());
@@ -308,7 +301,11 @@ namespace Wise.Framework.Bootstrapping
             Bootstrapper.ConfigureContainer(Container);
             Container.RegisterInstance(ModuleCatalog);
 
-            Container.RegisterTypeIfMissing<IContainerExtension, Prism.Unity.Ioc.UnityContainerExtension>(LifetimeScope.Singleton);
+            Container.RegisterTypeIfMissing<IContainerExtension, Prism.Unity.UnityContainerExtension>(LifetimeScope.Singleton);
+
+            if (ContainerLocator.Current is null)
+                ContainerLocator.SetContainerExtension(Container.Resolve<IContainerExtension>);
+
             Container.RegisterTypeIfMissing<IShellViewModel, ShellViewModel>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISecurityService, SecurityService>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IEnvironmentService, EnvironmentService>(LifetimeScope.Singleton);
@@ -337,7 +334,6 @@ namespace Wise.Framework.Bootstrapping
             Container.RegisterTypeIfMissing<IMessanger, Messanger>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<IMessangerExecutor, MessangerExecutor>(LifetimeScope.Singleton);
             Container.RegisterTypeIfMissing<ISplashRunner, SplashRunner>(LifetimeScope.Singleton);
-
 
             if (Container.IsTypeRegistered<IMessanger>())
             {

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>library</OutputType>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>

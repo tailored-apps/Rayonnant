@@ -47,7 +47,6 @@ namespace Wise.Framework.Presentation.UserInteraction.GenericPopup
             set { SetProperty(ref confirmedCommand, value); }
         }
 
-
         private T viewModel;
         public T ViewModel
         {
@@ -72,7 +71,7 @@ namespace Wise.Framework.Presentation.UserInteraction.GenericPopup
             set
             {
                 SetProperty(ref confirmationText, value);
-                OnPropertyChanged("IsConfirmationTextSpecyfied");
+                OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs("IsConfirmationTextSpecyfied"));
             }
         }
 
@@ -83,7 +82,7 @@ namespace Wise.Framework.Presentation.UserInteraction.GenericPopup
             set
             {
                 SetProperty(ref cancellationText, value);
-                OnPropertyChanged("IsCancellationTextSpecyfied");
+                OnPropertyChanged(new System.ComponentModel.PropertyChangedEventArgs("IsCancellationTextSpecyfied"));
             }
         }
 
@@ -94,7 +93,6 @@ namespace Wise.Framework.Presentation.UserInteraction.GenericPopup
             set { SetProperty(ref popupHeader, value); }
         }
 
-
         public GenericPopupViewModel(T vm, string headerText)
         {
             ViewModel = vm;
@@ -103,7 +101,6 @@ namespace Wise.Framework.Presentation.UserInteraction.GenericPopup
             IsEnabled = true;
         }
         
-
         public void Raise()
         {
             IsOpen = true;

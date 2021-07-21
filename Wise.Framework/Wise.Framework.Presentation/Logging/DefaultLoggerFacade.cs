@@ -1,6 +1,6 @@
 ﻿using System;
 using Common.Logging;
-using Prism.Logging;
+using Microsoft.Extensions.Logging;
 
 namespace Wise.Framework.Presentation.Logging
 {
@@ -9,7 +9,7 @@ namespace Wise.Framework.Presentation.Logging
     ///     this is default implementation of <see cref="ILoggerFacade" /> used for loging unhandled exception by prism
     ///     framework
     /// </summary>
-    public class DefaultLoggerFacade : ILoggerFacade
+    public class DefaultLoggerFacade : ILogger
     {
         /// <summary>
         ///     default logger
@@ -23,25 +23,43 @@ namespace Wise.Framework.Presentation.Logging
             this.log = log;
         }
 
-        /// <summary>
-        ///     <see cref="ILoggerFacade.Log" />
-        ///     used in case of handling every not handled exception
-        /// </summary>
-        public void Log(string message, Category category, Priority priority)
+        public IDisposable BeginScope<TState>(TState state)
         {
-            switch (category)
+            throw new NotImplementedException();
+        }
+
+        public bool IsEnabled(Microsoft.Extensions.Logging.LogLevel logLevel)
+        {
+            switch (logLevel)
             {
-                case Category.Debug:
-                    log.Debug(message);
+                case Microsoft.Extensions.Logging.LogLevel.Debug:
+                    return log.IsDebugEnabled;
+                case Microsoft.Extensions.Logging.LogLevel.Error:
+                    return log.IsErrorEnabled;
+                case Microsoft.Extensions.Logging.LogLevel.Information:
+                    return log.IsInfoEnabled;
+                case Microsoft.Extensions.Logging.LogLevel.Warning:
+                    return log.IsWarnEnabled;
+                default:
+                    throw new ArgumentException("category");
+            }
+        }
+
+        public void Log<TState>(Microsoft.Extensions.Logging.LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+        {
+            switch (logLevel)
+            {
+                case Microsoft.Extensions.Logging.LogLevel.Debug:
+                     log.Debug(formatter.Invoke(state, exception));
                     break;
-                case Category.Exception:
-                    log.Error(message);
+                case Microsoft.Extensions.Logging.LogLevel.Error:
+                    log.Error(formatter.Invoke(state, exception));
                     break;
-                case Category.Info:
-                    log.Info(message);
+                case Microsoft.Extensions.Logging.LogLevel.Information:
+                    log.Info(formatter.Invoke(state, exception));
                     break;
-                case Category.Warn:
-                    log.Warn(message);
+                case Microsoft.Extensions.Logging.LogLevel.Warning:
+                    log.Warn(formatter.Invoke(state, exception));
                     break;
                 default:
                     throw new ArgumentException("category");

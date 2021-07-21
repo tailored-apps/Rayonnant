@@ -3,13 +3,13 @@
   <PropertyGroup>
     <OutputType>library</OutputType>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="system.Data.SqlClient" Version="4.8.1" />
+    <PackageReference Include="system.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
 
   <ItemGroup>
