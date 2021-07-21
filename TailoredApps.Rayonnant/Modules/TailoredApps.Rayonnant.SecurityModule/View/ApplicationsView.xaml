@@ -1,0 +1,46 @@
+﻿<view:PrismViewBase x:Class="TailoredApps.Rayonnant.SecurityModule.View.ApplicationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:view="clr-namespace:TailoredApps.Rayonnant.Presentation.View;assembly=TailoredApps.Rayonnant.Presentation"
+             xmlns:userControl="clr-namespace:TailoredApps.Rayonnant.Presentation.Resources.UserControls;assembly=TailoredApps.Rayonnant.Presentation.Resources"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1600"
+                    Style="{StaticResource {x:Type view:PrismViewBase}}">
+    <view:PrismViewBase.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="pack://application:,,,/TailoredApps.Rayonnant.Presentation.Resources;component/Themes/Generic/SizeDefinition.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            
+            <ItemsPanelTemplate x:Key="ItemsPanelTemplate1">
+                <WrapPanel IsItemsHost="True" Orientation="Horizontal"/>
+            </ItemsPanelTemplate>
+            
+        </ResourceDictionary>
+    
+    </view:PrismViewBase.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="380"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="26"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <userControl:SearchTextBox Grid.Row="0" Grid.Column="0" Text="{Binding ApplicationFilterName, UpdateSourceTrigger=PropertyChanged}" Margin="0 1 0 5" Height="{StaticResource StandardTextBasedControlHeight}"/>
+        <ListView Grid.Row="1" Grid.Column="0" SelectedItem="{Binding SelectedApplicationViewModel}" ItemsSource="{Binding ApplicationsCollectionView}" ItemsPanel="{StaticResource ItemsPanelTemplate1}" Background="{DynamicResource MainWindowBackground}" />
+        <ListView Grid.Row="1" Grid.Column="1" >
+            <ListView.View>
+                <GridView>
+                    <GridView.Columns>
+                        <GridViewColumn Header="Role Name" DisplayMemberBinding="{Binding Name}" Width="150"/>
+                        <GridViewColumn Header="Users" DisplayMemberBinding="{Binding UserCount}" Width="50"/>
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</view:PrismViewBase>
