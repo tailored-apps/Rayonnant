@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:viewModel="clr-namespace:TailoredApps.Rayonnant.SecurityModule.ViewModel"
+                    xmlns:view="clr-namespace:TailoredApps.Rayonnant.SecurityModule.View">
+<ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="../DataTemplates/ApplicationViewModelDataTemplate.xaml" />
+</ResourceDictionary.MergedDictionaries>
+
+    <DataTemplate DataType="{x:Type viewModel:ApplicationsViewModel}">
+        <view:ApplicationsView />
+    </DataTemplate>
+    
+    
+    
+</ResourceDictionary>

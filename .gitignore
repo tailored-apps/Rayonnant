@@ -1,9 +1,4 @@
-﻿/*/**/.vs/Wise.Framework
-/bin/Debug
-
-*/**/bin/Debug
-
-*/**/bin/*
-
-*/**/obj/*
-/obj/Debug/netcoreapp3.1/
+﻿
+.vs/
+**/bin/Debug/
+**/obj/
