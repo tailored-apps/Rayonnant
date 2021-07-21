@@ -22,7 +22,7 @@ node () {
                 mergeTarget: 'develop'
             ]
         ]
-        ], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://bitbucket.tailoredapps.pl/scm/wise/TailoredApps.Rayonnant.git']]]) 
+        ], submoduleCfg: [], userRemoteConfigs: [[credentialsId: 'jenkins', url: 'https://bitbucket.tailoredapps.pl/scm/wise/wise.framework.git']]]) 
 	}
 	
 	stage ('Build'){
