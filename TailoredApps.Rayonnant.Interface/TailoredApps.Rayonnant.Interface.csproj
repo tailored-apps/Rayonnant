@@ -1,11 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>library</OutputType>
 	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <TargetFramework>net5.0-windows</TargetFramework>
-    <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <UseWPF>true</UseWPF>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Interface.DependencyInjection\TailoredApps.Rayonnant.Interface.DependencyInjection.csproj" />
+  </ItemGroup>
 
 </Project>

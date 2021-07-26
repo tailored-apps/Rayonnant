@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>library</OutputType>
@@ -7,10 +7,6 @@
     <UseWPF>true</UseWPF>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TailoredApps.Rayonnant.Interface\TailoredApps.Rayonnant.Interface.csproj" />
-  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Common.Logging">
       <Version>3.4.1</Version>
@@ -25,6 +21,9 @@
     <PackageReference Include="Unity">
       <Version>5.11.10</Version>
     </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TailoredApps.Rayonnant.Interface.DependencyInjection\TailoredApps.Rayonnant.Interface.DependencyInjection.csproj" />
   </ItemGroup>
 
 </Project>

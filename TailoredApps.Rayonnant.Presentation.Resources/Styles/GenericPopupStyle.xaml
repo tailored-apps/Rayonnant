@@ -3,7 +3,7 @@
                     xmlns:behaviors="clr-namespace:TailoredApps.Rayonnant.Presentation.Behaviors;assembly=TailoredApps.Rayonnant.Presentation"
                     xmlns:conv="clr-namespace:TailoredApps.Rayonnant.Presentation.Converters;assembly=TailoredApps.Rayonnant.Presentation"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity">
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary>
 

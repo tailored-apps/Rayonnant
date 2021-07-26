@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+                    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
                     xmlns:actions1="clr-namespace:TailoredApps.Rayonnant.Presentation.Resources.Actions">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary
