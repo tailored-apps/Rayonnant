@@ -6,34 +6,21 @@ namespace Wise.Framework.Data.NHibernate
 {
     public class SessionScope : IDisposable
     {
-        private readonly ISessionFactory sessionFactory;
+        private readonly ISession sessionFactory;
 
-        public SessionScope(ISessionFactory sessionFactory)
+        public SessionScope(ISession sessionFactory)
         {
             this.sessionFactory = sessionFactory;
-            if (!CurrentSessionContext.HasBind(sessionFactory))
-            {
-                ISession sess = sessionFactory.OpenSession();
-                CurrentSessionContext.Bind(sess);
-            }
         }
 
         public ISession Session
         {
-            get { return sessionFactory.GetCurrentSession(); }
+            get { return sessionFactory; }
         }
 
         public void Dispose()
         {
-            DisposeCurrentSession();
         }
 
-        private void DisposeCurrentSession()
-        {
-            ISession currentSession = CurrentSessionContext.Unbind(sessionFactory);
-            currentSession.Flush();
-            currentSession.Close();
-            currentSession.Dispose();
-        }
     }
 }

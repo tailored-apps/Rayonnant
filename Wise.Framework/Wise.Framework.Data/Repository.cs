@@ -43,12 +43,26 @@ namespace Wise.Framework.Data
             return dataProvider.GetById<TKey, TEntity>(id);
         }
 
-
         public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria) 
             where TEntity : class 
             where TProvider : class
         {
             return dataProvider.GetBySearchCriteria(searchCriteria);
+        }
+
+        public void BeginTransaction()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void CommitTransaction()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Rollback()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

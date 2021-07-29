@@ -68,7 +68,6 @@ namespace Wise.Framework.Data.Providers
             throw new Exception("Please register operation DeleteById");
         }
 
-
         public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(
             ISearchCriteria<TEntity, TProvider> searchCriteria) where TEntity : class where TProvider : class
         {
@@ -77,6 +76,21 @@ namespace Wise.Framework.Data.Providers
                 return persister.GetBySearchCriteria<TEntity, TProvider>(searchCriteria);
             }
             throw new Exception("Please register operation GetBySearchCriteria");
+        }
+
+        public void BeginTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CommitTransaction()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Rollback()
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,16 +10,18 @@ namespace Wise.Framework.Data.NHibernate
 {
     public class NHibernateDataProvider : IDataProvider
     {
+        private readonly ISession session;
         private readonly ISessionFactory sessionFactory;
 
-        public NHibernateDataProvider(ISessionFactory sessionFactory)
+        public NHibernateDataProvider(ISession session, ISessionFactory sessionFactory)
         {
+            this.session = session;
             this.sessionFactory = sessionFactory;
         }
 
         protected ISession Session
         {
-            get { return sessionFactory.GetCurrentSession(); }
+            get { return session; }
         }
 
         public TEntity Get<TEntity>(object id) where TEntity : class
@@ -53,7 +55,6 @@ namespace Wise.Framework.Data.NHibernate
                 sessionFactory.GetClassMetadata(typeof (TEntity)).IdentifierPropertyName, id));
         }
 
-
         public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria)
             where TEntity : class
             where TProvider : class
@@ -71,6 +72,21 @@ namespace Wise.Framework.Data.NHibernate
 
             throw new ArgumentTypeException("searchCriteria", typeof (ISearchCriteria<TEntity, DetachedCriteria>),
                 typeof (ISearchCriteria<TEntity, TProvider>));
+        }
+
+        public void BeginTransaction()
+        {
+            session.BeginTransaction();
+        }
+
+        public void CommitTransaction()
+        {
+            session.Transaction.Commit();
+        }
+
+        public void Rollback()
+        {
+            session.Transaction.Rollback();
         }
     }
 }
