@@ -42,17 +42,20 @@ namespace Wise.Framework.Data.NHibernate
         public void Save<TEntity>(TEntity entity) where TEntity : class
         {
             Session.Save(entity);
+            Session.Flush();
         }
 
         public void Delete<TEntity>(TEntity entity) where TEntity : class
         {
             Session.Delete(entity);
+            Session.Flush();
         }
 
         public void DeleteById<TKey, TEntity>(TKey id) where TEntity : class
         {
             Session.Delete(string.Format("from {0} where {1} = {2}", typeof (TEntity),
                 sessionFactory.GetClassMetadata(typeof (TEntity)).IdentifierPropertyName, id));
+            Session.Flush();
         }
 
         public IEnumerable<TEntity> GetBySearchCriteria<TEntity, TProvider>(ISearchCriteria<TEntity, TProvider> searchCriteria)
@@ -82,11 +85,13 @@ namespace Wise.Framework.Data.NHibernate
         public void CommitTransaction()
         {
             session.Transaction.Commit();
+            session.Flush();
         }
 
         public void Rollback()
         {
             session.Transaction.Rollback();
+            session.Flush();
         }
     }
 }

@@ -52,17 +52,17 @@ namespace Wise.Framework.Data
 
         public void BeginTransaction()
         {
-            throw new System.NotImplementedException();
+            dataProvider.BeginTransaction();
         }
 
         public void CommitTransaction()
         {
-            throw new System.NotImplementedException();
+            dataProvider.CommitTransaction();
         }
 
         public void Rollback()
         {
-            throw new System.NotImplementedException();
+            dataProvider.Rollback();
         }
     }
 }
