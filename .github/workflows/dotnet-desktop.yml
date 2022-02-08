@@ -69,7 +69,18 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-
+    
+    - name: Install dot net tools
+      run: npm install dotnettools
+   
+    - name: Bump version
+      run: node ./node_modules/dotnettools/bin/dnt.js bump-versions patch
+   
+    - name: Add & Commit
+      uses: EndBug/add-and-commit@v4.0.1
+      with:
+        message: Version update
+        
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
@@ -81,18 +92,15 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
- 
-    # Create the app package by building and packaging the Windows Application Packaging project
-    - name: Create the app package
-      run: msbuild $env:Wap_Project_Path /p:Configuration=$env:Configuration /p:UapAppxPackageBuildMode=$env:Appx_Package_Build_Mode /p:AppxBundle=$env:Appx_Bundle /p:PackageCertificateKeyFile=GitHubActionsWorkflow.pfx /p:PackageCertificatePassword=${{ secrets.Pfx_Key }}
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Publish /p:Configuration=$env:Configuration
       env:
-        Appx_Bundle: Always
-        Appx_Bundle_Platforms: x86|x64
-        Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}
+
 
     - name: Publish NuGet
       uses: rohith/publish-nuget@v2.2.1
       with:
-       PROJECT_FILE_PATH: TailoredApps.Rayonnant.Interface.csproj
+       PROJECT_FILE_PATH: ./TailoredApps.Rayonnant.Interface/TailoredApps.Rayonnant.Interface.csproj
        NUGET_KEY: ${{ secrets.RayonnantNugetKey }}
