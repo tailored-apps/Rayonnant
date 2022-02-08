@@ -91,4 +91,8 @@ jobs:
         Appx_Package_Build_Mode: StoreUpload
         Configuration: ${{ matrix.configuration }}
 
- 
+    - name: Publish NuGet
+      uses: rohith/publish-nuget@v2.2.1
+      with:
+       PROJECT_FILE_PATH: TailoredApps.Rayonnant.Interface.csproj
+       NUGET_KEY: ${{ secrets.RayonnantNugetKey }}
