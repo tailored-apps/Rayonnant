@@ -1,0 +1,102 @@
+@page "/users"
+@using MudBlazor
+
+<MudText Typo="Typo.h4" Class="mb-4">User Management</MudText>
+
+<MudGrid>
+    <MudItem xs="12">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center mb-4">
+                <MudText Typo="Typo.h6">Users</MudText>
+                <MudSpacer />
+                <MudTextField T="string" Placeholder="Filter users..." Variant="Variant.Outlined"
+                              Margin="Margin.Dense" Adornment="Adornment.Start"
+                              AdornmentIcon="@Icons.Material.Filled.Search" Class="mr-2" Style="max-width:250px;" />
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.PersonAdd">
+                    Add User
+                </MudButton>
+            </div>
+
+            <MudTable Items="_users" Hover="true" Striped="true" Dense="true" Elevation="0">
+                <HeaderContent>
+                    <MudTh>Avatar</MudTh>
+                    <MudTh>Name</MudTh>
+                    <MudTh>Email</MudTh>
+                    <MudTh>Role</MudTh>
+                    <MudTh>Status</MudTh>
+                    <MudTh>Last Login</MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd><MudAvatar Size="Size.Small" Color="@context.AvatarColor">@context.Initials</MudAvatar></MudTd>
+                    <MudTd><MudText Typo="Typo.body2"><b>@context.Name</b></MudText></MudTd>
+                    <MudTd>@context.Email</MudTd>
+                    <MudTd><MudChip T="string" Size="Size.Small" Color="@context.RoleColor">@context.Role</MudChip></MudTd>
+                    <MudTd>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.IsActive ? Color.Success : Color.Error)">
+                            @(context.IsActive ? "Active" : "Inactive")
+                        </MudChip>
+                    </MudTd>
+                    <MudTd><MudText Typo="Typo.caption">@context.LastLogin</MudText></MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Edit" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Delete" Size="Size.Small" Color="Color.Error" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Roles Distribution</MudText>
+            <MudSimpleTable Dense="true" Hover="true" Elevation="0">
+                <thead><tr><th>Role</th><th>Count</th><th>Permissions</th></tr></thead>
+                <tbody>
+                    <tr><td>Administrator</td><td><MudChip T="string" Size="Size.Small" Color="Color.Error">2</MudChip></td><td>Full Access</td></tr>
+                    <tr><td>Manager</td><td><MudChip T="string" Size="Size.Small" Color="Color.Warning">5</MudChip></td><td>Read/Write</td></tr>
+                    <tr><td>Developer</td><td><MudChip T="string" Size="Size.Small" Color="Color.Info">12</MudChip></td><td>Read/Write (scoped)</td></tr>
+                    <tr><td>Viewer</td><td><MudChip T="string" Size="Size.Small" Color="Color.Default">8</MudChip></td><td>Read Only</td></tr>
+                </tbody>
+            </MudSimpleTable>
+        </MudPaper>
+    </MudItem>
+
+    <MudItem xs="12" md="6">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Recent Activity</MudText>
+            <MudTimeline TimelinePosition="TimelinePosition.Start">
+                <MudTimelineItem Color="Color.Success" Size="Size.Small">
+                    <MudText Typo="Typo.body2"><b>Alice</b> logged in</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">2 minutes ago</MudText>
+                </MudTimelineItem>
+                <MudTimelineItem Color="Color.Info" Size="Size.Small">
+                    <MudText Typo="Typo.body2"><b>Bob</b> updated profile</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">15 minutes ago</MudText>
+                </MudTimelineItem>
+                <MudTimelineItem Color="Color.Warning" Size="Size.Small">
+                    <MudText Typo="Typo.body2"><b>Charlie</b> role changed to Manager</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">1 hour ago</MudText>
+                </MudTimelineItem>
+                <MudTimelineItem Color="Color.Error" Size="Size.Small">
+                    <MudText Typo="Typo.body2"><b>Dave</b> account deactivated</MudText>
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">3 hours ago</MudText>
+                </MudTimelineItem>
+            </MudTimeline>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    record UserRow(string Name, string Initials, string Email, string Role, bool IsActive, string LastLogin, Color AvatarColor, Color RoleColor);
+
+    private readonly List<UserRow> _users =
+    [
+        new("Alice Johnson", "AJ", "alice@rayonnant.io", "Admin", true, "2 min ago", Color.Primary, Color.Error),
+        new("Bob Smith", "BS", "bob@rayonnant.io", "Developer", true, "1 hour ago", Color.Secondary, Color.Info),
+        new("Charlie Brown", "CB", "charlie@rayonnant.io", "Manager", true, "3 hours ago", Color.Tertiary, Color.Warning),
+        new("Dave Wilson", "DW", "dave@rayonnant.io", "Viewer", false, "2 days ago", Color.Warning, Color.Default),
+        new("Eve Adams", "EA", "eve@rayonnant.io", "Developer", true, "30 min ago", Color.Success, Color.Info),
+        new("Frank Miller", "FM", "frank@rayonnant.io", "Admin", true, "Just now", Color.Info, Color.Error),
+    ];
+}

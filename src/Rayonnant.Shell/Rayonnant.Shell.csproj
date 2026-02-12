@@ -16,6 +16,9 @@
   <ItemGroup>
     <ProjectReference Include="..\Rayonnant.Core\Rayonnant.Core.csproj" />
     <ProjectReference Include="..\Modules\Rayonnant.Module.Dashboard\Rayonnant.Module.Dashboard.csproj" />
+    <ProjectReference Include="..\Modules\Rayonnant.Module.Users\Rayonnant.Module.Users.csproj" />
+    <ProjectReference Include="..\Modules\Rayonnant.Module.Monitoring\Rayonnant.Module.Monitoring.csproj" />
+    <ProjectReference Include="..\Modules\Rayonnant.Module.DataExplorer\Rayonnant.Module.DataExplorer.csproj" />
   </ItemGroup>
 
 </Project>

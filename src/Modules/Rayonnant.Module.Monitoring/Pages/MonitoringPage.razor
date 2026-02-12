@@ -1,0 +1,138 @@
+@page "/monitoring"
+@using MudBlazor
+
+<MudText Typo="Typo.h4" Class="mb-4">System Monitoring</MudText>
+
+<MudGrid>
+    @* Top stats row *@
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center">
+                <MudAvatar Color="Color.Success" Variant="Variant.Outlined" Size="Size.Large">
+                    <MudIcon Icon="@Icons.Material.Filled.Speed" />
+                </MudAvatar>
+                <div class="ml-3">
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">CPU Usage</MudText>
+                    <MudText Typo="Typo.h5">23%</MudText>
+                </div>
+            </div>
+            <MudProgressLinear Color="Color.Success" Value="23" Class="mt-3" Rounded="true" />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center">
+                <MudAvatar Color="Color.Info" Variant="Variant.Outlined" Size="Size.Large">
+                    <MudIcon Icon="@Icons.Material.Filled.Memory" />
+                </MudAvatar>
+                <div class="ml-3">
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">Memory</MudText>
+                    <MudText Typo="Typo.h5">4.2 / 8 GB</MudText>
+                </div>
+            </div>
+            <MudProgressLinear Color="Color.Info" Value="52" Class="mt-3" Rounded="true" />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center">
+                <MudAvatar Color="Color.Warning" Variant="Variant.Outlined" Size="Size.Large">
+                    <MudIcon Icon="@Icons.Material.Filled.Storage" />
+                </MudAvatar>
+                <div class="ml-3">
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">Disk</MudText>
+                    <MudText Typo="Typo.h5">156 / 256 GB</MudText>
+                </div>
+            </div>
+            <MudProgressLinear Color="Color.Warning" Value="61" Class="mt-3" Rounded="true" />
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="12" sm="6" md="3">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center">
+                <MudAvatar Color="Color.Secondary" Variant="Variant.Outlined" Size="Size.Large">
+                    <MudIcon Icon="@Icons.Material.Filled.NetworkCheck" />
+                </MudAvatar>
+                <div class="ml-3">
+                    <MudText Typo="Typo.caption" Color="Color.Tertiary">Network</MudText>
+                    <MudText Typo="Typo.h5">142 Mbps</MudText>
+                </div>
+            </div>
+            <MudProgressLinear Color="Color.Secondary" Value="35" Class="mt-3" Rounded="true" />
+        </MudPaper>
+    </MudItem>
+
+    @* Services table *@
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Services</MudText>
+            <MudTable Items="_services" Hover="true" Dense="true" Elevation="0">
+                <HeaderContent>
+                    <MudTh>Service</MudTh>
+                    <MudTh>Status</MudTh>
+                    <MudTh>Uptime</MudTh>
+                    <MudTh>Response</MudTh>
+                    <MudTh>Actions</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd>
+                        <div class="d-flex align-center">
+                            <MudIcon Icon="@context.Icon" Size="Size.Small" Class="mr-2" Color="@context.StatusColor" />
+                            <MudText Typo="Typo.body2"><b>@context.Name</b></MudText>
+                        </div>
+                    </MudTd>
+                    <MudTd><MudChip T="string" Size="Size.Small" Color="@context.StatusColor">@context.Status</MudChip></MudTd>
+                    <MudTd>@context.Uptime</MudTd>
+                    <MudTd>@context.ResponseTime</MudTd>
+                    <MudTd>
+                        <MudIconButton Icon="@Icons.Material.Filled.Refresh" Size="Size.Small" />
+                        <MudIconButton Icon="@Icons.Material.Filled.Stop" Size="Size.Small" Color="Color.Error" />
+                    </MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudPaper>
+    </MudItem>
+
+    @* Alerts panel *@
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Alerts</MudText>
+            <MudAlert Severity="Severity.Error" Dense="true" Class="mb-2">Database connection pool at 95%</MudAlert>
+            <MudAlert Severity="Severity.Warning" Dense="true" Class="mb-2">SSL certificate expires in 14 days</MudAlert>
+            <MudAlert Severity="Severity.Info" Dense="true" Class="mb-2">Scheduled maintenance: Feb 15, 02:00</MudAlert>
+            <MudAlert Severity="Severity.Success" Dense="true" Class="mb-2">Backup completed successfully</MudAlert>
+            <MudAlert Severity="Severity.Warning" Dense="true" Class="mb-2">Disk usage above 60% threshold</MudAlert>
+        </MudPaper>
+    </MudItem>
+
+    @* Logs *@
+    <MudItem xs="12">
+        <MudExpansionPanels Elevation="2">
+            <MudExpansionPanel Text="Application Logs" Icon="@Icons.Material.Filled.Article" IsInitiallyExpanded="true">
+                <MudSimpleTable Dense="true" Hover="true" Elevation="0" Style="font-family: 'Cascadia Code', monospace; font-size: 0.8rem;">
+                    <tbody>
+                        <tr><td style="color:#6c7a89">14:02:31</td><td><MudChip T="string" Size="Size.Small" Color="Color.Info">INFO</MudChip></td><td>Request processed: GET /api/health → 200 (3ms)</td></tr>
+                        <tr><td style="color:#6c7a89">14:02:28</td><td><MudChip T="string" Size="Size.Small" Color="Color.Warning">WARN</MudChip></td><td>Slow query detected: SELECT * FROM users (1240ms)</td></tr>
+                        <tr><td style="color:#6c7a89">14:02:15</td><td><MudChip T="string" Size="Size.Small" Color="Color.Error">ERROR</MudChip></td><td>Connection refused: redis://cache:6379 — retry in 5s</td></tr>
+                        <tr><td style="color:#6c7a89">14:02:10</td><td><MudChip T="string" Size="Size.Small" Color="Color.Info">INFO</MudChip></td><td>Module loaded: Rayonnant.Module.Monitoring v2.0.0</td></tr>
+                        <tr><td style="color:#6c7a89">14:02:05</td><td><MudChip T="string" Size="Size.Small" Color="Color.Success">DEBUG</MudChip></td><td>SignalR hub connected: client-7f3a (WebSocket)</td></tr>
+                    </tbody>
+                </MudSimpleTable>
+            </MudExpansionPanel>
+        </MudExpansionPanels>
+    </MudItem>
+</MudGrid>
+
+@code {
+    record ServiceRow(string Name, string Icon, string Status, Color StatusColor, string Uptime, string ResponseTime);
+
+    private readonly List<ServiceRow> _services =
+    [
+        new("API Gateway", Icons.Material.Filled.Api, "Running", Color.Success, "14d 6h", "12ms"),
+        new("Auth Service", Icons.Material.Filled.Lock, "Running", Color.Success, "14d 6h", "8ms"),
+        new("Database", Icons.Material.Filled.Storage, "Warning", Color.Warning, "7d 2h", "45ms"),
+        new("Cache (Redis)", Icons.Material.Filled.Cached, "Down", Color.Error, "0m", "—"),
+        new("Message Queue", Icons.Material.Filled.Forum, "Running", Color.Success, "3d 18h", "5ms"),
+        new("File Storage", Icons.Material.Filled.CloudUpload, "Running", Color.Success, "14d 6h", "22ms"),
+    ];
+}

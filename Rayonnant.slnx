@@ -5,6 +5,9 @@
   </Folder>
   <Folder Name="/src/Modules/">
     <Project Path="src/Modules/Rayonnant.Module.Dashboard/Rayonnant.Module.Dashboard.csproj" />
+    <Project Path="src/Modules/Rayonnant.Module.DataExplorer/Rayonnant.Module.DataExplorer.csproj" />
+    <Project Path="src/Modules/Rayonnant.Module.Monitoring/Rayonnant.Module.Monitoring.csproj" />
+    <Project Path="src/Modules/Rayonnant.Module.Users/Rayonnant.Module.Users.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Rayonnant.Tests/Rayonnant.Tests.csproj" />

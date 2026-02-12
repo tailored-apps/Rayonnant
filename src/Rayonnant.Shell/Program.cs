@@ -16,6 +16,9 @@ builder.Services.AddSingleton<ModuleLoader>();
 
 // Register modules
 builder.Services.AddSingleton<IModule, Rayonnant.Module.Dashboard.DashboardModule>();
+builder.Services.AddSingleton<IModule, Rayonnant.Module.Users.UsersModule>();
+builder.Services.AddSingleton<IModule, Rayonnant.Module.Monitoring.MonitoringModule>();
+builder.Services.AddSingleton<IModule, Rayonnant.Module.DataExplorer.DataExplorerModule>();
 
 var app = builder.Build();
 
@@ -33,7 +36,11 @@ app.UseAntiforgery();
 
 app.MapRazorComponents<Rayonnant.Shell.Components.App>()
     .AddInteractiveServerRenderMode()
-    .AddAdditionalAssemblies(typeof(Rayonnant.Module.Dashboard.DashboardModule).Assembly);
+    .AddAdditionalAssemblies(
+        typeof(Rayonnant.Module.Dashboard.DashboardModule).Assembly,
+        typeof(Rayonnant.Module.Users.UsersModule).Assembly,
+        typeof(Rayonnant.Module.Monitoring.MonitoringModule).Assembly,
+        typeof(Rayonnant.Module.DataExplorer.DataExplorerModule).Assembly);
 
 app.Run();
 

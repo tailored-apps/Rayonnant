@@ -38,10 +38,30 @@
     <MudDrawer @bind-Open="_rightDrawerOpen" Anchor="Anchor.End" Elevation="2"
                ClipMode="DrawerClipMode.Docked" Width="300px">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Context Panel</MudText>
+            <MudText Typo="Typo.h6">Quick Info</MudText>
         </MudDrawerHeader>
-        <MudContainer Class="pa-4">
-            <MudText Typo="Typo.body2" Color="Color.Tertiary">No context selected.</MudText>
+        <MudContainer Class="pa-2">
+            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mb-2">System</MudText>
+            <MudSimpleTable Dense="true" Hover="true" Elevation="0" Style="font-size:0.8rem;">
+                <tbody>
+                    <tr><td>Uptime</td><td><b>14d 6h</b></td></tr>
+                    <tr><td>Modules</td><td><b>@ModuleLoader.NavItems.Count()</b> loaded</td></tr>
+                    <tr><td>.NET</td><td><b>10.0</b></td></tr>
+                    <tr><td>Environment</td><td><MudChip T="string" Size="Size.Small" Color="Color.Warning">Dev</MudChip></td></tr>
+                </tbody>
+            </MudSimpleTable>
+
+            <MudDivider Class="my-3" />
+            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mb-2">Notifications</MudText>
+            <MudAlert Severity="Severity.Info" Dense="true" NoIcon="true" Class="mb-1" Style="font-size:0.75rem;">3 pending tasks</MudAlert>
+            <MudAlert Severity="Severity.Warning" Dense="true" NoIcon="true" Class="mb-1" Style="font-size:0.75rem;">1 alert active</MudAlert>
+            <MudAlert Severity="Severity.Success" Dense="true" NoIcon="true" Class="mb-1" Style="font-size:0.75rem;">All services OK</MudAlert>
+
+            <MudDivider Class="my-3" />
+            <MudText Typo="Typo.subtitle2" Color="Color.Primary" Class="mb-2">Help</MudText>
+            <MudLink Typo="Typo.caption" Href="#" Class="d-block mb-1">Documentation</MudLink>
+            <MudLink Typo="Typo.caption" Href="#" Class="d-block mb-1">Keyboard Shortcuts</MudLink>
+            <MudLink Typo="Typo.caption" Href="#" Class="d-block">Report Issue</MudLink>
         </MudContainer>
     </MudDrawer>
 

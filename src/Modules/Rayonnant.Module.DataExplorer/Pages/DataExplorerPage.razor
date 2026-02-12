@@ -1,0 +1,152 @@
+@page "/data"
+@using MudBlazor
+
+<MudText Typo="Typo.h4" Class="mb-4">Data Explorer</MudText>
+
+<MudGrid>
+    @* Query panel *@
+    <MudItem xs="12">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-2">Query</MudText>
+            <MudTextField T="string" @bind-Value="_query" Lines="3" Variant="Variant.Outlined"
+                          Placeholder="SELECT * FROM products WHERE category = 'Electronics' LIMIT 50"
+                          Style="font-family: 'Cascadia Code', monospace;" />
+            <div class="d-flex mt-3 gap-2">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" StartIcon="@Icons.Material.Filled.PlayArrow">
+                    Execute
+                </MudButton>
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.Save">Save Query</MudButton>
+                <MudButton Variant="Variant.Outlined" StartIcon="@Icons.Material.Filled.History">History</MudButton>
+                <MudSpacer />
+                <MudChip T="string" Size="Size.Small" Color="Color.Success" Icon="@Icons.Material.Filled.Timer">
+                    Last: 42ms
+                </MudChip>
+                <MudChip T="string" Size="Size.Small" Color="Color.Info" Icon="@Icons.Material.Filled.DataArray">
+                    8 rows
+                </MudChip>
+            </div>
+        </MudPaper>
+    </MudItem>
+
+    @* Results table *@
+    <MudItem xs="12">
+        <MudPaper Class="pa-4" Elevation="2">
+            <div class="d-flex align-center mb-3">
+                <MudText Typo="Typo.h6">Results</MudText>
+                <MudSpacer />
+                <MudButtonGroup Variant="Variant.Outlined" Size="Size.Small">
+                    <MudButton StartIcon="@Icons.Material.Filled.ViewList">Table</MudButton>
+                    <MudButton StartIcon="@Icons.Material.Filled.Code">JSON</MudButton>
+                    <MudButton StartIcon="@Icons.Material.Filled.Download">Export</MudButton>
+                </MudButtonGroup>
+            </div>
+            <MudTable Items="_products" Hover="true" Dense="true" Striped="true" Elevation="0"
+                      FixedHeader="true" Height="300px">
+                <HeaderContent>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ProductRow, object>(x => x.Id)">ID</MudTableSortLabel></MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ProductRow, object>(x => x.Name)">Name</MudTableSortLabel></MudTh>
+                    <MudTh>Category</MudTh>
+                    <MudTh><MudTableSortLabel SortBy="new Func<ProductRow, object>(x => x.Price)">Price</MudTableSortLabel></MudTh>
+                    <MudTh>Stock</MudTh>
+                    <MudTh>Rating</MudTh>
+                    <MudTh>Created</MudTh>
+                </HeaderContent>
+                <RowTemplate>
+                    <MudTd><MudText Typo="Typo.caption" Color="Color.Tertiary">@context.Id</MudText></MudTd>
+                    <MudTd><b>@context.Name</b></MudTd>
+                    <MudTd><MudChip T="string" Size="Size.Small" Color="@context.CategoryColor">@context.Category</MudChip></MudTd>
+                    <MudTd>@context.Price.ToString("C")</MudTd>
+                    <MudTd>
+                        <MudProgressLinear Color="@(context.Stock > 50 ? Color.Success : context.Stock > 20 ? Color.Warning : Color.Error)"
+                                           Value="@context.Stock" Max="100" Style="min-width:80px" Rounded="true" />
+                    </MudTd>
+                    <MudTd><MudRating ReadOnly="true" SelectedValue="@context.Rating" Size="Size.Small" /></MudTd>
+                    <MudTd><MudText Typo="Typo.caption">@context.Created</MudText></MudTd>
+                </RowTemplate>
+            </MudTable>
+        </MudPaper>
+    </MudItem>
+
+    @* Schema browser *@
+    <MudItem xs="12" md="4">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Schema</MudText>
+            <MudTreeView T="string" Dense="true">
+                <MudTreeViewItem T="string" Value="@("products")" Text="products" Icon="@Icons.Material.Filled.TableChart">
+                    <MudTreeViewItem T="string" Value="@("id")" Text="id (int, PK)" Icon="@Icons.Material.Filled.Key" />
+                    <MudTreeViewItem T="string" Value="@("name")" Text="name (varchar)" Icon="@Icons.Material.Filled.TextFields" />
+                    <MudTreeViewItem T="string" Value="@("category")" Text="category (varchar)" Icon="@Icons.Material.Filled.Category" />
+                    <MudTreeViewItem T="string" Value="@("price")" Text="price (decimal)" Icon="@Icons.Material.Filled.AttachMoney" />
+                    <MudTreeViewItem T="string" Value="@("stock")" Text="stock (int)" Icon="@Icons.Material.Filled.Inventory" />
+                </MudTreeViewItem>
+                <MudTreeViewItem T="string" Value="@("users")" Text="users" Icon="@Icons.Material.Filled.TableChart">
+                    <MudTreeViewItem T="string" Value="@("uid")" Text="id (int, PK)" Icon="@Icons.Material.Filled.Key" />
+                    <MudTreeViewItem T="string" Value="@("uname")" Text="name (varchar)" Icon="@Icons.Material.Filled.TextFields" />
+                    <MudTreeViewItem T="string" Value="@("uemail")" Text="email (varchar)" Icon="@Icons.Material.Filled.Email" />
+                </MudTreeViewItem>
+                <MudTreeViewItem T="string" Value="@("orders")" Text="orders" Icon="@Icons.Material.Filled.TableChart">
+                    <MudTreeViewItem T="string" Value="@("oid")" Text="id (int, PK)" Icon="@Icons.Material.Filled.Key" />
+                    <MudTreeViewItem T="string" Value="@("ouser")" Text="user_id (int, FK)" Icon="@Icons.Material.Filled.Link" />
+                    <MudTreeViewItem T="string" Value="@("ototal")" Text="total (decimal)" Icon="@Icons.Material.Filled.AttachMoney" />
+                </MudTreeViewItem>
+            </MudTreeView>
+        </MudPaper>
+    </MudItem>
+
+    @* Saved queries *@
+    <MudItem xs="12" md="8">
+        <MudPaper Class="pa-4" Elevation="2">
+            <MudText Typo="Typo.h6" Class="mb-3">Saved Queries</MudText>
+            <MudList T="string" Dense="true">
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Star" IconColor="Color.Warning">
+                    <div class="d-flex align-center">
+                        <div>
+                            <MudText Typo="Typo.body2"><b>Top selling products</b></MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Tertiary">SELECT * FROM products ORDER BY sales DESC LIMIT 10</MudText>
+                        </div>
+                        <MudSpacer />
+                        <MudIconButton Icon="@Icons.Material.Filled.PlayArrow" Size="Size.Small" Color="Color.Primary" />
+                    </div>
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.Star" IconColor="Color.Warning">
+                    <div class="d-flex align-center">
+                        <div>
+                            <MudText Typo="Typo.body2"><b>Low stock alert</b></MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Tertiary">SELECT * FROM products WHERE stock &lt; 20</MudText>
+                        </div>
+                        <MudSpacer />
+                        <MudIconButton Icon="@Icons.Material.Filled.PlayArrow" Size="Size.Small" Color="Color.Primary" />
+                    </div>
+                </MudListItem>
+                <MudListItem T="string" Icon="@Icons.Material.Filled.QueryStats">
+                    <div class="d-flex align-center">
+                        <div>
+                            <MudText Typo="Typo.body2"><b>User activity summary</b></MudText>
+                            <MudText Typo="Typo.caption" Color="Color.Tertiary">SELECT u.name, COUNT(o.id) FROM users u JOIN orders o ...</MudText>
+                        </div>
+                        <MudSpacer />
+                        <MudIconButton Icon="@Icons.Material.Filled.PlayArrow" Size="Size.Small" Color="Color.Primary" />
+                    </div>
+                </MudListItem>
+            </MudList>
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+@code {
+    private string _query = "SELECT * FROM products WHERE category = 'Electronics' LIMIT 50";
+
+    record ProductRow(int Id, string Name, string Category, decimal Price, int Stock, int Rating, string Created, Color CategoryColor);
+
+    private readonly List<ProductRow> _products =
+    [
+        new(1, "MacBook Pro 16\"", "Electronics", 2499.99m, 23, 5, "2024-01-15", Color.Info),
+        new(2, "Ergonomic Keyboard", "Peripherals", 149.99m, 67, 4, "2024-02-20", Color.Secondary),
+        new(3, "4K Monitor 32\"", "Electronics", 799.99m, 12, 4, "2024-03-10", Color.Info),
+        new(4, "Standing Desk", "Furniture", 599.99m, 45, 5, "2024-01-28", Color.Tertiary),
+        new(5, "Wireless Mouse", "Peripherals", 79.99m, 89, 3, "2024-04-05", Color.Secondary),
+        new(6, "USB-C Hub", "Accessories", 49.99m, 8, 4, "2024-02-14", Color.Warning),
+        new(7, "Noise Cancelling Headphones", "Audio", 349.99m, 34, 5, "2024-03-22", Color.Success),
+        new(8, "Webcam 4K", "Peripherals", 199.99m, 56, 4, "2024-01-30", Color.Secondary),
+    ];
+}
