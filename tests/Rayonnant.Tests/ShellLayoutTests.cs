@@ -6,17 +6,7 @@ namespace Rayonnant.Tests;
 [TestFixture]
 public class ShellLayoutTests : PageTest
 {
-    [OneTimeSetUp]
-    public async Task StartServer()
-    {
-        await ServerManager.EnsureStarted();
-    }
-
-    [OneTimeTearDown]
-    public void StopServer()
-    {
-        ServerManager.Stop();
-    }
+    // Server started/stopped by GlobalSetup [SetUpFixture]
 
     [Test]
     public async Task Shell_Has_AppBar_With_Title()
