@@ -14,11 +14,10 @@ public class ModuleLoader
         _modules = modules;
     }
 
-    public void Initialize(IServiceCollection services)
+    public void Initialize()
     {
         foreach (var module in _modules.OrderBy(m => m.Info.Order))
         {
-            module.ConfigureServices(services);
             var navBuilder = new NavigationBuilder();
             module.RegisterNavigation(navBuilder);
             _navItems.AddRange(navBuilder.Items);

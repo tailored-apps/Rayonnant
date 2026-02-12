@@ -1,0 +1,193 @@
+@page "/microerp/guidebooks"
+@using Rayonnant.Module.MicroErp.Services
+@inject GuidebookService GuidebookService
+@inject OrderService OrderService
+@inject IDialogService DialogService
+
+<MudText Typo="Typo.h4" Class="mb-4">Karty pracy (Guidebook)</MudText>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <div class="d-flex align-center mb-4">
+        <MudText Typo="Typo.h6">Lista kart pracy</MudText>
+        <MudSpacer />
+        <MudToggleIconButton Icon="@Icons.Material.Filled.Visibility" 
+                            Color="@(_showClosed ? Color.Default : Color.Primary)"
+                            ToggledIcon="@Icons.Material.Filled.VisibilityOff" 
+                            ToggledColor="@(_showClosed ? Color.Primary : Color.Default)"
+                            Toggled="_showClosed" 
+                            ToggledChanged="ToggleClosedGuidebooks" 
+                            Title="@(_showClosed ? "Pokaż tylko aktywne" : "Pokaż również zamknięte")" />
+        <MudButton Variant="Variant.Filled" 
+                  Color="Color.Primary" 
+                  StartIcon="@Icons.Material.Filled.Add"
+                  OnClick="OpenCreateGuidebookDialog">
+            Nowa karta pracy
+        </MudButton>
+    </div>
+
+    <MudDataGrid T="Guidebook" Items="_guidebooks" 
+                 Dense="true" 
+                 Hover="true" 
+                 Elevation="0"
+                 Loading="_loading"
+                 Virtualize="true"
+                 FixedHeader="true"
+                 Height="600px">
+        <Columns>
+            <PropertyColumn Property="x => x.FolderNumber" Title="Nr kartoteki" />
+            <PropertyColumn Property="x => x.Order!.Pcb!.Customer!.Name" Title="Klient" />
+            <PropertyColumn Property="x => x.Order!.Pcb!.Name" Title="PCB" />
+            <PropertyColumn Property="x => x.Qty" Title="Ilość" />
+            <TemplateColumn Title="Status">
+                <CellTemplate>
+                    <MudChip Size="Size.Small" Color="@(context.Item!.Closed ? Color.Success : Color.Warning)">
+                        @(context.Item.Closed ? "Zamknięta" : "Aktywna")
+                    </MudChip>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Kroki produkcji">
+                <CellTemplate>
+                    <div class="d-flex flex-wrap">
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item!.Riston ? Color.Success : Color.Default)">Riston</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.RistonTest ? Color.Success : Color.Default)">Test Riston</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.MosaicPrinting ? Color.Success : Color.Default)">Druk mozaiki</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.MosaicTest ? Color.Success : Color.Default)">Test mozaiki</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.Etching ? Color.Success : Color.Default)">Trawienie</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.Cutting ? Color.Success : Color.Default)">Cięcie</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.Vscoring ? Color.Success : Color.Default)">V-scoring</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.Control ? Color.Success : Color.Default)">Kontrola</MudChip>
+                        <MudChip T="string" Size="Size.Small" Color="@(context.Item.Packing ? Color.Success : Color.Default)">Pakowanie</MudChip>
+                    </div>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Akcje">
+                <CellTemplate>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" 
+                                  Size="Size.Small" 
+                                  OnClick="() => EditGuidebook(context.Item!)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.CheckCircle" 
+                                  Size="Size.Small" 
+                                  Color="@(context.Item!.Closed ? Color.Warning : Color.Success)"
+                                  Title="@(context.Item.Closed ? "Otwórz kartę" : "Zamknij kartę")"
+                                  OnClick="() => ToggleGuidebookStatus(context.Item)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" 
+                                  Size="Size.Small" 
+                                  Color="Color.Error"
+                                  OnClick="() => DeleteGuidebook(context.Item)" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="Guidebook" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>
+
+@code {
+    private List<Guidebook> _guidebooks = new();
+    private bool _loading = true;
+    private bool _showClosed = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadGuidebooks();
+    }
+
+    private async Task LoadGuidebooks()
+    {
+        _loading = true;
+        _guidebooks = _showClosed 
+            ? await GuidebookService.GetAllAsync()
+            : await GuidebookService.GetActiveGuidebooksAsync();
+        _loading = false;
+    }
+
+    private async Task ToggleClosedGuidebooks()
+    {
+        _showClosed = !_showClosed;
+        await LoadGuidebooks();
+    }
+
+    private async Task OpenCreateGuidebookDialog()
+    {
+        var parameters = new DialogParameters<GuidebookEditDialog>
+        {
+            ["IsCreateMode"] = true
+        };
+
+        var dialog = await DialogService.ShowAsync<GuidebookEditDialog>("Nowa karta pracy", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await LoadGuidebooks();
+        }
+    }
+
+    private async Task EditGuidebook(Guidebook guidebook)
+    {
+        var parameters = new DialogParameters<GuidebookEditDialog>
+        {
+            ["Guidebook"] = guidebook,
+            ["IsCreateMode"] = false
+        };
+
+        var dialog = await DialogService.ShowAsync<GuidebookEditDialog>($"Edytuj kartę pracy #{guidebook.FolderNumber}", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await LoadGuidebooks();
+        }
+    }
+
+    private async Task ToggleGuidebookStatus(Guidebook guidebook)
+    {
+        guidebook.Closed = !guidebook.Closed;
+        await GuidebookService.UpdateAsync(guidebook);
+        await LoadGuidebooks();
+    }
+
+    private async Task DeleteGuidebook(Guidebook guidebook)
+    {
+        var parameters = new DialogParameters
+        {
+            ["ContentText"] = $"Czy na pewno chcesz usunąć kartę pracy #{guidebook.FolderNumber}?",
+            ["ButtonText"] = "Usuń",
+            ["Color"] = Color.Error
+        };
+
+        var dialog = await DialogService.ShowAsync<MudMessageBox>("Potwierdź usunięcie", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled && bool.TryParse(result.Data?.ToString(), out bool confirmed) && confirmed)
+        {
+            await GuidebookService.DeleteAsync(guidebook.Id);
+            await LoadGuidebooks();
+        }
+    }
+}
+
+// Helper component for production step chips
+@code {
+    private class ProductionStepChip : ComponentBase
+    {
+        [Parameter] public bool IsCompleted { get; set; }
+        [Parameter] public string Text { get; set; } = string.Empty;
+
+        protected override void BuildRenderTree(Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder builder)
+        {
+            builder.OpenComponent<MudChip<string>>(0);
+            builder.AddAttribute(1, nameof(MudChip<string>.Size), Size.Small);
+            builder.AddAttribute(2, nameof(MudChip<string>.Color), IsCompleted ? Color.Success : Color.Default);
+            builder.AddAttribute(3, nameof(MudChip<string>.Text), Text);
+            builder.AddAttribute(4, "Class", "ma-1");
+            builder.CloseComponent();
+        }
+    }
+}
+
+// Placeholder for GuidebookEditDialog - would be implemented as a separate component
+@code { 
+    public class GuidebookEditDialog : MudDialog { }
+}

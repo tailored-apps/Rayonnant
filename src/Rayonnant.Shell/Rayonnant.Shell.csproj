@@ -19,6 +19,7 @@
     <ProjectReference Include="..\Modules\Rayonnant.Module.Users\Rayonnant.Module.Users.csproj" />
     <ProjectReference Include="..\Modules\Rayonnant.Module.Monitoring\Rayonnant.Module.Monitoring.csproj" />
     <ProjectReference Include="..\Modules\Rayonnant.Module.DataExplorer\Rayonnant.Module.DataExplorer.csproj" />
+    <ProjectReference Include="..\Modules\Rayonnant.Module.MicroErp\Rayonnant.Module.MicroErp.csproj" />
   </ItemGroup>
 
 </Project>

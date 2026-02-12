@@ -1,0 +1,189 @@
+@page "/microerp/pcbs"
+@using Rayonnant.Module.MicroErp.Services
+@inject PcbService PcbService
+@inject CustomerService CustomerService
+@inject ConfigurationService ConfigurationService
+@inject IDialogService DialogService
+
+<MudText Typo="Typo.h4" Class="mb-4">Płytki PCB</MudText>
+
+<MudPaper Class="pa-4" Elevation="2">
+    <div class="d-flex align-center mb-4">
+        <MudText Typo="Typo.h6">Lista płytek PCB</MudText>
+        <MudSpacer />
+        <MudTextField T="string" 
+                     @bind-Value="_searchString" 
+                     @oninput="OnSearchChanged"
+                     Placeholder="Szukaj PCB..." 
+                     Variant="Variant.Outlined"
+                     Margin="Margin.Dense" 
+                     Adornment="Adornment.Start"
+                     AdornmentIcon="@Icons.Material.Filled.Search" 
+                     Class="mr-2" 
+                     Style="max-width:300px;" />
+        <MudButton Variant="Variant.Filled" 
+                  Color="Color.Primary" 
+                  StartIcon="@Icons.Material.Filled.Add"
+                  OnClick="OpenCreatePcbDialog">
+            Nowa płytka
+        </MudButton>
+    </div>
+
+    <MudDataGrid T="Pcb" Items="_pcbs" 
+                 Dense="true" 
+                 Hover="true" 
+                 Elevation="0"
+                 Loading="_loading"
+                 Virtualize="true"
+                 FixedHeader="true"
+                 Height="600px">
+        <Columns>
+            <PropertyColumn Property="x => x.Id" Title="ID" />
+            <PropertyColumn Property="x => x.Name" Title="Nazwa PCB" />
+            <PropertyColumn Property="x => x.Customer!.Name" Title="Klient" />
+            <TemplateColumn Title="Materiał">
+                <CellTemplate>
+                    @if (context.Item!.Material != null)
+                    {
+                        <MudText Typo="Typo.caption">@context.Item.Material.FullMaterialName</MudText>
+                    }
+                </CellTemplate>
+            </TemplateColumn>
+            <PropertyColumn Property="x => x.PrototypePrice" Title="Cena prototypu" Format="F2" />
+            <PropertyColumn Property="x => x.ProductionPrice" Title="Cena produkcji" Format="F2" />
+            <TemplateColumn Title="Opcje">
+                <CellTemplate>
+                    <div class="d-flex">
+                        @if (context.Item!.HolePlatting)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Primary" Class="mr-1">HP</MudChip>
+                        }
+                        @if (context.Item.Vscoring)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Secondary" Class="mr-1">V-cut</MudChip>
+                        }
+                        @if (context.Item.Milling)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Tertiary" Class="mr-1">Mill</MudChip>
+                        }
+                        @if (context.Item.Aoi)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Info">AOI</MudChip>
+                        }
+                    </div>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Solder Mask">
+                <CellTemplate>
+                    <div class="d-flex">
+                        @if (context.Item!.DefaultTopSolder != null)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Success" Class="mr-1">T: @context.Item.DefaultTopSolder.Name</MudChip>
+                        }
+                        @if (context.Item.DefaultBottomSolder != null)
+                        {
+                            <MudChip Size="Size.Small" Color="Color.Warning">B: @context.Item.DefaultBottomSolder.Name</MudChip>
+                        }
+                    </div>
+                </CellTemplate>
+            </TemplateColumn>
+            <TemplateColumn Title="Akcje">
+                <CellTemplate>
+                    <MudIconButton Icon="@Icons.Material.Filled.Edit" 
+                                  Size="Size.Small" 
+                                  OnClick="() => EditPcb(context.Item!)" />
+                    <MudIconButton Icon="@Icons.Material.Filled.Delete" 
+                                  Size="Size.Small" 
+                                  Color="Color.Error"
+                                  OnClick="() => DeletePcb(context.Item!)" />
+                </CellTemplate>
+            </TemplateColumn>
+        </Columns>
+        <PagerContent>
+            <MudDataGridPager T="Pcb" />
+        </PagerContent>
+    </MudDataGrid>
+</MudPaper>
+
+@code {
+    private List<Pcb> _pcbs = new();
+    private string _searchString = string.Empty;
+    private bool _loading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadPcbs();
+    }
+
+    private async Task LoadPcbs()
+    {
+        _loading = true;
+        _pcbs = string.IsNullOrWhiteSpace(_searchString) 
+            ? await PcbService.GetAllAsync() 
+            : await PcbService.SearchAsync(_searchString);
+        _loading = false;
+    }
+
+    private async Task OnSearchChanged(ChangeEventArgs e)
+    {
+        _searchString = e.Value?.ToString() ?? string.Empty;
+        await LoadPcbs();
+    }
+
+    private async Task OpenCreatePcbDialog()
+    {
+        var parameters = new DialogParameters<PcbEditDialog>
+        {
+            ["IsCreateMode"] = true
+        };
+
+        var dialog = await DialogService.ShowAsync<PcbEditDialog>("Nowa płytka PCB", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await LoadPcbs();
+        }
+    }
+
+    private async Task EditPcb(Pcb pcb)
+    {
+        var parameters = new DialogParameters<PcbEditDialog>
+        {
+            ["Pcb"] = pcb,
+            ["IsCreateMode"] = false
+        };
+
+        var dialog = await DialogService.ShowAsync<PcbEditDialog>($"Edytuj PCB: {pcb.Name}", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled)
+        {
+            await LoadPcbs();
+        }
+    }
+
+    private async Task DeletePcb(Pcb pcb)
+    {
+        var parameters = new DialogParameters
+        {
+            ["ContentText"] = $"Czy na pewno chcesz usunąć płytkę {pcb.Name}?",
+            ["ButtonText"] = "Usuń",
+            ["Color"] = Color.Error
+        };
+
+        var dialog = await DialogService.ShowAsync<MudMessageBox>("Potwierdź usunięcie", parameters);
+        var result = await dialog.Result;
+
+        if (!result.Canceled && bool.TryParse(result.Data?.ToString(), out bool confirmed) && confirmed)
+        {
+            await PcbService.DeleteAsync(pcb.Id);
+            await LoadPcbs();
+        }
+    }
+}
+
+// Placeholder for PcbEditDialog - would be implemented as a separate component
+@code { 
+    public class PcbEditDialog : MudDialog { }
+}
