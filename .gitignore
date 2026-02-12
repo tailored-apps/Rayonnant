@@ -1,4 +1,6 @@
-﻿
+bin/
+obj/
+TestResults/
+*.user
 .vs/
-**/bin/Debug/
-**/obj/
+

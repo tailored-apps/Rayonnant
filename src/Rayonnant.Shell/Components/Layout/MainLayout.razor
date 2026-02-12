@@ -1,0 +1,88 @@
+@inherits LayoutComponentBase
+@inject Rayonnant.Shell.Services.ModuleLoader ModuleLoader
+
+<MudThemeProvider Theme="_theme" IsDarkMode="true" />
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudLayout>
+    <MudAppBar Elevation="4" Dense="true">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start"
+                       OnClick="@ToggleLeftDrawer" />
+        <MudText Typo="Typo.h6" Class="ml-2">Rayonnant</MudText>
+        <MudSpacer />
+        <MudTextField T="string" Placeholder="Search..." Variant="Variant.Outlined" Margin="Margin.Dense"
+                      Adornment="Adornment.Start" AdornmentIcon="@Icons.Material.Filled.Search"
+                      Class="mx-4" Style="max-width: 400px;" />
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.ViewSidebar" Color="Color.Inherit"
+                       OnClick="@ToggleRightDrawer" />
+        <MudIconButton Icon="@Icons.Material.Filled.Settings" Color="Color.Inherit" Href="/settings" />
+    </MudAppBar>
+
+    <MudDrawer @bind-Open="_leftDrawerOpen" ClipMode="DrawerClipMode.Docked"
+               Variant="@DrawerVariant.Mini" Elevation="2" OpenMiniOnHover="true">
+        <MudNavMenu>
+            @foreach (var item in ModuleLoader.NavItems.OrderBy(n => n.Order))
+            {
+                <MudNavLink Href="@item.Href" Icon="@item.Icon" Match="NavLinkMatch.All">
+                    @item.Title
+                </MudNavLink>
+            }
+            <MudNavLink Href="/settings" Icon="@Icons.Material.Filled.Settings">Settings</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+
+    <MudDrawer @bind-Open="_rightDrawerOpen" Anchor="Anchor.End" Elevation="2"
+               ClipMode="DrawerClipMode.Docked" Width="300px">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">Context Panel</MudText>
+        </MudDrawerHeader>
+        <MudContainer Class="pa-4">
+            <MudText Typo="Typo.body2" Color="Color.Tertiary">No context selected.</MudText>
+        </MudContainer>
+    </MudDrawer>
+
+    <MudMainContent>
+        <MudContainer MaxWidth="MaxWidth.False" Class="pa-6" Style="min-height: calc(100vh - 120px);">
+            @Body
+        </MudContainer>
+        <MudPaper Elevation="0" Class="d-flex align-center px-4 py-1"
+                  Style="background-color: var(--mud-palette-surface); border-top: 1px solid var(--mud-palette-lines-default);">
+            <MudText Typo="Typo.caption" Color="Color.Tertiary">Rayonnant v2.0</MudText>
+            <MudSpacer />
+            <MudText Typo="Typo.caption" Color="Color.Tertiary">Ready</MudText>
+        </MudPaper>
+    </MudMainContent>
+</MudLayout>
+
+@code {
+    private bool _leftDrawerOpen = true;
+    private bool _rightDrawerOpen = false;
+
+    private readonly MudTheme _theme = new()
+    {
+        PaletteLight = new PaletteLight(),
+        PaletteDark = new PaletteDark
+        {
+            Primary = "#7c4dff",
+            Secondary = "#448aff",
+            AppbarBackground = "#1e1e2e",
+            Surface = "#1e1e2e",
+            Background = "#11111b",
+            DrawerBackground = "#181825",
+            DrawerText = "#cdd6f4",
+            TextPrimary = "#cdd6f4",
+            TextSecondary = "#a6adc8",
+        },
+        Typography = new Typography
+        {
+            Default = new DefaultTypography { FontFamily = ["Roboto", "Helvetica", "Arial", "sans-serif"] }
+        }
+    };
+
+    private void ToggleLeftDrawer() => _leftDrawerOpen = !_leftDrawerOpen;
+    private void ToggleRightDrawer() => _rightDrawerOpen = !_rightDrawerOpen;
+}

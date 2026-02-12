@@ -1,0 +1,40 @@
+@page "/settings"
+
+<PageTitle>Rayonnant - Settings</PageTitle>
+
+<MudText Typo="Typo.h4" Class="mb-4">Settings</MudText>
+
+<MudTabs Elevation="2" Rounded="true" ApplyEffectsToContainer="true" PanelClass="pa-6">
+    <MudTabPanel Text="General">
+        <MudText Typo="Typo.h6" Class="mb-4">General Settings</MudText>
+        <MudTextField T="string" Label="Application Name" Value="@("Rayonnant")" Variant="Variant.Outlined" Class="mb-4" />
+        <MudSwitch T="bool" Label="Enable Notifications" Color="Color.Primary" />
+        <MudSwitch T="bool" Label="Auto-load Modules" Color="Color.Primary" Value="true" />
+    </MudTabPanel>
+
+    <MudTabPanel Text="Appearance">
+        <MudText Typo="Typo.h6" Class="mb-4">Appearance Settings</MudText>
+        <MudSwitch T="bool" Label="Dark Mode" Color="Color.Primary" Value="true" />
+        <MudSelect T="string" Label="Accent Color" Variant="Variant.Outlined" Value="@("Purple")" Class="mb-4">
+            <MudSelectItem T="string" Value="@("Purple")">Purple</MudSelectItem>
+            <MudSelectItem T="string" Value="@("Blue")">Blue</MudSelectItem>
+            <MudSelectItem T="string" Value="@("Green")">Green</MudSelectItem>
+        </MudSelect>
+    </MudTabPanel>
+
+    <MudTabPanel Text="Modules">
+        <MudText Typo="Typo.h6" Class="mb-4">Installed Modules</MudText>
+        <MudSimpleTable Hover="true">
+            <thead>
+                <tr><th>Module</th><th>Status</th><th>Actions</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Dashboard</td>
+                    <td><MudChip T="string" Size="Size.Small" Color="Color.Success">Active</MudChip></td>
+                    <td><MudButton Size="Size.Small" Variant="Variant.Text">Configure</MudButton></td>
+                </tr>
+            </tbody>
+        </MudSimpleTable>
+    </MudTabPanel>
+</MudTabs>
