@@ -1,35 +1,29 @@
 using Microsoft.Playwright;
-using Rayonnant.Tests.Support;
+using Microsoft.Playwright.NUnit;
 
 namespace Rayonnant.Tests;
 
 [TestFixture]
-public class ShellLayoutTests
+public class ShellLayoutTests : PageTest
 {
-    private IPage? _page;
-
-    [SetUp]
-    public async Task SetUp()
+    [OneTimeSetUp]
+    public async Task StartServer()
     {
-        if (!TestFixture.IsBrowserAvailable)
-        {
-            Assert.Ignore("Playwright browser not installed.");
-            return;
-        }
-        _page = await TestFixture.Browser!.NewPageAsync();
+        await ServerManager.EnsureStarted();
     }
 
-    [TearDown]
-    public async Task TearDown()
+    [OneTimeTearDown]
+    public void StopServer()
     {
-        if (_page != null) await _page.CloseAsync();
+        ServerManager.Stop();
     }
 
     [Test]
     public async Task Shell_Has_AppBar_With_Title()
     {
-        await _page!.GotoAsync(TestFixture.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
-        var appBar = _page.Locator("header.mud-appbar");
+        await Page.GotoAsync(ServerManager.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var appBar = Page.Locator("header.mud-appbar");
         await appBar.WaitForAsync(new() { Timeout = 10000 });
         var text = await appBar.TextContentAsync();
         Assert.That(text, Does.Contain("Rayonnant"));
@@ -38,8 +32,9 @@ public class ShellLayoutTests
     [Test]
     public async Task Shell_Has_Left_NavMenu()
     {
-        await _page!.GotoAsync(TestFixture.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
-        var drawer = _page.Locator("aside.mud-drawer").First;
+        await Page.GotoAsync(ServerManager.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var drawer = Page.Locator("aside.mud-drawer").First;
         await drawer.WaitForAsync(new() { Timeout = 10000 });
         var nav = drawer.Locator("nav.mud-navmenu");
         Assert.That(await nav.CountAsync(), Is.GreaterThan(0));
@@ -48,24 +43,67 @@ public class ShellLayoutTests
     [Test]
     public async Task Shell_Has_Search_Bar()
     {
-        await _page!.GotoAsync(TestFixture.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
-        var searchInput = _page.Locator("header.mud-appbar input");
+        await Page.GotoAsync(ServerManager.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var searchInput = Page.Locator("header.mud-appbar input");
         await searchInput.WaitForAsync(new() { Timeout = 10000 });
         Assert.That(await searchInput.CountAsync(), Is.GreaterThan(0));
     }
 
     [Test]
-    public async Task Shell_Takes_Screenshot()
+    public async Task Shell_Has_All_Module_NavLinks()
     {
-        await _page!.GotoAsync(TestFixture.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
-        await _page.WaitForTimeoutAsync(2000); // Let MudBlazor render
+        await Page.GotoAsync(ServerManager.BaseUrl, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var navLinks = Page.Locator("nav.mud-navmenu a.mud-nav-link");
+        var count = await navLinks.CountAsync();
+        Assert.That(count, Is.GreaterThanOrEqualTo(4), "Should have Dashboard, Users, Monitoring, Data Explorer + Settings");
+    }
 
-        var dir = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResults");
+    [Test]
+    public async Task Users_Page_Has_Table()
+    {
+        await Page.GotoAsync(ServerManager.BaseUrl + "/users", new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var table = Page.Locator("table.mud-table-root");
+        await table.First.WaitForAsync(new() { Timeout = 10000 });
+        Assert.That(await table.CountAsync(), Is.GreaterThan(0));
+    }
+
+    [Test]
+    public async Task Monitoring_Page_Has_Progress_Bars()
+    {
+        await Page.GotoAsync(ServerManager.BaseUrl + "/monitoring", new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var progress = Page.Locator(".mud-progress-linear");
+        Assert.That(await progress.CountAsync(), Is.GreaterThanOrEqualTo(4), "Should have CPU, RAM, Disk, Network bars");
+    }
+
+    [Test]
+    public async Task DataExplorer_Page_Has_Query_Editor()
+    {
+        await Page.GotoAsync(ServerManager.BaseUrl + "/data", new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+        await Page.WaitForTimeoutAsync(3000);
+        var textarea = Page.Locator("textarea");
+        Assert.That(await textarea.CountAsync(), Is.GreaterThan(0), "Should have SQL query textarea");
+    }
+
+    [Test]
+    public async Task Shell_Takes_Screenshot_AllPages()
+    {
+        var dir = Path.Combine(TestContext.CurrentContext.TestDirectory, "TestResults", "screenshots");
         Directory.CreateDirectory(dir);
-        var path = Path.Combine(dir, "shell-screenshot.png");
 
-        await _page.ScreenshotAsync(new() { Path = path, FullPage = true });
-        Assert.That(File.Exists(path), Is.True);
-        TestContext.WriteLine($"Screenshot saved to {path}");
+        var pages = new[] { ("/", "dashboard"), ("/users", "users"), ("/monitoring", "monitoring"), ("/data", "data-explorer") };
+        foreach (var (path, name) in pages)
+        {
+            await Page.GotoAsync(ServerManager.BaseUrl + path, new() { WaitUntil = WaitUntilState.DOMContentLoaded });
+            await Page.WaitForTimeoutAsync(3000);
+            var file = Path.Combine(dir, $"{name}.png");
+            await Page.ScreenshotAsync(new() { Path = file, FullPage = true });
+            Assert.That(File.Exists(file), Is.True, $"Screenshot {name} should exist");
+            Assert.That(new FileInfo(file).Length, Is.GreaterThan(10000), $"Screenshot {name} should be >10KB (real content)");
+            TestContext.WriteLine($"Screenshot: {file}");
+        }
     }
 }
