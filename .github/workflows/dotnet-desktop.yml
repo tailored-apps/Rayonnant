@@ -60,13 +60,13 @@ jobs:
     
     steps:
     - name: Checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v7
       with:
         fetch-depth: 0
 
     # Install the .NET Core workload
     - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
+      uses: actions/setup-dotnet@v6
       with:
         dotnet-version: 5.0.x
     
@@ -77,13 +77,13 @@ jobs:
       run: node ./node_modules/dotnettools/bin/dnt.js bump-versions patch
    
     - name: Add & Commit
-      uses: EndBug/add-and-commit@v4.0.1
+      uses: EndBug/add-and-commit@v11.1.1
       with:
         message: Version update
         
     # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
     - name: Setup MSBuild.exe
-      uses: microsoft/setup-msbuild@v1.0.2
+      uses: microsoft/setup-msbuild@v3.0.0
 
 
     # Restore the application to populate the obj folder with RuntimeIdentifiers
@@ -100,7 +100,7 @@ jobs:
 
 
     - name: Publish NuGet
-      uses: rohith/publish-nuget@v2.2.1
+      uses: rohith/publish-nuget@v2.5.5
       with:
        PROJECT_FILE_PATH: ./TailoredApps.Rayonnant.Interface/TailoredApps.Rayonnant.Interface.csproj
        NUGET_KEY: ${{ secrets.RayonnantNugetKey }}
