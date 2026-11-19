@@ -1,17 +1,19 @@
-# Build Rayonnant.sln (Debug + Release) na każdym PR i pushu do develop.
-# Push do develop dodatkowo publikuje TailoredApps.Rayonnant.Interface na nuget.org.
+# Build linii net5 (gałęzie v5/develop i v5/master): Debug + Release na każdym PR i pushu.
 #
-# Wersja pakietów to 1.0.<numer przebiegu> nadawana przy buildzie (-p:Version),
-# tak jak w pipeline'ach Jenkinsa. CI niczego nie commituje: develop jest
-# zablokowany i chroniony PR-ami, więc commit "Version update" z CI nigdy nie przejdzie.
+# Linia net5 jest utrzymywana tylko do poprawek; główny rozwój (.NET 10) idzie na develop/master.
+# Projekty celują w net5.0-windows (EOL); SDK 10 nadal je buduje (ostrzeżenie NETSDK1138).
+#
+# Tylko build, bez publikacji na nuget.org: publikacja na develop dostaje 403 Forbidden
+# (klucz w sekrecie RayonnantNugetKey jest nieważny). Pakiety net5 to linia 1.0.x
+# (paczki .NET 10 mają linię 10.0.x).
 
-name: .NET Core Desktop
+name: .NET Core Desktop (v5 / net5)
 
 on:
   push:
-    branches: [ develop ]
+    branches: [ v5/develop, v5/master ]
   pull_request:
-    branches: [ develop ]
+    branches: [ v5/develop, v5/master ]
 
 permissions:
   contents: read
@@ -37,7 +39,6 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v7
 
-    # Projekty celują w net5.0-windows (EOL); nowe SDK nadal je buduje (ostrzeżenie NETSDK1138).
     - name: Install .NET SDK
       uses: actions/setup-dotnet@v6
       with:
@@ -46,16 +47,5 @@ jobs:
     - name: Restore
       run: dotnet restore $env:Solution_Name
 
-    # GeneratePackageOnBuild=true w projektach, więc build od razu tworzy .nupkg.
     - name: Build
       run: dotnet build $env:Solution_Name --configuration $env:Configuration --no-restore -p:Version=$env:BUILD_VERSION
-
-    - name: Publish NuGet
-      if: github.event_name == 'push' && github.ref == 'refs/heads/develop' && matrix.configuration == 'Release'
-      env:
-        NUGET_KEY: ${{ secrets.RayonnantNugetKey }}
-      run: >-
-        dotnet nuget push "TailoredApps.Rayonnant.Interface/bin/Release/TailoredApps.Rayonnant.Interface.$env:BUILD_VERSION.nupkg"
-        --api-key $env:NUGET_KEY
-        --source https://api.nuget.org/v3/index.json
-        --skip-duplicate
