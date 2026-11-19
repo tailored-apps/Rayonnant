@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="system.Data.SqlClient" Version="4.8.2" />
+    <PackageReference Include="system.Data.SqlClient" Version="4.9.1" />
   </ItemGroup>
 
   <ItemGroup>
