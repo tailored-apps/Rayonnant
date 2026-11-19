@@ -1,10 +1,8 @@
-# Build Rayonnant.sln (Debug + Release) na każdym PR i pushu do develop.
-# Push do develop dodatkowo publikuje TailoredApps.Rayonnant.Interface na nuget.org.
+# Build Rayonnant.sln (Debug + Release) na każdym PR i pushu do develop. Tylko build:
+# publikację na nuget.org robi release.yml (Trusted Publishing, bez klucza API w sekretach).
 #
-# Wersja pakietów to 10.0.<numer przebiegu> nadawana przy buildzie (-p:Version).
-# Linia 10.x to .NET 10; linia 1.0.x zostaje dla net5 (gałęzie v5/develop i v5/master),
-# więc konsumenci na starym .NET z wersją 1.0.* nie dostaną paczki net10.
-# CI niczego nie commituje: develop jest
+# Wersja w buildzie to 10.0.<numer przebiegu> (-p:Version) — linia .NET 10; linia 1.0.x
+# zostaje dla net5 (gałęzie v5/develop i v5/master). CI niczego nie commituje: develop jest
 # zablokowany i chroniony PR-ami, więc commit "Version update" z CI nigdy nie przejdzie.
 
 name: .NET Core Desktop
@@ -51,13 +49,3 @@ jobs:
     # GeneratePackageOnBuild=true w projektach, więc build od razu tworzy .nupkg.
     - name: Build
       run: dotnet build $env:Solution_Name --configuration $env:Configuration --no-restore -p:Version=$env:BUILD_VERSION
-
-    - name: Publish NuGet
-      if: github.event_name == 'push' && github.ref == 'refs/heads/develop' && matrix.configuration == 'Release'
-      env:
-        NUGET_KEY: ${{ secrets.RayonnantNugetKey }}
-      run: >-
-        dotnet nuget push "TailoredApps.Rayonnant.Interface/bin/Release/TailoredApps.Rayonnant.Interface.$env:BUILD_VERSION.nupkg"
-        --api-key $env:NUGET_KEY
-        --source https://api.nuget.org/v3/index.json
-        --skip-duplicate
