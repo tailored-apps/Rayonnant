@@ -1,6 +1,7 @@
 # Dependabot: cotygodniowe PR-y z nowszymi wersjami zależności (minor i patch, jeden zbiorczy PR
 # na ekosystem) oraz poprawki bezpieczeństwa z alertów, też zebrane w jeden PR.
 # Wersje major są pominięte: to migracje, nie podbicia — robi się je ręcznie.
+# Górna granica to .NET 10: pakiety System.* / Microsoft.Extensions.* z linii 11.x to major, więc nie przyjdą.
 version: 2
 updates:
   - package-ecosystem: nuget
@@ -21,6 +22,10 @@ updates:
     ignore:
       - dependency-name: "*"
         update-types: ["version-update:semver-major"]
+      # Prism 9+ nie jest darmowy dla wszystkich (Prism Community License tylko przy przychodzie
+      # < 1 mln USD, poza tym licencja komercyjna). Zostajemy na Prism 8.x (MIT) — bez wyjątków.
+      - dependency-name: "Prism.*"
+        versions: [">= 9.0.0"]
 
   - package-ecosystem: github-actions
     directory: /

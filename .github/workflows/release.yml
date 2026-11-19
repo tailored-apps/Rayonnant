@@ -1,0 +1,79 @@
+# Publikacja TailoredApps.Rayonnant.Interface na nuget.org przez Trusted Publishing (OIDC).
+#
+# Bez długoterminowego klucza API w sekretach: NuGet/login wymienia token OIDC z GitHuba
+# na jednorazowy klucz ważny 1 h. Polityka Trusted Publishing na nuget.org (właściciel
+# paczki: TailoredApps) musi wskazywać:
+#   Repository Owner: tailored-apps   Repository: Rayonnant   Workflow File: release.yml
+#   Environment: nuget  (opcjonalnie; wpisz, jeśli środowisko ma ograniczenie do develop)
+# Sekret NUGET_USER = nazwa profilu nuget.org (nie e-mail) konta, które utworzyło politykę.
+#
+# Uruchamia się na pushu do develop (jak wcześniej publikacja w CI) albo ręcznie,
+# ale zawsze tylko z develop. Wersja: 10.0.<numer przebiegu tego workflow> — linia .NET 10;
+# linia 1.0.x jest zarezerwowana dla net5 (gałęzie v5/*).
+
+name: Release (NuGet)
+
+on:
+  push:
+    branches: [ develop ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Jedna publikacja naraz; kolejne czekają zamiast anulować trwającą.
+concurrency:
+  group: release-nuget
+  cancel-in-progress: false
+
+jobs:
+
+  publish:
+
+    if: github.ref == 'refs/heads/develop'
+
+    runs-on: windows-latest
+
+    environment: nuget
+
+    permissions:
+      contents: read
+      id-token: write   # token OIDC dla NuGet/login (Trusted Publishing)
+
+    env:
+      Solution_Name: Rayonnant.sln
+      BUILD_VERSION: 10.0.${{ github.run_number }}
+      DOTNET_NOLOGO: true
+      DOTNET_CLI_TELEMETRY_OPTOUT: true
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Install .NET SDK
+      uses: actions/setup-dotnet@v6
+      with:
+        dotnet-version: 10.0.x
+
+    - name: Restore
+      run: dotnet restore $env:Solution_Name
+
+    # GeneratePackageOnBuild=true w projektach, więc build od razu tworzy .nupkg.
+    - name: Build
+      run: dotnet build $env:Solution_Name --configuration Release --no-restore -p:Version=$env:BUILD_VERSION
+
+    # Klucz jest ważny 1 h i jednorazowy, więc logowanie tuż przed pushem.
+    - name: NuGet login (OIDC -> tymczasowy klucz API)
+      id: login
+      uses: NuGet/login@v1
+      with:
+        user: ${{ secrets.NUGET_USER }}
+
+    - name: Publish NuGet
+      env:
+        NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+      run: >-
+        dotnet nuget push "TailoredApps.Rayonnant.Interface/bin/Release/TailoredApps.Rayonnant.Interface.$env:BUILD_VERSION.nupkg"
+        --api-key $env:NUGET_KEY
+        --source https://api.nuget.org/v3/index.json
+        --skip-duplicate
