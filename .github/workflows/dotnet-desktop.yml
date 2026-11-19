@@ -3,9 +3,9 @@
 # Linia net5 jest utrzymywana tylko do poprawek; główny rozwój (.NET 10) idzie na develop/master.
 # Projekty celują w net5.0-windows (EOL); SDK 10 nadal je buduje (ostrzeżenie NETSDK1138).
 #
-# Tylko build, bez publikacji na nuget.org: publikacja na develop dostaje 403 Forbidden
-# (klucz w sekrecie RayonnantNugetKey jest nieważny). Pakiety net5 to linia 1.0.x
-# (paczki .NET 10 mają linię 10.0.x).
+# Tylko build, bez publikacji na nuget.org. Publikację robi release.yml (Trusted Publishing)
+# i tylko z develop (linia .NET 10, wersje 10.0.x). Linia 1.0.x jest zarezerwowana dla net5
+# — publikację z v5/develop można dodać, kopiując release.yml z wersją 1.0.<run>.
 
 name: .NET Core Desktop (v5 / net5)
 
