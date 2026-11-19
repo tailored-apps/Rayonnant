@@ -37,7 +37,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v7
 
-    # Projekty celują w net5.0-windows (EOL); nowe SDK nadal je buduje (ostrzeżenie NETSDK1138).
+    # Projekty celują w net10.0-windows (LTS), więc SDK musi być 10.0.x.
     - name: Install .NET SDK
       uses: actions/setup-dotnet@v6
       with:
