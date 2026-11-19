@@ -1,4 +1,9 @@
-# Publikacja TailoredApps.Rayonnant.Interface na nuget.org przez Trusted Publishing (OIDC).
+# Publikacja bibliotek TailoredApps.Rayonnant.* na nuget.org przez Trusted Publishing (OIDC).
+#
+# Publikowane są wszystkie biblioteki, które już są na nuget.org (12 paczek, lista w kroku
+# Pack), zawsze razem i w tej samej wersji: paczki zależą od siebie dokładnie w tej wersji
+# (np. Interface -> Interface.DependencyInjection), więc publikacja tylko części daje paczki,
+# których nie da się zainstalować. Bez HostShell, SecurityModule i modułów testowych.
 #
 # Bez długoterminowego klucza API w sekretach: NuGet/login wymienia token OIDC z GitHuba
 # na jednorazowy klucz ważny 1 h. Polityka Trusted Publishing na nuget.org (właściciel
@@ -58,9 +63,33 @@ jobs:
     - name: Restore
       run: dotnet restore $env:Solution_Name
 
-    # GeneratePackageOnBuild=true w projektach, więc build od razu tworzy .nupkg.
     - name: Build
       run: dotnet build $env:Solution_Name --configuration Release --no-restore -p:Version=$env:BUILD_VERSION
+
+    # Jawny pack zamiast polegania na GeneratePackageOnBuild: Interface.DependencyInjection
+    # go nie ma, a bez niej paczka Interface ma niespełnioną zależność.
+    - name: Pack
+      run: |
+        $projects = @(
+          'TailoredApps.Rayonnant.Interface.DependencyInjection'
+          'TailoredApps.Rayonnant.Interface'
+          'TailoredApps.Rayonnant.Commons'
+          'TailoredApps.Rayonnant.DependencyInjection'
+          'TailoredApps.Rayonnant.InternalMessagning'
+          'TailoredApps.Rayonnant.Environment'
+          'TailoredApps.Rayonnant.Presentation'
+          'TailoredApps.Rayonnant.Presentation.Resources'
+          'TailoredApps.Rayonnant.Security'
+          'TailoredApps.Rayonnant.Bootstrapping'
+          'TailoredApps.Rayonnant.Data'
+          'TailoredApps.Rayonnant.Data.NHibernate'
+        )
+        foreach ($p in $projects) {
+          dotnet pack "$p/$p.csproj" --configuration Release --no-build -p:Version=$env:BUILD_VERSION --output artifacts
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        }
+        $count = (Get-ChildItem artifacts -Filter *.nupkg).Count
+        if ($count -ne $projects.Count) { Write-Error "Oczekiwano $($projects.Count) paczek, jest $count"; exit 1 }
 
     # Klucz jest ważny 1 h i jednorazowy, więc logowanie tuż przed pushem.
     - name: NuGet login (OIDC -> tymczasowy klucz API)
@@ -73,7 +102,7 @@ jobs:
       env:
         NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
       run: >-
-        dotnet nuget push "TailoredApps.Rayonnant.Interface/bin/Release/TailoredApps.Rayonnant.Interface.$env:BUILD_VERSION.nupkg"
+        dotnet nuget push "artifacts/*.nupkg"
         --api-key $env:NUGET_KEY
         --source https://api.nuget.org/v3/index.json
         --skip-duplicate
