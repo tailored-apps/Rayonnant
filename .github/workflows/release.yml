@@ -91,18 +91,21 @@ jobs:
         $count = (Get-ChildItem artifacts -Filter *.nupkg).Count
         if ($count -ne $projects.Count) { Write-Error "Oczekiwano $($projects.Count) paczek, jest $count"; exit 1 }
 
-    # Klucz jest ważny 1 h i jednorazowy, więc logowanie tuż przed pushem.
+    # Jedyny sekret to NUGET_USER (nazwa profilu nuget.org). Klucza API nie trzymamy nigdzie:
+    # NuGet/login zwraca jednorazowy klucz ważny 1 h, więc logowanie tuż przed pushem.
     - name: NuGet login (OIDC -> tymczasowy klucz API)
       id: login
       uses: NuGet/login@v1
       with:
         user: ${{ secrets.NUGET_USER }}
 
+    # Pętla po plikach z pełną ścieżką: `dotnet nuget push "artifacts/*.nupkg"` na runnerze
+    # Windows nie rozwija wzorca ("File does not exist").
     - name: Publish NuGet
       env:
-        NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
-      run: >-
-        dotnet nuget push "artifacts/*.nupkg"
-        --api-key $env:NUGET_KEY
-        --source https://api.nuget.org/v3/index.json
-        --skip-duplicate
+        TEMP_NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+      run: |
+        foreach ($f in Get-ChildItem artifacts -Filter *.nupkg) {
+          dotnet nuget push $f.FullName --api-key $env:TEMP_NUGET_API_KEY --source https://api.nuget.org/v3/index.json --skip-duplicate
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        }
